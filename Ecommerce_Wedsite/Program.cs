@@ -13,13 +13,13 @@ namespace Ecommerce_Wedsite
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
-            var app = builder.Build();
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
             // Register services directly with Autofac here. Don't
             // call builder.Populate(), that happens in AutofacServiceProviderFactory.
             builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new Infrastructure()));
+            var app = builder.Build();
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
