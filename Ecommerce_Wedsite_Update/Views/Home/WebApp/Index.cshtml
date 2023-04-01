@@ -1,0 +1,307 @@
+﻿@model ResponseMessage<NewWebAppViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
+}
+@if (!Model.success)
+{
+    <p> @Model.message </p>
+}
+@section Scripts{
+    <script>
+        var Bizweb = Bizweb || {};
+        Bizweb.store = 'mew-nature.mysapo.net';
+        Bizweb.id = 364767;
+        Bizweb.theme = {"id":737174,"name":"MewNatures","role":"main"};
+        Bizweb.template = 'index';
+        if(!Bizweb.fbEventId)  Bizweb.fbEventId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                    return v.toString(16);
+                });
+    </script>
+    <script>
+        (function () {
+            function asyncLoad() {
+                var urls = [];
+                for (var i = 0; i < urls.length; i++) {
+                    var s = document.createElement('script');
+                    s.type = 'text/javascript';
+                    s.async = true;
+                    s.src = urls[i];
+                    var x = document.getElementsByTagName('script')[0];
+                    x.parentNode.insertBefore(s, x);
+                }
+            };
+            window.attachEvent ? window.attachEvent('onload', asyncLoad) : window.addEventListener('load', asyncLoad, false);
+        })();
+    </script>
+
+
+    <script>
+        window.BizwebAnalytics = window.BizwebAnalytics || {};
+        window.BizwebAnalytics.meta = window.BizwebAnalytics.meta || {};
+        window.BizwebAnalytics.meta.currency = 'VND';
+        window.BizwebAnalytics.tracking_url = '/s';
+
+        var meta = {};
+
+
+        for (var attr in meta) {
+        window.BizwebAnalytics.meta[attr] = meta[attr];
+        }
+    </script>
+            <script src="/dist/js/stats.min.js?v=69e02f0"></script>
+    <script src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/jquery.js?1676649124511" type="text/javascript"></script>
+    <script type="text/javascript" defer src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/bootstrap.js?1676649124511"></script>
+    <script type="text/javascript" defer src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/apear.js?1676649124511"></script>
+    <script type="text/javascript" defer src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/mmenu.js?1676649124511"></script>
+    <script type="application/ld+json">
+    {
+       "context":"http://schema.org",
+       "type":"Organization",
+       "name":"Mew Nature",
+       "url":"https://mew-nature.mysapo.net",
+       "logo":"https://bizweb.dktcdn.net/100/364/767/themes/737174/assets/logo.png?1676649124511",
+       "contactPoint":[
+          {
+             "type":"ContactPoint",
+            "telephone":"+84975997736",
+             "contactType":"Customer Service",
+             "availableLanguage":[
+                "Tiếng Việt",
+                "English"
+             ],
+             "contactOption":[
+             ]
+          }
+       ],
+       "sameAs":[
+       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+       "context": "http://schema.org",
+       "type": "WebSite",
+       "url": "https://mew-nature.mysapo.net",
+       "potentialAction": {
+       "type": "SearchAction",
+       "target": "https://mew-nature.mysapo.net/search?q={search_term_string}",
+       "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+}
+@section header{
+    <div class="header-container">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 z-indexlogo">
+                            <!-- Header Logo -->
+                            <div class="logo">
+                                <a title="Website thương mại điện tử" href="/">
+                                    <img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/logo.png?1676649124511">
+                                </a>
+                            </div>
+                            <!-- mobile-menu -->
+                            <div class="hidden-desktop" id="mobile-menu">
+                                <div class="navmenu">
+                                    <div class="menutop">
+                                        <a href="#nav-mobile" title="Website thương mai điện tử">
+                                            <div class="toggle">
+                                                <div class="line_mn">
+                                                    <span class="icon-bar"></span>
+                                                    <span class="icon-bar"></span>
+                                                    <span class="icon-bar"></span>
+
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End mobile-menu -->
+                            <div class="l_o_mb hidden-lg hidden-md">
+                                <img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/user.png?1676649124511" class="cl_lg">
+                                <div class="box_log mb_cl">
+
+                                    <div class="login">
+                                        <a href="/account/login">Đăng nhập</a>
+                                    </div>
+                                    <div class="res">
+                                        <a href="/account/register">Đăng ký</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-xs-12 mobi_bt">
+                            <div class="search-box">
+                                <form action="/search" method="get" id="search_mini_form">
+                                    <input type="text" class="change_pl" placeholder="Tìm kiếm..." value="" maxlength="70" name="query" id="search">
+                                    <button class="btn btn-default  search-btn-bg"> <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/search.png?1676649124511" alt="Mew Nature"></button>
+                                </form>
+                                <div class="fix-cart">
+                                    <div class="l_o hidden-xs hidden-sm">
+                                        <img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/user.png?1676649124511">
+                                        <div class="box_log">
+
+                                            <div class="login">
+                                                <a href="/account/login">Đăng nhập</a>
+                                            </div>
+                                            <div class="res">
+                                                <a href="/account/register">Đăng ký</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="top-cart-contain pull-right">
+                                        <!-- Top Cart -->
+                                        <div class="mini-cart">
+                                            <div class="basket dropdown-toggle">
+                                                <a href="/cart" title="Giỏ hàng">
+                                                    <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/cart.png?1676649124511" alt="Mew Nature">
+                                                    <div class="cart-box">
+                                                        <span id="cart-total">
+                                                            <b class="count_item_pr">3</b>
+                                                        </span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div style="padding: 4px 0;">
+                                                <div style="display: none;" class="top-cart-content arrow_box">
+                                                    <ul id="cart-sidebar" class="mini-products-list">
+                                                        <li>Trống ...</li>   
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <nav class="mb0">
+                                <div class="nav-inner clearfix">
+
+                                    <ul id="nav" class="hidden-xs hidden-sm remove_html nav_main">
+
+
+
+
+
+                                        <li class="level0 parent active"><a href="/"><span>Trang chủ</span></a></li>
+
+
+
+
+
+                                        <li class="level0 parent drop-menu ">
+                                            <a href="/collections/all"><span>Sản phẩm<img class="down_icon" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/arrowhead-pointing-to-the-right.png?1676649124511" alt="Mew Nature"></span></a>
+
+
+                                            <ul class="level1">
+
+
+                                                <li class="level1 parent">
+                                                    <a href="/xuong-rong">
+                                                        <span>Xương rồng</span>
+                                                        <img class="j1" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/arrowhead-pointing-to-the-right.png?1676649124511" alt="Mew Nature">
+                                                    </a>
+                                                    <ul class="level2 right-sub">
+
+                                                        <li class="level2"><a href="/"><span>Chi Opuntia</span></a></li>
+
+                                                        <li class="level2"><a href="/"><span>Chi Xương rồng cầu vồng</span></a></li>
+
+                                                        <li class="level2"><a href="/"><span>Lophophora williamsii</span></a></li>
+
+                                                        <li class="level2"><a href="/"><span>Chi Xương rồng nhím</span></a></li>
+
+                                                    </ul>
+                                                </li>
+
+
+
+                                                <li class="level1 parent">
+                                                    <a href="/sen-da">
+                                                        <span>Sen đá</span>
+                                                        <img class="j1" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/arrowhead-pointing-to-the-right.png?1676649124511" alt="Mew Nature">
+                                                    </a>
+                                                    <ul class="level2 right-sub">
+
+                                                        <li class="level2"><a href="/"><span>Sen đá chậu đơn</span></a></li>
+
+                                                        <li class="level2"><a href="/"><span>Sen đá tiểu cảnh</span></a></li>
+
+                                                        <li class="level2"><a href="/"><span>Sen đá để bàn</span></a></li>
+
+                                                        <li class="level2"><a href="/"><span>Sen đá chậu treo</span></a></li>
+
+                                                    </ul>
+                                                </li>
+
+
+
+                                                <li class="level1"><a href="/cay-xanh-trong-nha"><span>Cây xanh trong nhà</span></a></li>
+
+
+
+                                                <li class="level1"><a href="/cay-treo"><span>Cây treo</span></a></li>
+
+
+
+                                                <li class="level1"><a href="/cay-dan-leo"><span>Cây dàn leo</span></a></li>
+
+
+
+                                                <li class="level1"><a href="/cay-van-phong"><span>Cây văn phòng</span></a></li>
+
+
+
+                                                <li class="level1"><a href="/chau-canh"><span>Chậu cảnh</span></a></li>
+
+
+
+                                                <li class="level1"><a href="/tieu-canh"><span>Tiểu cảnh</span></a></li>
+
+
+                                            </ul>
+
+                                        </li>
+
+
+
+
+
+                                        <li class="level0 parent "><a href="/tin-tuc"><span>Tin mới</span></a></li>
+
+
+
+
+
+                                        <li class="level0 parent "><a href="/tin-tuc"><span>Cây phong thủy</span></a></li>
+
+
+
+
+
+                                        <li class="level0 parent "><a href="/gioi-thieu"><span>Giới thiệu</span></a></li>
+
+
+
+
+
+                                        <li class="level0 parent "><a href="/lien-he"><span>Liên hệ</span></a></li>
+
+
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
