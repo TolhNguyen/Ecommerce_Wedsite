@@ -8,19 +8,19 @@ namespace Ecommerce_Wedsite.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly INewWebAppService _newWebAppService;
+        private readonly INewWebAppService _newWebAppService; //Tạo biến cho Interface muốn sử dụng
 
-        public HomeController(ILogger<HomeController> logger, INewWebAppService newWebAppService)
+        public HomeController(ILogger<HomeController> logger, INewWebAppService newWebAppService) //Khai báo Interface
         {
             _logger = logger;
-            _newWebAppService = newWebAppService;
+            _newWebAppService = newWebAppService; // Tạo 1 tham chiếu 
         }
 
         [Route("~/")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index() // Controller cho service tương ứng
         {
-            var data = await _newWebAppService.Service_Test();
-            return View("WebApp/Index", data);
+            var data = await _newWebAppService.Service_Test(); // chạy dữ liệu service của trong Interface
+            return View("WebApp/Index", data); // Trả view đúng địa chỉ
         }
 
         public IActionResult Privacy()
