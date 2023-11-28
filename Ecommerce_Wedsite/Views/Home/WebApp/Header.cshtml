@@ -1,0 +1,172 @@
+﻿<!--Đổ dữ liệu vào model ...-->
+<!--Luôn nhận biết đường truyền dữ liệu của mình, vd: để lấy 1 list nhỏ
+    -   Gọi từ 1 model Lớn nhất (chứa các model nhỏ hơn)
+    -   Gọi "." dến các model nhỏ hơn
+    -   Gọi "." tiếp để lấy các danh sách nhỏ nữa (bên trong model nhỏ)
+    => AllLayout.header_ViewModel.headerLV1. (... nếu có thêm)
+    Lưu ý: Phải gọi đúng tên model lớn -> model nhỏ (vì 1 model lớn chứa nhiều model nhỏ khác nhau)
+-->
+@model AllLayout
+<!--IEnumerable để tạo list-->
+<header>
+    <div class="header-container">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 z-indexlogo">
+                <!-- Header Logo -->
+                <div class="logo">
+                    <a title="Website thương mại điện tử" href="/">
+                        <img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/logo.png?1676649124511">
+                    </a>
+                </div>
+                <!-- mobile-menu -->
+                <div class="hidden-desktop" id="mobile-menu">
+                    <div class="navmenu">
+                        <div class="menutop">
+                            <a href="#nav-mobile" title="Website thương mai điện tử">
+                                <div class="toggle">
+                                    <div class="line_mn">
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--End mobile-menu -->
+                <div class="l_o_mb hidden-lg hidden-md">
+                    <img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/user.png?1676649124511" class="cl_lg">
+                    <div class="box_log mb_cl">
+
+                        <div class="login">
+                            <a href="/account/login">Đăng nhập</a>
+                        </div>
+                        <div class="res">
+                            <a href="/account/register">Đăng ký</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-xs-12 mobi_bt">
+                <div class="search-box">
+                    <form method="get" id="search_mini_form" class="search-box">
+                        <input class="change_pl" style="border-radius:20px; width:350px; height:34px;" placeholder="Tìm kiếm..." value="@Model.sort_ViewModels.proname" maxlength="170" id="sortname" >
+                        <a onclick="SortName()">Tìm kiếm <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/search.png?1676649124511"></a>
+                    </form>
+                    <div class="fix-cart">
+                        <div class="l_o hidden-xs hidden-sm">
+                            <img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/user.png?1676649124511">
+                            <div class="box_log">
+
+                                <div class="login">
+                                    <a href="/account/login">Đăng nhập</a>
+                                </div>
+                                <div class="res">
+                                    <a href="/account/register">Đăng ký</a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="top-cart-contain pull-right">
+                            <!-- Top Cart -->
+                            <div class="mini-cart">
+                                <div class="basket dropdown-toggle">
+                                    <a href="/cart" title="Giỏ hàng">
+                                        <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/cart.png?1676649124511" alt="Mew Nature">
+                                        <div class="cart-box">
+                                            <span id="cart-total">
+                                                <b class="count_item_pr" id="countcart">0</b>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div style="padding: 4px 0;">
+                                    <div style="display: none;" class="top-cart-content arrow_box">
+                                        <ul id="cart-sidebar" class="mini-products-list">
+                                            <ul id="popupcartul" class="mini-products-list">
+                                                <li id="totalcart" value="0">
+                                                    Giỏ hàng trống...
+                                                </li>
+                                                <li id="btncart">
+                                                    
+                                                </li>
+                                            </ul>
+                                        </ul>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <nav class="mb0">
+                    <div class="nav-inner clearfix">
+                        <ul id="nav" class="hidden-xs hidden-sm remove_html nav_main">
+                            <!--code logic tiep cho 2 list-->
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model.headerandfooter_ViewModels.header_LV1)
+                                {
+                                    var check = Model.headerandfooter_ViewModels.header_LV2.Where(p => p.HeaderParent_Id == item.Header_Id).FirstOrDefault(); 
+                                    <!--Biến check để ktra có list con k. Và câu điều kiện where... để xác định. FOD sắp xếp các đối tượng thành 1 ds-->
+                                    if (check == null)
+                                    {
+                                        <!--K có list con-->
+                                        <li class="level0 parent"><a href="~/@item.HeaderAction"><span>@item.Header_Title</span></a></li>
+                                        <!--href link chuyển hướng ở [route] controller-->
+                                    }
+                                    else
+                                    {
+                                       <!--có list con-->
+                                       <li class="level0 parent drop-menu "> 
+                                           <a href="~/@item.HeaderAction">
+                                               <span>
+                                                   @item.Header_Title 
+                                                   <ul class="level1" style="display: none;">
+                                                       @foreach (var item1 in Model.headerandfooter_ViewModels.header_LV2)
+                                                        {
+                                                            if (item1.HeaderParent_Id == item.Header_Id)
+                                                            {
+                                                                <!--Nếu title nào có id cha = id gốc => là con của id gốc -->
+                                                               <li class="level1 parent"><a asp-controller="Home" asp-action="@item.HeaderAction"><span>@item1.Header_Title</span></a></li>
+                                                               @*<li class="level1 parent"><a><span>@item1.Header_Title</span></a></li>*@
+                                                            }
+                                                       }
+                                                   </ul>
+                                               </span>
+                                           </a>
+                                       </li>
+                                    }
+                                }
+                            }
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    
+</header>
+<script>
+	// Vấn để: là chưa search loại 1 mình đc và Chưa search ở bên ngoài trang Home đc:
+    function SortName() { 
+		var proname = document.getElementById("sortname").value; //get value input nếu k có thì là ""
+        if(proname != ""){ //Func Chạy ở Header thôi. Nếu có gõ vào
+		    var page = 1;
+		    var orderby = 1;
+            //category = undefined; // lỗi k lấy đc
+			category = document.getElementById("categoryitem").value;
+            return sort(page, orderby, proname, category);
+            /*
+                -   Cách lưu vào value của input tìm kiếm: chỉ cần gọi Model.sort_ViewModels.proname là đủ
+                -   Vì bên model đã lưu tên biến này rồi, chỉ cần gọi ra, dùng, lưu lại cho view thôi.
+            */
+        }
+        return; // nếu k có gõ thì k chạy
+	}
+</script>

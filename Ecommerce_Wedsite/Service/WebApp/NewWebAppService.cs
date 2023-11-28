@@ -9,7 +9,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
 {
     public interface INewWebAppService // Tạo Interface
     {
-        Task<ResponseMessage<NewWebAppViewModel>> Service_Test(); //Model lớn chứa Model nhỏ. Tạo Phương Thức     
+        Task<ResponseMessage<AllLayout>> Service_Test(); //Model lớn chứa Model nhỏ. Tạo Phương Thức     
     }
     public class NewWebAppService : INewWebAppService // Thừa kế các thuộc tính từ Interface 
     {
@@ -19,9 +19,9 @@ namespace Ecommerce_Wedsite.Service.WebApp
             _configuration = configuration;
         }
 
-        public async Task<ResponseMessage<NewWebAppViewModel>> Service_Test() // Code cho Phương Thức Service
+        public async Task<ResponseMessage<AllLayout>> Service_Test() // Code cho Phương Thức Service
         {
-            var data = new ResponseMessage<NewWebAppViewModel>(); // Tạo biến dữ liệu
+            var data = new ResponseMessage<AllLayout>(); // Tạo biến dữ liệu
             try
             {
                 using (var dbConn = new SqlConnection(_configuration.GetConnectionString("ConnectionString"))) // liên kết database
@@ -29,7 +29,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     await dbConn.OpenAsync(); // mở sync
 
                     var query = dbConn.QueryBuilder($"select topers_id ,sha256_e 2000000 id as custom164 as sha256 from data_customers cus "); // thao tác querry
-                    data.Data = await query.QueryAsync<NewWebAppViewModel>(); // lưu vào dữ liệu
+                    data.Data = await query.QueryAsync<AllLayout>(); // lưu vào dữ liệu
 
                     await dbConn.CloseAsync(); // đóng sync sau khi sử dụng
                 }

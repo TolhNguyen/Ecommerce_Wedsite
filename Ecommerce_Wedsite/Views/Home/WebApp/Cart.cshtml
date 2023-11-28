@@ -1,0 +1,175 @@
+﻿@model AllLayout
+@{
+    ViewData["Title"] = "Cart Page";
+    Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
+}
+<!--Vấn đề sai, thiếu, chưa chạy 1 file js nào đó-->
+<!--Có những file js trong stat.min k chạy
+	Những file js như page-view, cart.js trong stat.js k chạy được
+-->
+<div class="breadcrumbs">
+	<div class="container">
+
+		<div class="inner">
+			<ul class="breadcrumb">					
+				<li class="home">
+					<a href="/" ><span>Trang chủ</span></a>						
+					<span><img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/right-arrow.png?1676649124511" alt="Mew Nature"></span>
+				</li>
+				
+				<li><strong>Giỏ hàng</strong></li>
+				
+			</ul>
+		</div>
+
+	</div>
+</div> 
+<section class="wrap_page">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="title_head left after">
+					<span class="padding__">Giỏ hàng của bạn</span>
+				</h1>
+				<div id="shoptitle" class="header-cart title_cart_pc hidden-sm hidden-xs">
+					Chưa có sản phẩm ...
+				</div>
+				<div>
+					<table id="shoptable" style="width:100%; border: 1px solid black;">
+						<tr id="tablerow1" class="cart-thead">
+							<td style="width: 18%" class="a-center" id="row1">Id sản phẩm</td>
+							<td style="width: 18%" class="a-center" id="row1">Hình ảnh sản phẩm</td>
+							<td style="width: 18%" class="a-center" id="row1">Tên sản phẩm</td>
+							<td style="width: 18%" class="a-center" id="row1">Đơn giá</td>
+							<td style="width: 18%" class="a-center" id="row1">Số lượng</td>
+							<td style="width: 18%" class="a-center" id="row1">Xóa</td>
+						</tr>
+					</table>
+					<table style="width:100%; border: 1px solid black;">
+						<tr class="cart-thead">
+							<td>
+								Tổng tiền thanh toán
+							</td>
+							<td id="carttotal" value="0"> 
+
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div style="margin: 10px;" class="form-cart-button">
+					<div>
+						<a href="/product" class="form-cart-continue">Tiếp tục mua hàng</a>
+					</div>
+				</div>
+				<div style="margin: 10px;" class="form-cart-button">
+					<div id="checkout">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="main-cart-page main-container col1-layout">
+	<div class="main container hidden-xs hidden-sm">
+
+		<div class="col-main cart_desktop_page cart-page">
+
+		</div>
+
+	</div>
+	<div class="cart-mobile hidden-md hidden-lg container">
+		<form action="/cart" method="post" novalidate="" class="margin-bottom-0">
+			<div class="title_cart_mobile">
+
+			</div>
+
+			<div class="header-cart-content" style="background:#fff;">
+
+
+			</div>
+
+		</form>
+
+	</div>
+
+</section>
+<div class="product-id-in-cart hidden">16065160</div><div class="product-id-in-cart hidden">16065484</div><div class="product-id-in-cart hidden">16065458</div>
+<script>
+function ShoppingTable() {
+	var shoptitle = document.getElementById("shoptitle");
+	var shoptable = document.getElementById("shoptable");
+	var carttotal = document.getElementById("carttotal");
+	var carttotalprice = parseInt(document.getElementById("carttotal").getAttribute("value"));
+	var checkout = document.getElementById("checkout");
+	var cartcookie = getCart('cart').substring(0);
+
+    var tablerow2 = null;
+    var td1 = null;
+    var td2 = null;
+    var td3 = null;
+	var td4 = null;
+    var td5 = null;
+    var td6 = null;
+    var a7 = null;
+    var checkoutbtn = null;
+
+    if (getCart('cart') !== "") {
+        var cartcookieobj = JSON.parse(cartcookie);
+        let item = Object.values(cartcookieobj);
+        for (var i = 0; i < item.length; i++) {
+            if (item[i] !== null) {
+                for (var j = 0; j < item[i].length; j++) {
+                    tablerow2 = document.createElement("tr");
+                    td1 = document.createElement("td");
+                    td2 = document.createElement("td");
+                    td3 = document.createElement("td");
+                    td4 = document.createElement("td");
+                    td5 = document.createElement("td");
+                    td6 = document.createElement("td");
+                    a7 = document.createElement("a");
+                    var cartbtnxoa = document.createElement("button");
+
+                    td1.textContent = item[i][j].id;
+                    td2.textContent = "Chưa có";
+                    a7.textContent = item[i][j].name;
+                    td5.textContent = item[i][j].qty;
+                    td4.textContent = item[i][j].price + ".000đ";
+
+                    cartbtnxoa.appendChild(document.createTextNode("Xóa"));
+                    cartbtnxoa.setAttribute("onclick", "CartXoa(" + item[i][j].id + ");");
+                    a7.setAttribute("href", "#");
+
+                    shoptable.appendChild(tablerow2);
+                    tablerow2.appendChild(td1);
+                    tablerow2.appendChild(td2);
+                    tablerow2.appendChild(td3);
+                    tablerow2.appendChild(td4);
+                    tablerow2.appendChild(td5);
+                    tablerow2.appendChild(td6);
+                    td3.appendChild(a7);
+                    td6.appendChild(cartbtnxoa);
+                }
+            }
+			if(typeof item[i] === "number"){
+				carttotalprice = item[i];
+				if (carttotalprice > 0) {
+					document.getElementById("carttotal").value = carttotalprice;
+					carttotal.textContent = "Thành tiền tổng là: " + carttotalprice + ".000đ";
+					shoptitle.textContent = "Sản phẩm của bạn:"
+					checkoutbtn = document.createElement("a");
+					checkoutbtn.textContent = "Tiến hành thanh toán";
+					checkout.appendChild(checkoutbtn);
+					checkoutbtn.setAttribute("class", "form-cart-continue");
+					checkoutbtn.setAttribute("href", "/Checkout");
+				}
+			}
+        }
+    }
+}
+$(document).ready(function(){
+	setTimeout("ShoppingTable()",2000);
+	});
+</script>
+

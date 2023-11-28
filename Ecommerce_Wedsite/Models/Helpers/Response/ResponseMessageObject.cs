@@ -1,6 +1,6 @@
 ﻿namespace Ecommerce_Wedsite.Models.Helpers.Response
 {
-    public class ResponseMessageObject<T>
+    public class ResponseMessageObject<T> // 1 object (1 dua lieu)
     {
         public T Data { get; set; }
         public int Total { get; set; }

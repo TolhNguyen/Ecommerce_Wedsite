@@ -15,12 +15,68 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Dong Quan\Documents\Clone-HVNetWebsite\Ecommerce_Wedsite\Ecommerce_Wedsite
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Admin/AdminLoginPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5Mb2dpblBhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Admin/AdminPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5QYWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Checkout/Checkout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcQ2hlY2tvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Checkout/CheckoutFinal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcQ2hlY2tvdXRGaW5hbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/DiscountAdmin/DiscountAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzY291bnRBZG1pblxEaXNjb3VudEFkbWluLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/FooterAdmin/FooterAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vdGVyQWRtaW5cRm9vdGVyQWRtaW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/HeaderAdmin/HeaderAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhZGVyQWRtaW5cSGVhZGVyQWRtaW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/HeaderAdmin/HeaderAdminCreate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhZGVyQWRtaW5cSGVhZGVyQWRtaW5DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/HeaderAdmin/HeaderAdminEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhZGVyQWRtaW5cSGVhZGVyQWRtaW5FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/HeaderAdmin/SuccessPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhZGVyQWRtaW5cU3VjY2Vzc1BhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Home/WebApp/Cart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXZWJBcHBcQ2FydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Home/WebApp/CheckoutAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXZWJBcHBcQ2hlY2tvdXRBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Home/WebApp/Footer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXZWJBcHBcRm9vdGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Home/WebApp/Header.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXZWJBcHBcSGVhZGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Home/WebApp/Index.cshtml]
@@ -31,8 +87,56 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXZWJBcHBcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Home/WebApp/Scripts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXZWJBcHBcU2NyaXB0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Home/WebApp/Scripts2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXZWJBcHBcU2NyaXB0czIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Popup/Popup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9wdXBcUG9wdXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/ProductAdmin/ProductAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdEFkbWluXFByb2R1Y3RBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/ProductAdmin/ProductAdminCreate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdEFkbWluXFByb2R1Y3RBZG1pbkNyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/ProductAdmin/ProductAdminEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdEFkbWluXFByb2R1Y3RBZG1pbkVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/ProductAdmin/ProductTypeAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdEFkbWluXFByb2R1Y3RUeXBlQWRtaW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/ProductAdmin/SuccessPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdEFkbWluXFN1Y2Nlc3NQYWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Product/Product.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Product/ProductDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0RGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Shared/_LayoutAdminPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRBZG1pblBhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Shared/_LayoutLoginPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRMb2dpblBhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Shared/_LayoutMainPage.cshtml]
@@ -50,7 +154,3 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-eattoi7yqb

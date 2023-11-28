@@ -1,0 +1,56 @@
+﻿@model AllLayout
+@{
+    ViewData["Title"] = "Discount Admin Page";
+    Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
+}
+<div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> <!---Tạo bảng-->
+                <thead> <!--Danh sách bảng-->
+                    <tr>
+                        <th>
+                            Discount ID
+                        </th>
+                        <th>
+                           Discount Rate 
+                        </th>
+                        <th>
+                           Discount Number
+                        </th>
+                        <th>
+                           Discount Random ID
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody> 
+                    @if (Model != null) 
+                    {
+                        @foreach (var item in Model.discountt_ViewModels.discountt){ 
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Discount_Id)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Discount_Rate)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Discount_No)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Discount_RanId)</td>
+                                <!--Tao controller hay service cho edit va delete-->
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div class="clearfix">
+				<div class="hint-text">Showing <b>5</b> out of <b>10</b> entries</div>
+				<ul class="pagination">
+					<li class="page-item disabled"><a href="#">Previous</a></li>
+					<li class="page-item"><a href="#" class="page-link">1</a></li>
+					<li class="page-item"><a href="#" class="page-link">2</a></li>
+					<li class="page-item active"><a href="#" class="page-link">3</a></li>
+					<li class="page-item"><a href="#" class="page-link">4</a></li>
+					<li class="page-item"><a href="#" class="page-link">5</a></li>
+					<li class="page-item"><a href="#" class="page-link">Next</a></li>
+				</ul>
+	        </div>
+        </div>
+    </div>
+</div>

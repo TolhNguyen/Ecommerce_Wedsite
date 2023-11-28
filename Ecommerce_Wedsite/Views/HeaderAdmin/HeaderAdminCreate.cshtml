@@ -1,0 +1,29 @@
+﻿@model AllLayout
+@{
+    ViewData["Title"] = "Header Admin Page";
+    Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
+}
+<form action="/headeradmincreatefunction" class="login-form">
+	<div class="form-group">
+		<input type="text" id="Header_Title" name="Header_Title" class="form-control rounded-left" placeholder="Header_Title" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="HeaderCondition" name="HeaderCondition" class="form-control rounded-left" placeholder="HeaderCondition" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="HeaderParent_Id" name="HeaderParent_Id" class="form-control rounded-left" placeholder="HeaderParent_Id" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="HeaderLevels" name="HeaderLevels" class="form-control rounded-left" placeholder="HeaderLevels" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="HeaderType_Id" name="HeaderType_Id" class="form-control rounded-left" placeholder="HeaderType_Id" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="HeaderAction" name="HeaderAction" class="form-control rounded-left" placeholder="HeaderAction" required>
+	</div>
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary rounded submit p-3 px-5">Submit</button>
+		<!--Khi submit -> link controller -> service -> new view -->
+	</div>
+</form>

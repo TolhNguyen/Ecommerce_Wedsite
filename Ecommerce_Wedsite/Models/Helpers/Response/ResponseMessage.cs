@@ -1,6 +1,6 @@
 ﻿namespace Ecommerce_Wedsite.Models.Helpers.Response
 {
-    public class ResponseMessage<T>
+    public class ResponseMessage<T> // Truyền list (nhieu du lieu). vd dùng khi: nhiều người 1 vật chất (chung)
     {
         public IEnumerable<T>? Data { get; set; }
         public T Item { get; set; }

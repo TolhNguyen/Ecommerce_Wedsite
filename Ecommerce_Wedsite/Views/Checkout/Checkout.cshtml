@@ -1,0 +1,310 @@
+﻿@model AllLayout
+@{
+    ViewData["Title"] = "Checkout Page";
+    Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
+}
+<!--Cần add them model vào để lưu thông tin nhập và hiển thị thành phố scroll bar-->
+<body>
+    <header>
+  <!-- Jumbotron -->
+  
+  <!-- Jumbotron -->
+
+  <!-- Heading -->
+  
+  <!-- Heading -->
+  <h1><a>Checkout Page</a></h1>
+</header>
+
+<section class="bg-light py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-8 col-lg-8 mb-4">
+        <!-- Checkout -->
+        @if(Model != null)
+        {
+            <form action="/checkoutfunction" id="formcheckout">
+                <div class="card shadow-0 border">
+                    <div class="p-4">
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                        <p class="mb-0">First name</p>
+                        <div class="form-outline">
+                            <input type="text" id="CustomerCheckout_FirstName" name="CustomerCheckout_FirstName" placeholder="Type here" class="form-control" required/>
+                        </div>
+                        </div>
+
+                        <div class="col-6">
+                        <p class="mb-0">Last name</p>
+                        <div class="form-outline">
+                            <input type="text" id="CustomerCheckout_LastName" name="CustomerCheckout_LastName" placeholder="Type here" class="form-control" required/>
+                        </div>
+                        </div>
+
+                        <div class="col-6 mb-3">
+                        <p class="mb-0">Phone</p>
+                        <div class="form-outline">
+                            <input type="tel" id="CustomerCheckout_Phone" name="CustomerCheckout_Phone" value=" " class="form-control" required/>
+                        </div>
+                        </div>
+
+                        <div class="col-6 mb-3">
+                        <p class="mb-0">Email</p>
+                        <div class="form-outline">
+                            <input type="email" id="CustomerCheckout_Email" name="CustomerCheckout_Email" placeholder="example@gmail.com" class="form-control" required/>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                        <label class="form-check-label" for="flexCheckDefault">Keep me up to date on news</label>
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <h5 class="card-title mb-3">Shipping info</h5>
+
+                    <div class="row mb-3">
+                        <div class="col-lg-4 mb-3">
+                        <!-- Default checked radio -->
+                        <div class="form-check h-100 border rounded-3">
+                            <div class="p-3">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked/>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Express delivery <br />
+                                <small class="text-muted">3-4 days via Fedex </small>
+                            </label>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-lg-4 mb-3">
+                        <!-- Default radio -->
+                        <div class="form-check h-100 border rounded-3">
+                            <div class="p-3">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Post office <br />
+                                <small class="text-muted">20-30 days via post </small>
+                            </label>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-lg-4 mb-3">
+                        <!-- Default radio -->
+                        <div class="form-check h-100 border rounded-3">
+                            <div class="p-3">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3"/>
+                            <label class="form-check-label" for="flexRadioDefault3">
+                                Self pick-up <br />
+                                <small class="text-muted">Come to our shop </small>
+                            </label>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-8 mb-3">
+                        <p class="mb-0">Address</p>
+                        <div class="form-outline">
+                            <input type="text" id="CustomerCheckout_Address" name="CustomerCheckout_Address" placeholder="Type here" class="form-control" required/>
+                        </div>
+                        </div>
+
+                        <div class="col-sm-4 mb-3">
+                        <p class="mb-0">City</p>
+                        <select class="form-select">
+                            <option value="1">New York</option>
+                            <option value="2">Moscow</option>
+                            <option value="3">Samarqand</option>
+                        </select>
+                        </div>
+
+                        <div class="col-sm-8 mb-3">
+                        <p class="mb-0">House</p>
+                        <div class="form-outline">
+                            <input type="text" placeholder="Type here" class="form-control"/>
+                        </div>
+                        </div>
+
+                        <div class="col-sm-4 col-6 mb-3">
+                        <p class="mb-0">Postal code</p>
+                        <div class="form-outline">
+                            <input type="tel" id="CustomerCheckout_PostCode" name="CustomerCheckout_PostCode" class="form-control" required/>
+                        </div>
+                        </div>
+
+                        <div class="col-sm-4 col-6 mb-3">
+                        <p class="mb-0">Zip</p>
+                        <div class="form-outline">
+                            <input type="tel" id="CustomerCheckout_Zip" name="CustomerCheckout_Zip" class="form-control" required/>
+                        </div>
+                        </div>
+                        <div class="col-sm-4 col-6 mb-3">
+                        <p class="mb-0">Promotion</p>
+                        <div class="form-outline">
+                            <!--Thêm cái hiện Model list của select option vô: là chọn tên ra
+                            -->
+                            <select class="form-control" id="promoselect" name="promoselect" onChange="Summarytotalprice()">
+                                @foreach(var item2 in Model.promo_ViewModels.promo)
+                                {
+                                    <option id="@item2.Promotion_Id" name="@item2.Promotion_Id" value="@item2.Promotion_Percent">
+                                        @item2.Promotion_Name
+                                    </option>
+                                }
+                                 <input type="hidden" id="Promotion_Id" name="Promotion_Id" value="0"/>
+                            </select>
+                        </div>
+                        </div>
+                        <div class="col-sm-8 mb-3">
+                        <p class="mb-0">Message: </p>
+                        <div class="form-outline">
+                            <textarea id="CustomerCheckout_Mess" name="CustomerCheckout_Mess" type="text" placeholder="Type here" class="form-control"></textarea>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
+                        <label class="form-check-label" for="flexCheckDefault1">Save this address</label>
+                    </div>
+
+                    <p class="mb-0">Thông tin đơn hàng:</p>
+                    <table class="mb-3" id="checkoutorder">
+                      
+                    </table>
+                    <div class="mb-3">
+                        <p class="mb-0">Total Price:</p>
+                        <div class="form-outline" id="checkouttp">
+                            <input id="CustomerCheckout_TotalPrice" name="CustomerCheckout_TotalPrice" value="0" readonly />
+                            <span>.000đ</span>
+                            <p id="p1"></p>
+                        </div>
+                    </div>
+                
+                    <div class="float-end">
+                        <button onclick="" class="btn btn-light border">Cancel</button>
+                        <button type="submit" class="btn btn-success shadow-0 border">Xác nhận đơn hàng</button>
+                    </div>
+                    </div>
+                </div>
+            </form>    
+        }
+        <!-- Checkout -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+
+<!-- Footer -->
+
+<!--hidden <input> summarycarttotalprice-->
+<script>
+
+var summarytotalcart = document.getElementById("Checkout_TotalPrice");
+var summarytotalprice = parseInt(document.getElementById("CustomerCheckout_TotalPrice").getAttribute("value"));
+var checkoutorder = document.getElementById("checkoutorder"); // thẻ chứa table 
+
+var thetong = null; // thẻ tồng
+var in1 = null; // id 
+var in2 = null; // thẻ tên
+var in3 = null; // thẻ tiền
+var in4 = null; // thẻ sl
+
+function SummaryCart(){
+    if (getCart('cart') !== "") {
+        var cartcookie = getCart('cart').substring(0);
+        var cartcookieobj = JSON.parse(cartcookie);
+        let item = Object.values(cartcookieobj);
+        for (var i = 0; i < item.length; i++) {
+            if (item[i] !== null) {
+                for (var j = 0; j < item[i].length; j++) {
+                    thetong = document.createElement("div");
+
+                    in1 = document.createElement("input");
+                    in2 = document.createElement("input");
+                    in3 = document.createElement("input");
+                    in4 = document.createElement("input");
+
+                    in1.value = item[i][j].id;
+                    in1.value = "Id: " + in1.value; 
+                    in2.value = item[i][j].name;
+                    in2.value = "Name product: " + in2.value;
+                    in3.value = item[i][j].price;
+                    in3.value = "Price: " + in3.value;
+                    in4.value = item[i][j].qty;
+                    in4.value = "Quantity: " + in4.value;
+
+                    in1.setAttribute("id", "ProductCheckout_Id");
+                    in1.setAttribute("name", "ProductCheckout_Id");
+                    in1.setAttribute("readonly", true);
+                    in2.setAttribute("id", "ProductCheckout_Name");
+                    in2.setAttribute("name", "ProductCheckout_Name");
+                    in2.setAttribute("readonly", true);
+                    in3.setAttribute("id", "ProductCheckout_Price");
+                    in3.setAttribute("name", "ProductCheckout_Price");
+                    in3.setAttribute("readonly", true);
+                    in4.setAttribute("id", "ProductCheckout_Quantity");
+                    in4.setAttribute("name", "ProductCheckout_Quantity");
+                    in4.setAttribute("readonly", true);
+
+                    thetong.appendChild(in1);
+                    thetong.appendChild(in2);
+                    thetong.appendChild(in3);
+                    thetong.appendChild(in4);
+                    checkoutorder.appendChild(thetong);
+                }
+            }
+            
+        }
+    }
+}
+/*
+    - Cách lấy id từ option:
+        + dùng js select id ra và truyền vào value chủa input hidden bên ngoài
+*/
+function Summarytotalprice() {
+    var promoselect = document.getElementById('promoselect');
+    var promovalue = promoselect.options[promoselect.selectedIndex].value;
+    var promoid = promoselect.options[promoselect.selectedIndex].id;
+    var getpromoId = document.getElementById('Promotion_Id');
+    var popuprate = document.getElementById("popuprate").getAttribute("value"); 
+    var checkouttp = document.getElementById('checkouttp');
+    var p1 = document.getElementById('p1');
+    
+    getpromoId.value = promoid;
+    if (getCart('cart') !== "") {
+        var cartcookie = getCart('cart').substring(0);
+        var cartcookieobj = JSON.parse(cartcookie);
+        let item = Object.values(cartcookieobj);
+        for (var i = 0; i < item.length; i++) {
+            if (typeof item[i] === "number") {
+                summarytotalprice = item[i];
+                if (summarytotalprice > 0) {
+                    if (getCookie('popupdiscount') == 'true') { // còn lỗi bị lặp dòng p
+                        p1.textContent = "Đã áp dụng mã -" + popuprate*100 + "%"; // popuprate là số từ view popup
+                        summarytotalprice = summarytotalprice - (summarytotalprice * popuprate);
+	                }
+                    var summarytotalprice2 = summarytotalprice - summarytotalprice * promovalue;
+                    document.getElementById("CustomerCheckout_TotalPrice").value = Math.round(summarytotalprice2); 
+                    summarytotalcart.value = Math.round(summarytotalprice2); 
+                }
+            }
+        }  
+    } 
+}
+$(document).ready(function(){
+	setTimeout("SummaryCart()",2000);
+	});
+$(document).ready(function(){
+	setTimeout("Summarytotalprice()",2000);
+	});
+
+</script>
+<script>
+
+</script>
+</body>

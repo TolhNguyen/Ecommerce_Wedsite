@@ -1,0 +1,71 @@
+﻿@model AllLayout
+@{
+    ViewData["Title"] = "Header Admin Page";
+    Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
+}
+<div class="login-form">
+	@if(Model != null){
+		@foreach (var item in Model.header_ViewModels.header)
+		{		
+			<div class="form-group">
+				<input type="text" id="Header_Id" name="Header_Id" class="form-control rounded-left" placeholder="Header_Id" value="@item.Header_Id" readonly>
+			</div>
+			<div class="form-group">
+				<input type="text" id="Header_Title" name="Header_Title" class="form-control rounded-left" placeholder="Header_Title" value="@item.Header_Title" required>
+			</div>
+			<div class="form-group">
+				<input type="text" id="HeaderCondition" name="HeaderCondition" class="form-control rounded-left" placeholder="HeaderCondition" value="@item.HeaderCondition" required>
+			</div>
+			<div class="form-group">
+				<input type="text" id="HeaderParent_Id" name="HeaderParent_Id" class="form-control rounded-left" placeholder="HeaderParent_Id" value="@item.HeaderParent_Id" required>
+			</div>
+			<div class="form-group">
+				<input type="text" id="HeaderLevels" name="HeaderLevels" class="form-control rounded-left" placeholder="HeaderLevels" value="@item.HeaderLevels" required>
+			</div>
+			<div class="form-group">
+				<input type="text" id="HeaderType_Id" name="HeaderType_Id" class="form-control rounded-left" placeholder="HeaderType_Id" value="@item.HeaderType_Id" required>
+			</div>
+			<div class="form-group">
+				<input type="text" id="HeaderAction" name="HeaderAction" class="form-control rounded-left" placeholder="HeaderAction" value="@item.HeaderAction" required>
+			</div>
+			<div class="form-group">
+				<input id="button_1" onclick="Editlog()" type="button" value="Submit" class="btn btn-primary rounded submit p-3 px-5"/>
+				<!--Khi submit -> link controller -> service -> new view -->
+			</div>
+		}
+	}	
+</div>
+
+<script>
+	function Editlog() {
+        $.ajax({
+            url: "HeaderAdmin/HeaderAdminEditFunction",
+            dataType: "text",
+            type: "POST",
+            data: {
+                Header_Id: $('#Header_Id').val(),
+                Header_Title: $('#Header_Title').val(),
+                HeaderCondition: $('#HeaderCondition').val(),
+                HeaderParent_Id: $('#HeaderParent_Id').val(),
+                HeaderLevels: $('#HeaderLevels').val(),
+                HeaderType_Id: $('#HeaderType_Id').val(),
+                HeaderAction: $('#HeaderAction').val(),
+            },
+            cache: !1,
+            success:
+            function(result) {
+                var obj = JSON.parse(result);
+                if (obj.success == true) {
+                    alert(obj.message);
+                    window.location = 'https://localhost:7037/headeradmin'; // Nếu đúng thì chạy tiếp sang trang Admin
+                }
+                else {
+                    alert(obj.message);
+                    window.location = 'https://localhost:7037/headeradminedit'; // nếu false thì về lại trang login
+                }
+            }
+        });
+    };
+</script>
+
+
