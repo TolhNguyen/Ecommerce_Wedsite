@@ -1,0 +1,86 @@
+﻿@model AllLayout
+@{
+    ViewData["Title"] = "Admin Page";
+    Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
+}
+<div class="login-form">
+	<div class="form-group">
+		<input type="text" id="Product_Id" name="Product_Id" class="form-control rounded-left" placeholder="Product_Id" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="Product_Name" name="Product_Name" class="form-control rounded-left" placeholder="Product_Name" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="ProductType_Id" name="ProductType_Id" class="form-control rounded-left" placeholder="ProductType_Id" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="Picture_Id" name="Picture_Id" class="form-control rounded-left" placeholder="Picture_Id" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="Logo_Id" name="Logo_Id" class="form-control rounded-left" placeholder="Logo_Id" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="Product_Price" name="Product_Price" class="form-control rounded-left" placeholder="Product_Price" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="Product_PromoPrice" name="Product_PromoPrice" class="form-control rounded-left" placeholder="Product_PromoPrice" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="Product_ShortDescription" name="ProdProduct_ShortDescriptionuct_Name" class="form-control rounded-left" placeholder="Product_ShortDescription" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="Product_Manufacturers" name="Product_Manufacturers" class="form-control rounded-left" placeholder="Product_Manufacturers" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="Product_Condition" name="Product_Condition" class="form-control rounded-left" placeholder="Product_Condition" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="Product_Info" name="Product_Info" class="form-control rounded-left" placeholder="Product_Info" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="Product_Size" name="Product_Size" class="form-control rounded-left" placeholder="Product_Size" required>
+	</div>
+	<div class="form-group">
+		<input type="text" id="Product_Href" name="Product_Href" class="form-control rounded-left" placeholder="Product_Href" required>
+	</div>
+	<div class="form-group">
+		<input id="button_1" onclick="Createlog()" type="button" value="Submit" class="btn btn-primary rounded submit p-3 px-5"/>
+	</div>
+</div>
+<script>
+	function Createlog() {
+        $.ajax({
+            url: "ProductAdmin/ProductAdminCreateFunction",
+            dataType: "text",
+            type: "POST",
+            data: {
+                Product_Id: $('#Product_Id').val(),
+                Product_Name: $('#Product_Name').val(),
+                ProductType_Id: $('#ProductType_Id').val(),
+                Picture_Id: $('#Picture_Id').val(),
+                Logo_Id: $('#Logo_Id').val(),
+                Product_Price: $('#Product_Price').val(),
+                Product_PromoPrice: $('#Product_PromoPrice').val(),
+				Product_ShortDescription: $('#Product_ShortDescription').val(),
+                Product_Manufacturers: $('#Product_Manufacturers').val(),
+                Product_Condition: $('#Product_Condition').val(),
+                Product_Info: $('#Product_Info').val(),
+                Product_Size: $('#Product_Size').val(),
+                Product_Href: $('#Product_Href').val(),
+            },
+            cache: !1,
+            success:
+            function(result) {
+                var obj = JSON.parse(result);
+                if (obj.success == true) {
+                    alert(obj.message);
+                    window.location = 'https://localhost:7037/productadmin'; 
+                }
+                else {
+                    alert(obj.message);
+                    
+                }
+            }
+        });
+    };
+</script>

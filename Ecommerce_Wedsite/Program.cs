@@ -14,6 +14,7 @@ namespace Ecommerce_Wedsite
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Register services directly with Autofac here. Don't
             // call builder.Populate(), that happens in AutofacServiceProviderFactory.
@@ -39,7 +40,6 @@ namespace Ecommerce_Wedsite
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
             app.Run();
         }
     }

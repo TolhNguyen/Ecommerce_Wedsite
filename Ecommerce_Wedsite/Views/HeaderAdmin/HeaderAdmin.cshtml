@@ -1,0 +1,83 @@
+﻿@model AllLayout
+@{
+    ViewData["Title"] = "Header Admin Page";
+    Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
+}
+<div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> <!---Tạo bảng-->
+                <thead> <!--Danh sách bảng-->
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            Header title
+                        </th>
+                        <th>
+                            Header condition
+                        </th>
+                        <th>
+                            Header Parent ID
+                        </th>
+                        <th>
+                            Header Level
+                        </th>
+                        <th>
+                            Header Type ID
+                        </th>
+                        <th>
+                            Header action
+                        </th>
+                        <th>
+                            Edit
+                        </th>
+                        <th>
+                            Delete
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody> 
+                    @if (Model != null) 
+                    {
+                        // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
+                        @foreach (var item in Model.header_ViewModels.header){
+                            if(item != null){
+                                <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Header_Id)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Header_Title)</td>
+                                <td>@Html.DisplayFor(modelItem => item.HeaderCondition)</td>
+                                <td>@Html.DisplayFor(modelItem => item.HeaderParent_Id)</td> 
+                                <td>@Html.DisplayFor(modelItem => item.HeaderLevels)</td>
+                                <td>@Html.DisplayFor(modelItem => item.HeaderType_Id)</td>
+                                <td>@Html.DisplayFor(modelItem => item.HeaderAction)</td> 
+                                <td>@Html.ActionLink("Edit","headeradminedit",item)</td>
+                                <td>@Html.ActionLink("Delete","headeradmindelete",item)</td>
+                                <!--Tao controller hay service cho edit va delete-->
+                            </tr>
+                            }
+                            
+                        }
+                    }
+                </tbody>
+            </table>
+            <div class="clearfix">
+				<div class="hint-text">Showing <b>5</b> out of <b>10</b> entries</div>
+				<ul class="pagination">
+					<li class="page-item disabled"><a href="#">Previous</a></li>
+					<li class="page-item"><a href="#" class="page-link">1</a></li>
+					<li class="page-item"><a href="#" class="page-link">2</a></li>
+					<li class="page-item active"><a href="#" class="page-link">3</a></li>
+					<li class="page-item"><a href="#" class="page-link">4</a></li>
+					<li class="page-item"><a href="#" class="page-link">5</a></li>
+					<li class="page-item"><a href="#" class="page-link">Next</a></li>
+				</ul>
+	        </div>
+            <div>
+              <a href="/HeaderAdminCreate">Create New Item</a>
+            </div>
+        </div>
+    </div>
+</div>

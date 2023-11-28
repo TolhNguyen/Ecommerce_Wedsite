@@ -1,0 +1,101 @@
+﻿@model AllLayout
+<link href="~/css/popup.css" rel="stylesheet" type="text/css" media="all" /> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div>
+    @if(Model != null)
+    {
+        foreach(var item in Model.discountt_ViewModels.discountt)
+        {
+            <div class="bg-modal" id="bg-modal" style="opacity:0.9">
+                <div class="modal-content" id="popupno" value="@item.Discount_No"> 
+                    <a class="popupclose" id="popupclose">+</a>
+                    <div id="popupranid" value="@item.Discount_RanId">
+                        <h1 id="popuprate" value="@item.Discount_Rate">
+                            Sign up Email Here for "<strong>@item.Discount_Name</strong>" @item.Discount_Rate % discount
+                        </h1>
+                     </div>
+                    <form>
+                        <input id="popupemail" type="email" placeholder="Email" required/>
+                        <button class="buttonS" onclick="GetPopupDiscount()" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        }
+    }
+</div>
+<script>   
+    var popupboxvalue = parseInt(document.getElementById("popupranid").getAttribute("value"));
+    var popupno = parseInt(document.getElementById("popupno").getAttribute("value"));
+    var popuprate = document.getElementById("popuprate").getAttribute("value"); //deciaml là type float nên k parseInt đc (nên parseFloat)
+    var totalprice = parseInt(document.getElementById("totalcart").getAttribute("value")); 
+    window.setTimeout(function SetCookie(){ // func set time out.
+        if (popupno != 0) { // nếu còn mã giảm thì mới chạy popup:
+            if (getCookie('bg-modal')) { // Ktra nếu có cookie rồi:
+                if (getCookie('bg-modal') == 'false') // Ktra true hay false
+                {
+                    if (parseInt(getCookie('bg-modalno')) == popupboxvalue) { // Ktra nếu là dữ liệu cũ hay mới
+                        return; // return thì nó ngưng luôn, k run code dưới
+                    }
+                    setCookie('bg-modal', 'true', 365);
+                    setCookie('bg-modalno', popupboxvalue, 365);
+                    document.querySelector('.bg-modal').style.display = 'flex';
+                    return;
+                }
+                else {
+                    document.querySelector('.bg-modal').style.display = 'flex';
+                }
+	        }
+            else{ // Nếu chưa có:
+                document.querySelector('.bg-modal').style.display = 'flex'; // nếu k có thì hiện lại bg
+	            setCookie('bg-modal', 'true', 365); // và cài flag cookie vào
+                setCookie('bg-modalno', popupboxvalue, 365);
+            }
+        }
+    }, 1000);
+     document.querySelector(".popupclose").addEventListener('click',
+        function() {
+            document.querySelector('.bg-modal').style.display = 'none'; // nhấn nút tắt thì xóa bg. sau đó mới thêm cookie vô
+            setCookie('bg-modal', 'false', 365);
+            setCookie('popupdiscount', 'false', 365);
+        }
+     );
+function GetPopupDiscount() {
+    document.querySelector('.bg-modal').style.display = 'none'; // nhấn nút tắt thì xóa bg. sau đó mới thêm cookie vô
+    setCookie('bg-modal', 'false', 365);
+    $.ajax({
+		type: "GET",
+		url: "/Discount/DiscountNumberFunction?discountranid=" + popupboxvalue, // url là controller
+		cache: !1,
+		"async": !0,
+		success: function(result) { // result là kết quả return từ controller sang. success là nhận kết quả controller
+            if (result == true) {
+                alert("Mã giảm giá thành công!");
+                setCookie('popupdiscount', 'true', 365); // xác định xem người dùng có mã discount hay k. Nếu true
+            }
+            else { // nếu false = hết mã
+                alert("Hết mã giảm giá rồi!");
+                setCookie('popupdiscount', 'false', 365);
+            }
+		},
+		error: function(result) {
+			alert("Hết mã giảm giá rồi!");
+		}
+	});   
+}
+</script>
+<!--Bài toán:
+     + Nếu mà có sự thay đổi trong backend - code controller, db, sql, ... thì popup này hiện lại và thay đổi dữ liệu
+    Hướng đi:
+     - Tạo 2 cookie mỗi khi người dùng vào trang:
+      + 1 cookie true/false : bật / tắt popup
+      + 1 cookie id random
+    - Tạo 1 table chứa discount:
+      + Có tên, sl, mã , trang thái id random
+    - Logic:
+      + mỗi khi có discount mới, admin add 1 discount mới nhất vào db
+      + khi này backend sẽ query discount mới nhất lên và get id random của nó
+      + Đồng thời, lấy id ramdom của người dùng (từ cookie) để so sánh với id mới
+      + Nếu k có discount mới, id = cũ => k thay đổi nội dụng popup, vẫn giữ trạng thái cờ cũ.
+      + nếu != thì ta gắn id mới vào cookie của người dùng, và đặt trạng thái cờ về lại (nếu là false) true hết.
+      + Hiện popup mới
+-->

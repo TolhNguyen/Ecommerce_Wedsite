@@ -1,0 +1,120 @@
+﻿using Ecommerce_Wedsite.Models;
+using Ecommerce_Wedsite.Models.Entities;
+using Ecommerce_Wedsite.Models.Helpers.Response;
+using Ecommerce_Wedsite.Models.ViewModel;
+using Ecommerce_Wedsite.Service.WebApp;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Diagnostics;
+using System.Text.Json;
+
+namespace Ecommerce_Wedsite.Controllers.Main
+{
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
+        private readonly INewWebAppService _newWebAppService; //Tạo biến cho Interface muốn sử dụng
+        private readonly IHomePageService _homepageService;
+        private readonly IPictureService _pictureService;
+        private readonly ILogoService _logoService;
+        private readonly ICheckoutAdminService _checkoutadminService;
+        // cần sửa. Order: lưu biến từ cart về db
+        private readonly IHeaderAndFooterService _headerandfooterService;
+        private readonly IDiscounttService _discounttService;
+        // private readonly ISort
+
+        public HomeController(ILogger<HomeController> logger, INewWebAppService newWebAppService, IHomePageService homepageService, IPictureService pictureService, ILogoService logoService, ICheckoutAdminService checkoutadminService, IHeaderAndFooterService headerandfooterService, IDiscounttService discounttService) //Khai báo Interface
+        {
+            _logger = logger;
+            _newWebAppService = newWebAppService; // Tạo 1 tham chiếu 
+            _homepageService = homepageService;
+            _pictureService = pictureService;
+            _logoService = logoService;
+            _checkoutadminService = checkoutadminService;
+            _discounttService = discounttService;
+            _headerandfooterService = headerandfooterService;
+        }
+        /// <summary>
+        /// Trang Chu
+        /// </summary>
+        /// <returns></returns>
+
+        [Route("~/")]
+        public async Task<IActionResult> Index() // Controller cho service tương ứng
+        {
+            var All = new AllLayout();// Mode Return 
+
+            var headerandfooter_ViewModels = await _headerandfooterService.HeaderAndFooter_ServiceTest();
+            var homepage_ViewModels = await _homepageService.HomePage_ServiceTest();
+            var picture_ViewModels = await _pictureService.Service_Test();
+            var logo_ViewModels = await _logoService.Service_Test();
+            var discountt_ViewModels = await _discounttService.PopupDiscount();
+
+            All.headerandfooter_ViewModels = headerandfooter_ViewModels.Data;
+            All.homepage_ViewModels = homepage_ViewModels.Data;
+            All.picture_ViewModels = picture_ViewModels.Data;
+            All.logo_ViewModels = logo_ViewModels.Data;
+            All.discountt_ViewModels = discountt_ViewModels.Data;
+
+            return View("WebApp/Index", All); // Truyền dữ liệu. Hiển thị view đúng địa chỉ. 
+        }
+
+        [Route("~/cart")]
+        public async Task<IActionResult> Cart()
+        {
+            var All = new AllLayout();
+            var headerandfooter_ViewModels = await _headerandfooterService.HeaderAndFooter_ServiceTest();
+            var picture_ViewModels = await _pictureService.Service_Test();
+            var discountt_ViewModels = await _discounttService.PopupDiscount();
+
+            All.headerandfooter_ViewModels = headerandfooter_ViewModels.Data;
+            All.picture_ViewModels = picture_ViewModels.Data;
+            All.discountt_ViewModels = discountt_ViewModels.Data;
+
+            return View("WebApp/Cart", All);
+        }
+
+        [Route("~/checkoutadmin")]
+        public async Task<IActionResult> CheckoutAdmin()
+        {
+            var All = new AllLayout();
+
+            var checkout_ViewModels = await _checkoutadminService.Service_Test();
+
+            All.checkout_ViewModels = checkout_ViewModels.Data;
+
+            return View("WebApp/CheckoutAdmin", All);
+        }
+
+        /* - Tách Cart thành 1 controller khác 
+           - Tạo 1 folder View riêng khác 
+           - Gọi view đó vào layout (html async)
+           - Sửa trang Cart tiếp*/
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}
+/*
+ Lưu ý:
+    - Thêm đường dẫn href cho header và sản phẩm - chưa liền
+    - cHO showCart hiện lên khi gọi / chạy trang
+    - thêm link cho sản phẩm
+    - hiện bảng sp mỗi khi add cart
+    - chia nhỏ controller, service ra thành từng thư mục riêng biệt nhiều tầng lớp để dễ quản lý và đẹp
+    - có thể cho chạy nhìu service nhỏ chung 1 service lớn để gọn (vd: edit, delete, create trong 1 ...admin)
+    - gọi từng service nhỏ trong những service lớn hơn, ... tương tự cho đến controller lớn nhất (càng gọn càng tốt).
+    - Controller chứa nhiều service lớn (chính phục vụ cho trang controller đó)
+    - service lớn chứa nhiều service nhỏ (là nhiều functions chạy trong 1 service), gom nhiều function services vào thành 1 file thôi
+    - có thể đổi tên cho "ServiceTest()" để nhiều service nhỏ khác nhau chạy chung đc trong 1 service lớn.
+    - Giai đoạn 1: xong bên trên, cookie controller
+    - Giai đoạn 2: thực hiện thêm các function hành động service nhỏ cho người dùng
+ */

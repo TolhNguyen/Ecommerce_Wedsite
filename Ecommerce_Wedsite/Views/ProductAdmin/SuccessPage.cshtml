@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Admin Page";
+    Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
+}
+<body>
+    <div>
+        <h1> Thành công !!!</h1>
+    </div>
+    <script>
+        function ReturnTablePage(){
+            window.location.reload();
+            window.location = "https://localhost:7037/productadmin";
+        }
+        setTimeout(function(){
+            ReturnTablePage();  
+        }, 1000);
+    </script>
+</body>
+

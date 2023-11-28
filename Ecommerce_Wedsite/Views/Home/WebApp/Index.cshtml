@@ -1,307 +1,460 @@
-﻿@model ResponseMessage<NewWebAppViewModel>
+﻿@model AllLayout
+<!--Trang nào hiện thị chung thì đều xài model chung (1 kiểu)-->
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Categories Page";
     Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
 }
-@if (!Model.success)
-{
-    <p> @Model.message </p>
-}
-@section Scripts{
-    <script>
-        var Bizweb = Bizweb || {};
-        Bizweb.store = 'mew-nature.mysapo.net';
-        Bizweb.id = 364767;
-        Bizweb.theme = {"id":737174,"name":"MewNatures","role":"main"};
-        Bizweb.template = 'index';
-        if(!Bizweb.fbEventId)  Bizweb.fbEventId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-                    return v.toString(16);
-                });
-    </script>
-    <script>
-        (function () {
-            function asyncLoad() {
-                var urls = [];
-                for (var i = 0; i < urls.length; i++) {
-                    var s = document.createElement('script');
-                    s.type = 'text/javascript';
-                    s.async = true;
-                    s.src = urls[i];
-                    var x = document.getElementsByTagName('script')[0];
-                    x.parentNode.insertBefore(s, x);
-                }
-            };
-            window.attachEvent ? window.attachEvent('onload', asyncLoad) : window.addEventListener('load', asyncLoad, false);
-        })();
-    </script>
-
-
-    <script>
-        window.BizwebAnalytics = window.BizwebAnalytics || {};
-        window.BizwebAnalytics.meta = window.BizwebAnalytics.meta || {};
-        window.BizwebAnalytics.meta.currency = 'VND';
-        window.BizwebAnalytics.tracking_url = '/s';
-
-        var meta = {};
-
-
-        for (var attr in meta) {
-        window.BizwebAnalytics.meta[attr] = meta[attr];
-        }
-    </script>
-            <script src="/dist/js/stats.min.js?v=69e02f0"></script>
-    <script src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/jquery.js?1676649124511" type="text/javascript"></script>
-    <script type="text/javascript" defer src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/bootstrap.js?1676649124511"></script>
-    <script type="text/javascript" defer src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/apear.js?1676649124511"></script>
-    <script type="text/javascript" defer src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/mmenu.js?1676649124511"></script>
-    <script type="application/ld+json">
-    {
-       "context":"http://schema.org",
-       "type":"Organization",
-       "name":"Mew Nature",
-       "url":"https://mew-nature.mysapo.net",
-       "logo":"https://bizweb.dktcdn.net/100/364/767/themes/737174/assets/logo.png?1676649124511",
-       "contactPoint":[
-          {
-             "type":"ContactPoint",
-            "telephone":"+84975997736",
-             "contactType":"Customer Service",
-             "availableLanguage":[
-                "Tiếng Việt",
-                "English"
-             ],
-             "contactOption":[
-             ]
-          }
-       ],
-       "sameAs":[
-       ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-       "context": "http://schema.org",
-       "type": "WebSite",
-       "url": "https://mew-nature.mysapo.net",
-       "potentialAction": {
-       "type": "SearchAction",
-       "target": "https://mew-nature.mysapo.net/search?q={search_term_string}",
-       "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-}
-@section header{
-    <div class="header-container">
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 z-indexlogo">
-                            <!-- Header Logo -->
-                            <div class="logo">
-                                <a title="Website thương mại điện tử" href="/">
-                                    <img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/logo.png?1676649124511">
-                                </a>
-                            </div>
-                            <!-- mobile-menu -->
-                            <div class="hidden-desktop" id="mobile-menu">
-                                <div class="navmenu">
-                                    <div class="menutop">
-                                        <a href="#nav-mobile" title="Website thương mai điện tử">
-                                            <div class="toggle">
-                                                <div class="line_mn">
-                                                    <span class="icon-bar"></span>
-                                                    <span class="icon-bar"></span>
-                                                    <span class="icon-bar"></span>
-
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--End mobile-menu -->
-                            <div class="l_o_mb hidden-lg hidden-md">
-                                <img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/user.png?1676649124511" class="cl_lg">
-                                <div class="box_log mb_cl">
-
-                                    <div class="login">
-                                        <a href="/account/login">Đăng nhập</a>
-                                    </div>
-                                    <div class="res">
-                                        <a href="/account/register">Đăng ký</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-9 col-md-9 col-xs-12 mobi_bt">
-                            <div class="search-box">
-                                <form action="/search" method="get" id="search_mini_form">
-                                    <input type="text" class="change_pl" placeholder="Tìm kiếm..." value="" maxlength="70" name="query" id="search">
-                                    <button class="btn btn-default  search-btn-bg"> <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/search.png?1676649124511" alt="Mew Nature"></button>
-                                </form>
-                                <div class="fix-cart">
-                                    <div class="l_o hidden-xs hidden-sm">
-                                        <img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/user.png?1676649124511">
-                                        <div class="box_log">
-
-                                            <div class="login">
-                                                <a href="/account/login">Đăng nhập</a>
-                                            </div>
-                                            <div class="res">
-                                                <a href="/account/register">Đăng ký</a>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="top-cart-contain pull-right">
-                                        <!-- Top Cart -->
-                                        <div class="mini-cart">
-                                            <div class="basket dropdown-toggle">
-                                                <a href="/cart" title="Giỏ hàng">
-                                                    <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/cart.png?1676649124511" alt="Mew Nature">
-                                                    <div class="cart-box">
-                                                        <span id="cart-total">
-                                                            <b class="count_item_pr">3</b>
-                                                        </span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div style="padding: 4px 0;">
-                                                <div style="display: none;" class="top-cart-content arrow_box">
-                                                    <ul id="cart-sidebar" class="mini-products-list">
-                                                        <li>Trống ...</li>   
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <nav class="mb0">
-                                <div class="nav-inner clearfix">
-
-                                    <ul id="nav" class="hidden-xs hidden-sm remove_html nav_main">
-
-
-
-
-
-                                        <li class="level0 parent active"><a href="/"><span>Trang chủ</span></a></li>
-
-
-
-
-
-                                        <li class="level0 parent drop-menu ">
-                                            <a href="/collections/all"><span>Sản phẩm<img class="down_icon" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/arrowhead-pointing-to-the-right.png?1676649124511" alt="Mew Nature"></span></a>
-
-
-                                            <ul class="level1">
-
-
-                                                <li class="level1 parent">
-                                                    <a href="/xuong-rong">
-                                                        <span>Xương rồng</span>
-                                                        <img class="j1" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/arrowhead-pointing-to-the-right.png?1676649124511" alt="Mew Nature">
-                                                    </a>
-                                                    <ul class="level2 right-sub">
-
-                                                        <li class="level2"><a href="/"><span>Chi Opuntia</span></a></li>
-
-                                                        <li class="level2"><a href="/"><span>Chi Xương rồng cầu vồng</span></a></li>
-
-                                                        <li class="level2"><a href="/"><span>Lophophora williamsii</span></a></li>
-
-                                                        <li class="level2"><a href="/"><span>Chi Xương rồng nhím</span></a></li>
-
-                                                    </ul>
-                                                </li>
-
-
-
-                                                <li class="level1 parent">
-                                                    <a href="/sen-da">
-                                                        <span>Sen đá</span>
-                                                        <img class="j1" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/arrowhead-pointing-to-the-right.png?1676649124511" alt="Mew Nature">
-                                                    </a>
-                                                    <ul class="level2 right-sub">
-
-                                                        <li class="level2"><a href="/"><span>Sen đá chậu đơn</span></a></li>
-
-                                                        <li class="level2"><a href="/"><span>Sen đá tiểu cảnh</span></a></li>
-
-                                                        <li class="level2"><a href="/"><span>Sen đá để bàn</span></a></li>
-
-                                                        <li class="level2"><a href="/"><span>Sen đá chậu treo</span></a></li>
-
-                                                    </ul>
-                                                </li>
-
-
-
-                                                <li class="level1"><a href="/cay-xanh-trong-nha"><span>Cây xanh trong nhà</span></a></li>
-
-
-
-                                                <li class="level1"><a href="/cay-treo"><span>Cây treo</span></a></li>
-
-
-
-                                                <li class="level1"><a href="/cay-dan-leo"><span>Cây dàn leo</span></a></li>
-
-
-
-                                                <li class="level1"><a href="/cay-van-phong"><span>Cây văn phòng</span></a></li>
-
-
-
-                                                <li class="level1"><a href="/chau-canh"><span>Chậu cảnh</span></a></li>
-
-
-
-                                                <li class="level1"><a href="/tieu-canh"><span>Tiểu cảnh</span></a></li>
-
-
-                                            </ul>
-
-                                        </li>
-
-
-
-
-
-                                        <li class="level0 parent "><a href="/tin-tuc"><span>Tin mới</span></a></li>
-
-
-
-
-
-                                        <li class="level0 parent "><a href="/tin-tuc"><span>Cây phong thủy</span></a></li>
-
-
-
-
-
-                                        <li class="level0 parent "><a href="/gioi-thieu"><span>Giới thiệu</span></a></li>
-
-
-
-
-
-                                        <li class="level0 parent "><a href="/lien-he"><span>Liên hệ</span></a></li>
-
-
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-}
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<body>
+	@if (Model != null)
+		{
+			@foreach (var item in Model.homepage_ViewModels.homepage_Vl1)
+			{
+				var check = Model.homepage_ViewModels.homepage_Vl2.Where(p => p.HomePageParent_Id == item.HomePage_Id).FirstOrDefault();
+						<!--item là của list lv 1-->
+						<!--Kiểm tra nếu id parent = id => có con. Lấy danh sách đầu tiên FOD => id nào cha đó -->
+
+				@if (check == null)
+				{
+					<!--Chia làm 3 phần 1 là tiêu đề. 2 là nội dung. 3 là hình ảnh-->
+					<div class="new_title center">
+						<h2>
+							<a href="#"  title="Sản phẩm mới">
+								@item.HomePage_Title
+							</a>
+						</h2>
+					</div>
+					@if (item.HTML_Id == 4)
+					{	
+						<div class="container">
+							<div class="row">
+								<div class="col-md-9 col-sm-12 col-xs-12">
+									<div id="magik-slideshow" class="magik-slideshow">
+										<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+										<!--Thêm 1 service khác cho mí ảnh dưới này. Vẫn Đang khi thêm ảnh mới: sai-->
+
+										<!--Toán đa ngôi và code C#: 
+											- Tạo 1 biến dem = 0 (bên ngoài)
+											- Cho biến dem ++ tăng dần (+1) mỗi lần lập trong foreach
+											- Khi biến dem == 1 (là item đầu tiên trong vòng lặp) thì sẽ in ra file name tương ứng đó
+											- Đặt thêm đk nếu  == 1 ? thì "True" : "False"
+										-->
+											<div class="carousel-inner" role="listbox">
+												@{var dem = 0;}
+
+											@foreach(var item3 in Model.picture_ViewModels.picture)
+											{
+												@if (item3.PictureGrp_Id == item.PictureGrp_Id)
+												{
+													dem++;
+													<div class="item @(dem == 1 ? "active":"")">
+														<a href="#" title="Mew Nature">
+															<picture>
+																<source media="(min-width: 1025px)" srcset="@item3.Picture_FileName" />
+																<source media="(min-width: 768px) and (max-width: 1024px)" srcset="@item3.Picture_FileName"  />
+																<source media="(max-width: 480px)" srcset="@item3.Picture_FileName"  />
+																<img onclick="window.location.href='#'" src="@item3.Picture_FileName" alt="Mew Nature">
+															</picture>
+														</a>
+													</div>
+													<div class="item">
+														<a href="#" title="Mew Nature">
+															<picture>
+																<source media="(min-width: 1025px)" srcset="@item3.Picture_FileName" />
+																<source media="(min-width: 768px) and (max-width: 1024px)" srcset="@item3.Picture_FileName"  />
+																<source media="(max-width: 480px)" srcset="@item3.Picture_FileName"  />
+																<img onclick="window.location.href='#'" src="@item3.Picture_FileName" class="img-responsive" alt="Mew Nature">
+															</picture>
+														</a>
+													</div>
+												}
+											}
+											</div>
+
+											<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+												<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+												<span class="sr-only">Trước</span>
+											</a>
+											<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+												<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+												<span class="sr-only">Sau</span>
+											</a>
+					
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3 col-sm-12 col-xs-12 boxer">
+									<div class="box_set">
+										<a href="#" title="Free ship toàn quốc">
+											<div class="icon">
+												<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/set_cf1.png?1676649124511">
+											</div>
+											<div class="set_content">
+												<p class="tt_boxser">
+													Free ship toàn quốc
+												</p>
+												<p class="content_boxer">
+													Free Ship tất cả các hóa đơn từ 500k
+												</p>
+											</div>
+										</a>
+									</div>
+									<div class="box_set">
+										<a href="#" title="Tư vấn 24/7">
+											<div class="icon">
+												<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/set_cf2.png?1676649124511">
+											</div>
+											<div class="set_content">
+												<p class="tt_boxser">
+													Tư vấn 24/7
+												</p>
+												<p class="content_boxer">
+													Hotline: 1900 6750
+												</p>
+											</div>
+										</a>
+									</div>
+									<div class="box_set">
+										<a href="#" title="Cây ươm tại vườn">
+											<div class="icon">
+												<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/set_cf3.png?1676649124511">
+											</div>
+											<div class="set_content">
+												<p class="tt_boxser">
+													Cây ươm tại vườn
+												</p>
+												<p class="content_boxer">
+													Các loại cây được thuần dưỡng với khí hậu Việt Nam
+												</p>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					}
+					@if(item.HTML_Id == 1)
+					{
+				
+						<!--Chèn dữ liệu HomePage vào-->
+
+						<!--Sẽ có thêm if nếu chỉ lấy các loại sp là Cây (=1)-->
+
+						<!--Đây dang là foreach lập nguyên khung SPM-->
+
+						<!--Tạo thêm Section ID cho các sản phẩm ở HomePage để : 1 là html kiểu 1, 2 là hmtl kiểu 2. Các hiện thị đều là các sản phẩm nhưng html sẽ khác nhau tùy theo SectionID
+						if (SectionID =1){...(html)...}-->
+
+						<!--Viết logic tiếp cho SPM-->
+							
+						<!--Chèn dữ liệu Product vào-->
+						<div class="main-col sock_to_day">
+							<div class="container">
+								<div class="product-sock">
+									<div class="sock_slide">
+										@foreach(var item4 in Model.homepage_ViewModels.newproduct)
+										{
+											<div class="item">
+												<div class="col-item">
+													<div class ="item-inner">
+														<div class="info-inner">
+															<!--Nội dung muốn hiện thị phụ thuộc vào query ở Service-->
+															<h3 class="item-title"><a href="#" title="#">@item4.Product_Name</a></h3>
+															<div class="item-content">
+																<div class="item-price">
+																	<div class="price-box">
+																		@if(item4.Product_PromoPrice == 0)
+																		{
+																			<p class="special-price"><span class="price">@item4.Product_Price.000đ</span></p>
+																		}
+																		else
+																		{
+																			<p class="special-price"><span class="price">@item4.Product_PromoPrice.000đ</span></p>
+																			<p class="old-price"><span class="price">@item4.Product_Price.000đ</span></p>
+																		}
+																	</div>
+																</div>
+															</div>
+															<div class="actions">
+																<form action="/cart/add" method="post" class="variants" data-id="product-actions-15887794" enctype="multipart/form-data">
+																	<input type="hidden" name="variantId" value="27843194">
+																	<button class="button btn-cart add_to_cart" title="Mua hàng" fdprocessedid="e99jd6">Mua hàng</button>
+																	<button class="button btn-cart btn-more" title="Chi tiết sản phẩm" type="button" onclick="window.location.href='/dia-lan-y'" fdprocessedid="uhiyki">
+																		<img alt="Mew Nature" src="/img/Logo/eye.png">
+																	</button>
+																</form>
+															</div>
+														</div>
+														<div class="thumb-wrapper" onclick="window.location.href='/xuong-rong-bang-coc'">
+															<a href="/xuong-rong-bang-coc" class="thumb flip"  title="@item4.Product_Name">
+																@foreach (var item3 in Model.picture_ViewModels.picture)
+																{
+																	@if (item3.Picture_Id == item4.Picture_Id)
+																	{
+																		<img src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="Sen đá lá ngọc">
+																	}
+																}
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										}
+									</div>
+								</div>
+							</div>
+						</div>
+					}
+					@if(item.HTML_Id == 2)
+					{
+						<!--Tạo thêm 1 service cho mục Promo Pduct này-->
+						<!--Tạo cho HomePage (hoặc ở Product) 1 bên even / odd. Chưa xong!
+							Owl-wrapper sai
+							Đổi thành 1 cái thôi bỏ các SPHG kia.
+						-->
+						<div class="main-col bg_menu">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="std">
+											<div class="best-seller-pro menu" style="visibility: visible;">
+												<div class="slider-items-products">
+													<div id="best-seller-slider" class="product-flexslider hidden-buttons">							
+														<div class="slider-items slider-width-col6">
+															@foreach(var item5 in Model.homepage_ViewModels.promoproduct)
+															{
+																<div class="col-xs-12 item_hm odd">
+																	<div class="col-item">
+																		<div class="item-inner-menu">
+																			<div class="product-wrapper">
+																				<div class="thumb-wrapper" onclick="window.location.href='/sen-da-la-ngoc'">
+																					<a href="/sen-da-la-ngoc" class="thumb flip" title="@item5.Product_Name">
+																						@foreach (var item3 in Model.picture_ViewModels.picture)
+																						{
+																							@if (item3.Picture_Id == item5.Picture_Id)
+																							{
+																								<img src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="Sen đá lá ngọc">
+																							}
+																						}	
+																					</a>
+																				</div>
+																			</div>
+																			<div class="item-info-menu">
+																				<div class="info-inner">
+																					<a href="#" title="Sen đá lá ngọc">
+																						<h3 class="item-title line_2">@item5.Product_Name</h3>
+																					</a>
+																					<div class="item-content">
+																						<div class="item-price">    
+																							<div class="price-box"> 							
+																								<p class="special-price"> 
+																									<span class="price">@item5.Product_PromoPrice.000đ</span> 
+																								</p>
+																								<p class="old-price"> 
+																									<span class="price">@item5.Product_Price.000đ</span> 
+																								</p>
+																							</div>
+																						</div>
+																						<div class="desrc_mn hidden-xs hidden-sm">
+																							@item5.Product_ShortDescription
+																						</div>
+																					</div>
+																					<div class="countdown">
+																						<p class="text-countdown"><span>Ưu đãi kết thúc sau:</span></p>
+																						<div class="clockdiv" data-countdown="2024/12/13" style="display: block !important;"></div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															}
+														</div>				
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					
+					}
+					@if(item.HTML_Id == 3)
+					{
+						// Đã có ở dưới
+					}
+					@if(item.HTML_Id == 5)
+					{
+						<section class="small-product-slider test_people">
+							<div class="container">
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="bag-product-slider small-pr-slider">
+											<div class="slider-items-products">
+												<div class="new_title text-center">
+													<p class="small_tt">
+														Cảm nhận và đánh giá
+													</p>
+													<h2>Khách hàng với Mew Nature</h2>
+												</div>
+												<div id="bag-seller-slider" class="product-flexslider hidden-buttons">
+													<div class="slider-items slider-width-col3">
+													@foreach( var item6 in Model.homepage_ViewModels.users)
+													{
+														<div class="item-ykkh">	
+															<div class="content_tip"><p>@item6.User_Feedbacks</p>
+																<div class="hgroup">
+																	@foreach(var item7 in Model.logo_ViewModels.logo)
+																	{
+																		if(item6.Logo_Id == item7.Logo_Id)
+																		{	
+																			<p><img alt="@item6.User_Name" src="@item7.Logo_FileName"  data-lazyload="@item7.Logo_FileName"></p>
+																		}
+																	}
+																	<p class="name">@item6.User_Name</p>	
+																</div>			
+															</div>
+														</div>
+													}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					}
+
+					<!--Chèn ảnh thêm ở sau mỗi mục-->
+					<!--
+						oreach (var item3 in Model.picture_ViewModels.picture)
+						{
+							f (item.PictureGrp_Id == item3.PictureGrp_Id)
+							{
+								//Ảnh cho title có 1 list
+								//Kiểm tra nhóm nếu trùng nhóm thì ra các ảnh của nhóm đó
+
+								<div class="promo-banner-section">
+									<div class="container">
+										<a href="#" title="Mew Nature" class="wd100 image_effect">
+											<img class="responsive-img" src="item3.Picture_FileName" alt="Mew Nature">
+										</a>
+									</div>
+								</div>
+							}
+						} 
+					-->
+				}
+				else
+				{
+					<!--Nếu homepage có list lv2 thì Title thêm lv2 (lv con nữa thì thêm html cho nó) else...-->
+					@foreach (var item1 in Model.homepage_ViewModels.homepage_Vl2)
+					{
+						if (item1.HomePageParent_Id == item.HomePage_Id)
+						{
+							<!--Nếu title nào có id cha = id gốc => là con của id gốc. Xác định cha nào là con nào (3=3, nào có parent = 3 thì cha là id = 3) -->
+							<div class="new_title center clear_pd">
+								<p class="small_tt">
+									@item1.HomePage_Title
+								</p>
+								<h2><a href="#" title="@item.HomePage_Title">@item.HomePage_Title</a></h2>
+							</div>
+							<!--Sửa lại còn nhiều-->
+							@if(item.HTML_Id == 3)
+							{
+								<section class="featured-pro">
+									<div class="container">
+										<div class="slider-items-products">
+											<div id="featured-product-slider" class="product-flexslider hidden-buttons">			
+												<div class="slider-items slider-width-col6 row">					
+													@foreach(var item8 in Model.homepage_ViewModels.newproduct)
+													{
+														<div class="item col-md-3 col-sm-4 col-xs-6">
+															<div class="col-item">
+																@if(item8.Product_PromoPrice != 0)
+																{
+																	<div class="sale-label sale-top-right">- 
+																		17% 
+																	</div>
+																}
+																<div class="item-inner">
+																	<div class="product-wrapper">
+																		<div class="thumb-wrapper" onclick="window.location.href='/luas-nuide'">
+																			<a href="/luas-nuide" class="thumb flip"  title="@item8.Product_Name">
+																				@foreach (var item3 in Model.picture_ViewModels.picture)
+																				{
+																					@if (item3.Picture_Id == item8.Picture_Id)
+																					{
+																						<img src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="@item8.Product_Name">
+																					}
+																				}
+																			</a>
+																		</div>
+																	</div>
+																	<div class="item-info">
+																		<div class="info-inner">
+																			<h3 class="item-title"> <a href="/luas-nuide" title="@item8.Product_Name">@item8.Product_Name</a> </h3>
+																			<div class="item-content">
+																				<div class="item-price">    
+						
+																					<div class="price-box"> 
+																						@if(item8.Product_PromoPrice != 0)
+																						{
+																							<p class="special-price"> 
+																								<span class="price">@item8.Product_PromoPrice.000₫</span> 
+																							</p>
+																							<p class="old-price"> 
+																								<span class="price">@item8.Product_Price.000₫</span> 
+																							</p>
+																						}
+																						else
+																						{
+																							<p class="special-price"> 
+																								<span class="price">@item8.Product_Price.000₫</span> 
+																							</p>
+																						}
+																				</div>
+						
+																				</div>
+																				<!-- Holder for Product Review -->
+																			</div>
+																		</div>
+
+																		<div class="actions hidden-xs hidden-sm remove_html">
+																			<form action="/cart/add" method="post" class="variants" data-id="product-actions-15887884" enctype="multipart/form-data">
+																				<button class="button btn-cart btn-more" title="Chi tiết sản phẩm" type="button" onclick="window.location.href='/luas-nuide'" >
+																					<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/eye.png?1676649124511">
+																				</button>
+																				<input type="hidden" name="variantId" value="27843379" />
+																				<button class="button btn-cart add_to_cart" title="Mua hàng">
+																					<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/basket.png?1676649124511">
+																				</button>
+																			</form>       
+																		</div>
+
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													}
+												</div>
+											</div>
+										</div>
+									</div>
+								</section>
+							}
+						}
+					}
+				}
+			}
+		}
+	</div>
+</body>
+<!--mm-nav trong mmenu.js -->
+<!--Những câu hỏi : 1. Cách nào để lấy ra từng file tấm ảnh 1 cho Ad Banner . Vì lỗi bị lấy ra toàn bộ file ảnh 1 lúc
+					2. Cách tối ưu từng html cho mỗi phần ở trang Home Page. Vì bị lập code nhiều lần
+					3. Phân chi html cho trái phải
+-->

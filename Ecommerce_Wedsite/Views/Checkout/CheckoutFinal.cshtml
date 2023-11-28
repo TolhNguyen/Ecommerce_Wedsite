@@ -1,0 +1,128 @@
+﻿@model AllLayout
+@{
+    ViewData["Title"] = "Thank you Page";
+    Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
+}
+<html lang="en">
+
+<body>
+	<header class="site-header" id="header">
+		<h1 data-lead-id="site-header-title">Thank you for your order!</h1>
+	</header>
+
+	<div class="main-content">
+		<i class="fa fa-check main-content__checkmark" id="checkmark"></i>
+		<p data-lead-id="main-content-body">Your information has been saved. Please wait for us to contact you to proceed with the transaction..</p>
+	</div>
+	<div>
+		<table id="checkouttable" style="width:100%; border: 1px solid black;">
+			<tr id="tablerow1" class="cart-thead">
+				<td style="width: 18%" class="a-center" id="row1">Id sản phẩm</td>
+				<td style="width: 18%" class="a-center" id="row1">Hình ảnh sản phẩm</td>
+				<td style="width: 18%" class="a-center" id="row1">Tên sản phẩm</td>
+				<td style="width: 18%" class="a-center" id="row1">Đơn giá</td>
+				<td style="width: 18%" class="a-center" id="row1">Số lượng</td>
+			</tr>
+		</table>
+		<table style="width:100%; border: 1px solid black;">
+			<tr class="cart-thead">
+				<td>
+					Tổng tiền thanh toán
+				</td>
+				<td id="checkouttotal" value="0"> 
+
+				</td>
+                <td id="promoapply" value="0">
+
+                </td>
+			</tr>
+		</table>
+	</div>
+</body>
+
+<!--
+	- Sửa đường dẫn link checkoutfunction
+	- Cần hiển thị bảng tổng kết sản phẩm của người dùng
+	- Cần có thêm function xóa sạch cart trong showCart đã lưu
+	- và tạo function reload ra home page
+-->
+<script>
+function CheckoutTable() {
+	var checkouttable = document.getElementById("checkouttable");
+	var checkouttotal = document.getElementById("checkouttotal");
+	var checkouttotalprice = parseInt(document.getElementById("checkouttotal").getAttribute("value"));
+    var promoapply = document.getElementById("promoapply");
+    var promoapplyvalue = parseInt(document.getElementById("promoapply").getAttribute("value"));
+    var cartcookie = getCart('cart').substring(0);
+
+    var tablerow2 = null;
+    var td1 = null;
+    var td2 = null;
+    var td3 = null;
+	var td4 = null;
+    var td5 = null;
+    var td6 = null
+    var a7 = null;
+    if (getCart('cart') !== "") {
+        var cartcookieobj = JSON.parse(cartcookie);
+        let item = Object.values(cartcookieobj);
+        for (var i = 0; i < item.length; i++) {
+            if (item[i] !== null) {
+                for (var j = 0; j < item[i].length; j++) {
+                    tablerow2 = document.createElement("tr");
+                    td1 = document.createElement("td");
+                    td2 = document.createElement("td");
+                    td3 = document.createElement("td");
+                    td4 = document.createElement("td");
+                    td5 = document.createElement("td");
+                    a7 = document.createElement("a");
+                    var cartbtnxoa = document.createElement("button");
+
+                    td1.textContent = item[i][j].id;
+                    td2.textContent = "Chưa có";
+                    a7.textContent = item[i][j].name;
+                    td5.textContent = item[i][j].qty;
+                    td4.textContent = item[i][j].price + ".000đ";
+                    a7.setAttribute("href", "#");
+                    promoapplyvalue += item[i][j].price;
+
+                    checkouttable.appendChild(tablerow2);
+                    tablerow2.appendChild(td1);
+                    tablerow2.appendChild(td2);
+                    tablerow2.appendChild(td3);
+                    tablerow2.appendChild(td4);
+                    tablerow2.appendChild(td5);
+                    td3.appendChild(a7);
+                }
+            }
+            if (typeof item[i] === "number") {
+                checkouttotalprice = item[i];
+                if (checkouttotalprice > 0) {
+                    document.getElementById("checkouttotal").value = checkouttotalprice;
+                    checkouttotal.textContent = " Thành tiền tổng là: " + checkouttotalprice + ".000đ";
+                    if (promoapplyvalue > checkouttotalprice) { // nếu tổng giá sp > tổng thanh toán:
+                        promoapply.textContent = "Đã có áp dụng Mã giảm";
+                    }
+                    else promoapply.textContent = " Không có Mã giảm";
+                }
+            }
+        }
+    }
+    //document.cookie = "cart= ; expires=00:00:01 UTC; path=/"; chưa xóa cookie đc 
+}
+$(document).ready(function(){
+	setTimeout("CheckoutTable()",2000);
+	});
+
+</script>
+<script>
+    function resetPopupDiscount() {
+        if (getCookie("popupdiscount") == "true") { // nếu đã có discount true
+            setCookie('popupdiscount', 'false', 365); // thì set discount = false lại = đã xài r. 
+        }
+    }
+$(document).ready(function(){ //document.ready để cho chạy function
+	setTimeout("resetPopupDiscount()",2000);
+	});
+</script>
+</html>
