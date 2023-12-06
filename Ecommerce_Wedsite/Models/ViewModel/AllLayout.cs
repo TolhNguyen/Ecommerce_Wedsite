@@ -24,7 +24,9 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public IEnumerable<Promotion> promo { get; set; } = new List<Promotion>();
         public IEnumerable<CustomerCheckout> customercheckout { get; set; } = new List<CustomerCheckout>();
         public IEnumerable<Discountt> discountt { get; set; } = new List<Discountt>();
+
         public IEnumerable<AdminMenu> adminmenu { get; set; } = new List<AdminMenu>();
+
 
 
         /*
@@ -49,6 +51,7 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public Promo_ViewModel promo_ViewModels { get; set; }
         public CustomerCheckout_ViewModel customercheckout_ViewModels { get; set; }
         public Discountt_ViewModel discountt_ViewModels { get; set; }
-        public AdminMenu_ViewModel adminmenu_ViewModels { get;set; }
+        public AdminMenu_ViewModel adminmenu_ViewModels { get; set; }
+
     }
 }

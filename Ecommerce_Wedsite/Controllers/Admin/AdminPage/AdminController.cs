@@ -18,6 +18,7 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly IHeaderAndFooterService _headerandfooterService;
         private readonly IAdminMenuService _adminmenuService;
 
+
         public AdminController(ILogger<AdminController> logger, IAdminService adminService, IHeaderAndFooterService headerandfooterService, IAdminMenuService adminmenuService)
         {
             _logger = logger;
@@ -45,21 +46,21 @@ namespace Ecommerce_Wedsite.Controllers
         }
 
 
-        //C1: Dùng ajax để login với js:
-        //public async Task<ResponseMessageObject<Admin_ViewModel>> AdminLoginPageFunction(string? userName, string? passWord) // function login ajax. Nên để dưới 
-        //{
-        //    var All = new AllLayout();
+    //C1: Dùng ajax để login với js:
+    //public async Task<ResponseMessageObject<Admin_ViewModel>> AdminLoginPageFunction(string? userName, string? passWord) // function login ajax. Nên để dưới 
+    //{
+    //    var All = new AllLayout();
 
-        //    var admin_ViewModels = await _adminService.Service_Test(userName, passWord);
+    //    var admin_ViewModels = await _adminService.Service_Test(userName, passWord);
 
-        //    All.admin_ViewModels = admin_ViewModels.Data;
+    //    All.admin_ViewModels = admin_ViewModels.Data;
 
-        //    return admin_ViewModels;
-        //}
+    //    return admin_ViewModels;
+    //}
 
 
-        //C2:
-        [Route("~/adminloginpagefunction")]
+    //C2:
+    [Route("~/adminloginpagefunction")]
         public async Task<IActionResult> AdminLoginPageFunction(string? userName, string? passWord) // function login ajax. Nên để dưới 
         {
 

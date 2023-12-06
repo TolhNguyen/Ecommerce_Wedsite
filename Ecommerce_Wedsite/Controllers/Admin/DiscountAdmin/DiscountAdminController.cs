@@ -15,6 +15,7 @@ namespace Ecommerce_Wedsite.Controllers
     {
         private readonly ILogger<DiscountAdminController> _logger;
         private readonly IDiscountAdminService _discountAdminService;
+
         private readonly IAdminMenuService _adminmenuService;
 
         public DiscountAdminController(ILogger<DiscountAdminController> logger, IDiscountAdminService discountAdminService, IAdminMenuService adminmenuService)
@@ -23,18 +24,19 @@ namespace Ecommerce_Wedsite.Controllers
             _discountAdminService = discountAdminService;
             _adminmenuService = adminmenuService;
         }
+            [Route("~/discountadmin")]
+            public async Task<IActionResult> DiscountAdmin()
+            {
+                var All = new AllLayout();
 
-        [Route("~/discountadmin")]
-        public async Task<IActionResult> DiscountAdmin()
-        {
-            var All = new AllLayout();
+                var discount_ViewModels = await _discountAdminService.Service_Test();
 
-            var discount_ViewModels = await _discountAdminService.Service_Test();
-            var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
-            All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
-            All.discountt_ViewModels = discount_ViewModels.Data;
+                var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+                All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
 
-            return View("DiscountAdmin", All);
+                All.discountt_ViewModels = discount_ViewModels.Data;
+
+                return View("DiscountAdmin", All);
+            }
         }
     }
-}

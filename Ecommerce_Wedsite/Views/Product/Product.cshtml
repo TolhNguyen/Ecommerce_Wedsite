@@ -307,16 +307,16 @@
                                                 switch (Model.sort_ViewModels.orderby)
                                                 {
                                                     case 1:
-                                                                                                                                                                                                            <span>Giá giảm dần</span>
+                                                                                                                                                                                        <span>Giá giảm dần</span>
                                                         break;
                                                     case 2:
-                                                                                                                                                                                                            <span>Giá tăng dần</span>
+                                                                                                                                                                                        <span>Giá tăng dần</span>
                                                         break;
                                                     case 3:
-                                                                                                                                                                                                                                                                                        <span>Hàng Mới nhất</span>
+                                                                                                                                                                                                                                                                    <span>Hàng Mới nhất</span>
                                                         break;
                                                     case 4:
-                                                                                                                                                                                                                                                                                        <span>Hàng Cũ nhất</span>
+                                                                                                                                                                                                                                                                    <span>Hàng Cũ nhất</span>
                                                         break;
                                                 }
                                             }
@@ -345,10 +345,10 @@
                                                                     @if (item1.Product_PromoPrice != 0)
                                                                     {
                                                                         <p class="special-price">
-                                                                            <span id="price2" data-value="@item1.Product_PromoPrice" value="@item1.Product_PromoPrice" class="price">@item1.Product_PromoPrice.000đ</span>
+                                                                            <span id="price2" value="@item1.Product_PromoPrice" class="price">@item1.Product_PromoPrice.000đ</span>
                                                                         </p>
                                                                         <p class="old-price">
-                                                                            <span id="price1" data-value="@item1.Product_Price" value="@item1.Product_Price" class="price">@item1.Product_Price.000₫</span>
+                                                                            <span id="price1" value="@item1.Product_Price" class="price">@item1.Product_Price.000₫</span>
                                                                         </p>
                                                                     }
                                                                     else
@@ -383,8 +383,8 @@
                                                         </a>
                                                         @if (item1.Product_PromoPrice != 0)
                                                         {
-                                                            <div id="percenttag" class="sale-label sale-top-left" value="0"> 
-
+                                                            <div id="percenttag" class="sale-label sale-top-left" value="0">
+                                                                
                                                             </div>
                                                         }
                                                     </div>
@@ -527,7 +527,8 @@
             });
         });
 
-        $('.view_mores as.one').click(function(){
+        
+        $('.view_mores as.one').click(function() {
             $(this).addClass('active');
             $('.view_mores a.two').removeClass('active');
             $('.content_coll').addClass('active');
@@ -573,6 +574,3 @@
     - Tạo 1 model chứa 2 biến để đón giá trị nhận từ Views -> gọi model đó trong controller để controller nhận giá trị -> chạy hàm desc, asc, ... -> rồi trả lại view
 -->
 <!---Học nám cơ bản tutorial JS về thiết kế trang web, chức năng, ... W3c.com, F8.youtube -->
-
-
-

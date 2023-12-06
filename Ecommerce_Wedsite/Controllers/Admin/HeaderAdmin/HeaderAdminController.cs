@@ -38,6 +38,7 @@ namespace Ecommerce_Wedsite.Controllers
             var All = new AllLayout();
 
             var header_ViewModels = await _headeradminService.Service_Test();
+
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.header_ViewModels = header_ViewModels.Data;
@@ -51,6 +52,7 @@ namespace Ecommerce_Wedsite.Controllers
             var All = new AllLayout();
 
             var header_ViewModels = await _headeradminDeleteService.Service_Test(headeritem);
+
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.header_ViewModels = header_ViewModels.Data;
@@ -64,6 +66,7 @@ namespace Ecommerce_Wedsite.Controllers
             var All = new AllLayout();
 
             var header_ViewModels = await _headeradminService.Service_Test();
+
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.header_ViewModels = header_ViewModels.Data;
@@ -77,6 +80,7 @@ namespace Ecommerce_Wedsite.Controllers
             var All = new AllLayout();
 
             var header_ViewModels = await _headeradminCreateService.Service_Test(headeritem);
+
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.header_ViewModels = header_ViewModels.Data;
@@ -90,6 +94,7 @@ namespace Ecommerce_Wedsite.Controllers
             var All = new AllLayout();
 
             var header_ViewModels = await _headeradminEditService.Service_Test(Header_Id);
+
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.header_ViewModels = header_ViewModels.Data;

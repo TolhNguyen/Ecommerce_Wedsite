@@ -24,17 +24,18 @@ namespace Ecommerce_Wedsite.Controllers
             _adminmenuService = adminmenuService;
         }
 
-        [Route("~/footeradmin")]
-        public async Task<IActionResult> FooterAdmin()
-        {
-            var All = new AllLayout();
+            [Route("~/footeradmin")]
+            public async Task<IActionResult> FooterAdmin()
+            {
+                var All = new AllLayout();
 
-            var footer_ViewModels = await _footeradminService.Service_Test();
-            var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
-            All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
-            All.footer_ViewModels = footer_ViewModels.Data;
+                var footer_ViewModels = await _footeradminService.Service_Test();
+                var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+                All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
 
-            return View("FooterAdmin", All);
+                All.footer_ViewModels = footer_ViewModels.Data;
+
+                return View("FooterAdmin", All);
+            }
         }
-    }
 }

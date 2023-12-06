@@ -110,8 +110,8 @@
                             <!--code logic tiep cho 2 list-->
                             @if (Model != null)
                             {
-                                foreach (var item in Model.headerandfooter_ViewModels.header_LV1)
-                                {
+                                foreach (var item in Model.headerandfooter_ViewModels.header_LV1){
+                               
                                     var check = Model.headerandfooter_ViewModels.header_LV2.Where(p => p.HeaderParent_Id == item.Header_Id).FirstOrDefault(); 
                                     <!--Biến check để ktra có list con k. Và câu điều kiện where... để xác định. FOD sắp xếp các đối tượng thành 1 ds-->
                                     if (check == null)
@@ -129,7 +129,7 @@
                                                    @item.Header_Title 
                                                    <ul class="level1" style="display: none;">
                                                        @foreach (var item1 in Model.headerandfooter_ViewModels.header_LV2)
-                                                        {
+                                                       {
                                                             if (item1.HeaderParent_Id == item.Header_Id)
                                                             {
                                                                 <!--Nếu title nào có id cha = id gốc => là con của id gốc -->
@@ -137,6 +137,7 @@
                                                                @*<li class="level1 parent"><a><span>@item1.Header_Title</span></a></li>*@
                                                             }
                                                        }
+
                                                    </ul>
                                                </span>
                                            </a>

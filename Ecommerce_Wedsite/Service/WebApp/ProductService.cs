@@ -37,6 +37,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     data.Data.product = await query.QueryAsync<Product>();
                     var product = await query.QueryAsync<Product>();
 
+
                     await dbConn.CloseAsync(); // đóng sync sau khi sử dụng
                 }
             }

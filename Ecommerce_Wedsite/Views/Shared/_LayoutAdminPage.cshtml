@@ -98,11 +98,29 @@
             }
 @*            <li class="nav-item">
                 <a class="nav-link collapsed" href="/#" data-toggle="collapse" data-target="#collapseTwo"
+
+            <li class="nav-item">
+               <a class="nav-link collapsed" href="/checkoutadmin" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Quản lý Check Out</span>
+                </a>
+                <a class="nav-link collapsed" href="/productadmin" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Quản lý Product </span>
                 </a>
+
             </li>*@
+
+          
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Components:</h6>
+                    <a class="collapse-item" href="buttons.html">Buttons</a>
+                    <a class="collapse-item" href="cards.html">Cards</a>
+                </div>
+            </div>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
@@ -390,23 +408,7 @@
     <!-- Bootstrap core JavaScript-->
     @*<script src="vendor/jquery.min.js"></script>*@
     <script> 
-        /* Giải pháp dùng css:
-        function DropDownSideBar() { // chưa sử dụng đc
-            var collapseTwos = document.querySelectorAll('[id="collapseTwo"]');
-            collapseTwos.forEach(function (collapseTwo, index) {
-                collapseTwo.addEventListener('click', DropDownSideBar(event){
-                    var item = event.target;
-                    console.log(item);
-                    if (item.classList.value == "collapse show"){
-                        return item.classList.remove("show");
-                    }
-                    else{ 
-                        return item.classList.add("show");
-                    }
-                });
-             });
-        }
-        */
+
     </script>
     <script src="vendor/bootstrap.bundle.min.js"></script>
 

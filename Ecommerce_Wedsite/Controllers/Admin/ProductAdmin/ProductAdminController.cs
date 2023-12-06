@@ -20,7 +20,8 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly IProductAdminCreateService _productadmincreateService;
         private readonly IProductAdminEditFunctionService _productadmineditfunctionService;
         private readonly IProductAdminEditService _productadmineditService;
-        public ProductAdminController(ILogger<ProductAdminController> logger, IProductAdminService productadminService, IProductTypeAdminService producttypeadminService, IProductAdminDeleteService productadmindeleteService, IProductAdminCreateService productadmincreateService, IProductAdminEditFunctionService productadmineditfunctionService, IProductAdminEditService productadmineditService)
+        private readonly IAdminMenuService _adminmenuService;
+        public ProductAdminController(ILogger<ProductAdminController> logger, IProductAdminService productadminService, IProductTypeAdminService producttypeadminService, IProductAdminDeleteService productadmindeleteService, IProductAdminCreateService productadmincreateService, IProductAdminEditFunctionService productadmineditfunctionService, IProductAdminEditService productadmineditService, IAdminMenuService adminmenuService)
         {
             _logger = logger;
             _productadminService = productadminService;
@@ -29,6 +30,7 @@ namespace Ecommerce_Wedsite.Controllers
             _productadmincreateService = productadmincreateService;
             _productadmineditfunctionService = productadmineditfunctionService;
             _productadmineditService = productadmineditService;
+            _adminmenuService = adminmenuService;
         }
 
         [Route("~/productadmin")]
@@ -37,7 +39,8 @@ namespace Ecommerce_Wedsite.Controllers
             var All = new AllLayout();
 
             var product_ViewModels = await _productadminService.Service_Test();
-
+            var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+            All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.product_ViewModels = product_ViewModels.Data;
 
             return View("ProductAdmin", All);
@@ -49,7 +52,7 @@ namespace Ecommerce_Wedsite.Controllers
             var All = new AllLayout();
 
             var product_ViewModels = await _productadmindeleteService.Service_Test(productitem);
-
+            
             All.product_ViewModels = product_ViewModels.Data;
 
             return View("SuccessPage", All); // sau khi chạy service ở trên r mới trả view ra
@@ -91,7 +94,8 @@ namespace Ecommerce_Wedsite.Controllers
             var All = new AllLayout();
 
             var producttype_ViewModels = await _producttypeadminService.Service_Test();
-
+            var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+            All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.producttype_ViewModels = producttype_ViewModels.Data;
 
             return View("ProductTypeAdmin", All);  
