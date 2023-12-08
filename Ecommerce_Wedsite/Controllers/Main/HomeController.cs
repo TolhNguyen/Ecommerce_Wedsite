@@ -117,4 +117,9 @@ namespace Ecommerce_Wedsite.Controllers.Main
     - có thể đổi tên cho "ServiceTest()" để nhiều service nhỏ khác nhau chạy chung đc trong 1 service lớn.
     - Giai đoạn 1: xong bên trên, cookie controller
     - Giai đoạn 2: thực hiện thêm các function hành động service nhỏ cho người dùng
+
+Cách commit code: 
+    - Vào github desktop:
+    - Ở changes, bên dưới có description, gõ des cho update mới nhất vào, sau đó commit ở fetch
+=> tìm hiểu thêm về Git hub, cách upcode mà k lấy file obj, bin lên (vì sẽ bị conflick)
  */

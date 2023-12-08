@@ -1,0 +1,102 @@
+﻿@model AllLayout
+@{
+    ViewData["Title"] = "Customer Admin Page";
+    Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
+}
+<div>
+    <h1>
+        Customer Checkout Table
+    </h1>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> <!---Tạo bảng-->
+                <thead> <!--Danh sách bảng-->
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            Customer Checkout First Name
+                        </th>
+                        <th>
+                            Customer Checkout Last Name
+                        </th>
+                        <th>
+                            Customer Checkout Phone 
+                        </th>
+                        <th>
+                            Customer Checkout Email
+                        </th>
+                        <th>
+                            Customer Checkout Address
+                        </th>
+                        <th>
+                            Customer Checkout Post Code
+                        </th>
+                        <th>
+                            Customer Checkout Zip
+                        </th>
+                        <th>
+                            Customer Checkout Total Price
+                        </th>
+                        <th>
+                            Customer Checkout Message / Feedback
+                        </th>
+                        <th>
+                            Promotion ID
+                        </th>
+                        <th>
+                            Edit
+                        </th>
+                        <th>
+                            Delete
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody> 
+                    @if (Model != null) 
+                    {
+                        // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
+                        @foreach (var item in Model.customercheckout_ViewModels.customercheckout){
+                            if(item != null){
+                                <tr>
+                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Id)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_FirstName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_LastName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Phone)</td> 
+                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Email)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Address)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_PostCode)</td> 
+                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Zip)</td> 
+                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_TotalPrice)</td> 
+                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Mess)</td> 
+                                <td>@Html.DisplayFor(modelItem => item.Promotion_Id)</td> 
+                                <td>@Html.ActionLink("Edit","#",item)</td>
+                                <td>@Html.ActionLink("Delete","#",item)</td>
+                                <!--Tao controller hay service cho edit va delete-->
+                            </tr>
+                            }
+                            
+                        }
+                    }
+                </tbody>
+            </table>
+            <div class="clearfix">
+				<div class="hint-text">Showing <b>5</b> out of <b>10</b> entries</div>
+				<ul class="pagination">
+					<li class="page-item disabled"><a href="#">Previous</a></li>
+					<li class="page-item"><a href="#" class="page-link">1</a></li>
+					<li class="page-item"><a href="#" class="page-link">2</a></li>
+					<li class="page-item active"><a href="#" class="page-link">3</a></li>
+					<li class="page-item"><a href="#" class="page-link">4</a></li>
+					<li class="page-item"><a href="#" class="page-link">5</a></li>
+					<li class="page-item"><a href="#" class="page-link">Next</a></li>
+				</ul>
+	        </div>
+            <div>
+              <a href="/HeaderAdminCreate">Create New Item</a>
+            </div>
+        </div>
+    </div>
+</div>
