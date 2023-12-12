@@ -1,0 +1,143 @@
+﻿@model AllLayout
+@{
+    ViewData["Title"] = "Discount Admin Page";
+    Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
+}
+<div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+    <nav class="nav nav-borders">
+        <a class="nav-link active ms-0" href="#" target="__blank">Profile</a>
+        <a class="nav-link" href="#" target="__blank">Billing</a>
+        <a class="nav-link" href="#" target="__blank">Security</a>
+        <a class="nav-link" href="#"  target="__blank">Notifications</a>
+    </nav>
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Details</div>
+                <div class="card-body">
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model.discountt_ViewModels.discountt)
+                        {
+                            <div>
+                                <!-- Form Group (username)-->
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="Discount_Id">Discount Id</label>
+                                    <input class="form-control" id="Discount_Id" name="Discount_Id" type="text" placeholder="Discount_Id" value="@item.Discount_Id" readonly>
+                                </div>
+                                <!-- Form Row-->
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (first name)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Discount_Rate">Discount Rate</label>
+                                        <input class="form-control" id="Discount_Rate" name="Discount_Rate" type="text"  placeholder="Discount_Rate" value="@item.Discount_Rate" required>
+                                    </div>
+                                    <!-- Form Group (last name)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Discount_No">Discount Number</label>
+                                        <input class="form-control" id="Discount_No" name="Discount_No" type="text"  placeholder="Discount_No" value="@item.Discount_No" required>
+                                    </div>
+                                </div>
+                                <!-- Form Row-->
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (organization name)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Discount_RanId">Discount Random Id</label>
+                                        <input class="form-control" id="Discount_RanId" name="Discount_RanId" type="text" placeholder="Discount_RanId" value="@item.Discount_RanId" required>
+                                    </div>
+                                    <!-- Form Group (location)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Discount_Name">Discount Name</label>
+                                        <input class="form-control" id="Discount_Name" name="Discount_Name" type="text" placeholder="Discount_Name" value="@item.Discount_Name" required>
+                                    </div>
+                                </div>
+                                @*<!-- Form Group (email address)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                            <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="name@example.com">
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputPhone">Phone number</label>
+                                <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="555-123-4567">
+                            </div>
+                            <!-- Form Group (birthday)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputBirthday">Birthday</label>
+                                <input class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday" value="06/10/1988">
+                            </div>
+                        </div>*@
+                                <!-- Save changes button-->
+                                <input id="button_1" onclick="Editlog()" type="button" value="Save Edit" class="btn btn-primary rounded submit p-3 px-5"/>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+@*<div class="login-form">
+	@if(Model != null){
+		@foreach (var item in Model.discountt_ViewModels.discountt)
+		{		
+			<div class="form-group">
+				<input type="text" id="Discount_Id" name="Discount_Id" class="form-control rounded-left" placeholder="Discount_Id" value="@item.Discount_Id" readonly>
+			</div>
+			<div class="form-group">
+				<input type="text" id="Discount_Rate" name="Discount_Rate" class="form-control rounded-left" placeholder="Discount_Rate" value="@item.Discount_Rate" required>
+			</div>
+			<div class="form-group">
+				<input type="text" id="Discount_No" name="Discount_No" class="form-control rounded-left" placeholder="Discount_No" value="@item.Discount_No" required>
+			</div>
+			<div class="form-group">
+				<input type="text" id="Discount_RanId" name="Discount_RanId" class="form-control rounded-left" placeholder="Discount_RanId" value="@item.Discount_RanId" required>
+			</div>
+			<div class="form-group">
+				<input type="text" id="Discount_Name" name="Discount_Name" class="form-control rounded-left" placeholder="Discount_Name" value="@item.Discount_Name" required>
+			</div>
+			<div class="form-group">
+				<input id="button_1" onclick="Editlog()" type="button" value="Submit" class="btn btn-primary rounded submit p-3 px-5"/>
+				<!--Khi submit -> link controller -> service -> new view -->
+			</div>
+		}
+	}	
+</div>*@
+
+<script>
+	function Editlog() {
+        $.ajax({
+            url: "DiscountAdmin/DiscountAdminEditFunction",
+            dataType: "text",
+            type: "POST",
+            data: {
+                Discount_Id: $('#Discount_Id').val(),
+                Discount_Rate: $('#Discount_Rate').val(),
+                Discount_No: $('#Discount_No').val(),
+                Discount_RanId: $('#Discount_RanId').val(),
+                Discount_Name: $('#Discount_Name').val(),
+            },
+            cache: !1,
+            success:
+            function(result) {
+                var obj = JSON.parse(result);
+                if (obj.success == true) {
+                    alert(obj.message);
+                    window.location = 'https://localhost:7037/discountadmin'; // Nếu đúng thì chạy tiếp sang trang Admin
+                }
+                else {
+                    alert(obj.message);
+                    window.location = 'https://localhost:7037/discountadminedit'; // nếu false thì về lại trang login
+                }
+            }
+        });
+    };
+</script>
+
+
+

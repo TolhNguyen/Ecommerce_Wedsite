@@ -3,8 +3,9 @@
     ViewData["Title"] = "Discount Admin Page";
     Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
 }
+<link href="~/css/crud.css" rel="stylesheet" type="text/css">
 <div>
-    <h1>Discount Table</h1>
+    <h1 style="color:black">Discount Table</h1>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> <!---Tạo bảng-->
@@ -22,6 +23,15 @@
                         <th>
                            Discount Random ID
                         </th>
+                        <th>
+                           Discount Name
+                        </th>
+                        <th>
+                           Edit
+                        </th>
+                        <th>
+                           Delete
+                        </th>
                     </tr>
                 </thead>
 
@@ -34,6 +44,9 @@
                                 <td>@Html.DisplayFor(modelItem => item.Discount_Rate)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Discount_No)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Discount_RanId)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Discount_Name)</td>
+                                <td>@Html.ActionLink("Edit","discountadminedit",item)</td>
+                                <td>@Html.ActionLink("Delete","discountadmindelete",item)</td>
                                 <!--Tao controller hay service cho edit va delete-->
                             </tr>
                         }

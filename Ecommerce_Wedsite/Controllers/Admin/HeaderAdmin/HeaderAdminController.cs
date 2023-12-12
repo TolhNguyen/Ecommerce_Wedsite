@@ -33,7 +33,7 @@ namespace Ecommerce_Wedsite.Controllers
         }
 
         [Route("~/headeradmin")]
-        public async Task<IActionResult> HeaderAdmin(Header headeritem) // Delete, Edit nên chung 1 controller hay tách ra
+        public async Task<IActionResult> HeaderAdmin(Header headeritem) 
         {
             var All = new AllLayout();
 
@@ -61,7 +61,7 @@ namespace Ecommerce_Wedsite.Controllers
         }
 
         [Route("~/headeradmincreate")]
-        public async Task<IActionResult> HeaderAdminCreate() // không cần service chỉ cần trả trang thôi
+        public async Task<IActionResult> HeaderAdminCreate() // không cần service chỉ cần trả trang thôi. trang
         {
             var All = new AllLayout();
 
@@ -75,7 +75,7 @@ namespace Ecommerce_Wedsite.Controllers
         }
 
         [Route("~/headeradmincreatefunction")]
-        public async Task<IActionResult> HeaderAdminCreateFunction(Header headeritem) 
+        public async Task<IActionResult> HeaderAdminCreateFunction(Header headeritem) // Function create
         {
             var All = new AllLayout();
 
