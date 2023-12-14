@@ -122,4 +122,7 @@ Cách commit code:
     - Vào github desktop:
     - Ở changes, bên dưới có description, gõ des cho update mới nhất vào, sau đó commit ở fetch
 => tìm hiểu thêm về Git hub, cách upcode mà k lấy file obj, bin lên (vì sẽ bị conflick)
+
+Cần làm: tối ưu trang web: ưu tiên trang home, trang checkout, trang product:
+    1. Thêm hình ảnh sản phẩm ở check out
  */

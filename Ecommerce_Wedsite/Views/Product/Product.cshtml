@@ -50,8 +50,6 @@
                 <div class="row">
                     <div class="col-left sidebar sidebar_mobi col-sm-12 col-xs-12">
                         <aside class="col-left sidebar">
-
-
                             <div class="box_fill">
                                 <div class="filter-containers">
                                     <div class="heading">
@@ -253,17 +251,21 @@
                                                     <div class="h2 title-head margin-top-0"><span>Loại</span></div>
                                                 </div>
                                                 <div class="aside-content filter-group">
-                                                    <ul class="filter-type">
+                                                    <ul class="filter-type>
+                                                    @{
+                                                        var n = 0;
                                                         @foreach (var item2 in Model.producttype_ViewModels.producttype)
                                                         {
+                                                            n++;
                                                             <li class="filter-item filter-item--check-box filter-item--green" id="sortcategorydplt" >
                                                                 <label data-filter="cây để bàn" >
                                                                     <input type="checkbox" onchange="GetCategory(this);" data-group="Loại" data-field="product_type" data-text="@item2.ProductType_Name" value="@item2.ProductType_Id" name="@item2.ProductType_Name" data-operator="OR">
                                                                     <i class="fa" for="@item2.ProductType_Name"></i>
-                                                                    @item2.ProductType_Name
+                                                                    Loại @n: @item2.ProductType_Name
                                                                 </label>
                                                             </li>
                                                         }
+                                                    }
                                                     </ul>
                                                 </div>
                                             </aside>
@@ -307,16 +309,16 @@
                                                 switch (Model.sort_ViewModels.orderby)
                                                 {
                                                     case 1:
-                                                                                                                                                                                        <span>Giá giảm dần</span>
+                                                                                                                                                                                                                        <span>Giá giảm dần</span>
                                                         break;
                                                     case 2:
-                                                                                                                                                                                        <span>Giá tăng dần</span>
+                                                                                                                                                                                                                        <span>Giá tăng dần</span>
                                                         break;
                                                     case 3:
-                                                                                                                                                                                                                                                                    <span>Hàng Mới nhất</span>
+                                                                                                                                                                                                                                                                                                    <span>Hàng Mới nhất</span>
                                                         break;
                                                     case 4:
-                                                                                                                                                                                                                                                                    <span>Hàng Cũ nhất</span>
+                                                                                                                                                                                                                                                                                                    <span>Hàng Cũ nhất</span>
                                                         break;
                                                 }
                                             }
@@ -487,7 +489,6 @@
         function GetCategory(it) { // "it" là "this"" thôi. Chỉ hiện 1 lần, chọn lại mới có. Hiện 1 lần lưu nếu thay đổi phải
             var categoryid = document.getElementById("categoryitem");
             var category = document.getElementById("categoryitem").value; // cái ô hiện tên cate ra
-
             if (it.checked) { // có checked thì mới có value
                 categoryid.textContent = it.name; // hiện name
                 category = it.value; // lấy dc id r

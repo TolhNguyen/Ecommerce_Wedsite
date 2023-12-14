@@ -169,24 +169,26 @@
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
                         <label class="form-check-label" for="flexCheckDefault1">Save this address</label>
                     </div>
-
-                    <p class="mb-0">Thông tin đơn hàng:</p>
-                    <table class="mb-3" id="checkoutorder">
+                        <div class="">
+                            <p class="mb-0">Thông tin đơn hàng:</p>
+                            <table class="mb-3" id="checkoutorder">
                       
-                    </table>
-                    <div class="mb-3">
-                        <p class="mb-0">Total Price:</p>
-                        <div class="form-outline" id="checkouttp">
-                            <input id="CustomerCheckout_TotalPrice" name="CustomerCheckout_TotalPrice" value="0" readonly />
-                            <span>.000đ</span>
-                            <p id="p1"></p>
-                        </div>
-                    </div>
+                            </table>
+                            <div class="mb-3">
+                                <p class="mb-0">Total Price:</p>
+                                <div class="form-outline" id="checkouttp">
+                                    <input id="CustomerCheckout_TotalPrice" name="CustomerCheckout_TotalPrice" value="0" readonly />
+                                    <span>.000đ</span>
+                                    <p id="p1"></p>
+                                </div>
+                            </div>
                 
-                    <div class="float-end">
-                        <button onclick="" class="btn btn-light border">Cancel</button>
-                        <button type="submit" class="btn btn-success shadow-0 border">Xác nhận đơn hàng</button>
-                    </div>
+                            <div class="float-end">
+                                <button onclick="" id="cancelid" class="btn btn-light border">Cancel</button>
+                                <button type="submit" class="btn btn-success shadow-0 border">Xác nhận đơn hàng</button>
+                            </div>
+                        </div>
+                    
                     </div>
                 </div>
             </form>    
@@ -219,9 +221,11 @@ function SummaryCart(){
         var cartcookie = getCart('cart').substring(0);
         var cartcookieobj = JSON.parse(cartcookie);
         let item = Object.values(cartcookieobj);
+        var n = 0;
         for (var i = 0; i < item.length; i++) {
             if (item[i] !== null) {
                 for (var j = 0; j < item[i].length; j++) {
+                    n++;
                     thetong = document.createElement("div");
 
                     in1 = document.createElement("input");
@@ -251,7 +255,8 @@ function SummaryCart(){
                     in4.setAttribute("name", "ProductCheckout_Quantity");
                     in4.setAttribute("readonly", true);
 
-                    thetong.appendChild(in1);
+                    thetong.textContent = n+". ";
+                    thetong.appendChild(in1); // sau đó appendchild để + tiếp đoạn string vào
                     thetong.appendChild(in2);
                     thetong.appendChild(in3);
                     thetong.appendChild(in4);

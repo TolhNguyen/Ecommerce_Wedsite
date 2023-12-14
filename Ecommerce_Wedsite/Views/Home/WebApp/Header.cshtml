@@ -155,13 +155,14 @@
 </header>
 <script>
 	// Vấn để: là chưa search loại 1 mình đc và Chưa search ở bên ngoài trang Home đc:
-    function SortName() { 
+    function SortName() {    
 		var proname = document.getElementById("sortname").value; //get value input nếu k có thì là ""
-        if(proname != ""){ //Func Chạy ở Header thôi. Nếu có gõ vào
-		    var page = 1;
-		    var orderby = 1;
+        if(proname != ""){ //Func Chạy ở Header thôi. Nếu có giá trị
+		    var page = 1; // lấy đỡ là 1
+		    var orderby = 1; 
             //category = undefined; // lỗi k lấy đc
-			category = document.getElementById("categoryitem").value;
+			var category = document.getElementById("categoryitem").value; // ở Header k cần category
+            console.log(category);
             return sort(page, orderby, proname, category);
             /*
                 -   Cách lưu vào value của input tìm kiếm: chỉ cần gọi Model.sort_ViewModels.proname là đủ
