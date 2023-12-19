@@ -27,7 +27,9 @@ namespace Ecommerce_Wedsite.Models.ViewModel
 
         public IEnumerable<AdminMenu> adminmenu { get; set; } = new List<AdminMenu>();
 
-
+        public IEnumerable<City> city { get; set; } = new List<City>();
+        public IEnumerable<NewsCategory> newscate { get; set; } = new List<NewsCategory>();
+        public IEnumerable<ListNews> listnews { get; set; } = new List<ListNews>();
 
         /*
             -   Tạo từng ViewModel từ Entities (có thể tạo nhiều entities trong 1 viewmodel để service gọi ra nhiều biến result giá trị để sử dụng đc
@@ -52,6 +54,8 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public CustomerCheckout_ViewModel customercheckout_ViewModels { get; set; }
         public Discountt_ViewModel discountt_ViewModels { get; set; }
         public AdminMenu_ViewModel adminmenu_ViewModels { get; set; }
-
+        public City_ViewModel city_ViewModels { get; set; }
+        public NewsCategory_ViewModel newscategory_ViewModels { get; set; }
+        public ListNews_ViewModel listnews_ViewModels { get; set; }
     }
 }

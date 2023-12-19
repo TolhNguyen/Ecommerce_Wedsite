@@ -114,10 +114,15 @@
 
                         <div class="col-sm-4 mb-3">
                         <p class="mb-0">City</p>
-                        <select class="form-select">
-                            <option value="1">New York</option>
-                            <option value="2">Moscow</option>
-                            <option value="3">Samarqand</option>
+                        <select class="form-select" id="cityselect" name="cityselect" onChange="Summarytotalprice()">
+                            @foreach(var item3 in Model.city_ViewModels.city)
+                                {
+                                    <option id="@item3.City_Id" name="@item3.City_Id" value="@item3.City_Id">
+                                        @item3.City_Name
+                                    </option>
+                                }
+                                 <input type="hidden" id="City_Id" name="City_Id" value="0"/>
+                                 <!--input hidden giấu -> chỉ để lấy value cho Model thôi-->
                         </select>
                         </div>
 
@@ -272,15 +277,20 @@ function SummaryCart(){
         + dùng js select id ra và truyền vào value chủa input hidden bên ngoài
 */
 function Summarytotalprice() {
+    var cityselect = document.getElementById('cityselect');
+    var cityid = cityselect.options[cityselect.selectedIndex].id; // lấy id đc select ra
+    var getcityId = document.getElementById('City_Id'); 
+
     var promoselect = document.getElementById('promoselect');
-    var promovalue = promoselect.options[promoselect.selectedIndex].value;
-    var promoid = promoselect.options[promoselect.selectedIndex].id;
+    var promovalue = promoselect.options[promoselect.selectedIndex].value; // value để tính total price lại
+    var promoid = promoselect.options[promoselect.selectedIndex].id; // lấy id đc select ra
     var getpromoId = document.getElementById('Promotion_Id');
     var popuprate = document.getElementById("popuprate").getAttribute("value"); 
     var checkouttp = document.getElementById('checkouttp');
     var p1 = document.getElementById('p1');
     
-    getpromoId.value = promoid;
+    getcityId.value = cityid;
+    getpromoId.value = promoid; // lưu id select vào model để gửi đi
     if (getCart('cart') !== "") {
         var cartcookie = getCart('cart').substring(0);
         var cartcookieobj = JSON.parse(cartcookie);

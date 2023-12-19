@@ -19,8 +19,9 @@ namespace Ecommerce_Wedsite.Controllers.Main
         private readonly IPromotionService _promotionService;
         private readonly IDiscounttService _discounttService;
         private readonly IDecreasePromoQuantityService _decreasepromoquantityService;
+        private readonly ICityService _cityService;
 
-        public CheckoutController(ILogger<CheckoutController> logger, IHeaderAndFooterService headerandfooterService, IPictureService pictureService, ICustomerCheckoutService customercheckoutService, IProductCheckoutService productcheckoutService, IPromotionService promotionService, IDiscounttService discounttService, IDecreasePromoQuantityService decreasepromoquantityService)
+        public CheckoutController(ILogger<CheckoutController> logger, IHeaderAndFooterService headerandfooterService, IPictureService pictureService, ICustomerCheckoutService customercheckoutService, IProductCheckoutService productcheckoutService, IPromotionService promotionService, IDiscounttService discounttService, IDecreasePromoQuantityService decreasepromoquantityService, ICityService cityService)
         {
             _logger = logger;
             _headerandfooterService = headerandfooterService;
@@ -30,6 +31,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             _promotionService = promotionService;
             _discounttService = discounttService;
             _decreasepromoquantityService = decreasepromoquantityService;
+            _cityService = cityService;
         }
 
         [Route("~/checkout")]
@@ -41,11 +43,13 @@ namespace Ecommerce_Wedsite.Controllers.Main
             var promotion_ViewModels = await _promotionService.Service_Test();
             var picture_ViewModels = await _pictureService.Service_Test();
             var discountt_ViewModels = await _discounttService.PopupDiscount();
+            var city_ViewModels = await _cityService.Service_Test();
 
             All.headerandfooter_ViewModels = headerandfooter_ViewModels.Data;
             All.picture_ViewModels = picture_ViewModels.Data;
             All.promo_ViewModels = promotion_ViewModels.Data;
             All.discountt_ViewModels = discountt_ViewModels.Data;
+            All.city_ViewModels = city_ViewModels.Data;
 
             return View("Checkout", All);
         }

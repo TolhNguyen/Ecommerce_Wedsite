@@ -56,7 +56,7 @@
                 <div class="search-box">
                     <form method="get" id="search_mini_form" class="search-box">
                         <input class="change_pl" style="border-radius:20px; width:350px; height:34px;" placeholder="Tìm kiếm..." value="@Model.sort_ViewModels.proname" maxlength="170" id="sortname" >
-                        <a onclick="SortName()">Tìm kiếm <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/search.png?1676649124511"></a>
+                        <a href="#" onclick="SortName()">Tìm kiếm</a>
                     </form>
                     <div class="fix-cart">
                         <div class="l_o hidden-xs hidden-sm">
@@ -133,8 +133,8 @@
                                                             if (item1.HeaderParent_Id == item.Header_Id)
                                                             {
                                                                 <!--Nếu title nào có id cha = id gốc => là con của id gốc -->
-                                                               <li class="level1 parent"><a asp-controller="Home" asp-action="@item.HeaderAction"><span>@item1.Header_Title</span></a></li>
-                                                               @*<li class="level1 parent"><a><span>@item1.Header_Title</span></a></li>*@
+                                                                <li class="level1 parent"><a asp-controller="Home" asp-action="@item.HeaderAction"><span>@item1.Header_Title</span></a></li>
+                                                                @*<li class="level1 parent"><a><span>@item1.Header_Title</span></a></li>*@
                                                             }
                                                        }
 
