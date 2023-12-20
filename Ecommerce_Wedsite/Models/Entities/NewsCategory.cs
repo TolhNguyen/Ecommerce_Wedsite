@@ -10,6 +10,7 @@ namespace Ecommerce_Wedsite.Models.Entities
         public int NewsCate_Id { get; set; }
         public string NewsCate_Name { get; set; }
         public Bit6 NewsCate_Condition { get; set; }
+        public int NewsCate_HTML { get; set; }
     }
     public enum Bit6 // false là 0, true là 1
     {

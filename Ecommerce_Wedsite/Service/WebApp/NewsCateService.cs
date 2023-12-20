@@ -31,7 +31,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 {
                     await dbConn.OpenAsync(); // mở sync
 
-                    var query = dbConn.QueryBuilder($"SELECT * FROM NewsCategory where NewsCate_Condition = 1");
+                    var query = dbConn.QueryBuilder($"SELECT * FROM NewsCategory where NewsCate_Condition = 1"); // Phải Condition = 1 (true) mới lấy
 
                     data.Data.newscate = await query.QueryAsync<NewsCategory>();
 

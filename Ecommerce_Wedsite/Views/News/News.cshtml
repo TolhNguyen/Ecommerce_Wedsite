@@ -26,7 +26,9 @@
         <link href="css/news.css" rel="stylesheet">
     </head>
     <body>
-<!--Top News Start-->
+        @if (Model != null)
+        {
+        <!--Top News Start-->
         <div class="breadcrumbs">
             <div class="container">
                 <div class="inner">
@@ -108,25 +110,31 @@
         <div class= "cat-news" >
             <div class= "container" >
                 <div class= "row" >
-                    @if (Model != null)
+                    @foreach (var item in Model.newscategory_ViewModels.newscate)
                     {
-                        foreach (var item in Model.newscategory_ViewModels.newscate)
+                        @if (item.NewsCate_HTML == 1)
                         {
                             <div class= "col-md-6">
                                 <h2> @item.NewsCate_Name</h2>
                                 <div class= "row cn-slider">
                                     @foreach (var item2 in Model.listnews_ViewModels.listnews)
                                     {
-                                        @if(item.NewsCate_Id == item2.NewsCate_Id)
+                                        @if (item.NewsCate_Id == item2.NewsCate_Id)
                                         {
-                                            <div class= "col-md-6">
-                                                <div class= "cn-img" >
-                                                    <img src = "img/NewsImg/news-350x223-1.jpg" />
-                                                    <div class= "cn-title" >
-                                                        <a href = "" > @item2.ListNews_Title</a>
+                                            @foreach (var item3 in Model.picture_ViewModels.picture)
+                                            {
+                                                @if (item3.Picture_Id == item2.Picture_Id)
+                                                {
+                                                    <div class= "col-md-6">
+                                                        <div class= "cn-img" >
+                                                            <img src = "img/NewsImg/@item3.Picture_FileName" />
+                                                            <div class= "cn-title" >
+                                                                <a href = "" > @item2.ListNews_Title</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                }
+                                            }
                                         }
                                     }
                                 </div>
@@ -137,9 +145,9 @@
             </div>
         </div>
         <!-- Category News End-->
-        
+
         <!-- Tab News Start-->
-        <div class= "tab-news" >
+        @*<div class= "tab-news" >
             <div class= "container" >
                 <div class= "row" >
                     <div class= "col-md-6" >
@@ -236,7 +244,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class= "col-md-6" >
                         <ul class= "nav nav-pills nav-justified" >
                             <li class= "nav-item" >
@@ -333,7 +341,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
         <!-- Tab News Start-->
 
         <!-- Main News Start-->
@@ -416,28 +424,33 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class= "col-lg-3" >
-                        <div class= "mn-list" >
-                            <h2> Read More </h2>
-                            <ul>
-                                <li><a href = "" > Lorem ipsum dolor sit amet</a></li>
-                                <li><a href="">Pellentesque tincidunt enim libero</a></li>
-                                <li><a href="">Morbi id finibus diam vel pretium enim</a></li>
-                                <li><a href="">Duis semper sapien in eros euismod sodales</a></li>
-                                <li><a href="">Vestibulum cursus lorem nibh</a></li>
-                                <li><a href="">Morbi ullamcorper vulputate metus non eleifend</a></li>
-                                <li><a href="">Etiam vitae elit felis sit amet</a></li>
-                                <li><a href="">Nullam congue massa vitae quam</a></li>
-                                <li><a href="">Proin sed ante rutrum</a></li>
-                                <li><a href="">Curabitur vel lectus</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    @foreach (var item in Model.newscategory_ViewModels.newscate) // có thể cùng tên item miễn là không bị trồng lên nhau 
+                    {
+                        @if (item.NewsCate_HTML == 2)
+                        {
+                            <div class= "col-lg-3" >
+                                <div class= "mn-list" >
+                                    <h2> @item.NewsCate_Name nè</h2>
+                                    <ul>
+                                        <li><a href = "" > Lorem ipsum dolor sit amet</a></li>
+                                        <li><a href="">Pellentesque tincidunt enim libero</a></li>
+                                        <li><a href="">Morbi id finibus diam vel pretium enim</a></li>
+                                        <li><a href="">Duis semper sapien in eros euismod sodales</a></li>
+                                        <li><a href="">Vestibulum cursus lorem nibh</a></li>
+                                        <li><a href="">Morbi ullamcorper vulputate metus non eleifend</a></li>
+                                        <li><a href="">Etiam vitae elit felis sit amet</a></li>
+                                        <li><a href="">Nullam congue massa vitae quam</a></li>
+                                        <li><a href="">Proin sed ante rutrum</a></li>
+                                        <li><a href="">Curabitur vel lectus</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
         </div>
-
+        }
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
