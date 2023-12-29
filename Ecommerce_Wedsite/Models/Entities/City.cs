@@ -9,5 +9,6 @@ namespace Ecommerce_Wedsite.Models.Entities
         [Key]
         public int City_Id { get; set; }
         public string City_Name { get; set; }
+        public int City_ZipCode {  get; set; }
     }
 }

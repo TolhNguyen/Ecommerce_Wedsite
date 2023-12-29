@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LpFnNwZCj6wgn3uDIeTPu/gpd7we7X86ofAB2IR4CEU=",
+  "Hash": "ddl0gh9p//JlGfAEWcu+AyhR5q5f9v+T1LGrqIoMVJo=",
   "Source": "Ecommerce_Wedsite",
   "BasePath": "_content/Ecommerce_Wedsite",
   "Mode": "Default",
@@ -473,12 +473,12 @@
       "OriginalItemSpec": "wwwroot\\css\\news.css"
     },
     {
-      "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\popup.css",
+      "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\popup2.css",
       "SourceId": "Ecommerce_Wedsite",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\",
       "BasePath": "_content/Ecommerce_Wedsite",
-      "RelativePath": "css/popup.css",
+      "RelativePath": "css/popup2.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -489,7 +489,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\popup.css"
+      "OriginalItemSpec": "wwwroot\\css\\popup2.css"
     },
     {
       "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\sb-admin-2.css",

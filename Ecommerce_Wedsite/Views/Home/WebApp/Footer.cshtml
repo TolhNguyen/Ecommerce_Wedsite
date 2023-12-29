@@ -1,133 +1,133 @@
 ﻿@model AllLayout
     <footer>
-            <div class="footer-inner">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-7 col-md-8 col-lg-8 col-xs-12">
-                            <div class="row">
-                                @if (Model != null)
+        <div class="footer-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7 col-md-8 col-lg-8 col-xs-12">
+                        <div class="row">
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model.headerandfooter_ViewModels.footer_Vl1)
+                                {
+                                    <!--Item là list các dữ liệu của header cha (lớn nhất)-->
+                                    var check = Model.headerandfooter_ViewModels.footer_Vl2.Where(p => p.FooterParent_Id == item.Footer_Id).FirstOrDefault(); 
+                                    <!--Biến check để ktra có list con k. Và câu điều kiện where... để xác định. FOD sắp xếp các đối tượng thành 1 ds-->
+                                    if (check == null)
                                     {
-                                        foreach (var item in Model.headerandfooter_ViewModels.footer_Vl1)
-                                        {
-                                            <!--Item là list các dữ liệu của header cha (lớn nhất)-->
-                                            var check = Model.headerandfooter_ViewModels.footer_Vl2.Where(p => p.FooterParent_Id == item.Footer_Id).FirstOrDefault(); 
-                                            <!--Biến check để ktra có list con k. Và câu điều kiện where... để xác định. FOD sắp xếp các đối tượng thành 1 ds-->
-                                            if (check == null)
-                                            {
-                                                <!--K có list con-->
-                                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                                                    <div class="footer-column dq-toggle">
-                                                        <h4>@item.Footer_Title<i class="fa fa-angle-down f-right"></i></h4>
-                                                    </div>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <!--có list con-->
-                                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                                                    <div class="footer-column dq-toggle">
-                                                        <h4>@item.Footer_Title<i class="fa fa-angle-down f-right"></i></h4>
-                                                        <ul class="links">
-                                                        @foreach (var item1 in Model.headerandfooter_ViewModels.footer_Vl2)
-                                                        {
-                                                            <!--Item1 là list các dữ liệu của header con (bé của header cha)-->
-                                                            if (item1.FooterParent_Id == item.Footer_Id)
-                                                            {
-                                                                <!--Nếu title nào có id cha = id gốc => là con của id gốc => Title con -->
-                                                                <li><a href="/" title="Trang chủ">@item1.Footer_Title</a></li>
-                                                            }
-                                                        }
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            }
-                                        }
+                                        <!--K có list con-->
+                                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                            <div class="footer-column dq-toggle">
+                                                <h4>@item.Footer_Title<i class="fa fa-angle-down f-right"></i></h4>
+                                            </div>
+                                        </div>
                                     }
-                                <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12">
-                                    <div class="footer-column-last vbline">
-                                        <h4>Liên hệ</h4>
-
-                                        <address>
-                                            <img class="mg_r_2" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/on-maps.png?1676649124511" alt="Mew Nature">
-                                            <span>Ladeco Building, 266 Doi Can Street, Ba Dinh District, Hanoi. </span>
-                                        </address>
-                                        <div class="phone-footer">
-                                            <img class="mg_r_2" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/old-phone.png?1676649124511" alt="Mew Nature">
-                                            <a href="tel:19006750" title="1900 6750">1900 6750</a>
+                                    else
+                                    {
+                                        <!--có list con-->
+                                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                            <div class="footer-column dq-toggle">
+                                                <h4>@item.Footer_Title<i class="fa fa-angle-down f-right"></i></h4>
+                                                <ul class="links">
+                                                @foreach (var item1 in Model.headerandfooter_ViewModels.footer_Vl2)
+                                                {
+                                                    <!--Item1 là list các dữ liệu của header con (bé của header cha)-->
+                                                    if (item1.FooterParent_Id == item.Footer_Id)
+                                                    {
+                                                        <!--Nếu title nào có id cha = id gốc => là con của id gốc => Title con -->
+                                                        <li><a href="/" title="Trang chủ">@item1.Footer_Title</a></li>
+                                                    }
+                                                }
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <div class="email-footer">
-                                            <img class="mg_r_2" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/email-envelope.png?1676649124511" alt="Mew Nature">
-                                            <a href="mailto:support@sapo.vn" title="support@sapo.vn">support@sapo.vn</a>
-                                        </div>
+                                    }
+                                }
+                            }
+                            <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12">
+                                <div class="footer-column-last vbline">
+                                    <h4>Liên hệ</h4>
 
+                                    <address>
+                                        <img class="mg_r_2" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/on-maps.png?1676649124511" alt="Mew Nature">
+                                        <span>Ladeco Building, 266 Doi Can Street, Ba Dinh District, Hanoi. </span>
+                                    </address>
+                                    <div class="phone-footer">
+                                        <img class="mg_r_2" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/old-phone.png?1676649124511" alt="Mew Nature">
+                                        <a href="tel:19006750" title="1900 6750">1900 6750</a>
                                     </div>
+                                    <div class="email-footer">
+                                        <img class="mg_r_2" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/email-envelope.png?1676649124511" alt="Mew Nature">
+                                        <a href="mailto:support@sapo.vn" title="support@sapo.vn">support@sapo.vn</a>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-5 col-md-4 col-lg-4 col-xs-12">
-                            <div class="footer-column-1">
-                                <div class="footer-logo">
-                                    <a href="/" title="Mew Nature">
-                                        <img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/logo.png?1676649124511">
-                                    </a>
-                                </div>
-                                <p>Công ty Cổ phần Đầu tư MewMew là nhà bán lẻ số 1 Việt Nam về doanh thu và lợi nhuận, với mạng lưới hơn 2200 cửa hàng trên toàn quốc. MewMew vận hành các chuỗi nhà hàng MewCoffee, MewFood , MewTea . Ngoài ra, MewMew đã mở rộng ra thị trường nước ngoài với chuỗi bán lẻ MewIphone tại Campuchia. </p>
-                            </div>
-
-                            <div class="footer-column-1">
-                                <div class="social">
-                                    <div class="onut">
-                                        <a href="#" class="facebook" target="_blank" title="Facebook">
-                                            <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/facebook.png?1676649124511" alt="facebook">
-                                        </a>
-                                        <a href="#" target="_blank" class="twitter" title="Twitter">
-                                            <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/twitter.png?1676649124511" alt="twitter">
-                                        </a>
-                                        <a href="#" target="_blank" class="instagram" title="Instagram+">
-                                            <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/instagram.png?1676649124511" alt="instagram">
-                                        </a>
-                                        <a href="#" target="_blank" class="youtube" title="Youtube">
-                                            <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/youtube.png?1676649124511" alt="youtube">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="payment-accept">
-                                    <div>
-                                        <img class="first" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/payment-1.png?1676649124511" alt="payment-1">
-
-                                        <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/payment-2.png?1676649124511" alt="payment-2">
-
-
-                                        <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/payment-3.png?1676649124511" alt="payment-3">
-
-
-                                        <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/payment-4.png?1676649124511" alt="payment-4">
-
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
-                </div>
-                <div class="footer-bottom">
-                    <div class="container">
+                    <div class="col-sm-5 col-md-4 col-lg-4 col-xs-12">
+                        <div class="footer-column-1">
+                            <div class="footer-logo">
+                                <a href="/" title="Mew Nature">
+                                    <img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/logo.png?1676649124511">
+                                </a>
+                            </div>
+                            <p>Công ty Cổ phần Đầu tư MewMew là nhà bán lẻ số 1 Việt Nam về doanh thu và lợi nhuận, với mạng lưới hơn 2200 cửa hàng trên toàn quốc. MewMew vận hành các chuỗi nhà hàng MewCoffee, MewFood , MewTea . Ngoài ra, MewMew đã mở rộng ra thị trường nước ngoài với chuỗi bán lẻ MewIphone tại Campuchia. </p>
+                        </div>
 
-                        <div class="coppyright">
-                            Bản quyền thuộc về <a href="https://www.facebook.com/mewtheme/" title="MewTheme" target="_blank" rel="nofollow">MewTheme</a>.
+                        <div class="footer-column-1">
+                            <div class="social">
+                                <div class="onut">
+                                    <a href="#" class="facebook" target="_blank" title="Facebook">
+                                        <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/facebook.png?1676649124511" alt="facebook">
+                                    </a>
+                                    <a href="#" target="_blank" class="twitter" title="Twitter">
+                                        <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/twitter.png?1676649124511" alt="twitter">
+                                    </a>
+                                    <a href="#" target="_blank" class="instagram" title="Instagram+">
+                                        <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/instagram.png?1676649124511" alt="instagram">
+                                    </a>
+                                    <a href="#" target="_blank" class="youtube" title="Youtube">
+                                        <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/youtube.png?1676649124511" alt="youtube">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="payment-accept">
+                                <div>
+                                    <img class="first" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/payment-1.png?1676649124511" alt="payment-1">
+
+                                    <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/payment-2.png?1676649124511" alt="payment-2">
 
 
-                            <span class="opacity1">
-                                Cung cấp bởi<a href="https://www.sapo.vn/?utm_campaign=cpn:kho_theme-plm:footer&utm_source=Tu_nhien&utm_medium=referral&utm_content=fm:text_link-km:-sz:&utm_term=&campaign=kho_theme-sapo" rel="nofollow" title="Sapo" target="_blank"> Sapo</a>
-                            </span>
+                                    <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/payment-3.png?1676649124511" alt="payment-3">
 
+
+                                    <img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/payment-4.png?1676649124511" alt="payment-4">
+
+                                </div>
+                            </div>
                         </div>
 
                     </div>
                 </div>
             </div>
-            <input type="text" class="input-text number-sidebar hidden">
-            <div class="fix-phone">
+            <div class="footer-bottom">
+                <div class="container">
+
+                    <div class="coppyright">
+                        Bản quyền thuộc về <a href="https://www.facebook.com/mewtheme/" title="MewTheme" target="_blank" rel="nofollow">MewTheme</a>.
+
+
+                        <span class="opacity1">
+                            Cung cấp bởi<a href="https://www.sapo.vn/?utm_campaign=cpn:kho_theme-plm:footer&utm_source=Tu_nhien&utm_medium=referral&utm_content=fm:text_link-km:-sz:&utm_term=&campaign=kho_theme-sapo" rel="nofollow" title="Sapo" target="_blank"> Sapo</a>
+                        </span>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <input type="text" class="input-text number-sidebar hidden">
+        <div class="fix-phone">
 	        <div class="bbh">
 		        <div class="phone">
 			        <a href="tel:0975997736" title="Gọi ngay">
