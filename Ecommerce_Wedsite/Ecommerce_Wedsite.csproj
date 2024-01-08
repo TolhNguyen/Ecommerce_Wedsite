@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\popup7.css~RF2157994.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="Dapper-QueryBuilder" Version="1.2.9" />
