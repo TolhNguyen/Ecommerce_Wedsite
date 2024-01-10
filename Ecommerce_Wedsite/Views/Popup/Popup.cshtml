@@ -16,10 +16,10 @@
                            
                         </div>
                     </div>
-                    <a class="popupclose" id="popupclose">+</a>
+                    <a class="popupclose" id="popupclose" href="#">+</a>
                     <div class="col-sm-6 col-xs-12 text-center">
-                        <div class="col-right">                            
-                            <div id="popupranid" value="@item.Discount_RanId">
+                        <div class="col-right">
+                            <div id="popupranid" name="popupranid" value="@item.Discount_NewId">
                                 @{
                                     var rate = @item.Discount_Rate * 100;
                                 }
@@ -44,6 +44,7 @@
                 <div class="popupsuccess">
                     <img src="/img/Picture/404-tick.png"/>
                     <h2>Thank You!</h2>
+                    <h3 id="popupcode" value="1234">Mã Code:<strong> 1234</strong></h3>
                     <p>Voucher discount của bạn sẽ được apply cho đơn hàng gần nhất!</p>
                     <button type="button" onclick="PopupConfirmation()">Ok</button>
                 </div>
@@ -66,18 +67,19 @@
 </div>
 
 <script>   
-    var popupranid = parseInt(document.getElementById("popupranid").getAttribute("value")); // random id của popup
+    var popupranid = document.getElementById("popupranid").getAttribute("value"); // random id của popup
     var popupno = parseInt(document.getElementById("popupno").getAttribute("value")); // số lượng discount còn
     var popuprate = document.getElementById("popuprate").getAttribute("value"); //deciaml là type float nên k parseInt đc (nên parseFloat). % discount
     var totalprice = parseInt(document.getElementById("totalcart").getAttribute("value")); // tổng tiền thay đổi
     var submess = document.getElementById("submess");
-   
+    var popupcode = document.getElementById("popupcode").getAttribute("value");
+
     window.setTimeout(function SetCookie(){ // func set time out. Thời gian đợi mới chạy.
         // if (popupno != 0) { // nếu còn mã giảm thì mới chạy popup: k còn sử dụng nên khóa lại.
         if (getCookie('bg-modal')) { // Ktra nếu có cookie rồi:
             if (getCookie('bg-modal') == 'false') // Ktra true hay false
             {
-                if (parseInt(getCookie('bg-modalno')) == popupranid) { // Ktra nếu vẫn là dữ liệu cũ
+                if (getCookie('bg-modalno') == popupranid) { // Ktra nếu vẫn là dữ liệu cũ
                     return; // return thì nó ngưng luôn, k run code dưới
                 }
                 setCookie('bg-modal', 'true', 365);
@@ -95,7 +97,9 @@
             setCookie('bg-modalno', popupranid, 365);
         }
     }, 1000);
-     document.querySelector(".popupclose").addEventListener('click',
+
+    // Giống onclick function:
+     document.querySelector(".popupclose").addEventListener('click', 
         function() {
             document.querySelector('.bg-modal').style.display = 'none'; // nhấn nút tắt thì xóa bg. sau đó mới thêm cookie vô
             setCookie('bg-modal', 'false', 365);
@@ -112,12 +116,13 @@
     // }
     function GetPopupDiscount() {
         var popupemail = encodeURIComponent(document.getElementById("popupemail").value); //Đến lúc gõ value rồi mới lấy của email. Trước đó là rỗng
-        if (popupemail != "" && popupemail.includes("%40")) { // ktra có rỗng không và có email k. Chưa ktra dạng email valid đc "%40"
+        var popupranid2 =  encodeURIComponent(popupranid);
+        if (popupemail != "" && popupemail.includes("%40")) { // ktra có rỗng không và có email k %40. Chưa ktra dạng email valid hay k 
             document.querySelector('.bg-modal').style.display = 'none'; // submit r thì xóa bg
             setCookie('bg-modal', 'false', 365);
             $.ajax({
                 type: "GET",
-                url: "/Discount/DiscountNumberFunction?discountranid=" + popupranid,
+                url: "/Discount/DiscountNumberFunction?discountranid=" + popupranid2,
                 cache: !1,
                 "async": !0,
                 dataType: 'json',
@@ -125,6 +130,7 @@
                 success: function (result) { 
                     if(result == true) {
                         setCookie('popupdiscount', 'true', 365); // xác định xem người dùng có mã discount hay k. Nếu true
+                        setCookie('popupcode', popupcode, 365); // mã code của 
                         document.querySelector('.popupcontainer').style.display = 'flex';
                     }
                     else{ // nếu false = hết mã

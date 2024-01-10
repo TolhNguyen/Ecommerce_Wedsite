@@ -12,7 +12,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
 {
     public interface IDiscountNumberFunctionService // Tạo Interface
     {
-        Task<ResponseMessageObject<bool>> DiscountNumberFunction(int discountranid); // cách trả vê là true or false (còn hay k còn sl discount)
+        Task<ResponseMessageObject<bool>> DiscountNumberFunction(string? discountranid); // cách trả vê là true or false (còn hay k còn sl discount)
     }
     public class DiscountNumberFunctionService : IDiscountNumberFunctionService // Thừa kế các thuộc tính từ Interface 
     {
@@ -22,7 +22,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
             _configuration = configuration;
         }
 
-        public async Task<ResponseMessageObject<bool>> DiscountNumberFunction(int discountranid) // có thể sử dụng chung viewmodel đc
+        public async Task<ResponseMessageObject<bool>> DiscountNumberFunction(string? discountranid) // có thể sử dụng chung viewmodel đc
         {
             try
             {
@@ -30,7 +30,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 {
                     await dbConn.OpenAsync(); // mở sync
 
-                    var query = dbConn.QueryBuilder($"select top 1 * from Discountt where Discount_RanId = {discountranid}");
+                    var query = dbConn.QueryBuilder($"select top 1 * from Discountt where Discount_NewId = '{discountranid}'");
 
                     var discount = await query.QueryFirstOrDefaultAsync<Discountt>();
 

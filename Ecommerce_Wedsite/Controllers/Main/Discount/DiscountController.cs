@@ -21,7 +21,8 @@ namespace Ecommerce_Wedsite.Controllers
             _discountnumberfunctionService = discountnumberfunctionService;
         }
 
-        public async Task<IActionResult> DiscountNumberFunction(int discountranid) // truyền biến id (id sp), qty (số lượng sp)
+        [HttpGet]
+        public async Task<IActionResult> DiscountNumberFunction(string? discountranid) // truyền tên biến đúng với tên biến sau ? url của ajax
         {
             var discount = await _discountnumberfunctionService.DiscountNumberFunction(discountranid);
             if(discount.success == true) // nếu kết quả thành công

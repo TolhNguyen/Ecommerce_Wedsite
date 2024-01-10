@@ -11,5 +11,6 @@ namespace Ecommerce_Wedsite.Models.Entities
         public int Discount_No { get; set; }
         public int Discount_RanId { get; set; }
         public string Discount_Name { get; set; }
+        public Guid Discount_NewId { get; set; }
     }
 }
