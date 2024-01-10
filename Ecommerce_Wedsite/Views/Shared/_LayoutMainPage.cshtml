@@ -28,8 +28,6 @@
         <meta property="og:url" content="https://mew-nature.mysapo.net/">
         <meta property="og:site_name" content="Mew Nature">
 
-
-
         <link rel="preload" as="style" type="text/css" href="~/bizweb.dktcdn.net/themes/bootstrap_css.scss.css">
         <link rel="preload" as="style" type="text/css" href="~/bizweb.dktcdn.net/themes/mewint_css.scss.css">
         <link rel="preload" as="style" type="text/css" href="~/bizweb.dktcdn.net/themes/owlcarousel.scss.css">
@@ -59,8 +57,8 @@
             @await Html.PartialAsync("~/Views/Home/WebApp/Footer.cshtml", Model)
             <!--RenderSection thêm false để sang trang khác-->
             @await Html.PartialAsync("~/Views/Home/WebApp/Scripts2.cshtml")
+            
         </div>
     </body>
-    @await Html.PartialAsync("~/Views/Popup/Popup.cshtml", Model)
-    @await Html.PartialAsync("~/Views/Popup/PopupSuccess.cshtml")
+@await Html.PartialAsync("~/Views/Popup/Popup.cshtml", Model)
 </html>

@@ -1,5 +1,6 @@
 ﻿@model AllLayout
 <link href="~/css/popup10.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/css/popupSS6.css" rel="stylesheet" type="text/css" media="all"/> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 @* <link href="~/css/popupfont.css" rel="stylesheet" type="text/css" media="all" /> *@
 <div>
@@ -39,8 +40,29 @@
                     </div>
                 </div>
             </div>
+            <div class="popupcontainer">
+                <div class="popupsuccess">
+                    <img src="/img/Picture/404-tick.png"/>
+                    <h2>Thank You!</h2>
+                    <p>Voucher discount của bạn sẽ được apply cho đơn hàng gần nhất!</p>
+                    <button type="button" onclick="PopupConfirmation()">Ok</button>
+                </div>
+            </div>
+            <div class="popupcontainer-error">
+                <div class="popupsuccess">
+                    <img src="/img/Picture/404-x3.png" />
+                    <h2 style="color: orangered">
+                        Error!
+                    </h2>
+                    <p>
+                        Hết Voucher hoặc lỗi hệ thống, Vui lòng tải lại trang để thử lại!
+                    </p>
+                    <button type="button" onclick="PopupConfirmation()" style="background: orangered">Ok</button>
+                </div>
+            </div>
         }
     }
+    
 </div>
 
 <script>   
@@ -51,27 +73,26 @@
     var submess = document.getElementById("submess");
    
     window.setTimeout(function SetCookie(){ // func set time out. Thời gian đợi mới chạy.
-        if (popupno != 0) { // nếu còn mã giảm thì mới chạy popup:
-            if (getCookie('bg-modal')) { // Ktra nếu có cookie rồi:
-                if (getCookie('bg-modal') == 'false') // Ktra true hay false
-                {
-                    if (parseInt(getCookie('bg-modalno')) == popupranid) { // Ktra nếu vẫn là dữ liệu cũ
-                        return; // return thì nó ngưng luôn, k run code dưới
-                    }
-                    setCookie('bg-modal', 'true', 365);
-                    setCookie('bg-modalno', popupranid, 365); //add dữ liệu mới 
-                    document.querySelector('.bg-modal').style.display = 'flex';
-                    return;
+        // if (popupno != 0) { // nếu còn mã giảm thì mới chạy popup: k còn sử dụng nên khóa lại.
+        if (getCookie('bg-modal')) { // Ktra nếu có cookie rồi:
+            if (getCookie('bg-modal') == 'false') // Ktra true hay false
+            {
+                if (parseInt(getCookie('bg-modalno')) == popupranid) { // Ktra nếu vẫn là dữ liệu cũ
+                    return; // return thì nó ngưng luôn, k run code dưới
                 }
-                else { // nếu true:
-                    document.querySelector('.bg-modal').style.display = 'flex';
-                }
-	        }
-            else{ // Nếu chưa có:
-                document.querySelector('.bg-modal').style.display = 'flex'; // nếu k có thì hiện lại bg
-	            setCookie('bg-modal', 'true', 365); // và cài flag cookie vào
-                setCookie('bg-modalno', popupranid, 365);
+                setCookie('bg-modal', 'true', 365);
+                setCookie('bg-modalno', popupranid, 365); //add dữ liệu mới 
+                document.querySelector('.bg-modal').style.display = 'flex';
+                return;
             }
+            else { // nếu true:
+                document.querySelector('.bg-modal').style.display = 'flex';
+            }
+	    }
+        else{ // Nếu chưa có:
+            document.querySelector('.bg-modal').style.display = 'flex'; // nếu k có thì hiện lại bg
+	        setCookie('bg-modal', 'true', 365); // và cài flag cookie vào
+            setCookie('bg-modalno', popupranid, 365);
         }
     }, 1000);
      document.querySelector(".popupclose").addEventListener('click',
@@ -91,7 +112,7 @@
     // }
     function GetPopupDiscount() {
         var popupemail = encodeURIComponent(document.getElementById("popupemail").value); //Đến lúc gõ value rồi mới lấy của email. Trước đó là rỗng
-        if (popupemail != "" && popupemail.includes("%40")) { // ktra có rỗng không và có email k. Chưa ktra dạng email valid đc
+        if (popupemail != "" && popupemail.includes("%40")) { // ktra có rỗng không và có email k. Chưa ktra dạng email valid đc "%40"
             document.querySelector('.bg-modal').style.display = 'none'; // submit r thì xóa bg
             setCookie('bg-modal', 'false', 365);
             $.ajax({
@@ -103,23 +124,28 @@
                 // result là kết quả return từ controller sang. success là nhận kết quả controller. Đã dùng ajax thì k có form
                 success: function (result) { 
                     if(result == true) {
-                        alert("Mã giảm giá thành công!");
                         setCookie('popupdiscount', 'true', 365); // xác định xem người dùng có mã discount hay k. Nếu true
-                        PopupSuccess();
+                        document.querySelector('.popupcontainer').style.display = 'flex';
                     }
                     else{ // nếu false = hết mã
-                        alert("Hết mã giảm giá rồi!");
                         setCookie('popupdiscount', 'false', 365);
+                        document.querySelector('.popupcontainer-error').style.display = 'flex';
                     }
                 },
-                error: function (result) {
-                    alert("Hết mã giảm giá rồi!");
+                error: function (result) { // lỗi controller = false
+                    setCookie('popupdiscount', 'false', 365);
+                    document.querySelector('.popupcontainer-error').style.display = 'flex';
                 }
             });
         }
         else {
             submess.textContent = "Bạn nhập sai rồi, Mời bạn nhập lại";
         }
+    }
+
+    function PopupConfirmation() {
+        document.querySelector('.popupcontainer').style.display = 'none';
+        document.querySelector('.popupcontainer-error').style.display = 'none';
     }
 </script>
 <!--Bài toán:
