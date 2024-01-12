@@ -1,6 +1,6 @@
 ﻿@model AllLayout
 @{
-    ViewData["Title"] = "News Page";
+    ViewData["Title"] = "List News Page";
     Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
 }
     <head>
@@ -49,9 +49,9 @@
                         <div class= "row tn-slider" >
                             <div class= "col-md-6" >
                                 <div class= "tn-img" >
-                                    <img src = "img/NewsImg/news-450x350-1.jpg" />
+                                    <img src = "img/NewsImg/news-450x350-1.jpg"/>
                                     <div class= "tn-title" >
-                                        <a href = "" > Lorem ipsum dolor sit amet</a>
+                                        <a href = "" >Lorem ipsum dolor sit amet</a>
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@
                                                         <div class= "cn-img" >
                                                             <img src = "img/NewsImg/@item3.Picture_FileName" />
                                                             <div class= "cn-title" >
-                                                                <a href = ""> @item2.ListNews_Title</a>
+                                                                <a href="~/News/NewsDetail/?ListNews_Id=@item2.ListNews_Id"> @item2.ListNews_Title</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -168,7 +168,7 @@
                                                 <div class= "mn-img" >
                                                     <img src = "img/NewsImg/news-350x223-1.jpg" />
                                                     <div class= "mn-title" >
-                                                        <a href ="#">@item2.ListNews_Title</a>
+                                                        <a href="~/News/NewsDetail/?ListNews_Id=@item2.ListNews_Id">@item2.ListNews_Title</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -190,7 +190,7 @@
                                         {
                                             @if (item.NewsCate_Id == item2.NewsCate_Id)
                                             {
-                                                <li><a href = "#" >@item2.ListNews_Title</a></li>
+                                                <li><a href="~/News/NewsDetail/?ListNews_Id=@item2.ListNews_Id">@item2.ListNews_Title</a></li>
                                             }
                                         }
                                     </ul>

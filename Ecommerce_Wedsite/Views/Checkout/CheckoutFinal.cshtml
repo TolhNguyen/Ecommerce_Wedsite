@@ -111,18 +111,16 @@ function CheckoutTable() {
     //document.cookie = "cart= ; expires=00:00:01 UTC; path=/"; chưa xóa cookie đc 
 }
 $(document).ready(function(){
-	setTimeout("CheckoutTable()",2000);
+	setTimeout("CheckoutTable()",1000);
 	});
 
 </script>
 <script>
     function resetPopupDiscount() {
-        if (getCookie("popupdiscount") == "true") { // nếu đã có discount true
-            setCookie('popupdiscount', 'false', 365); // thì set discount = false lại = đã xài r. 
-        }
+       setCookie('popupdiscount', 'false', 365); // thì set discount = false lại = đã xài r. 
     }
-$(document).ready(function(){ //document.ready để cho chạy function
-	setTimeout("resetPopupDiscount()",2000);
+    $(document).ready(function(){ //document.ready để cho chạy function
+	    setTimeout("resetPopupDiscount()",1000);
 	});
 </script>
 </html>

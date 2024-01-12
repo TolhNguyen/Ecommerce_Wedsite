@@ -31,6 +31,8 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public IEnumerable<NewsCategory> newscate { get; set; } = new List<NewsCategory>();
         public IEnumerable<ListNews> listnews { get; set; } = new List<ListNews>();
 
+        public IEnumerable<News> news { get; set; } = new List<News>();
+
         /*
             -   Tạo từng ViewModel từ Entities (có thể tạo nhiều entities trong 1 viewmodel để service gọi ra nhiều biến result giá trị để sử dụng đc
             -   truyền ViewModels vào Alllayout bằng 1 biến mới (gọi trong alllayout dùng chung):
@@ -57,5 +59,7 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public City_ViewModel city_ViewModels { get; set; }
         public NewsCategory_ViewModel newscategory_ViewModels { get; set; }
         public ListNews_ViewModel listnews_ViewModels { get; set; }
+
+        public News_ViewModel news_ViewModels { get; set; }
     }
 }

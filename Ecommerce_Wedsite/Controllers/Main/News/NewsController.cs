@@ -19,8 +19,9 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly IPictureService _pictureService;
         private readonly INewCateService _newscateService;
         private readonly IListNewsService _listnewsService;
+        private readonly INewsService _newsService;
 
-        public NewsController(ILogger<NewsController> logger, IHeaderAndFooterService headerandfooterService, IPictureService pictureService, IDiscounttService discounttService, INewCateService newscateService, IListNewsService listnewsService)
+        public NewsController(ILogger<NewsController> logger, IHeaderAndFooterService headerandfooterService, IPictureService pictureService, IDiscounttService discounttService, INewCateService newscateService, IListNewsService listnewsService, INewsService newsService)
         {
             _logger = logger;
             _headerandfooterService = headerandfooterService;
@@ -28,6 +29,7 @@ namespace Ecommerce_Wedsite.Controllers
             _pictureService = pictureService;
             _newscateService = newscateService;
             _listnewsService = listnewsService;
+            _newsService = newsService;
         }
 
         [Route("~/News")]
@@ -48,6 +50,23 @@ namespace Ecommerce_Wedsite.Controllers
             All.listnews_ViewModels = listnews_ViewModels.Data;
 
             return View("News", All);
+        }
+
+        public async Task<IActionResult> NewsDetail(int? ListNews_Id = 0)
+        {
+            var All = new AllLayout();
+
+            var headerandfooter_ViewModels = await _headerandfooterService.HeaderAndFooter_ServiceTest();
+            var picture_ViewModels = await _pictureService.Service_Test();
+            var discountt_ViewModels = await _discounttService.PopupDiscount();
+            var news_ViewModels = await _newsService.Service_Test(ListNews_Id);
+
+            All.headerandfooter_ViewModels = headerandfooter_ViewModels.Data;
+            All.picture_ViewModels = picture_ViewModels.Data;
+            All.discountt_ViewModels = discountt_ViewModels.Data;
+            All.news_ViewModels = news_ViewModels.Data;
+
+            return View("NewsDetail", All);
         }
     }
 }

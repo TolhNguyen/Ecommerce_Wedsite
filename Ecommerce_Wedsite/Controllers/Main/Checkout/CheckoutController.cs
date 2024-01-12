@@ -96,7 +96,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             All.picture_ViewModels = picture_ViewModels.Data;
 
             var cookieCard = HttpContext.Request.Cookies["cart"];
-            if (cookieCard != null) // set time cho cookie để mất
+            if (cookieCard != null) // set time cookie cho giỏ hàng mất luôn
             {
                 CookieOptions option = new CookieOptions();
                 option.Secure = true;

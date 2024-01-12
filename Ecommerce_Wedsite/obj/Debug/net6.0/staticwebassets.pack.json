@@ -97,6 +97,10 @@
       "PackagePath": "staticwebassets\\css\\news.css"
     },
     {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\newscss2.css",
+      "PackagePath": "staticwebassets\\css\\newscss2.css"
+    },
+    {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\popup10.css",
       "PackagePath": "staticwebassets\\css\\popup10.css"
     },
@@ -255,6 +259,10 @@
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\404-x3.png",
       "PackagePath": "staticwebassets\\img\\Picture\\404-x3.png"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\Caydua2.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\Caydua2.jpg"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\DiaLan.jpg",
