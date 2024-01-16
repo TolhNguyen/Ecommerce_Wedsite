@@ -22,7 +22,8 @@ namespace Ecommerce_Wedsite.Service.WebApp
             _configuration = configuration;
         }
 
-        public async Task<ResponseMessageObject<bool>> DiscountNumberFunction(string? discountranid) // có thể sử dụng chung viewmodel đc
+        // có thể sử dụng chung viewmodel đc
+        public async Task<ResponseMessageObject<bool>> DiscountNumberFunction(string? discountranid) // Chức năng: lấy random id lên ss và tính số lượng
         {
             try
             {

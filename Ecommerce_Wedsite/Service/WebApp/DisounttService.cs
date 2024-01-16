@@ -22,7 +22,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 _configuration = configuration;
             }
 
-            public async Task<ResponseMessageObject<Discountt_ViewModel>> PopupDiscount()
+            public async Task<ResponseMessageObject<Discountt_ViewModel>> PopupDiscount() // chức năng: để lấy dữ liệu discount hiện lên popup 
             {
                 var data = new ResponseMessageObject<Discountt_ViewModel>();
                 data.Data = new Discountt_ViewModel();
@@ -32,7 +32,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     {
                         await dbConn.OpenAsync(); // mở sync
 
-                        var query = dbConn.QueryBuilder($"SELECT TOP 1 * FROM Discountt ORDER BY Discount_Id DESC"); // Phải lấy discount mới nhất lên ss.
+                        var query = dbConn.QueryBuilder($"SELECT TOP 1 * FROM Discountt ORDER BY Discount_Id DESC"); // Luôn lấy discount mới nhất lên
 
                         data.Data.discountt = await query.QueryAsync<Discountt>();
 

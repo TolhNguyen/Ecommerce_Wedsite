@@ -18,6 +18,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Dong Quan\Documents\Clone-HVNetWebsite\Ecommerce_Wedsite\Ecommerce_Wedsite
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/AboutUs/AboutUs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRVc1xBYm91dFVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Admin/AdminLoginPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5Mb2dpblBhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
