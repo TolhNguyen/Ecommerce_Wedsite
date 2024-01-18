@@ -22,7 +22,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 _configuration = configuration;
             }
 
-            public async Task<ResponseMessageObject<Discountt_ViewModel>> PopupDiscount() // chức năng: để lấy dữ liệu discount hiện lên popup 
+            public async Task<ResponseMessageObject<Discountt_ViewModel>> PopupDiscount() // chức năng: để lấy dữ liệu discount mới cho popup hiện
             {
                 var data = new ResponseMessageObject<Discountt_ViewModel>();
                 data.Data = new Discountt_ViewModel();

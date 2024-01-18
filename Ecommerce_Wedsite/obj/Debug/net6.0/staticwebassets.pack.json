@@ -85,6 +85,10 @@
       "PackagePath": "staticwebassets\\css\\aboutus.css"
     },
     {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\aboutus2.css",
+      "PackagePath": "staticwebassets\\css\\aboutus2.css"
+    },
+    {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\checkout.css",
       "PackagePath": "staticwebassets\\css\\checkout.css"
     },
@@ -265,6 +269,10 @@
       "PackagePath": "staticwebassets\\img\\Picture\\404-x3.png"
     },
     {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\AboutUs.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\AboutUs.jpg"
+    },
+    {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\Caydua2.jpg",
       "PackagePath": "staticwebassets\\img\\Picture\\Caydua2.jpg"
     },
@@ -303,6 +311,10 @@
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\bkg-img4.jpg",
       "PackagePath": "staticwebassets\\img\\Picture\\bkg-img4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\davidbeckham.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\davidbeckham.jpg"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\long-banner.jpg",

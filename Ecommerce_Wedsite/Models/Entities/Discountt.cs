@@ -12,5 +12,6 @@ namespace Ecommerce_Wedsite.Models.Entities
         public int Discount_RanId { get; set; }
         public string Discount_Name { get; set; }
         public Guid Discount_NewId { get; set; } // này là random ID chứ k phải là id của tin tức news
+        public string Discount_Code { get; set; }
     }
 }

@@ -32,6 +32,8 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public IEnumerable<ListNews> listnews { get; set; } = new List<ListNews>();
 
         public IEnumerable<News> news { get; set; } = new List<News>();
+        public IEnumerable<AboutUs> aboutus { get; set; } = new List<AboutUs>();
+        public IEnumerable<AboutUsMem> aboutusmem { get; set; } = new List<AboutUsMem>();
 
         /*
             -   Tạo từng ViewModel từ Entities (có thể tạo nhiều entities trong 1 viewmodel để service gọi ra nhiều biến result giá trị để sử dụng đc
@@ -61,5 +63,7 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public ListNews_ViewModel listnews_ViewModels { get; set; }
 
         public News_ViewModel news_ViewModels { get; set; }
+        public AboutUs_ViewModel aboutus_ViewModels { get; set; }
+        public AboutUsMem_ViewModel aboutusmem_ViewModels { get;set; }
     }
 }

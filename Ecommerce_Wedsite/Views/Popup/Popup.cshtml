@@ -44,7 +44,7 @@
                 <div class="popupsuccess">
                     <img src="/img/Picture/404-tick.png"/>
                     <h2>Thank You!</h2>
-                    <h3 id="popupcode" value="1234">Mã Code:<strong> 1234</strong></h3>
+                    <h3 id="popupcode" value="@item.Discount_Code">Mã Code:<strong>@item.Discount_Code</strong></h3>
                     <p>Voucher discount của bạn sẽ được apply cho đơn hàng gần nhất!</p>
                     <button type="button" onclick="PopupConfirmation()">Ok</button>
                 </div>
@@ -79,7 +79,7 @@
         if (getCookie('bg-modal')) { // Ktra nếu có cookie rồi:
             if (getCookie('bg-modal') == 'false') // Ktra true hay false
             {
-                if (getCookie('bg-modalno') == popupranid) { // Ktra nếu vẫn là dữ liệu cũ
+                if (getCookie('bg-modalno') == popupranid) { // Ktra nếu vẫn là dữ liệu cũ hay mới
                     return; // return thì nó ngưng luôn, k run code dưới
                 }
                 setCookie('bg-modal', 'true', 365);
@@ -94,7 +94,7 @@
         else{ // Nếu chưa có:
             document.querySelector('.bg-modal').style.display = 'flex'; // nếu k có thì hiện lại bg
 	        setCookie('bg-modal', 'true', 365); // và cài flag cookie vào
-            setCookie('bg-modalno', popupranid, 365);
+            setCookie('bg-modalno', popupranid, 365); // thì lưu id mới
         }
     }, 1000);
 
