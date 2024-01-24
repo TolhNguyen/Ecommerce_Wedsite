@@ -10,8 +10,14 @@
     2. Sủa sub product lấy các dữ liệu khác trừ dữ liệu hiện trên hình
 -->
 <!--Tùy theo query Service, foreach sẽ cho hiển thị nhiều dữ liễu hay chỉ mỗi một dữ liệu -->
-
-<body class="">
+<head>
+    <script type="text/javascript" defer src="~/bizweb.dktcdn.net/themesJS/elevatezoom.js"></script>
+    <!--Mang elevatezoom lên đầu-->
+    <script src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/jquery.elevatezoom308.min.js?1676649124511" type="text/javascript"></script>
+</head>
+<body>
+    @if (Model != null)
+    {
     <div class="page-body">
         <div class="hidden-md hidden-lg opacity_menu"></div>
         <div class="opacity_filter"></div>
@@ -26,8 +32,6 @@
                             <a asp-controller="Home" asp-action="Index"><span>Trang chủ</span></a>
                             <span><img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/right-arrow.png?1676649124511" alt="Mew Nature"></span>
                         </li>
-
-
                         <li>
                             <a href="/#Category_Link"><span>#Category_Name</span></a>
                             <span><img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/right-arrow.png?1676649124511" alt="Mew Nature"></span>
@@ -85,22 +89,19 @@
                         {
                             <div class="row">
                                 <div class="product-view form-product">
-
                                     <div class="product-essential">
                                         <div class="product-img-box col-sm-6 col-xs-12 col-md-5 col-lg-5">
-
                                             <div class="product-detail-left product-images">
                                                 <div class="col_large_full large-image">
-                                                    @foreach (var item3 in Model.picture_ViewModels.picture)
+                                                    @foreach (var item3 in Model.picture_ViewModels.picture) // vòng for này chỉ 1 ảnh duy nhất ở đây
                                                     {
-                                                        if (item1.Picture_Id == item3.Picture_Id)
+                                                        @if (item1.Picture_Id == item3.Picture_Id)
                                                         {
                                                             <a href="@item3.Picture_FileName" class="large_image_url checkurl" data-rel="prettyPhoto[product-gallery]">
                                                                 <img id="img_01" class="img-responsive" alt="#Product_Name" src="@item3.Picture_FileName" data-zoom-image="@item3.Picture_FileName" />
                                                             </a>
                                                         }
                                                     }
-
                                                     <div class="offset_nop hidden">
 
                                                         <div class="item">
@@ -116,20 +117,38 @@
                                                 <!--#Picture_FileName2-->
                                                 <div class="thumb_gallary">
                                                     <div id="gallery_02" class="owl_width no-padding thumbnail-product thumb_product_details">
+                                                        <!--Chỉ cần thêm 1 hình ảnh có parent nữa là xong-->
+                                                        @{
+                                                            var check = Model.picture_ViewModels.subpicture.Where(p => p.Picture_ParentId == item1.Picture_Id).FirstOrDefault(); // kiểm tra có ảnh còn không
+                                                        }
+                                                        @if (check == null)
+                                                        {
+                                                            <div class="item">
+                                                                <a href="#" data-image="https://bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" data-zoom-image="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967">
+                                                                    <img data-img="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" alt="Sen đá lá ngọc">
+                                                                </a>
+                                                            </div>
+                                                        }
+                                                        else{
 
-                                                        <div class="item">
-
-                                                            <a href="#" data-image="https://bizweb.dktcdn.net/100/364/767/products/14-800x800.jpg?v=1570121932967" data-zoom-image="//bizweb.dktcdn.net/100/364/767/products/14-800x800.jpg?v=1570121932967">
-                                                                <img data-img="//bizweb.dktcdn.net/100/364/767/products/14-800x800.jpg?v=1570121932967" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/products/14-800x800.jpg?v=1570121932967" alt="Sen đá lá ngọc">
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="item">
+                                                            @foreach(var item6 in Model.picture_ViewModels.subpicture)
+                                                            {
+                                                                @if(item1.Picture_Id == item6.Picture_ParentId) // so sánh với id của sản phẩm của trang đó. (chứ k dùng id picture item3)
+                                                                {
+                                                                    <div class="item">
+                                                                        <a href="#" data-image="@item6.Picture_FileName" data-zoom-image="@item6.Picture_FileName">
+                                                                            <img data-img="@item6.Picture_FileName" src="@item6.Picture_FileName" data-lazyload="@item6.Picture_FileName" alt="@item6.Picture_Desciption">
+                                                                        </a>
+                                                                    </div>
+                                                                }
+                                                            }
+                                                        }
+                                                        @* <div class="item">
 
                                                             <a href="#" data-image="https://bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" data-zoom-image="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967">
                                                                 <img data-img="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" alt="Sen đá lá ngọc">
                                                             </a>
-                                                        </div>
+                                                        </div> *@
 
                                                     </div>
                                                 </div>
@@ -142,6 +161,7 @@
                                                         <!--#Đường dẫn ra trang product lại search theo category-->
                                                         <a href="chau-canh" title="Sản phẩm cùng loại"><h3>Sản phẩm cùng loại</h3></a>
                                                     </div>
+
 
                                                     <!--#Tạo service nhỏ là các sản phẩm cùng loại: -->
                                                     @foreach (var item5 in Model.subproduct_ViewModels.subproduct)
@@ -938,7 +958,6 @@
                         $('.checkurl').attr('href', $(this).attr('src'));
                         if (ww >= 1200) {
                             $('.zoomContainer').remove();
-
                             $("#img_01").elevateZoom({
                                 responsive: true,
                                 gallery: 'gallery_02',
@@ -949,7 +968,6 @@
 
                         }
                     }, 200);
-
                 }
 
             };
@@ -1074,8 +1092,8 @@
 
                     $('#img_01').elevateZoom({
                         gallery: 'gallery_02',
-                        zoomWindowWidth: 420,
-                        zoomWindowHeight: 500,
+                        zoomWindowWidth: 370,
+                        zoomWindowHeight: 450,
                         zoomWindowOffetx: 10,
                         easing: true,
                         scrollZoom: false,
@@ -1111,11 +1129,13 @@
 
             });
         </script>
-
-        <script src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/jquery.elevatezoom308.min.js?1676649124511" type="text/javascript"></script>
-        <script src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/jquery.prettyphoto.min005e.js?1676649124511" type="text/javascript"></script>
-        <script src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/jquery.prettyphoto.init.min367a.js?1676649124511" type="text/javascript"></script>
     </div>
+    }
+    <script>
+        $('#imgzoom').elevateZoom({easing: true, tint:true, tintColour: '#999'})
+    </script>
+    <script src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/jquery.prettyphoto.min005e.js?1676649124511" type="text/javascript"></script>
+    <script src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/jquery.prettyphoto.init.min367a.js?1676649124511" type="text/javascript"></script>
 </body>
 <!--JavaScript product detail -> xong rồi
     SỬa html thêm zoom và 2 ảnh nhỏ

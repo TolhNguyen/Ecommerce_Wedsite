@@ -7,7 +7,9 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public IEnumerable<Picture> picture { get; set; } // Lấy hết thuộc tính của Piture.
                                                           // Gọi 1 biến đơn giản vì query k yêu cầu phức tạp (k có phân biệt, nhiều mục cụ thể)
 
-        // Sau này phát triển thêm piture_Lv1 2 để làm ảnh minh họa riêng cho các levels
-        
+        // Piture_Lv1 2 để làm ảnh minh họa riêng cho các levels:
+        public IEnumerable<Picture> subpicture { get; set; }
+
+
     }
 }

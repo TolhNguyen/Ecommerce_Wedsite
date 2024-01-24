@@ -254,16 +254,16 @@
                                                     <ul class="filter-type>
                                                     @{
                                                         var n = 0;
-                                                        @foreach (var item2 in Model.producttype_ViewModels.producttype)
+                                                            @foreach (var item2 in Model.producttype_ViewModels.producttype)
                                                         {
                                                             n++;
-                                                            <li class="filter-item filter-item--check-box filter-item--green" id="sortcategorydplt" >
-                                                                <label data-filter="cây để bàn" >
-                                                                    <input type="checkbox" onchange="GetCategory(this);" data-group="Loại" data-field="product_type" data-text="@item2.ProductType_Name" value="@item2.ProductType_Id" name="@item2.ProductType_Name" data-operator="OR">
-                                                                    <i class="fa" for="@item2.ProductType_Name"></i>
-                                                                    Loại @n: @item2.ProductType_Name
-                                                                </label>
-                                                            </li>
+                                                                <li class="filter-item filter-item--check-box filter-item--green" id="sortcategorydplt" >
+                                                                    <label data-filter="cây để bàn" >
+                                                                        <input type="checkbox" onchange="GetCategory(this);" data-group="Loại" data-field="product_type" data-text="@item2.ProductType_Name" value="@item2.ProductType_Id" name="@item2.ProductType_Name" data-operator="OR">
+                                                                        <i class="fa" for="@item2.ProductType_Name"></i>
+                                                                        Loại @n: @item2.ProductType_Name
+                                                                    </label>
+                                                                </li>
                                                         }
                                                     }
                                                     </ul>
@@ -309,16 +309,16 @@
                                                 switch (Model.sort_ViewModels.orderby)
                                                 {
                                                     case 1:
-                                                                                                                                                                                                                        <span>Giá giảm dần</span>
+                                                                                                                                                                                                                            <span>Giá giảm dần</span>
                                                         break;
                                                     case 2:
-                                                                                                                                                                                                                        <span>Giá tăng dần</span>
+                                                                                                                                                                                                                            <span>Giá tăng dần</span>
                                                         break;
                                                     case 3:
-                                                                                                                                                                                                                                                                                                    <span>Hàng Mới nhất</span>
+                                                                                                                                                                                                                                                                                                        <span>Hàng Mới nhất</span>
                                                         break;
                                                     case 4:
-                                                                                                                                                                                                                                                                                                    <span>Hàng Cũ nhất</span>
+                                                                                                                                                                                                                                                                                                        <span>Hàng Cũ nhất</span>
                                                         break;
                                                 }
                                             }
@@ -559,7 +559,7 @@
         });
     </script>
 
-
+    
 <!--Code js chạy từ script trên xuống dưới nên để fuction mới trong cùng script có sẵn(chạy được) trước đó.-->    
 
 </body>

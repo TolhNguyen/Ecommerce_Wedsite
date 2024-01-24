@@ -1,6 +1,6 @@
 ﻿@model AllLayout
-<link href="~/css/popup10.css" rel="stylesheet" type="text/css" media="all" />
-<link href="~/css/popupSS6.css" rel="stylesheet" type="text/css" media="all"/> 
+<link href="~/css/popup11.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/css/popupSS7.css" rel="stylesheet" type="text/css" media="all"/> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 @* <link href="~/css/popupfont.css" rel="stylesheet" type="text/css" media="all" /> *@
 <div>
@@ -33,7 +33,7 @@
                                     Available Now
                                 </p>
                             </div>
-                            <input class="popupemail" type="email" id="popupemail" name="popupemail" placeholder="Email" required />
+                            <input class="popupemail" type="email" id="popupemail" name="popupemail" placeholder="Gmail" required />
                             <p id="submess" class="submess"></p>
                             <button class="buttonS" onclick="GetPopupDiscount()" type="submit">Submit</button>
                         </div>
@@ -115,14 +115,15 @@
     //     return emailRegex.test(email);
     // }
     function GetPopupDiscount() {
-        var popupemail = encodeURIComponent(document.getElementById("popupemail").value); //Đến lúc gõ value rồi mới lấy của email. Trước đó là rỗng
+        var popupemail = document.getElementById("popupemail").value; //Đến lúc gõ value rồi mới lấy của email. Trước đó là rỗng
+        var popupemail2 = encodeURIComponent(popupemail);
         var popupranid2 =  encodeURIComponent(popupranid);
-        if (popupemail != "" && popupemail.includes("%40")) { // ktra có rỗng không và có email k %40. Chưa ktra dạng email valid hay k 
+        if (popupemail2 != "" && popupemail2.includes("%40gmail.com")) { // ktra có rỗng không và có email k %40. Chưa ktra dạng email valid hay k 
             document.querySelector('.bg-modal').style.display = 'none'; // submit r thì xóa bg
             setCookie('bg-modal', 'false', 365);
             $.ajax({
                 type: "GET",
-                url: "/Discount/DiscountNumberFunction?discountranid=" + popupranid2,
+                url: "/Discount/DiscountNumberFunction?discountranid=" + popupranid2 + "&gmail=" + popupemail,
                 cache: !1,
                 "async": !0,
                 dataType: 'json',
@@ -145,7 +146,7 @@
             });
         }
         else {
-            submess.textContent = "Bạn nhập sai rồi, Mời bạn nhập lại";
+            submess.textContent = "Bạn nhập sai rồi, Mời bạn nhập Gmail lại!";
         }
     }
 

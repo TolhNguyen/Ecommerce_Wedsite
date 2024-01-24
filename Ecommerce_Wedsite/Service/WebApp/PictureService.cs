@@ -34,8 +34,9 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     await dbConn.OpenAsync(); // mở sync
 
                     var query = dbConn.QueryBuilder($"select * from Picture"); // thao tác querry 
+                    var query2 = dbConn.QueryBuilder($"select * from Picture where Picture_Level = 2"); // lấy list con lên
                     //data.Data = await query.QueryAsync<AllLayout>(); // lưu vào dữ liệu
-
+                    data.Data.subpicture = await query2.QueryAsync<Picture>();
                     data.Data.picture = await query.QueryAsync<Picture>(); // chỉ lấy mỗi 1 header_Lv1 nên là dạng Object
                     // Vào biến lớn "data." đến biến nhỏ hơn "Data." sau đó vào danh sách nhỏ nữa là "header_VL1(trong model header_ViewModel"
 

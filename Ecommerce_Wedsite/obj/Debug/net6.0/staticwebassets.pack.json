@@ -109,12 +109,12 @@
       "PackagePath": "staticwebassets\\css\\newscss2.css"
     },
     {
-      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\popup10.css",
-      "PackagePath": "staticwebassets\\css\\popup10.css"
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\popup11.css",
+      "PackagePath": "staticwebassets\\css\\popup11.css"
     },
     {
-      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\popupSS6.css",
-      "PackagePath": "staticwebassets\\css\\popupSS6.css"
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\popupSS7.css",
+      "PackagePath": "staticwebassets\\css\\popupSS7.css"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\popupfont.css",
@@ -277,8 +277,16 @@
       "PackagePath": "staticwebassets\\img\\Picture\\Caydua2.jpg"
     },
     {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\Dayenkim.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\Dayenkim.jpg"
+    },
+    {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\DiaLan.jpg",
       "PackagePath": "staticwebassets\\img\\Picture\\DiaLan.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\Dinhsam.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\Dinhsam.jpg"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\HongLacAnh.jpg",
@@ -293,12 +301,36 @@
       "PackagePath": "staticwebassets\\img\\Picture\\LuasNuide.jpg"
     },
     {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\Phongleolaxanh.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\Phongleolaxanh.jpg"
+    },
+    {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\Sendalangoc.jpg",
       "PackagePath": "staticwebassets\\img\\Picture\\Sendalangoc.jpg"
     },
     {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\Sendalangoc2.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\Sendalangoc2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\Sendalangoc3.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\Sendalangoc3.jpg"
+    },
+    {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\ThienMocHuong.jpg",
       "PackagePath": "staticwebassets\\img\\Picture\\ThienMocHuong.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\Thienhuong.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\Thienhuong.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\Thongkimmini.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\Thongkimmini.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\Xuongrongdatamphuc.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\Xuongrongdatamphuc.jpg"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\bkg-img.jpg",

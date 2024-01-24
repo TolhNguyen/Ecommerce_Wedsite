@@ -11,6 +11,8 @@ namespace Ecommerce_Wedsite.Models.Entities
         public string Picture_FileName { get; set; }
         public string Picture_Desciption { get; set; }
         public int PictureGrp_Id { get; set; }
+        public int Picture_Level { get; set; }
+        public int Picture_ParentId {  get; set; }
     }
     
 }

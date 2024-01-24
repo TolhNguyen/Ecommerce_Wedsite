@@ -22,7 +22,7 @@ namespace Ecommerce_Wedsite.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> DiscountNumberFunction(string? discountranid) // truyền tên biến đúng với tên biến sau ? url của ajax
+        public async Task<IActionResult> DiscountNumberFunction(string? discountranid, string? gmail) // truyền tên biến đúng với tên biến sau ? url của ajax
         {
             var discount = await _discountnumberfunctionService.DiscountNumberFunction(discountranid);
             if(discount.success == true) // nếu kết quả thành công
