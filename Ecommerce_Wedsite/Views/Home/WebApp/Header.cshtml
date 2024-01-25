@@ -8,6 +8,7 @@
 -->
 @model AllLayout
 <!--IEnumerable để tạo list-->
+
 <header>
     <div class="header-container">
     </div>
@@ -106,7 +107,8 @@
                 </div>
                 <nav class="mb0">
                     <div class="nav-inner clearfix">
-                        <ul id="nav" class="hidden-xs hidden-sm remove_html nav_main">
+                        @* <ul id="nav" class="hidden-xs hidden-sm remove_html nav_main"> *@
+                        <ul id="nav" class="menu-items">
                             <!--code logic tiep cho 2 list-->
                             @if (Model != null)
                             {
@@ -123,25 +125,82 @@
                                     else
                                     {
                                        <!--có list con-->
-                                       <li class="level0 parent drop-menu "> 
-                                           <a href="~/@item.HeaderAction">
-                                               <span>
-                                                   @item.Header_Title 
-                                                   <ul class="level1" style="display: none;">
-                                                       @foreach (var item1 in Model.headerandfooter_ViewModels.header_LV2)
-                                                       {
+                                        
+                                       <li>
+                                            <a href="#" class="menu-item"><span>Mega Menu</span></a>
+                                            <div class="mega-menu">
+                                                <div class="content">
+                                                    <div class="col">
+                                                        <section>
+                                                            <h2>Featured 1</h2>
+                                                            <a href="#" class="img-wrapper">
+                                                                <span class="img">
+                                                                    <img src="https://picsum.photos/400?random=1"
+                                                                         alt="Random Image" />
+                                                                </span>
+                                                            </a>
+                                                            <p>Lorem ipsum dolor sit amet.</p>
+                                                        </section>
+                                                    </div>
+                                                    <div class="col">
+                                                        <section>
+                                                            <h2>Featured 2</h2>
+                                                            <ul class="mega-links">
+                                                                <li><a href="#">Item 1</a></li>
+                                                                <li><a href="#">Item 2</a></li>
+                                                                <li><a href="#">Item 3</a></li>
+                                                                <li><a href="#">Item 4</a></li>
+                                                                <li><a href="#">Item 5</a></li>
+                                                            </ul>
+                                                        </section>
+                                                    </div>
+                                                    <div class="col">
+                                                        <section>
+                                                            <h2>Featured 3</h2>
+                                                            <ul class="mega-links">
+                                                                <li><a href="#">Item 1</a></li>
+                                                                <li><a href="#">Item 2</a></li>
+                                                                <li><a href="#">Item 3</a></li>
+                                                                <li><a href="#">Item 4</a></li>
+                                                                <li><a href="#">Item 5</a></li>
+                                                            </ul>
+                                                        </section>
+                                                    </div>
+                                                    <div class="col">
+                                                        <section>
+                                                            <h2>Featured 4</h2>
+                                                            <ul class="mega-links">
+                                                                <li><a href="#">Item 1</a></li>
+                                                                <li><a href="#">Item 2</a></li>
+                                                                <li><a href="#">Item 3</a></li>
+                                                                <li><a href="#">Item 4</a></li>
+                                                                <li><a href="#">Item 5</a></li>
+                                                            </ul>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+                                       </li>
+                                        @* <li class="level0 parent drop-down">
+                                            <a href="~/@item.HeaderAction">
+                                                <span>
+                                                    @item.Header_Title
+                                                    <ul class="level1" style="display: none;">
+                                                        @foreach (var item1 in Model.headerandfooter_ViewModels.header_LV2)
+                                                        {
                                                             if (item1.HeaderParent_Id == item.Header_Id)
                                                             {
                                                                 <!--Nếu title nào có id cha = id gốc => là con của id gốc -->
-                                                                <li class="level1 parent"><a asp-controller="Home" asp-action="@item.HeaderAction"><span>@item1.Header_Title</span></a></li>
-                                                                @*<li class="level1 parent"><a><span>@item1.Header_Title</span></a></li>*@
+                                                                <li class="level1 parent">
+                                                                    <a asp-controller="Home" asp-action="@item.HeaderAction"><span>@item1.Header_Title</span></a>
+                                                                </li>
                                                             }
-                                                       }
-
-                                                   </ul>
-                                               </span>
-                                           </a>
-                                       </li>
+                                                        }
+                                                    </ul>
+                                                </span>
+                                            </a>
+                                       </li> *@
                                     }
                                 }
                             }

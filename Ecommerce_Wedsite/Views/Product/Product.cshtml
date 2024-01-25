@@ -106,8 +106,6 @@
                                                             </label>
                                                         </li>
 
-
-
                                                         <li class="filter-item filter-item--check-box filter-item--green ">
                                                             <label data-filter="fusheng" for="filter-fusheng" class="fusheng">
                                                                 <input type="checkbox" id="filter-fusheng" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor" data-text="Fusheng" value="(Fusheng)" data-operator="OR">
@@ -383,10 +381,15 @@
                                                                 }
                                                             }
                                                         </a>
+                                                        @{
+                                                           // không cần dùng js. Phải chuyển từ int về double để tính %. Round để làm tròn
+                                                           double percenttag =  Math.Round(((double)(item1.Product_Price - item1.Product_PromoPrice)/item1.Product_Price)*100,2);
+                                                        }
                                                         @if (item1.Product_PromoPrice != 0)
                                                         {
+                                                            
                                                             <div id="percenttag" class="sale-label sale-top-left" value="0">
-                                                                
+                                                                <p>@percenttag%</p>
                                                             </div>
                                                         }
                                                     </div>
@@ -519,16 +522,6 @@
 		    sort(page, orderby, proname, category);
 	    }
 
-        $(document).ready(function PercentTag() { //Bật trang là js chạy luôn.
-            var price1 = parseInt(document.getElementById('price1').getAttribute("data-value")); // dùng attribute data-value tốt hơn value
-            var price2 = parseInt(document.getElementById('price2').getAttribute("data-value")); 
-            var percenttags = document.querySelectorAll('[id="percenttag"]'); // get nhiều thẻ tags cùng id 
-            percenttags.forEach(function(percenttag, index) { 
-                percenttag.innerText = "-" + Math.round((price1 - price2)/price1 * 100) + "%";  // chưa set % cho từng sp đc (có thể add luôn trong db)
-            });
-        });
-
-        
         $('.view_mores as.one').click(function() {
             $(this).addClass('active');
             $('.view_mores a.two').removeClass('active');
