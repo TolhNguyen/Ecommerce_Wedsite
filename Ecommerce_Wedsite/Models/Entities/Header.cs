@@ -9,11 +9,15 @@ namespace Ecommerce_Wedsite.Models.Entities
         [Key]
         public int Header_Id { get; set; }
         public string Header_Title { get; set; }
-        public int HeaderParent_Id { get; set; }
-        public int HeaderLevels { get; set; }
         public int HeaderType_Id { get; set; }
         public string HeaderAction { get; set; }
         public Bit HeaderCondition { get; set; }
+        public int Header_HTML { get; set; }
+
+        /*
+         ? Có thể cần thêm public HeaderParnt_condition k: tùy
+         ? Có cần thêm table Subheader riêng k: subheader, id parent, level, ...
+         */
     }
     public enum Bit // false là 0, true là 1
     {

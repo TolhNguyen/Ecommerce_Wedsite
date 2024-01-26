@@ -8,5 +8,6 @@ namespace Ecommerce_Wedsite.Models.Entities
         [Key]
         public int ProductType_Id { get; set; }
         public string ProductType_Name { get; set; }
+        public int Header_Id { get; set; }
     }
 }

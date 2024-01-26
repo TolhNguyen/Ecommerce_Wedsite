@@ -24,13 +24,10 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public IEnumerable<Promotion> promo { get; set; } = new List<Promotion>();
         public IEnumerable<CustomerCheckout> customercheckout { get; set; } = new List<CustomerCheckout>();
         public IEnumerable<Discountt> discountt { get; set; } = new List<Discountt>();
-
         public IEnumerable<AdminMenu> adminmenu { get; set; } = new List<AdminMenu>();
-
         public IEnumerable<City> city { get; set; } = new List<City>();
         public IEnumerable<NewsCategory> newscate { get; set; } = new List<NewsCategory>();
         public IEnumerable<ListNews> listnews { get; set; } = new List<ListNews>();
-
         public IEnumerable<News> news { get; set; } = new List<News>();
         public IEnumerable<AboutUs> aboutus { get; set; } = new List<AboutUs>();
         public IEnumerable<AboutUsMem> aboutusmem { get; set; } = new List<AboutUsMem>();
@@ -40,6 +37,7 @@ namespace Ecommerce_Wedsite.Models.ViewModel
             -   truyền ViewModels vào Alllayout bằng 1 biến mới (gọi trong alllayout dùng chung):
             -   
          */
+
         public Header_ViewModel header_ViewModels { get; set; } // tạo model con riêng chỉ để thực hiện function trên View (từ model header). Chỉ lấy 1 dữ liệu (là 1 RMObject) xài mỗi lần
         public Footer_ViewModel footer_ViewModels { get; set; }
         public HeaderAndFooter_ViewModel headerandfooter_ViewModels { get; set; } // Gom model cho header và footer chung
@@ -65,5 +63,6 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public News_ViewModel news_ViewModels { get; set; }
         public AboutUs_ViewModel aboutus_ViewModels { get; set; }
         public AboutUsMem_ViewModel aboutusmem_ViewModels { get;set; }
+        public SubHeader_ViewModel subheader_ViewModels { get; set;}
     }
 }

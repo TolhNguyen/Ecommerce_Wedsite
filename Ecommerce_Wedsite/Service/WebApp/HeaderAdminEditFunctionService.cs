@@ -56,8 +56,6 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     // map tay 
 
                     header.Header_Title = headeritem.Header_Title;
-                    header.HeaderParent_Id = headeritem.HeaderParent_Id;
-                    header.HeaderLevels = headeritem.HeaderLevels;
                     header.HeaderType_Id = headeritem.HeaderType_Id;
                     header.HeaderAction = headeritem.HeaderAction;
                     header.HeaderCondition = headeritem.HeaderCondition;

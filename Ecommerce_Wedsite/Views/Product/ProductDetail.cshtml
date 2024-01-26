@@ -134,6 +134,7 @@
                                                             @{
                                                                 var check = Model.picture_ViewModels.subpicture.Where(p => p.Picture_ParentId == item1.Picture_Id).FirstOrDefault(); // kiểm tra có ảnh còn không
                                                             }
+                                                            <!--Biến check để ktra có list con k. Và câu điều kiện where... để xác định. FOD sắp xếp các đối tượng thành 1 ds-->
                                                             @if (check == null)
                                                             {
                                                                 <div class="item">

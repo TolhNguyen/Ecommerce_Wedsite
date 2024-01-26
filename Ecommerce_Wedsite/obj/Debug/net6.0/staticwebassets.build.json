@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Wa0Szt3gFMy4faEti/Ti2fa1p3RR/zy5B3kY/nR2a3k=",
+  "Hash": "z3jseR2J8jdjP+g4GH6sRlutkbbIDrAV7c4EVytIXi4=",
   "Source": "Ecommerce_Wedsite",
   "BasePath": "_content/Ecommerce_Wedsite",
   "Mode": "Default",
@@ -473,12 +473,12 @@
       "OriginalItemSpec": "wwwroot\\css\\crud.css"
     },
     {
-      "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\header.css",
+      "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\header2.css",
       "SourceId": "Ecommerce_Wedsite",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\",
       "BasePath": "_content/Ecommerce_Wedsite",
-      "RelativePath": "css/header.css",
+      "RelativePath": "css/header2.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -489,7 +489,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\header.css"
+      "OriginalItemSpec": "wwwroot\\css\\header2.css"
     },
     {
       "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\main.css",

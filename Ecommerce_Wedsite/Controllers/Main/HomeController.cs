@@ -21,9 +21,10 @@ namespace Ecommerce_Wedsite.Controllers.Main
         // cần sửa. Order: lưu biến từ cart về db
         private readonly IHeaderAndFooterService _headerandfooterService;
         private readonly IDiscounttService _discounttService;
+        private readonly ISubHeaderService _subheaderService;
         // private readonly ISort
 
-        public HomeController(ILogger<HomeController> logger, INewWebAppService newWebAppService, IHomePageService homepageService, IPictureService pictureService, ILogoService logoService, ICheckoutAdminService checkoutadminService, IHeaderAndFooterService headerandfooterService, IDiscounttService discounttService) //Khai báo Interface
+        public HomeController(ILogger<HomeController> logger, INewWebAppService newWebAppService, IHomePageService homepageService, IPictureService pictureService, ILogoService logoService, ICheckoutAdminService checkoutadminService, IHeaderAndFooterService headerandfooterService, IDiscounttService discounttService, ISubHeaderService subheaderService) //Khai báo Interface
         {
             _logger = logger;
             _newWebAppService = newWebAppService; // Tạo 1 tham chiếu 
@@ -33,6 +34,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             _checkoutadminService = checkoutadminService;
             _discounttService = discounttService;
             _headerandfooterService = headerandfooterService;
+            _subheaderService = subheaderService;
         }
         /// <summary>
         /// Trang Chu
@@ -49,12 +51,14 @@ namespace Ecommerce_Wedsite.Controllers.Main
             var picture_ViewModels = await _pictureService.Service_Test();
             var logo_ViewModels = await _logoService.Service_Test();
             var discountt_ViewModels = await _discounttService.PopupDiscount();
+            var subheader_ViewModels = await _subheaderService.SubHeader();
 
             All.headerandfooter_ViewModels = headerandfooter_ViewModels.Data;
             All.homepage_ViewModels = homepage_ViewModels.Data;
             All.picture_ViewModels = picture_ViewModels.Data;
             All.logo_ViewModels = logo_ViewModels.Data;
             All.discountt_ViewModels = discountt_ViewModels.Data;
+            All.subheader_ViewModels = subheader_ViewModels.Data;
 
             return View("WebApp/Index", All); // Truyền dữ liệu. Hiển thị view đúng địa chỉ. 
         }
@@ -66,10 +70,12 @@ namespace Ecommerce_Wedsite.Controllers.Main
             var headerandfooter_ViewModels = await _headerandfooterService.HeaderAndFooter_ServiceTest();
             var picture_ViewModels = await _pictureService.Service_Test();
             var discountt_ViewModels = await _discounttService.PopupDiscount();
+            var subheader_ViewModels = await _subheaderService.SubHeader();
 
             All.headerandfooter_ViewModels = headerandfooter_ViewModels.Data;
             All.picture_ViewModels = picture_ViewModels.Data;
             All.discountt_ViewModels = discountt_ViewModels.Data;
+            All.subheader_ViewModels = subheader_ViewModels.Data;
 
             return View("WebApp/Cart", All);
         }

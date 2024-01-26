@@ -112,22 +112,22 @@
                             <!--code logic tiep cho 2 list-->
                             @if (Model != null)
                             {
-                                foreach (var item in Model.headerandfooter_ViewModels.header_LV1){
-                               
-                                    var check = Model.headerandfooter_ViewModels.header_LV2.Where(p => p.HeaderParent_Id == item.Header_Id).FirstOrDefault(); 
-                                    <!--Biến check để ktra có list con k. Và câu điều kiện where... để xác định. FOD sắp xếp các đối tượng thành 1 ds-->
-                                    if (check == null)
+                                foreach (var item in Model.headerandfooter_ViewModels.headermain)
+                                {
+                                    @if(item.Header_HTML == 1)
                                     {
-                                        <!--K có list con-->
-                                        <li class="level0 parent"><a href="~/@item.HeaderAction"><span>@item.Header_Title</span></a></li>
-                                        <!--href link chuyển hướng ở [route] controller-->
+                                        <li class="level0 parent">
+                                            <a href="~/@item.HeaderAction">
+                                                <span>
+                                                    @item.Header_Title
+                                                </span>
+                                            </a>
+                                        </li>
                                     }
-                                    else
+                                    @if (item.Header_HTML == 3) // nếu có header con và dạng html = 3. Có sub header nếu cần ảnh:
                                     {
-                                       <!--có list con-->
-                                        
-                                       <li>
-                                            <a href="#" class="menu-item"><span>Mega Menu</span></a>
+                                        <li>
+                                            <a href="~/@item.HeaderAction" class="menu-item"><span>@item.Header_Title</span></a>
                                             <div class="mega-menu">
                                                 <div class="content">
                                                     <div class="col">
@@ -142,66 +142,89 @@
                                                             <p>Lorem ipsum dolor sit amet.</p>
                                                         </section>
                                                     </div>
-                                                    <div class="col">
-                                                        <section>
-                                                            <h2>Featured 2</h2>
-                                                            <ul class="mega-links">
-                                                                <li><a href="#">Item 1</a></li>
-                                                                <li><a href="#">Item 2</a></li>
-                                                                <li><a href="#">Item 3</a></li>
-                                                                <li><a href="#">Item 4</a></li>
-                                                                <li><a href="#">Item 5</a></li>
-                                                            </ul>
-                                                        </section>
-                                                    </div>
-                                                    <div class="col">
-                                                        <section>
-                                                            <h2>Featured 3</h2>
-                                                            <ul class="mega-links">
-                                                                <li><a href="#">Item 1</a></li>
-                                                                <li><a href="#">Item 2</a></li>
-                                                                <li><a href="#">Item 3</a></li>
-                                                                <li><a href="#">Item 4</a></li>
-                                                                <li><a href="#">Item 5</a></li>
-                                                            </ul>
-                                                        </section>
-                                                    </div>
-                                                    <div class="col">
-                                                        <section>
-                                                            <h2>Featured 4</h2>
-                                                            <ul class="mega-links">
-                                                                <li><a href="#">Item 1</a></li>
-                                                                <li><a href="#">Item 2</a></li>
-                                                                <li><a href="#">Item 3</a></li>
-                                                                <li><a href="#">Item 4</a></li>
-                                                                <li><a href="#">Item 5</a></li>
-                                                            </ul>
-                                                        </section>
-                                                    </div>
+                                                    @foreach(var item2 in Model.subheader_ViewModels.subheaderproducttype)
+                                                    {
+                                                        if(item.Header_Id == item2.Header_Id) // nếu id header nó là Product
+                                                        {
+                                                            <div class="col">
+                                                                <section>
+                                                                    <h2>@item2.ProductType_Name</h2>
+                                                                    <ul class="mega-links">
+                                                                        @foreach (var item3 in Model.subheader_ViewModels.subheaderproduct)
+                                                                        {
+                                                                            if(item3.ProductType_Id == item2.ProductType_Id)
+                                                                            {
+                                                                                <li class="megali"><a href="#">@item3.Product_Name</a></li>
+                                                                            } 
+                                                                        }
+                                                                        @* <li><a href="#">Item 1</a></li> Phải có item trước*@
+                                                                        
+                                                                    </ul>
+                                                                </section>
+                                                            </div>
+                                                        }
+                                                    }
                                                 </div>
                                             </div>
-                                           
-                                       </li>
-                                        @* <li class="level0 parent drop-down">
-                                            <a href="~/@item.HeaderAction">
-                                                <span>
-                                                    @item.Header_Title
-                                                    <ul class="level1" style="display: none;">
-                                                        @foreach (var item1 in Model.headerandfooter_ViewModels.header_LV2)
-                                                        {
-                                                            if (item1.HeaderParent_Id == item.Header_Id)
-                                                            {
-                                                                <!--Nếu title nào có id cha = id gốc => là con của id gốc -->
-                                                                <li class="level1 parent">
-                                                                    <a asp-controller="Home" asp-action="@item.HeaderAction"><span>@item1.Header_Title</span></a>
-                                                                </li>
-                                                            }
-                                                        }
-                                                    </ul>
-                                                </span>
-                                            </a>
-                                       </li> *@
+
+                                        </li>
                                     }
+                                    @if(item.Header_HTML == 2)
+                                    {
+                                        <li>
+                                            <a href="~/@item.HeaderAction" class="menu-item"><span>@item.Header_Title</span></a>
+                                            <div class="mega-menu blog">
+                                                <div class="content">
+                                                    @* <div class="col">
+                                                        <a href="#" class="img-wrapper">
+                                                            <span class="img">
+                                                                <img src="https://picsum.photos/400?random=2"
+                                                                     alt="Random Image" />
+                                                            </span>
+                                                        </a>
+                                                        <h2>Title</h2>
+                                                        <a href="#" class="read-more">read more...</a>
+                                                    </div> *@
+                                                    @foreach (var item2 in Model.subheader_ViewModels.subheadernewscate)
+                                                    {
+                                                        if (item.Header_Id == item2.Header_Id) // nếu id header nó là Product
+                                                        {
+                                                            <div class="col">
+                                                                <a href="#" class="img-wrapper">
+                                                                    <span class="img">
+                                                                        <img src="https://picsum.photos/400?random=3"
+                                                                             alt="Random Image" />
+                                                                    </span>
+                                                                </a>
+                                                                <h2>@item2.NewsCate_Name</h2>
+                                                                <a href="#" class="read-more">Click here to read more...</a>
+                                                            </div>
+                                                        }    
+                                                    }
+                                                    
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                    @* <li class="level0 parent drop-down">
+                                        <a href="~/@item.HeaderAction">
+                                            <span>
+                                                @item.Header_Title
+                                                <ul class="level1" style="display: none;">
+                                                    @foreach (var item1 in Model.headerandfooter_ViewModels.header_LV2)
+                                                    {
+                                                        if (item1.HeaderParent_Id == item.Header_Id)
+                                                        {
+                                                            <!--Nếu title nào có id cha = id gốc => là con của id gốc -->
+                                                            <li class="level1 parent">
+                                                                <a asp-controller="Home" asp-action="@item.HeaderAction"><span>@item1.Header_Title</span></a>
+                                                            </li>
+                                                        }
+                                                    }
+                                                </ul>
+                                            </span>
+                                        </a>
+                                    </li> *@
                                 }
                             }
                         </ul>

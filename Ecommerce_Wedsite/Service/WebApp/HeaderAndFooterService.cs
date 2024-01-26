@@ -33,20 +33,21 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 {
                     await dbConn.OpenAsync(); // mở sync
 
-                    var query = dbConn.QueryBuilder($"select * from Header where HeaderType_Id = 1 and HeaderLevels = 1"); // thao tác querry 
+                    var query = dbConn.QueryBuilder($"select * from Header where HeaderType_Id = 1"); // thao tác querry 
                     // Gọi lên các thông tin dữ liệu thuộc các "header cha" (là lv1)
 
                     //data.Data = await query.QueryAsync<AllLayout>(); // lưu vào dữ liệu
-                    data.Data.header_LV1 = await query.QueryAsync<Header>();
+                    data.Data.headermain = await query.QueryAsync<Header>(); // dùng chung model với service khác được
+
                     // Vào biến lớn "data." đến biến nhỏ hơn "Data." sau đó vào danh sách nhỏ nữa là "header_VL1(trong model header_ViewModel"
                     //Gom nguyên một danh sách title này thành 1 object gọi là header_lv1 2
 
-                    query = dbConn.QueryBuilder($"select * from Header where HeaderType_Id = 1 and HeaderLevels = 2"); // thao tác querry
+                    //query = dbConn.QueryBuilder($"select * from Header where HeaderType_Id = 1 and HeaderLevels = 2"); // thao tác querry
                     //Gọi lên các thông tin dữ liệu thuộc các "header con" (là lv2) 
                     // Nếu có header con nhỏ nữa thì sẽ là lv3, 4, ...
 
                     //data.Data = await query.QueryAsync<AllLayout>(); // lưu vào dữ liệu
-                    data.Data.header_LV2 = await query.QueryAsync<Header>();
+                    //data.Data.header_LV2 = await query.QueryAsync<Header>();
 
                     var query2 = dbConn.QueryBuilder($"select * from Footer where FooterType_Id = 1 and FooterLevels = 1"); 
                     
