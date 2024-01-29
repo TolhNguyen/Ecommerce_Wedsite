@@ -30,14 +30,14 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 {
                     await dbConn.OpenAsync(); // mở sync
 
-                    var query = dbConn.QueryBuilder($"SELECT TOP 3 * FROM ProductType");
+                    var query = dbConn.QueryBuilder($"SELECT * FROM ProductType");
                     data.Data.subheaderproducttype = await query.QueryAsync<ProductType>();
 
                     // Công thức câu query chọn ra 5 sp của mỗi loại type id khác nhau:
                     var query2 = dbConn.QueryBuilder($"SELECT * FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY ProductType_Id ORDER BY Product_Price DESC) AS RowNum FROM Product) AS RankedData WHERE RowNum <= 5;");
                     data.Data.subheaderproduct = await query2.QueryAsync<Product>();
 
-                    var query3 = dbConn.QueryBuilder($"SELECT TOP 3 * FROM NewsCategory");
+                    var query3 = dbConn.QueryBuilder($"SELECT * FROM NewsCategory");
                     data.Data.subheadernewscate = await query3.QueryAsync<NewsCategory>();
 
                     await dbConn.CloseAsync(); // đóng sync sau khi sử dụng

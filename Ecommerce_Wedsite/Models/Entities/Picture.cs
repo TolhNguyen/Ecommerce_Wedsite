@@ -10,8 +10,8 @@ namespace Ecommerce_Wedsite.Models.Entities
         public int Picture_Id { get; set; }
         public string Picture_FileName { get; set; }
         public string Picture_Desciption { get; set; }
-        public int PictureGrp_Id { get; set; }
-        public int Picture_Level { get; set; }
+        public int PictureGrp_Id { get; set; } // cho các ảnh cùng cấp cùng lúc hiện chung với nhau
+        public int Picture_Level { get; set; } // cho ảnh có chia cấp cha - con 
         public int Picture_ParentId {  get; set; }
     }
     

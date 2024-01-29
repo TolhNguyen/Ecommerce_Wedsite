@@ -31,7 +31,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 {
                     await dbConn.OpenAsync(); // mở sync
 
-                    var query = dbConn.QueryBuilder($"SELECT TOP 3 * FROM Product order by NEWID() asc");
+                    var query = dbConn.QueryBuilder($"SELECT TOP 3 * FROM Product order by NEWID()");
 
                     data.Data.subproduct = await query.QueryAsync<Product>();
 

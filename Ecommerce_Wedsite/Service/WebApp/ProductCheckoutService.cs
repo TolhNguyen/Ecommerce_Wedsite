@@ -17,9 +17,11 @@ namespace Ecommerce_Wedsite.Service.WebApp
     public class ProductCheckoutService : IProductCheckoutService // Thừa kế các thuộc tính từ Interface 
     {
         private readonly IConfigManagerService _configuration;
-        public ProductCheckoutService(IConfigManagerService configuration)
+        private readonly IProductCheckoutQuantityService _productcheckoutquantityService; // cách thêm service khác vào sử dụng
+        public ProductCheckoutService(IConfigManagerService configuration, IProductCheckoutQuantityService productcheckoutquantityService)
         {
             _configuration = configuration;
+            _productcheckoutquantityService = productcheckoutquantityService;
         }
         public async Task<ShopCard_ViewModel> ProductCheckoutFunction(ShopCard_ViewModel card, int cscheckoutid) // tạo riêng 1 service. (bỏ static r)
         {
@@ -33,10 +35,18 @@ namespace Ecommerce_Wedsite.Service.WebApp
 
                 foreach (var item in card.product_card) // foreach từng sp trong giỏ hàng 
                 {
-                    productcheckout.ProductCheckout_Id = item.id;
+                    // thêm try catch:
+                    var idcheck = item.id;
+                    var qtycheck = item.qty;
+
+                    await _productcheckoutquantityService.ProductCheckoutQuantityFunction(idcheck, qtycheck); // check và giảm số lượng
+
+                    productcheckout.ProductCheckout_Id = idcheck;
+                    productcheckout.ProductCheckout_Quantity = qtycheck;
+                    
                     productcheckout.ProductCheckout_Name = item.name;
                     productcheckout.ProductCheckout_Price = item.price;
-                    productcheckout.ProductCheckout_Quantity = item.qty;
+                    
                     dbConn.Insert(productcheckout); // gắn id cus vào và lưu model mới db
                 }
                 await dbConn.CloseAsync();

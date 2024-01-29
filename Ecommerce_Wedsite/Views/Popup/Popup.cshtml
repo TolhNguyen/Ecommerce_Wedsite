@@ -1,5 +1,5 @@
 ﻿@model AllLayout
-<link href="~/css/popup11.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/css/popup13.css" rel="stylesheet" type="text/css" media="all" />
 <link href="~/css/popupSS7.css" rel="stylesheet" type="text/css" media="all"/> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 @* <link href="~/css/popupfont.css" rel="stylesheet" type="text/css" media="all" /> *@
@@ -17,7 +17,8 @@
                         </div>
                     </div>
                     <a class="popupclose" id="popupclose" href="#">+</a>
-                    <div class="col-sm-6 col-xs-12 text-center">
+                    <!--style: float right để chiều bđ từ phải sang trái-->
+                    <div class="col-sm-6 col-xs-12 text-center" style="width: 50%; float: right">
                         <div class="col-right">
                             <div id="popupranid" name="popupranid" value="@item.Discount_NewId">
                                 @{

@@ -114,47 +114,47 @@
 
                                                         </div>
                                                     </div>
-                                                    <!--Ảnh nhỏ ảnh phụ -->
-                                                    <!--#Picture_FileName2-->
-                                                    <!--#Picture_FileName2-->
+                                                    <!-- 
+                                                        Có 2 cách: Ảnh nhỏ ảnh phụ 
+                                                        1. xét ảnh con với anh cha - đang dùng (từng ảnh con cùng id cha), item3 là list cha (cần ảnh lv cha riêng tùy)
+                                                        2. xét ảnh theo cùng 1 grp (cha con cùng grp, 1 cụm ảnh cùng grp id)
+                                                    -->
                                                     <div class="thumb_gallary">
                                                         <div id="gallery_02" class="owl_width no-padding thumbnail-product thumb_product_details">
                                                             @foreach (var item3 in Model.picture_ViewModels.picture) 
                                                             {
                                                                 @if (item1.Picture_Id == item3.Picture_Id)
                                                                 {
+                                                                    <!--Luôn có ảnh cha trước-->
                                                                     <div class="item">
                                                                         <a href="#" data-image="@item3.Picture_FileName" data-zoom-image="@item3.Picture_FileName">
                                                                             <img data-img="@item3.Picture_FileName" src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="@item3.Picture_Desciption">
                                                                         </a>
                                                                     </div>
-                                                                }
-                                                            }
-                                                            
-                                                            @{
-                                                                var check = Model.picture_ViewModels.subpicture.Where(p => p.Picture_ParentId == item1.Picture_Id).FirstOrDefault(); // kiểm tra có ảnh còn không
-                                                            }
-                                                            <!--Biến check để ktra có list con k. Và câu điều kiện where... để xác định. FOD sắp xếp các đối tượng thành 1 ds-->
-                                                            @if (check == null)
-                                                            {
-                                                                <div class="item">
-                                                                    <a href="#" data-image="https://bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" data-zoom-image="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967">
-                                                                        <img data-img="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" alt="Sen đá lá ngọc">
-                                                                    </a>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
 
-                                                                @foreach (var item6 in Model.picture_ViewModels.subpicture)
-                                                                {
-                                                                    @if (item1.Picture_Id == item6.Picture_ParentId) // so sánh với id của sản phẩm của trang đó. (chứ k dùng id picture item3 vì bị lặp)
+                                                                    var check = Model.picture_ViewModels.subpicture.Where(p => p.Picture_ParentId == item3.Picture_Id).FirstOrDefault(); // kiểm tra có ảnh con không
+                                                                    <!--Biến check để ktra có list con k. Và câu điều kiện where... để xác định. FOD sắp xếp các đối tượng thành 1 ds-->
+                                                                    @if (check == null) // nếu k có con
                                                                     {
                                                                         <div class="item">
-                                                                            <a href="#" data-image="@item6.Picture_FileName" data-zoom-image="@item6.Picture_FileName">
-                                                                                <img data-img="@item6.Picture_FileName" src="@item6.Picture_FileName" data-lazyload="@item6.Picture_FileName" alt="@item6.Picture_Desciption">
+                                                                            <a href="#" data-image="https://bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" data-zoom-image="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967">
+                                                                                <img data-img="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" alt="Sen đá lá ngọc">
                                                                             </a>
                                                                         </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @foreach (var item6 in Model.picture_ViewModels.subpicture)
+                                                                        {
+                                                                            @if (item3.Picture_Id == item6.Picture_ParentId) // xác định id ảnh cha là item3. (Phải có item3 là ảnh cha cover item6 là ảnh con)
+                                                                            {
+                                                                                <div class="item">
+                                                                                    <a href="#" data-image="@item6.Picture_FileName" data-zoom-image="@item6.Picture_FileName">
+                                                                                        <img data-img="@item6.Picture_FileName" src="@item6.Picture_FileName" data-lazyload="@item6.Picture_FileName" alt="@item6.Picture_Desciption">
+                                                                                    </a>
+                                                                                </div>
+                                                                            }
+                                                                        }
                                                                     }
                                                                 }
                                                             }
@@ -181,7 +181,7 @@
                                                         <!--#Tạo service nhỏ là các sản phẩm cùng loại: -->
                                                         @foreach (var item5 in Model.subproduct_ViewModels.subproduct)
                                                         {
-                                                            if (item5.ProductType_Id == item1.ProductType_Id && item5.Product_Name != item1.Product_Name) // nếu có id giống thì lấy tên ra
+                                                            if (item5.ProductType_Id == item1.ProductType_Id && item5.Product_Name != item1.Product_Name) // nếu có cùng loại id và khác tên sp chính. Nếu sp loại khác và cùng tên sẽ bị loại ra.
                                                             {
                                                                 //var product_name = @item1.Product_Name;
                                                                 <div class="aside-content mini-products-list2">
@@ -191,12 +191,12 @@
                                                                             {
                                                                                 if (item5.Picture_Id == item3.Picture_Id)
                                                                                 {
-                                                                                    <img src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="Thông kim mini">
+                                                                                    <img src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="">
                                                                                 }
                                                                             }
                                                                         </a>
                                                                         <div class="info-inner">
-                                                                            <h3 class="item-title"> <a href="~/productdetail/@item5.Product_Href" title="Thông kim mini">@item5.Product_Name</a></h3>
+                                                                            <h3 class="item-title"> <a href="~/productdetail/@item5.Product_Href" title="">@item5.Product_Name</a></h3>
                                                                             <div class="item-content">
                                                                                 <div class="item-price">
                                                                                     <div class="price-box">
@@ -223,19 +223,13 @@
                                                                             </div>
 
                                                                             <div class="actions">
-
-                                                                                <form action="/cart/add" method="post" class=" variants" id="product-actions-16065458" enctype="multipart/form-data">
-
+                                                                                <form action="#" method="post" class=" variants" id="product-actions-16065458" enctype="multipart/form-data">
                                                                                     <input type="hidden" name="variantId" value="28347250" />
-                                                                                    <button class="button btn-cart add_to_cart" title="Mua hàng"><span>Mua hàng</span></button>
+                                                                                    <button class="button btn-cart add_to_cart" title="Xem hàng"><span>Xem hàng</span></button>
                                                                                 </form>
-
                                                                             </div>
-
                                                                         </div>
                                                                     </div>
-
-
                                                                 </div>
                                                             }
                                                         }
@@ -313,7 +307,7 @@
                                                                 <div class="hqty ct2 pull-left fixprice box">
                                                                     <div class="custom pull-left">
                                                                         <button onclick="Counting(0)" class="reduced items-count-s" type="button">-</button>
-                                                                        <input id="num" type="text" class="input-text qty" value="2">
+                                                                        <input id="num" type="text" class="input-text qty" value="1">
                                                                         <button onclick="Counting(1)" class="increase items-count-s" type="button">+</button>
                                                                     </div>
                                                                 </div>
@@ -324,14 +318,17 @@
                                                                     <button onclick="CreateCart(0,0,0)" id="muahang" value="0" class="button btn-cart product_add_to_cart add_to_cart" title="Mua hàng"><span>Mua hàng</span></button>
                                                                 </div>
                                                             </div>
-
+                                                            <b>
+                                                                <i>
+                                                                    <p class="short-description rte justify" id="numnoti" style="color:red; font-size: 12px;">
+                                                                    </p>
+                                                                </i>
+                                                            </b>
                                                         </form>
                                                     </div>
                                                 </div>
                                                 <div class="short-description rte justify">
-
                                                     @item1.Product_ShortDescription
-
                                                 </div>
 
                                                 <div class="box_green">
@@ -354,9 +351,11 @@
                                                         }
 
                                                     }
-
+                                                    <div class="product_sku" id="productquantity" value="@item1.Product_Quantity"><span class="fnew">Số lượng:</span> @item1.Product_Quantity</div>
+                                                    
+                                                    
                                                 </div>
-
+                                                
 
                                                 <div class="product-collateral">
                                                     <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
@@ -411,38 +410,57 @@
                     var n = parseInt(document.getElementById("itemid").getAttribute("value"));
                     var itemprice = parseInt(document.getElementById("itemprice").getAttribute("value"));
                     var p = itemprice * n;
-                    $.ajax({
-                        type: "GET",
-                        url: "/CookieCart/CreateCookie?id=" + n + "&qty=" + t + "&price=" + p,
-                        cache: !1,
-                        "async": !0,
-                        success: function(a) { // a là kết quả return từ controller sang 
-                            console.log(a); // hiện nó lên (ở trong )
-                            n.success ? (togles(), ReadCookie(), LoadNumber()) : alert("Đã mua hàng thành công"); // alert biến a đó nếu thành công
-                            window.location = "https://localhost:7037/product";
-                        },
-                           error : function(a) {
-                               console.log(a);
-                            alert(a);
-                        }
-                    });
+                        var numnoti = document.getElementById("numnoti");
+                    if (t != 0) {
+                        $.ajax({
+                            type: "GET",
+                            url: "/CookieCart/CreateCookie?id=" + n + "&qty=" + t + "&price=" + p,
+                            cache: !1,
+                            "async": !0,
+                            success: function (a) { // a là kết quả return từ controller sang
+                                console.log(a); // hiện nó lên (ở trong )
+                                n.success ? (togles(), ReadCookie(), LoadNumber()) : alert("Đã mua hàng thành công"); // alert biến a đó nếu thành công
+                                window.location = "https://localhost:7037/product";
+                            },
+                            error: function (a) {
+                                console.log(a);
+                                alert(a);
+                            }
+                        });
+                    }
+                    else {
+                        numnoti.textContent = "Warning: Lỗi số lượng sản phẩm";
+                    } 
                 }
             </script>
             <!--JS tăng giảm số lượng sửa tiếp-->
             <script>
                 function Counting(calc) {
                     var num = parseInt(document.getElementById("num").value);
+                    var productquantity = parseInt(document.getElementById("productquantity").getAttribute('value'));
+                    var numnoti = document.getElementById("numnoti");
                     if (calc == 0) {
                         num--;
                         if (num < 0) {
-                            num = 0;
-                            alert("không giảm được nữa");
+                            numnoti.textContent = "Warning: Không giảm được nữa!";
+                            return num = 0; // gán về thành 0
+                        }
+                        else{
+                            numnoti.textContent = "";
                         }
                     }
                     else {
                         num++;
+                        if(num >= productquantity)
+                        {
+                            numnoti.textContent = "Warning: Không thể mua số lượng hơn số lượng sản phẩm!";
+                            return num--;
+                        }
+                        else{
+                            numnoti.textContent = "";
+                        }
                     }
-                    document.getElementById("num").value = num;
+                    document.getElementById("num").value = num; // lưu giá trị num mới
                 }
             </script>
 
@@ -1125,6 +1143,6 @@
     <script src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/jquery.prettyphoto.init.min367a.js?1676649124511" type="text/javascript"></script>
 </body>
 <!--JavaScript product detail -> xong rồi
-    SỬa html thêm zoom và 2 ảnh nhỏ
+    SỬa html thêm zoom và 2 ảnh nhỏ -xong
     Thêm service, item chèn , controller ....
 -->

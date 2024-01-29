@@ -162,14 +162,40 @@ function ShoppingTable() {
 					checkoutbtn.textContent = "Tiến hành thanh toán";
 					checkout.appendChild(checkoutbtn);
 					checkoutbtn.setAttribute("class", "form-cart-continue");
-					checkoutbtn.setAttribute("href", "/Checkout");
+						checkoutbtn.setAttribute("onclick", "CheckingCheckout()");
 				}
 			}
         }
     }
 }
-$(document).ready(function(){
-	setTimeout("ShoppingTable()",1000);
+	function CheckingCheckout() {
+		var cartcookie = getCart('cart').substring(0); // chỉ có thể gửi string
+		$.ajax({
+			type: "GET",
+			url: "/Checkout/CheckingCheckout?cartcookie=" + cartcookie,
+			cache: !1,
+			"async": !0,
+			dataType: 'json',
+			// result là kết quả return từ controller sang. success là nhận kết quả controller. Đã dùng ajax thì k có form
+			success: function (result) {
+				if (result == true) {
+					setCookie('popupdiscount', 'true', 365); // xác định xem người dùng có mã discount hay k. Nếu true
+					setCookie('popupcode', popupcode, 365); // mã code của
+					document.querySelector('.popupcontainer').style.display = 'flex';
+				}
+				else { // nếu false = hết mã
+					setCookie('popupdiscount', 'false', 365);
+					document.querySelector('.popupcontainer-error').style.display = 'flex';
+				}
+			},
+			error: function (result) { // lỗi controller = false
+				setCookie('popupdiscount', 'false', 365);
+				document.querySelector('.popupcontainer-error').style.display = 'flex';
+			}
+		});
+	}
+	$(document).ready(function(){
+		setTimeout("ShoppingTable()",1000);
 	});
 </script>
 

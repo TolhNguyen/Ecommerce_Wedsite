@@ -19,6 +19,8 @@ namespace Ecommerce_Wedsite.Models.Entities
         public string Product_Info { get; set; }
         public string Product_Size { get; set; }
         public string Product_Href { get; set; }
+        public string Product_Info2 { get; set; }
+        public int Product_Quantity { get; set; }
 
     }
 

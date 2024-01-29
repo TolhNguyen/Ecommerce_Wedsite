@@ -20,9 +20,10 @@ namespace Ecommerce_Wedsite.Controllers.Main
         private readonly IPictureService _pictureService;
         private readonly IHeaderAndFooterService _headerandfooterService;
         private readonly IDiscounttService _discounttService;
+        private readonly ISubHeaderService _subheaderService;
         // private readonly ISort
 
-        public ProductController(ILogger<ProductController> logger, IPictureService pictureService, IProductService productService, IOrderByProductService orderbyproductService, IProductTypeService producttypeService, ISubProductService subproductService, IHeaderAndFooterService headerandfooterService, IDiscounttService discounttService)
+        public ProductController(ILogger<ProductController> logger, IPictureService pictureService, IProductService productService, IOrderByProductService orderbyproductService, IProductTypeService producttypeService, ISubProductService subproductService, IHeaderAndFooterService headerandfooterService, IDiscounttService discounttService, ISubHeaderService subheaderService)
         {
             _logger = logger;
             _productService = productService;
@@ -32,6 +33,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             _headerandfooterService = headerandfooterService;
             _pictureService = pictureService;
             _discounttService = discounttService;
+            _subheaderService = subheaderService;
         }
 
 
@@ -45,6 +47,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             var producttype_ViewModels = await _producttypeService.Service_Test();
             var orderbyproduct_ViewModels = await _orderbyproductService.Service_Test(proname, category, orderby, page);
             var discountt_ViewModels = await _discounttService.PopupDiscount();
+            var subheader_ViewModels = await _subheaderService.SubHeader();
 
             // Tạo view riêng cho những item sp theo desc (A-Z) / sử dụng chung ở trang product. có phải đúng là truyền order và page = 1 ở lick url cho nút a k. Service truyện thêm 2 tham số
             // _PhanTrangService.Service_Test (page , orderby). 2 tham số này lấy từ đường dẫn bắt sự kiện khi click chuột vào. Service này sẽ query dữ liệu từ db lên.
@@ -54,6 +57,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             All.picture_ViewModels = picture_ViewModels.Data;
             All.producttype_ViewModels = producttype_ViewModels.Data;
             All.discountt_ViewModels = discountt_ViewModels.Data;
+            All.subheader_ViewModels = subheader_ViewModels.Data;
 
             //Tạo sort là model lấy page và orderby ra:
             All.sort_ViewModels.page = page;
@@ -76,6 +80,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             var subproduct_ViewModels = await _subproductService.Service_Test();
             var picture_ViewModels = await _pictureService.Service_Test();
             var discountt_ViewModels = await _discounttService.PopupDiscount();
+            var subheader_ViewModels = await _subheaderService.SubHeader();
 
             All.headerandfooter_ViewModels = headerandfooter_ViewModels.Data;
             All.product_ViewModels = product_ViewModels.Data;
@@ -83,6 +88,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             All.subproduct_ViewModels = subproduct_ViewModels.Data;
             All.picture_ViewModels = picture_ViewModels.Data;
             All.discountt_ViewModels = discountt_ViewModels.Data;
+            All.subheader_ViewModels = subheader_ViewModels.Data;
 
             return View("ProductDetail", All);
         }

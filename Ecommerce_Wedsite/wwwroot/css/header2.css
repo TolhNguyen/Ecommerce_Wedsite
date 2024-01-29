@@ -80,7 +80,6 @@
 
     .content .col .read-more {
         display: inline-block;
-        padding-top: 1rem;
         color: #427dad;
         transition: color 0.3s ease;
     }
