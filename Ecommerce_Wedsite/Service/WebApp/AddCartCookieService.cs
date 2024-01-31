@@ -12,22 +12,26 @@ namespace Ecommerce_Wedsite.Service.WebApp
 {
     public interface IAddCartCookieService // Tạo Interface
     {
-        ShopCard_ViewModel them_san_pham_vao_goi_hang(ShopCard_ViewModel card, Product product_ViewModels, int qty); //Model lớn chứa Model nhỏ. Tạo Phương Thức     
+        Task<ShopCard_ViewModel> them_san_pham_vao_goi_hang(ShopCard_ViewModel card, Product product_ViewModels, int qty); //Model lớn chứa Model nhỏ. Tạo Phương Thức     
     }
     public class AddCartCookieService : IAddCartCookieService // Thừa kế các thuộc tính từ Interface 
     {
         private readonly IConfigManagerService _configuration;
-        public AddCartCookieService(IConfigManagerService configuration)
+        private readonly IProductCartImgService _productcartimgService;
+        public AddCartCookieService(IConfigManagerService configuration, IProductCartImgService productcartimgService)
         {
             _configuration = configuration;
+            _productcartimgService = productcartimgService;
         }
-        public ShopCard_ViewModel them_san_pham_vao_goi_hang(ShopCard_ViewModel card, Product product_ViewModels, int qty) // tạo riêng 1 service. (bỏ static r)
+        public async Task<ShopCard_ViewModel> them_san_pham_vao_goi_hang(ShopCard_ViewModel card, Product product_ViewModels, int qty) // tạo riêng 1 service. (bỏ static r)
         {
 
             var product_item = new Producd_ShopCard(); // tạo biến sp mới là thay đổi của sp cũ (đã có trong giỏ hàng)
             product_item.id = product_ViewModels.Product_Id;
             product_item.name = product_ViewModels.Product_Name;
             product_item.qty = qty;
+            product_item.imgid = product_ViewModels.Picture_Id;
+            product_item.img = await _productcartimgService.ProductCartImgFunction(product_item.imgid);
             if (product_ViewModels.Product_PromoPrice != 0)
             {
                 product_item.price = product_ViewModels.Product_PromoPrice * qty;

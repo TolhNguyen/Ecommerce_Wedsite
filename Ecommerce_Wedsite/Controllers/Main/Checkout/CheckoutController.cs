@@ -120,19 +120,19 @@ namespace Ecommerce_Wedsite.Controllers.Main
             return View("CheckoutFinal", All); // hiện page kết quả và nội dung các dữ liệu checkout và order
         }
 
-
+        //Chức năng check sl sp
         public async Task<IActionResult> CheckingCheckout(string cartcookie) // dữ liệu từ ajax. Lỗi trả về trang checkout
         {
             var cartcookieobj = new ShopCard_ViewModel();
-			cartcookieobj = JsonSerializer.Deserialize<ShopCard_ViewModel>(cartcookie);
+			cartcookieobj = JsonSerializer.Deserialize<ShopCard_ViewModel>(cartcookie); // 2 biến này giống cookiecard và card
             if (cartcookieobj != null)
             {
 				var result = await _checkingquantityService.CheckingQuantityFunction(cartcookieobj);
                 if(result.success == true)
                 {
-					return RedirectToAction("checkout");
+					return Json(true);
 				}
-                else Json(false);
+                else return Json(result.message); // Phải trả về kiểu như này mới được
 
 			}
 			return Json(false); // hiện page kết quả và nội dung các dữ liệu checkout và order

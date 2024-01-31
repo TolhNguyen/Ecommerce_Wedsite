@@ -13,6 +13,8 @@
         public string name { get; set; }
         public int qty { get; set; }
         public decimal price { get; set; }
+        public int imgid { get; set; }
+        public string img {  get; set; }
     }
 }
 // k cần vào Allayout. Dây là model để lưu, đọc dữ liệu từ ajax gửi về cho controller

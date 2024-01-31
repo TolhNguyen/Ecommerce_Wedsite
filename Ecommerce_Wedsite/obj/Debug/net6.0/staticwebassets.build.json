@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OD+lz5gmKhB9rxw7mOZUfHJ/utbuYMY0h/ZQFVYCvMw=",
+  "Hash": "wg4OM0bTNGqVR1LY+p9xLK9ftsERlBS4hmaCPW6K1TQ=",
   "Source": "Ecommerce_Wedsite",
   "BasePath": "_content/Ecommerce_Wedsite",
   "Mode": "Default",
@@ -433,6 +433,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\aboutus2.css"
+    },
+    {
+      "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\cartproductcheckout2.css",
+      "SourceId": "Ecommerce_Wedsite",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\",
+      "BasePath": "_content/Ecommerce_Wedsite",
+      "RelativePath": "css/cartproductcheckout2.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\cartproductcheckout2.css"
     },
     {
       "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\checkout.css",
@@ -1440,6 +1459,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\Picture\\Dayenkim.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\delete.jpg",
+      "SourceId": "Ecommerce_Wedsite",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\",
+      "BasePath": "_content/Ecommerce_Wedsite",
+      "RelativePath": "img/Picture/delete.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\Picture\\delete.jpg"
     },
     {
       "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\DiaLan.jpg",

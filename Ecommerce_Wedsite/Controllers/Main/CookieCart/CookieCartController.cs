@@ -19,8 +19,9 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly IAddCartCookieService _addcartcookieService;
         private readonly ICreateCartCookieService _createcartcookieService;
         private readonly IDeleteCartCookieService _deletecartcookieService;
+        private readonly IChangeProductCartQuantityService _changeproductcartquantityService;
 
-        public CookieCartController(ILogger<CookieCartController> logger, INewWebAppService newWebAppService, IHeaderAndFooterService headerandfooterService, IProductCookieService productcookieService, IAddCartCookieService addcartcookieService, ICreateCartCookieService createcartcookieService, IDeleteCartCookieService deletecartcookieService)
+        public CookieCartController(ILogger<CookieCartController> logger, INewWebAppService newWebAppService, IHeaderAndFooterService headerandfooterService, IProductCookieService productcookieService, IAddCartCookieService addcartcookieService, ICreateCartCookieService createcartcookieService, IDeleteCartCookieService deletecartcookieService, IChangeProductCartQuantityService changeproductcartquantityService)
         {
             _logger = logger;
             //_newWebAppService = newWebAppService; // Tạo 1 tham chiếu 
@@ -29,6 +30,7 @@ namespace Ecommerce_Wedsite.Controllers
             _addcartcookieService = addcartcookieService;
             _createcartcookieService = createcartcookieService;
             _deletecartcookieService = deletecartcookieService;
+            _changeproductcartquantityService = changeproductcartquantityService;
         }
 
 
@@ -62,7 +64,7 @@ namespace Ecommerce_Wedsite.Controllers
             
             else // k có cookie sẵn thì tạo và chèn dữ liệu mới vô
             {
-                card = _addcartcookieService.them_san_pham_vao_goi_hang(card, product_ViewModels, qty); // k có cookie value nên tạo value luôn
+                card = await _addcartcookieService.them_san_pham_vao_goi_hang(card, product_ViewModels, qty); // k có cookie value nên tạo value luôn
                 string productvalue = JsonSerializer.Serialize(card); // đổi từ jsonobj sang string là productvalue. Và chèn card là value mới của cookie vô
                 CookieOptions option = new CookieOptions();
                 option.Secure = true;
@@ -189,24 +191,49 @@ namespace Ecommerce_Wedsite.Controllers
             // json gửi cho ajax đọc kết quả đó
         }
 
+		public async Task<IActionResult> ChangeProductCartQuantity(int id, int qty) // truyền biến id (id sp), qty (số lượng sp). Dùng để xóa 1 item trong cart
+		{
+			var cookieCard = HttpContext.Request.Cookies["cart"];
+			var card = new ShopCard_ViewModel();
+			if (cookieCard != null) // Phải có cookie sẵn
+			{
+				card = JsonSerializer.Deserialize<ShopCard_ViewModel>(cookieCard); // đổi từ string sang json
+				if (card != null) // card k đc null 
+				{
+					card = _changeproductcartquantityService.ChangeProductCartQuantityFunction(card, id, qty); // xử lý sp trong giỏ hàng
+				}
+				string productvalue = JsonSerializer.Serialize(card); // đổi lại từ jsonobj sang string là productvalue. 
+				CookieOptions option = new CookieOptions();
+				option.Secure = true;
+				option.HttpOnly = false;
+				option.SameSite = SameSiteMode.None;
+				option.Path = "/";
+				option.Expires = DateTime.Now.AddDays(1);
+				HttpContext.Response.Cookies.Append("cart", productvalue, option); // lưu những thay đổi mới vào cart
 
-        //public IActionResult ResetCookie()
-        //{
-        //    var cookie = HttpContext.Request.Cookies["bg-modal"];
-        //    if (cookie != null) // là đang có cookie thì 
-        //    {
-        //        CookieOptions option = new CookieOptions();
-        //        option.Secure = true;
-        //        option.HttpOnly = false;
-        //        option.SameSite = SameSiteMode.None;
-        //        option.Path = "/";
-        //        option.Expires = DateTime.Now.AddDays(1);
-        //        HttpContext.Response.Cookies.Append("bg-model", "yes", option);
-        //    }
-        //    return RedirectToAction("Index");
-        //}
+				return Json(true); // nếu function chạy thành công thì true
+			}
+			return Json(false); // nếu function k chạy được thì false
+								// json gửi cho ajax đọc kết quả đó
+		}
 
-    }
+		//public IActionResult ResetCookie()
+		//{
+		//    var cookie = HttpContext.Request.Cookies["bg-modal"];
+		//    if (cookie != null) // là đang có cookie thì 
+		//    {
+		//        CookieOptions option = new CookieOptions();
+		//        option.Secure = true;
+		//        option.HttpOnly = false;
+		//        option.SameSite = SameSiteMode.None;
+		//        option.Path = "/";
+		//        option.Expires = DateTime.Now.AddDays(1);
+		//        HttpContext.Response.Cookies.Append("bg-model", "yes", option);
+		//    }
+		//    return RedirectToAction("Index");
+		//}
+
+	}
 }
 // hướng đi: lấy cart về -> chuyển thành object -> insert object đó vào db
 // vấn đề: controller k đọc hiểu đc code js ở cookie value.

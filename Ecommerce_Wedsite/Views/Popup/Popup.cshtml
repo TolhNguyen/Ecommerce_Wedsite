@@ -67,95 +67,95 @@
     
 </div>
 
-<script>   
-    var popupranid = document.getElementById("popupranid").getAttribute("value"); // random id của popup
-    var popupno = parseInt(document.getElementById("popupno").getAttribute("value")); // số lượng discount còn
-    var popuprate = document.getElementById("popuprate").getAttribute("value"); //deciaml là type float nên k parseInt đc (nên parseFloat). % discount
-    var totalprice = parseInt(document.getElementById("totalcart").getAttribute("value")); // tổng tiền thay đổi
-    var submess = document.getElementById("submess");
-    var popupcode = document.getElementById("popupcode").getAttribute("value");
+    <script>   
+        var popupranid = document.getElementById("popupranid").getAttribute("value"); // random id của popup
+        var popupno = parseInt(document.getElementById("popupno").getAttribute("value")); // số lượng discount còn
+        var popuprate = document.getElementById("popuprate").getAttribute("value"); //deciaml là type float nên k parseInt đc (nên parseFloat). % discount
+        var totalprice = parseInt(document.getElementById("totalcart").getAttribute("value")); // tổng tiền thay đổi
+        var submess = document.getElementById("submess");
+        var popupcode = document.getElementById("popupcode").getAttribute("value");
 
-    window.setTimeout(function SetCookie(){ // func set time out. Thời gian đợi mới chạy.
-        // if (popupno != 0) { // nếu còn mã giảm thì mới chạy popup: k còn sử dụng nên khóa lại.
-        if (getCookie('bg-modal')) { // Ktra nếu có cookie rồi:
-            if (getCookie('bg-modal') == 'false') // Ktra true hay false
-            {
-                if (getCookie('bg-modalno') == popupranid) { // Ktra nếu vẫn là dữ liệu cũ hay mới
-                    return; // return thì nó ngưng luôn, k run code dưới
-                }
-                setCookie('bg-modal', 'true', 365);
-                setCookie('bg-modalno', popupranid, 365); //add dữ liệu mới 
-                document.querySelector('.bg-modal').style.display = 'flex';
-                return;
-            }
-            else { // nếu true:
-                document.querySelector('.bg-modal').style.display = 'flex';
-            }
-	    }
-        else{ // Nếu chưa có:
-            document.querySelector('.bg-modal').style.display = 'flex'; // nếu k có thì hiện lại bg
-	        setCookie('bg-modal', 'true', 365); // và cài flag cookie vào
-            setCookie('bg-modalno', popupranid, 365); // thì lưu id mới
-        }
-    }, 1000);
-
-    // Giống onclick function:
-     document.querySelector(".popupclose").addEventListener('click', 
-        function() {
-            document.querySelector('.bg-modal').style.display = 'none'; // nhấn nút tắt thì xóa bg. sau đó mới thêm cookie vô
-            setCookie('bg-modal', 'false', 365);
-            setCookie('popupdiscount', 'false', 365);
-        }
-     );
-
-    // function isValidEmail(email) {
-    //     // Regular expression for validating email addresses
-    //     const emailRegex
-  
-    //     // Test the email against the regular expression
-    //     return emailRegex.test(email);
-    // }
-    function GetPopupDiscount() {
-        var popupemail = document.getElementById("popupemail").value; //Đến lúc gõ value rồi mới lấy của email. Trước đó là rỗng
-        var popupemail2 = encodeURIComponent(popupemail);
-        var popupranid2 =  encodeURIComponent(popupranid);
-        if (popupemail2 != "" && popupemail2.includes("%40gmail.com")) { // ktra có rỗng không và có email k %40. Chưa ktra dạng email valid hay k 
-            document.querySelector('.bg-modal').style.display = 'none'; // submit r thì xóa bg
-            setCookie('bg-modal', 'false', 365);
-            $.ajax({
-                type: "GET",
-                url: "/Discount/DiscountNumberFunction?discountranid=" + popupranid2 + "&gmail=" + popupemail,
-                cache: !1,
-                "async": !0,
-                dataType: 'json',
-                // result là kết quả return từ controller sang. success là nhận kết quả controller. Đã dùng ajax thì k có form
-                success: function (result) { 
-                    if(result == true) {
-                        setCookie('popupdiscount', 'true', 365); // xác định xem người dùng có mã discount hay k. Nếu true
-                        setCookie('popupcode', popupcode, 365); // mã code của 
-                        document.querySelector('.popupcontainer').style.display = 'flex';
+        window.setTimeout(function SetCookie(){ // func set time out. Thời gian đợi mới chạy.
+            // if (popupno != 0) { // nếu còn mã giảm thì mới chạy popup: k còn sử dụng nên khóa lại.
+            if (getCookie('bg-modal')) { // Ktra nếu có cookie rồi:
+                if (getCookie('bg-modal') == 'false') // Ktra true hay false
+                {
+                    if (getCookie('bg-modalno') == popupranid) { // Ktra nếu vẫn là dữ liệu cũ hay mới
+                        return; // return thì nó ngưng luôn, k run code dưới
                     }
-                    else{ // nếu false = hết mã
+                    setCookie('bg-modal', 'true', 365);
+                    setCookie('bg-modalno', popupranid, 365); //add dữ liệu mới 
+                    document.querySelector('.bg-modal').style.display = 'flex';
+                    return;
+                }
+                else { // nếu true:
+                    document.querySelector('.bg-modal').style.display = 'flex';
+                }
+	        }
+            else{ // Nếu chưa có:
+                document.querySelector('.bg-modal').style.display = 'flex'; // nếu k có thì hiện lại bg
+	            setCookie('bg-modal', 'true', 365); // và cài flag cookie vào
+                setCookie('bg-modalno', popupranid, 365); // thì lưu id mới
+            }
+        }, 1000);
+
+        // Giống onclick function:
+         document.querySelector(".popupclose").addEventListener('click', 
+            function() {
+                document.querySelector('.bg-modal').style.display = 'none'; // nhấn nút tắt thì xóa bg. sau đó mới thêm cookie vô
+                setCookie('bg-modal', 'false', 365);
+                setCookie('popupdiscount', 'false', 365);
+            }
+         );
+
+        // function isValidEmail(email) {
+        //     // Regular expression for validating email addresses
+        //     const emailRegex
+  
+        //     // Test the email against the regular expression
+        //     return emailRegex.test(email);
+        // }
+        function GetPopupDiscount() {
+            var popupemail = document.getElementById("popupemail").value; //Đến lúc gõ value rồi mới lấy của email. Trước đó là rỗng
+            var popupemail2 = encodeURIComponent(popupemail);
+            var popupranid2 =  encodeURIComponent(popupranid);
+            if (popupemail2 != "" && popupemail2.includes("%40gmail.com")) { // ktra có rỗng không và có email k %40. Chưa ktra dạng email valid hay k 
+                document.querySelector('.bg-modal').style.display = 'none'; // submit r thì xóa bg
+                setCookie('bg-modal', 'false', 365);
+                $.ajax({
+                    type: "GET",
+                    url: "/Discount/DiscountNumberFunction?discountranid=" + popupranid2 + "&gmail=" + popupemail,
+                    cache: !1,
+                    "async": !0,
+                    dataType: 'json',
+                    // result là kết quả return từ controller sang. success là nhận kết quả controller. Đã dùng ajax thì k có form
+                    success: function (result) { 
+                        if(result == true) {
+                            setCookie('popupdiscount', 'true', 365); // xác định xem người dùng có mã discount hay k. Nếu true
+                            setCookie('popupcode', popupcode, 365); // mã code của 
+                            document.querySelector('.popupcontainer').style.display = 'flex';
+                        }
+                        else{ // nếu false = hết mã
+                            setCookie('popupdiscount', 'false', 365);
+                            document.querySelector('.popupcontainer-error').style.display = 'flex';
+                        }
+                    },
+                    error: function (result) { // lỗi controller = false
                         setCookie('popupdiscount', 'false', 365);
                         document.querySelector('.popupcontainer-error').style.display = 'flex';
                     }
-                },
-                error: function (result) { // lỗi controller = false
-                    setCookie('popupdiscount', 'false', 365);
-                    document.querySelector('.popupcontainer-error').style.display = 'flex';
-                }
-            });
+                });
+            }
+            else {
+                submess.textContent = "Bạn nhập sai rồi, Mời bạn nhập Gmail lại!";
+            }
         }
-        else {
-            submess.textContent = "Bạn nhập sai rồi, Mời bạn nhập Gmail lại!";
-        }
-    }
 
-    function PopupConfirmation() {
-        document.querySelector('.popupcontainer').style.display = 'none';
-        document.querySelector('.popupcontainer-error').style.display = 'none';
-    }
-</script>
+        function PopupConfirmation() {
+            document.querySelector('.popupcontainer').style.display = 'none';
+            document.querySelector('.popupcontainer-error').style.display = 'none';
+        }
+    </script>
 <!--Bài toán:
      + Nếu mà có sự thay đổi trong backend - code controller, db, sql, ... thì popup này hiện lại và thay đổi dữ liệu
     Hướng đi:

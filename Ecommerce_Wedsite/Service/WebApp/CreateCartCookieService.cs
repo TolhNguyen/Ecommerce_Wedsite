@@ -30,7 +30,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
         {
             if (!card.product_card.Any()) // Kiem tra giỏ có đang trống hay k. Lấy thông tin product lên ktra. Nếu trống:
                 // tinh toan va them san pham mới
-                card = _addcartcookieService.them_san_pham_vao_goi_hang(card, product_ViewModels, qty);
+                card = await _addcartcookieService.them_san_pham_vao_goi_hang(card, product_ViewModels, qty);
             else
             {
                 var check = new Producd_ShopCard();
@@ -43,7 +43,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     }
                 }
                 if (check.name == null) // gio hang khong co item trùng. Biến check k có id giống nhau
-                    card = _addcartcookieService.them_san_pham_vao_goi_hang(card, product_ViewModels, qty); // thì thêm sp mới vào giỏ hàng
+                    card = await _addcartcookieService.them_san_pham_vao_goi_hang(card, product_ViewModels, qty); // thì thêm sp mới vào giỏ hàng
 
                 else // gio hang co item trùng, san them vao 
                 {

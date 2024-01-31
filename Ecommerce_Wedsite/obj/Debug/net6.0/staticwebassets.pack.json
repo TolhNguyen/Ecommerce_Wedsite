@@ -89,6 +89,10 @@
       "PackagePath": "staticwebassets\\css\\aboutus2.css"
     },
     {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\cartproductcheckout2.css",
+      "PackagePath": "staticwebassets\\css\\cartproductcheckout2.css"
+    },
+    {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\checkout.css",
       "PackagePath": "staticwebassets\\css\\checkout.css"
     },
@@ -383,6 +387,10 @@
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\davidbeckham.jpg",
       "PackagePath": "staticwebassets\\img\\Picture\\davidbeckham.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\delete.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\delete.jpg"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\long-banner.jpg",

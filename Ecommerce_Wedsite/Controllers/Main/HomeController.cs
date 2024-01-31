@@ -4,7 +4,6 @@ using Ecommerce_Wedsite.Models.Helpers.Response;
 using Ecommerce_Wedsite.Models.ViewModel;
 using Ecommerce_Wedsite.Service.WebApp;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -77,7 +76,17 @@ namespace Ecommerce_Wedsite.Controllers.Main
             All.discountt_ViewModels = discountt_ViewModels.Data;
             All.subheader_ViewModels = subheader_ViewModels.Data;
 
-            return View("WebApp/Cart", All);
+            // Cách lấy cart model chỉ có ở viewmodel mang ra view sử dụng: Cần có setup viewmodel trc trong All:
+
+			var cookieCard = HttpContext.Request.Cookies["cart"]; // lấy value từ cart cookie
+			var card = new ShopCard_ViewModel(); // tạo 1 biến lưu dữ liệu đó
+            if (cookieCard != null) // là đã có cookie rồi
+            {
+				card = JsonSerializer.Deserialize<ShopCard_ViewModel>(cookieCard); // truyền dữ liệu object vào card
+                All.shopcard_ViewModels = card; // lưu nó vào viewmodel để hiện ra.
+			}
+
+		    return View("WebApp/Cart", All);
         }
 
         [Route("~/checkoutadmin")]

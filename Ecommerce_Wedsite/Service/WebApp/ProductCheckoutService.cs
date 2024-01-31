@@ -39,7 +39,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     var idcheck = item.id;
                     var qtycheck = item.qty;
 
-                    await _productcheckoutquantityService.ProductCheckoutQuantityFunction(idcheck, qtycheck); // check và giảm số lượng
+                    await _productcheckoutquantityService.ProductCheckoutQuantityFunction(idcheck, qtycheck); // check và giảm số lượng từng sp qua for
 
                     productcheckout.ProductCheckout_Id = idcheck;
                     productcheckout.ProductCheckout_Quantity = qtycheck;

@@ -10,6 +10,8 @@
 <!--IEnumerable để tạo list-->
 
 <header>
+@if (Model != null)
+{
     <div class="header-container">
     </div>
     <div class="container">
@@ -110,9 +112,8 @@
                         @* <ul id="nav" class="hidden-xs hidden-sm remove_html nav_main"> *@
                         <ul id="nav" class="menu-items">
                             <!--code logic tiep cho 2 list-->
-                            @if (Model != null)
-                            {
-                                foreach (var item in Model.headerandfooter_ViewModels.headermain)
+                            
+                                @foreach (var item in Model.headerandfooter_ViewModels.headermain)
                                 {
                                     @if(item.Header_HTML == 1)
                                     {
@@ -261,14 +262,13 @@
                                         </a>
                                     </li> *@
                                 }
-                            }
                         </ul>
                     </div>
                 </nav>
             </div>
         </div>
     </div>
-    
+}
 </header>
 <script>
 	// Vấn để: là chưa search loại 1 mình đc và Chưa search ở bên ngoài trang Home đc:

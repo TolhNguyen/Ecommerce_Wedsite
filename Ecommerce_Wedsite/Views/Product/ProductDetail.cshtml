@@ -88,7 +88,6 @@
                     <section class="main-container col1-layout">
                         <div class="main container">
                             <div class="col-main details-product">
-
                                 <div class="row">
                                     <div class="product-view form-product">
                                         <div class="product-essential">
@@ -100,7 +99,7 @@
                                                             @if (item1.Picture_Id == item3.Picture_Id) // luôn kiểm tra để chỉ lấy 1 id
                                                             {
                                                                 <a href="@item3.Picture_FileName" class="large_image_url checkurl" data-rel="prettyPhoto[product-gallery]">
-                                                                    <img id="img_01" class="img-responsive" alt="#Product_Name" src="@item3.Picture_FileName" data-zoom-image="@item3.Picture_FileName" />
+                                                                    <img id="img_01" value="@item3.Picture_Id" class="img-responsive" alt="#Product_Name" src="@item3.Picture_FileName" data-zoom-image="@item3.Picture_FileName" />
                                                                 </a>
                                                             }
                                                         }
@@ -315,7 +314,7 @@
                                                                 <div class="pull-left ct2 fixprice">
 
                                                                     @*<button onclick="PopupCart(is_button); return is_button = true;" id="muahang" value="0" class="button btn-cart product_add_to_cart add_to_cart" title="Mua hàng"><span>Mua hàng</span></button>*@
-                                                                    <button onclick="CreateCart(0,0,0)" id="muahang" value="0" class="button btn-cart product_add_to_cart add_to_cart" title="Mua hàng"><span>Mua hàng</span></button>
+                                                                    <button onclick="CreateCart(0,0,0,0)" id="muahang" value="0" class="button btn-cart product_add_to_cart add_to_cart" title="Mua hàng"><span>Mua hàng</span></button>
                                                                 </div>
                                                             </div>
                                                             <b>
@@ -404,17 +403,18 @@
                 n là id, t là số lượng sp   
             -->
             <script>
-                function CreateCart(n, t, p) {
+                function CreateCart(n, t, p, i) {
                     //console.log("====== chay ajax" + n + "," + t);
                     var t = parseInt(document.getElementById("num").value);
                     var n = parseInt(document.getElementById("itemid").getAttribute("value"));
                     var itemprice = parseInt(document.getElementById("itemprice").getAttribute("value"));
                     var p = itemprice * n;
-                        var numnoti = document.getElementById("numnoti");
+                    var i = document.getElementById("img_01").getAttribute('value');
+                    var numnoti = document.getElementById("numnoti");
                     if (t != 0) {
                         $.ajax({
                             type: "GET",
-                            url: "/CookieCart/CreateCookie?id=" + n + "&qty=" + t + "&price=" + p,
+                            url: "/CookieCart/CreateCookie?id=" + n + "&qty=" + t + "&price=" + p + "&imgid=" + i,
                             cache: !1,
                             "async": !0,
                             success: function (a) { // a là kết quả return từ controller sang
@@ -434,35 +434,7 @@
                 }
             </script>
             <!--JS tăng giảm số lượng sửa tiếp-->
-            <script>
-                function Counting(calc) {
-                    var num = parseInt(document.getElementById("num").value);
-                    var productquantity = parseInt(document.getElementById("productquantity").getAttribute('value'));
-                    var numnoti = document.getElementById("numnoti");
-                    if (calc == 0) {
-                        num--;
-                        if (num < 0) {
-                            numnoti.textContent = "Warning: Không giảm được nữa!";
-                            return num = 0; // gán về thành 0
-                        }
-                        else{
-                            numnoti.textContent = "";
-                        }
-                    }
-                    else {
-                        num++;
-                        if(num >= productquantity)
-                        {
-                            numnoti.textContent = "Warning: Không thể mua số lượng hơn số lượng sản phẩm!";
-                            return num--;
-                        }
-                        else{
-                            numnoti.textContent = "";
-                        }
-                    }
-                    document.getElementById("num").value = num; // lưu giá trị num mới
-                }
-            </script>
+            
 
             <!--
                 Ghi chú:
