@@ -37,7 +37,7 @@
                                     {
                                         @if(item1.ProductType_Id == item7.ProductType_Id) // kiểm tra phải cùng type id. Để k bị lặp (để chỉ lấy 1)
                                         {
-                                            <a href="/#Category_Link"><span>@item7.ProductType_Name</span></a>
+                                            <a href="#"><span>@item7.ProductType_Name</span></a>
                                         }
                                         
                                     }
@@ -176,16 +176,20 @@
                                                             <a href="chau-canh" title="Sản phẩm cùng loại"><h3>Sản phẩm cùng loại</h3></a>
                                                         </div>
 
-
+                                                        <!--Cách chỉ lấy 3 sp cùng loại trong toàn bộ sp:-->
+                                                        @{
+                                                            var n = 0; // chỉ được lặp 3 lần, 3 sp cùng loại
+                                                        }
                                                         <!--#Tạo service nhỏ là các sản phẩm cùng loại: -->
                                                         @foreach (var item5 in Model.subproduct_ViewModels.subproduct)
                                                         {
                                                             if (item5.ProductType_Id == item1.ProductType_Id && item5.Product_Name != item1.Product_Name) // nếu có cùng loại id và khác tên sp chính. Nếu sp loại khác và cùng tên sẽ bị loại ra.
                                                             {
-                                                                //var product_name = @item1.Product_Name;
+                                                                n++; // tăng 1 mỗi lần có 1 sp
+                                                            //var product_name = @item1.Product_Name;
                                                                 <div class="aside-content mini-products-list2">
                                                                     <div class="product-item clearfix on-sale">
-                                                                        <a href="/thong-kim-mini" class="product-img" title="Thông kim mini">
+                                                                        <a href="/thong-kim-mini" class="product-img" title="#">
                                                                             @foreach (var item3 in Model.picture_ViewModels.picture)
                                                                             {
                                                                                 if (item5.Picture_Id == item3.Picture_Id)
@@ -230,6 +234,10 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                if (n == 3)
+                                                                {
+                                                                    break;
+                                                                }
                                                             }
                                                         }
                                                         <a href="/chau-canh" class="btn-view-more" title="Xem thêm">
@@ -342,11 +350,12 @@
 
                                                     <div class="product_sku" id="vendor"><span class="fnew">Hãng sản xuất:</span> @item1.Product_Manufacturers</div>
 
+                                                    
                                                     @foreach (var item2 in Model.producttype_ViewModels.producttype)
                                                     {
                                                         if (item1.ProductType_Id == item2.ProductType_Id)
                                                         {
-                                                            <div class="product_sku" id="type"><span class="fnew">Loại:</span> @item2.ProductType_Name</div>
+                                                            <div class="product_sku" id="typeid" value="item1.ProductType_Id"><span class="fnew">Loại:</span> @item2.ProductType_Name</div>
                                                         }
 
                                                     }
@@ -432,6 +441,39 @@
                         numnoti.textContent = "Warning: Lỗi số lượng sản phẩm";
                     } 
                 }
+
+                
+            </script>
+            <script>
+                // chức năng tăng giảm của trang product detail:
+                function Counting(calc) {
+                    var num = parseInt(document.getElementById("num").value);
+                    var productquantity = parseInt(document.getElementById("productquantity").getAttribute('value')); // sl sp
+                    var numnoti = document.getElementById("numnoti");
+                    if (calc == 0) {
+                        num--;
+                        if (num < 0) {
+                            numnoti.textContent = "Warning: Không giảm được nữa!";
+                            return num = 0; // gán về thành 0
+                        }
+                        else {
+                            numnoti.textContent = "";
+                        }
+                    }
+                    else {
+                        num++;
+                        if (num >= productquantity) {
+                            numnoti.textContent = "Warning: Không thể mua số lượng hơn số lượng sản phẩm!";
+                            return num--;
+                        }
+                        else {
+                            numnoti.textContent = "";
+                        }
+                    }
+                    document.getElementById("num").value = num; // lưu giá trị num mới
+                }
+
+
             </script>
             <!--JS tăng giảm số lượng sửa tiếp-->
             

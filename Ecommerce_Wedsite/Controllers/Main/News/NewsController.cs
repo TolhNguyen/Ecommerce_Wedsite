@@ -20,8 +20,9 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly INewCateService _newscateService;
         private readonly IListNewsService _listnewsService;
         private readonly INewsService _newsService;
+        private readonly ISubHeaderService _subheaderService;
 
-        public NewsController(ILogger<NewsController> logger, IHeaderAndFooterService headerandfooterService, IPictureService pictureService, IDiscounttService discounttService, INewCateService newscateService, IListNewsService listnewsService, INewsService newsService)
+        public NewsController(ILogger<NewsController> logger, IHeaderAndFooterService headerandfooterService, IPictureService pictureService, IDiscounttService discounttService, INewCateService newscateService, IListNewsService listnewsService, INewsService newsService, ISubHeaderService subheaderService)
         {
             _logger = logger;
             _headerandfooterService = headerandfooterService;
@@ -30,6 +31,7 @@ namespace Ecommerce_Wedsite.Controllers
             _newscateService = newscateService;
             _listnewsService = listnewsService;
             _newsService = newsService;
+            _subheaderService = subheaderService;
         }
 
         [Route("~/News")]
@@ -42,12 +44,14 @@ namespace Ecommerce_Wedsite.Controllers
             var discountt_ViewModels = await _discounttService.PopupDiscount();
             var newscategory_ViewModels = await _newscateService.Service_Test();
             var listnews_ViewModels = await _listnewsService.Service_Test();
+            var subheader_ViewModels = await _subheaderService.SubHeader();
 
             All.headerandfooter_ViewModels = headerandfooter_ViewModels.Data;
             All.picture_ViewModels = picture_ViewModels.Data;
             All.discountt_ViewModels = discountt_ViewModels.Data;
             All.newscategory_ViewModels = newscategory_ViewModels.Data;
             All.listnews_ViewModels = listnews_ViewModels.Data;
+            All.subheader_ViewModels = subheader_ViewModels.Data;
 
             return View("News", All);
         }

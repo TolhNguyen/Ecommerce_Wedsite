@@ -17,7 +17,6 @@ namespace Ecommerce_Wedsite.Controllers.Main
         private readonly IPictureService _pictureService;
         private readonly ILogoService _logoService;
         private readonly ICheckoutAdminService _checkoutadminService;
-        // cần sửa. Order: lưu biến từ cart về db
         private readonly IHeaderAndFooterService _headerandfooterService;
         private readonly IDiscounttService _discounttService;
         private readonly ISubHeaderService _subheaderService;
@@ -84,7 +83,11 @@ namespace Ecommerce_Wedsite.Controllers.Main
             {
 				card = JsonSerializer.Deserialize<ShopCard_ViewModel>(cookieCard); // truyền dữ liệu object vào card
                 All.shopcard_ViewModels = card; // lưu nó vào viewmodel để hiện ra.
-			}
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
 
 		    return View("WebApp/Cart", All);
         }

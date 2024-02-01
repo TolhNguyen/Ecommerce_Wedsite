@@ -35,8 +35,6 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     var query = dbConn.QueryBuilder($"SELECT * FROM Product where Product_Href = '{producthref}'"); 
 
                     data.Data.product = await query.QueryAsync<Product>();
-                    var product = await query.QueryAsync<Product>();
-
 
                     await dbConn.CloseAsync(); // đóng sync sau khi sử dụng
                 }

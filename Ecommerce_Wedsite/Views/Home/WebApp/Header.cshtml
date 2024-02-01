@@ -191,7 +191,8 @@
                                                                         {
                                                                             if(item3.ProductType_Id == item2.ProductType_Id)
                                                                             {
-                                                                               <li class="megali"><a href="#">@item3.Product_Name</a></li>
+                                                                                <!--Sửa lại đường dẫn trong db (~/...) hoặc:-->
+                                                                               <li class="megali"><a href="~/productdetail/@item3.Product_Href">@item3.Product_Name</a></li>
                                                                             } 
                                                                         }
                                                                         @* <li><a href="#">Item 1</a></li> Phải có item trước thì mới có thanh dọc*@
@@ -233,7 +234,7 @@
                                                                     </span>
                                                                 </a>
                                                                 <h2>@item2.NewsCate_Name</h2>
-                                                                <a href="#" class="read-more">Click here to read more...</a>
+                                                                <a href="/News" class="read-more">Click here to read more...</a>
                                                             </div>
                                                         }    
                                                     }
@@ -270,22 +271,23 @@
     </div>
 }
 </header>
-<script>
-	// Vấn để: là chưa search loại 1 mình đc và Chưa search ở bên ngoài trang Home đc:
-    function SortName() {    
-		var proname = document.getElementById("sortname").value; //get value input nếu k có thì là ""
-        if(proname != ""){ //Func Chạy ở Header thôi. Nếu có giá trị
-		    var page = 1; // lấy đỡ là 1
-		    var orderby = 1; 
-            //category = undefined; // lỗi k lấy đc
-			var category = document.getElementById("categoryitem").value; // ở Header k cần category
-            console.log(category);
-            return sort(page, orderby, proname, category);
-            /*
-                -   Cách lưu vào value của input tìm kiếm: chỉ cần gọi Model.sort_ViewModels.proname là đủ
-                -   Vì bên model đã lưu tên biến này rồi, chỉ cần gọi ra, dùng, lưu lại cho view thôi.
-            */
-        }
-        return; // nếu k có gõ thì k chạy
-	}
-</script>
+    <script>
+	    // Vấn để: là chưa search loại 1 mình đc và Chưa search ở bên ngoài trang Home đc:
+        function SortName() {    
+		    var proname = document.getElementById("sortname").value; //get value input nếu k có thì là ""
+            if(proname != ""){ //Func Chạy ở Header thôi. Nếu có giá trị
+		        var page = 1; // lấy đỡ là 1
+		        var orderby = 1; 
+                //category = undefined; // lỗi k lấy đc
+			    var category = document.getElementById("categoryitem").value; // ở Header k cần category
+                console.log(category);
+                return sort(page, orderby, proname, category);
+                /*
+                    -   Cách lưu vào value của input tìm kiếm: chỉ cần gọi Model.sort_ViewModels.proname là đủ
+                    -   Vì bên model đã lưu tên biến này rồi, chỉ cần gọi ra, dùng, lưu lại cho view thôi.
+                */
+            }
+            return; // nếu k có gõ thì k chạy
+	    }
+    </script>
+    

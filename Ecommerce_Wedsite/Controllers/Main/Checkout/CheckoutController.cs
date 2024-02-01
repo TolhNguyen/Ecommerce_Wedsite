@@ -57,6 +57,13 @@ namespace Ecommerce_Wedsite.Controllers.Main
             All.city_ViewModels = city_ViewModels.Data;
             All.subheader_ViewModels = subheader_ViewModels.Data;
 
+            var cookieCard = HttpContext.Request.Cookies["cart"]; // lấy value từ cart cookie
+            var card = new ShopCard_ViewModel(); // tạo 1 biến lưu dữ liệu đó
+            if (cookieCard != null) // là đã có cookie rồi
+            {
+                card = JsonSerializer.Deserialize<ShopCard_ViewModel>(cookieCard); // truyền dữ liệu object vào card
+                All.shopcard_ViewModels = card; // lưu nó vào viewmodel để hiện ra.
+            }
             return View("Checkout", All);
         }
 
@@ -120,7 +127,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             return View("CheckoutFinal", All); // hiện page kết quả và nội dung các dữ liệu checkout và order
         }
 
-        //Chức năng check sl sp
+        //Chức năng check sl sp trước khi sang trang checkout (còn sai thì ở Cart)
         public async Task<IActionResult> CheckingCheckout(string cartcookie) // dữ liệu từ ajax. Lỗi trả về trang checkout
         {
             var cartcookieobj = new ShopCard_ViewModel();

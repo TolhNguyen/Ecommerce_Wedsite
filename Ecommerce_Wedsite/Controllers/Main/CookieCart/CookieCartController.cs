@@ -191,6 +191,8 @@ namespace Ecommerce_Wedsite.Controllers
             // json gửi cho ajax đọc kết quả đó
         }
 
+
+        // Chức năng thay đổi sl sp ở trang Cart:
 		public async Task<IActionResult> ChangeProductCartQuantity(int id, int qty) // truyền biến id (id sp), qty (số lượng sp). Dùng để xóa 1 item trong cart
 		{
 			var cookieCard = HttpContext.Request.Cookies["cart"];

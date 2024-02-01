@@ -30,7 +30,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
 					await dbConn.OpenAsync(); // mở sync
 
 					var productobj = cartcookieobj.product_card;
-					foreach (Producd_ShopCard item in productobj) //lấy từng dữ liệu ra. vòng lặp cách 2: foreach (var/Product_ShopCart item in card.product_card)
+					foreach (Producd_ShopCard item in productobj) //lấy từng dữ liệu ra. vòng lặp loại 2: foreach (var/Product_ShopCart item in card.product_card)
 					{
 						var query = dbConn.QueryBuilder($"select top 1 * from Product where Product_Id = '{item.id}'");
 						var qtycheck = await query.QueryFirstOrDefaultAsync<Product>();

@@ -142,35 +142,7 @@ function sort( page, orderby, proname, category) {
 }
 
 </script>
-<script>
-	// chức năng tăng giảm của product detail thôi
-	function Counting(calc) {
-		var num = parseInt(document.getElementById("num").value);
-		var productquantity = parseInt(document.getElementById("productquantity").getAttribute('value'));
-		var numnoti = document.getElementById("numnoti");
-		if (calc == 0) {
-			num--;
-			if (num < 0) {
-				numnoti.textContent = "Warning: Không giảm được nữa!";
-				return num = 0; // gán về thành 0
-			}
-			else {
-				numnoti.textContent = "";
-			}
-		}
-		else {
-			num++;
-			if (num >= productquantity) {
-				numnoti.textContent = "Warning: Không thể mua số lượng hơn số lượng sản phẩm!";
-				return num--;
-			}
-			else {
-				numnoti.textContent = "";
-			}
-		}
-		document.getElementById("num").value = num; // lưu giá trị num mới
-	}
-</script>
+
 
 <!-- Cách làm cũ: CartXoa
 	//delete item[i][j];

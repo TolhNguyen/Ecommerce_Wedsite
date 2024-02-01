@@ -69,14 +69,18 @@ namespace Ecommerce_Wedsite.Controllers.Main
         }
 
         [Route("~/productdetail/{producthref}")]
-        public async Task<IActionResult> ProductDetail(string producthref) // gom service lại
+        public async Task<IActionResult> ProductDetail(string producthref) // lấy href dường dẫn riêng của mỗi trang sp .gom service lại
         {
 
             var All = new AllLayout();
 
             var headerandfooter_ViewModels = await _headerandfooterService.HeaderAndFooter_ServiceTest();
+
             var product_ViewModels = await _productService.Service_Test(producthref);
+            //Product producttemp ;
+            //product_ViewModels.Data.product = producttemp;
             var producttype_ViewModels = await _producttypeService.Service_Test();
+
             var subproduct_ViewModels = await _subproductService.Service_Test();
             var picture_ViewModels = await _pictureService.Service_Test();
             var discountt_ViewModels = await _discounttService.PopupDiscount();

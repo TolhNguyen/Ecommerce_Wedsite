@@ -8,7 +8,7 @@
 	Những file js như page-view, cart.js trong stat.js k chạy được
 -->
 <header>
-	<link href="~/css/cartproductcheckout2.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="~/css/cartproductcheckout3.css" rel="stylesheet" type="text/css" media="all" />
 </header>
 <body>
 	@if (Model != null)
@@ -72,7 +72,7 @@
 									<div class="col-md-8">
 										<div class="card mb-4">
 											<div class="card-header py-3">
-												<h5 class="mb-0">Cart - 2 items</h5>
+												<h5 class="mb-0" id="itemno"></h5>
 											</div>
 											<div class="card-body">
 												<!-- Single item -->
@@ -83,7 +83,7 @@
 															<!-- Image -->
 															<div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
 																<img id="productcartimg" src="@item.img"
-																	 class="w-100" alt="Blue Jeans Jacket" />
+																		class="w-100" alt="Blue Jeans Jacket" />
 																<a href="#!">
 																	<div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
 																</a>
@@ -121,29 +121,7 @@
 												<!-- Single item -->
 											</div>
 										</div>
-										<div class="card mb-4">
-											<div class="card-body">
-												<p><strong>Expected shipping delivery</strong></p>
-												<p class="mb-0">12.10.2020 - 14.10.2020</p>
-											</div>
-										</div>
-										<div class="card mb-4 mb-lg-0">
-											<div class="card-body">
-												<p><strong>We accept</strong></p>
-												<img class="me-2" width="45px"
-													 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
-													 alt="Visa" />
-												<img class="me-2" width="45px"
-													 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
-													 alt="American Express" />
-												<img class="me-2" width="45px"
-													 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
-													 alt="Mastercard" />
-												<img class="me-2" width="45px"
-													 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.webp"
-													 alt="PayPal acceptance mark" />
-											</div>
-										</div>
+										
 									</div>
 									<div class="col-md-4">
 										<div class="card mb-4">
@@ -169,32 +147,61 @@
 														</div>
 														<span><strong>@Model.shopcard_ViewModels.total_price.000đ</strong></span>
 													</li>
+													<!--Bổ sung: giao hàng, thẻ ngân hàng vv-->
+													@* <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+														<div class="card mb-4">
+															<div class="card-body">
+																<p><strong>Expected shipping delivery</strong></p>
+																<p class="mb-0">12.10.2020 - 14.10.2020</p>
+															</div>
+														</div>
+													</li>
+													<li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+														<div class="card mb-4 mb-lg-0">
+															<div class="card-body">
+																<p><strong>We accept</strong></p>
+																<img class="me-2" width="45px"
+																	 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+																	 alt="Visa" />
+																<img class="me-2" width="45px"
+																	 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+																	 alt="American Express" />
+																<img class="me-2" width="45px"
+																	 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+																	 alt="Mastercard" />
+																<img class="me-2" width="45px"
+																	 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.webp"
+																	 alt="PayPal acceptance mark" />
+															</div>
+														</div>
+													</li> *@
 												</ul>
-
-												<button type="button" class="btn btn-primary btn-lg btn-block">
-													Go to checkout
-												</button>
+												<div style="margin: 10px;" class="form-cart-button">
+													<div id="checkout">
+													</div>
+												</div>
+												<div style="margin: 10px;" class="form-cart-button">
+													<div>
+														<a href="/product" class="form-cart-continue" style="border-radius: 5px; width: 100%; text-align: center;">Tiếp tục mua hàng</a>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</section>
-
 						<i>
 							<p id="messnoti" style="color: red;">
 
 							</p>
 						</i>
-						<div style="margin: 10px;" class="form-cart-button">
-							<div>
-								<a href="/product" class="form-cart-continue">Tiếp tục mua hàng</a>
-							</div>
-						</div>
-						<div style="margin: 10px;" class="form-cart-button">
-							<div id="checkout">
-							</div>
-						</div>
+						<b>
+							<i>
+								<p class="short-description rte justify" id="numnoti" style="color:red; font-size: 12px;">
+								</p>
+							</i>
+						</b>
 					</div>
 				</div>
 			</div>
@@ -305,16 +312,31 @@
 				var shoptitle = document.getElementById("shoptitle");
 				var checkoutbtn = null;
 				var checkout = document.getElementById("checkout");
+				var cartcookie = getCart('cart').substring(0);
+				var cartcookieobj = JSON.parse(cartcookie);
+				let item = Object.values(cartcookieobj);
+				var n = 0;
+				var itemno = document.getElementById("itemno");
 				if (getCart('cart') !== "") {
 					shoptitle.textContent = "Sản phẩm của bạn:"
-					checkoutbtn = document.createElement("a");
+					checkoutbtn = document.createElement("button");
 					checkoutbtn.textContent = "Tiến hành thanh toán";
 					checkout.appendChild(checkoutbtn);
-					checkoutbtn.setAttribute("class", "form-cart-continue");
+					checkoutbtn.setAttribute("class", "btn btn-primary btn-lg btn-block");
+					checkoutbtn.setAttribute("type", "button");
 					checkoutbtn.setAttribute("onclick", "CheckingCheckout()");
+					for (var i = 0; i < item.length; i++) {
+						if (item[i] !== null) {
+							for (var j = 0; j < item[i].length; j++) {
+								n++;
+							}
+						}
+					}
+					itemno.textContent = "Cart items: " + n;
 				}
 			}
 
+			// chức năng tăng giảm + thay đổi sl sp ở trang Cart:
 			function ProductCartQuantity(productid) {
 				if (getCart('cart') !== "") {
 					var cartcookie = getCart('cart').substring(0);
@@ -323,6 +345,7 @@
 					for (var i = 0; i < item.length; i++) {
 						for (var j = 0; j < item[i].length; j++) {
 							if (productid == item[i][j].id) { // no là id của item đó trong card
+								// lấy .value là giá trị trong ô input và .getAttribute("value") là giá trị trong value=""x
 								var productno = parseInt(document.getElementById("form1").value);
 								console.log(productno);
 								$.ajax({
@@ -347,6 +370,8 @@
 					}
 				}
 			}
+
+			//Chuc nang kiem tra sl trong db:
 			function CheckingCheckout() {
 				var messnoti = document.getElementById("messnoti");
 				var cartcookie = getCart('cart').substring(0); // chỉ có thể gửi string. dang object gio hang

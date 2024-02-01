@@ -31,7 +31,10 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 {
                     await dbConn.OpenAsync(); // mở sync
 
-                    var query = dbConn.QueryBuilder($"SELECT TOP 3 * FROM Product order by NEWID()");
+                    // Cứ select * hết, xử lý logic bên trang productdetail:
+                    // Lí do k dùng cách khác: 1. không thể lấy producttypeid từ product service. 2. Vì nó cùng lúc tải dữ liệu cùng trang product nên k dùng ajax truyền dữ liệu được
+                    // 3. Tạo service nhiều phức tạp hơn
+                    var query = dbConn.QueryBuilder($"SELECT * FROM Product order by NEWID()"); 
 
                     data.Data.subproduct = await query.QueryAsync<Product>();
 
