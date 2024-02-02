@@ -15,6 +15,7 @@ namespace Ecommerce_Wedsite.Models.Entities
         public int Logo_Id { get; set; }
         public int PictureGrp_Id { get; set; }
         public int HTML_Id { get; set; }
+        public int Video_Id { get; set; }
     }
     public enum Bit3
     {

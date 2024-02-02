@@ -64,11 +64,13 @@ namespace Ecommerce_Wedsite.Controllers
             var picture_ViewModels = await _pictureService.Service_Test();
             var discountt_ViewModels = await _discounttService.PopupDiscount();
             var news_ViewModels = await _newsService.Service_Test(ListNews_Id);
+            var subheader_ViewModels = await _subheaderService.SubHeader();
 
             All.headerandfooter_ViewModels = headerandfooter_ViewModels.Data;
             All.picture_ViewModels = picture_ViewModels.Data;
             All.discountt_ViewModels = discountt_ViewModels.Data;
             All.news_ViewModels = news_ViewModels.Data;
+            All.subheader_ViewModels = subheader_ViewModels.Data;
 
             return View("NewsDetail", All);
         }

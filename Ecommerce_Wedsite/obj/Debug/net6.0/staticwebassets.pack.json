@@ -145,6 +145,10 @@
       "PackagePath": "staticwebassets\\css\\style.css"
     },
     {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\videoad2.css",
+      "PackagePath": "staticwebassets\\css\\videoad2.css"
+    },
+    {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
@@ -827,6 +831,10 @@
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\vendor\\v4-shims.min.css",
       "PackagePath": "staticwebassets\\vendor\\v4-shims.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\video\\HomePageVideo\\ExamplePlantsVideo.mp4",
+      "PackagePath": "staticwebassets\\video\\HomePageVideo\\ExamplePlantsVideo.mp4"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Ecommerce_Wedsite.Microsoft.AspNetCore.StaticWebAssets.props",

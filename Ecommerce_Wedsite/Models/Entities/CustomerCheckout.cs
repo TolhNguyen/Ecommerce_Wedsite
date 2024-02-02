@@ -7,8 +7,6 @@ namespace Ecommerce_Wedsite.Models.Entities
     {
         [Key]
         public int CustomerCheckout_Id { get; set; }
-        public string CustomerCheckout_FirstName { get; set; }
-        public string CustomerCheckout_LastName { get; set; }
         public int CustomerCheckout_Phone { get; set; }
         public string CustomerCheckout_Email { get; set; }
         public string CustomerCheckout_Address { get; set; }
@@ -18,6 +16,7 @@ namespace Ecommerce_Wedsite.Models.Entities
         public int CustomerCheckout_TotalPrice { get; set; }
         public int Promotion_Id { get; set; }
         public int City_Id { get; set; }
+        public string CustomerCheckout_FullName { get; set; }
     }
     //public enum Promo
     //{

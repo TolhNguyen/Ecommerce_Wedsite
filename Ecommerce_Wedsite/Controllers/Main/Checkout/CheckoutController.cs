@@ -118,7 +118,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
                 option.HttpOnly = false;
                 option.SameSite = SameSiteMode.None;
                 option.Path = "/";
-                option.Expires = DateTime.Now.AddMinutes(1); // set cookie cart sau 1p là mất
+                option.Expires = DateTime.Now.AddSeconds(10); // set cookie cart sau 10s là mất
                 HttpContext.Response.Cookies.Append("cart", cookieCard, option); // lưu những thay đổi vào cart cookie
                 
                 // k cần return chỉ cần nếu chạy if thì set time out mất cookie.

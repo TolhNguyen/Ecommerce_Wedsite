@@ -20,8 +20,9 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly ICreateCartCookieService _createcartcookieService;
         private readonly IDeleteCartCookieService _deletecartcookieService;
         private readonly IChangeProductCartQuantityService _changeproductcartquantityService;
+        private readonly ICheckingQuantityService _checkingquantityService;
 
-        public CookieCartController(ILogger<CookieCartController> logger, INewWebAppService newWebAppService, IHeaderAndFooterService headerandfooterService, IProductCookieService productcookieService, IAddCartCookieService addcartcookieService, ICreateCartCookieService createcartcookieService, IDeleteCartCookieService deletecartcookieService, IChangeProductCartQuantityService changeproductcartquantityService)
+        public CookieCartController(ILogger<CookieCartController> logger, INewWebAppService newWebAppService, IHeaderAndFooterService headerandfooterService, IProductCookieService productcookieService, IAddCartCookieService addcartcookieService, ICreateCartCookieService createcartcookieService, IDeleteCartCookieService deletecartcookieService, IChangeProductCartQuantityService changeproductcartquantityService, ICheckingQuantityService checkingquantityService)
         {
             _logger = logger;
             //_newWebAppService = newWebAppService; // Tạo 1 tham chiếu 
@@ -31,6 +32,7 @@ namespace Ecommerce_Wedsite.Controllers
             _createcartcookieService = createcartcookieService;
             _deletecartcookieService = deletecartcookieService;
             _changeproductcartquantityService = changeproductcartquantityService;
+            _checkingquantityService = checkingquantityService;
         }
 
 
@@ -52,14 +54,19 @@ namespace Ecommerce_Wedsite.Controllers
             {
                 card = JsonSerializer.Deserialize<ShopCard_ViewModel>(cookieCard); // lấy cookie value ra và convert thành object -> luu vao cart
                 await _createcartcookieService.CreateCookieFunction(card, product_ViewModels, qty); // function thêm sp vào và update lại card (card có sẵn value rồi). Sai tên function k phải là create mà là ... 
-                string productvalue = JsonSerializer.Serialize(card); // đổi từ jsonobj sang string là productvalue để lưu vào cookie
-                CookieOptions option = new CookieOptions();
-                option.Secure = true; // secure là trữ value vào cookie lại
-                option.HttpOnly = false; // httponly này là khóa cookie thành private k cho hiện, xài
-                option.SameSite = SameSiteMode.None;
-                option.Path = "/";
-                option.Expires = DateTime.Now.AddDays(1);
-                HttpContext.Response.Cookies.Append("cart", productvalue, option); // lưu những update vào cart
+                var result = await _checkingquantityService.CheckingQuantityFunction(card);
+                if (result.success == true) // chưa có làm else, nếu thất bại
+                {
+                    string productvalue = JsonSerializer.Serialize(card); // đổi từ jsonobj sang string là productvalue để lưu vào cookie
+                    CookieOptions option = new CookieOptions();
+                    option.Secure = true; // secure là trữ value vào cookie lại
+                    option.HttpOnly = false; // httponly này là khóa cookie thành private k cho hiện, xài
+                    option.SameSite = SameSiteMode.None;
+                    option.Path = "/";
+                    option.Expires = DateTime.Now.AddDays(1);
+                    HttpContext.Response.Cookies.Append("cart", productvalue, option); // lưu những update vào cart
+                }
+                else return Json(result.message);
             }
             
             else // k có cookie sẵn thì tạo và chèn dữ liệu mới vô

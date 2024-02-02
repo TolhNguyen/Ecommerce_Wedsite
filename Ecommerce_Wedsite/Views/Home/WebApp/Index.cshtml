@@ -13,7 +13,7 @@
 					<!--item là của list lv 1-->
 					<!--Kiểm tra nếu id parent = id => có con. Lấy danh sách đầu tiên FOD => id nào cha đó -->
 
-			@if (check == null)
+			@if (check == null) // null là k có list con
 			{
 				<!--Chia làm 3 phần 1 là tiêu đề. 2 là nội dung. 3 là hình ảnh-->
 				<div class="new_title center">
@@ -346,6 +346,35 @@
 						}
 					} 
 				-->
+				@if (item.HTML_Id == 6) // video banner:
+				{
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="hero">
+									@foreach(var item7 in Model.video_ViewModels.video)
+									{
+										@if(item.Video_Id == item7.Video_Id)
+										{
+											<video autoplay loop muted plays-inline class="herovideo">
+												<source src="@item7.Video_FileName" type="video/mp4"/>
+											</video>
+										}
+									}
+									<div class="herocontent">
+										<h1 >
+											Trending Things
+											<!--Cần 1 sub title trong db HomePage-->
+										</h1>
+										<a href="#">
+											Explore Now!
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
 			}
 			else
 			{

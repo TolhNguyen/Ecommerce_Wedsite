@@ -30,18 +30,18 @@
                         <div class="p-4">
                             <div class="row">
                                 <div class="col-6 mb-3">
-                                <p class="mb-0">First name</p>
+                                <p class="mb-0">Full name</p>
                                 <div class="form-outline">
-                                    <input type="text" id="CustomerCheckout_FirstName" name="CustomerCheckout_FirstName" placeholder="Type here" class="form-control" required/>
+                                    <input type="text" id="CustomerCheckout_FullName" name="CustomerCheckout_FullName" placeholder="Type here" class="form-control" required/>
                                 </div>
                                 </div>
 
-                                <div class="col-6">
+                                @* <div class="col-6">
                                 <p class="mb-0">Last name</p>
                                 <div class="form-outline">
                                     <input type="text" id="CustomerCheckout_LastName" name="CustomerCheckout_LastName" placeholder="Type here" class="form-control" required/>
                                 </div>
-                                </div>
+                                </div> *@
 
                                 <div class="col-6 mb-3">
                                 <p class="mb-0">Phone</p>
@@ -58,14 +58,14 @@
                                 </div>
                             </div>
 
-                            <div class="form-check">
+                            @* <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
                                 <label class="form-check-label" for="flexCheckDefault">Keep me up to date on news</label>
-                            </div>
+                            </div> *@
 
                             <hr class="my-4" />
 
-                            <h5 class="card-title mb-3">Shipping info</h5>
+                            @* <h5 class="card-title mb-3">Shipping info</h5>
 
                             <div class="row mb-3">
                                 <div class="col-lg-4 mb-3">
@@ -104,7 +104,7 @@
                                     </div>
                                 </div>
                                 </div>
-                            </div>
+                            </div> *@
 
                             <div class="row">
                                 <div class="col-sm-8 mb-3">
@@ -128,14 +128,7 @@
                                 </select>
                                 </div>
 
-                                <div class="col-sm-8 mb-3">
-                                <p class="mb-0">House</p>
-                                <div class="form-outline">
-                                    <input type="text" placeholder="Type here" class="form-control"/>
-                                </div>
-                                </div>
-
-                                <div class="col-sm-4 col-6 mb-3">
+                                @* <div class="col-sm-4 col-6 mb-3">
                                 <p class="mb-0">Postal code</p>
                                 <div class="form-outline">
                                     <input type="tel" id="CustomerCheckout_PostCode" name="CustomerCheckout_PostCode" class="form-control" required/>
@@ -147,7 +140,7 @@
                                 <div class="form-outline">
                                     <input type="tel" id="CustomerCheckout_Zip" name="CustomerCheckout_Zip" class="form-control" required/>
                                 </div>
-                                </div>
+                                </div> *@
                                 <div class="col-sm-4 col-6 mb-3">
                                 <p class="mb-0">Promotion</p>
                                 <div class="form-outline">
@@ -163,6 +156,18 @@
                                          <input type="hidden" id="Promotion_Id" name="Promotion_Id" value="0"/>
                                     </select>
                                 </div>
+                                </div>
+                                <div class="col-sm-4 col-6 mb-3">
+                                    <p class="mb-0">Popup Discount</p>
+                                    <div class="form-outline">
+                                        <!--Thêm cái hiện Model list của select option vô: là chọn tên ra
+                                        -->
+                                        <select class="form-control" id="popupselect" name="popupselect" onChange="Summarytotalprice()">
+                                            <option value="0">
+                                                None
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col-sm-8 mb-3">
                                 <p class="mb-0">Message: </p>
@@ -245,7 +250,7 @@
                                                                         <!-- Quantity -->
                                                                         <!-- Price -->
                                                                         <p class="text-start text-md-center">
-                                                                            <strong>Price: @item.price</strong>
+                                                                            Price: <strong>@item.price.000đ</strong>
                                                                             <input type="hidden" id="ProductCheckout_Price" name="ProductCheckout_Price" value="@item.price">
                                                                         </p>
                                                                         <!-- Price -->
@@ -311,6 +316,9 @@
                                                                                     alt="PayPal acceptance mark" />
                                                                         </div>
                                                                     </div>
+                                                                </li>
+                                                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                                                    <p id="p1">Không có áp dụng mã giảm giá từ Popup</p>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -410,6 +418,17 @@
     */
 
     // Chưa làm cho tổng tiền
+    function ApplyPopupDiscount(){
+        var popupselect = document.getElementById('popupselect');
+        var popuprate = document.getElementById("popuprate").getAttribute("value"); // lấy % từ trang Popup
+        if (getCookie('popupdiscount') == 'true') { // nếu true thì tạo 1 option select
+            var opt = document.createElement("option");
+            opt.textContent = "Mã giảm popup " + popuprate*100 + "%";
+            opt.setAttribute("value", popuprate); // lưu value
+            popupselect.appendChild(opt);
+        }
+        
+    }
     function Summarytotalprice() {
         var summarytotalprice = parseInt(document.getElementById("CustomerCheckout_TotalPrice").getAttribute("value"));
         var cityselect = document.getElementById('cityselect');
@@ -420,10 +439,13 @@
         var promovalue = promoselect.options[promoselect.selectedIndex].value; // value để tính total price lại
         var promoid = promoselect.options[promoselect.selectedIndex].id; // lấy id đc select ra
         var getpromoId = document.getElementById('Promotion_Id');
-        var popuprate = document.getElementById("popuprate").getAttribute("value"); // lấy từ trang Popup
+
+        var popupselect = document.getElementById('popupselect');
+        var popupvalue = popupselect.options[popupselect.selectedIndex].value; // lấy value khi chọn option
+
         var checkouttp = document.getElementById('checkouttp');
         var p1 = document.getElementById('p1');
-    
+
         getcityId.value = cityid;
         getpromoId.value = promoid; // lưu id select vào model để gửi đi
         if (getCart('cart') !== "") {
@@ -432,12 +454,14 @@
             let item = Object.values(cartcookieobj);
             for (var i = 0; i < item.length; i++) {
                 if (typeof item[i] === "number") {
-                    summarytotalprice = item[i];
+                    summarytotalprice = item[i]; // lấy totalprice từ obj ra
                     if (summarytotalprice > 0) {
-                        if (getCookie('popupdiscount') == 'true') { // còn lỗi bị lặp dòng p
-                            p1.textContent = "Đã áp dụng mã -" + popuprate*100 + "%"; // popuprate là số từ view popup
-                            summarytotalprice = summarytotalprice - (summarytotalprice * popuprate);
-	                    }
+                        //Tính tiền tổng:
+                        if (popupvalue != 0) {
+                            setCookie('popupdiscount', 'false', 365); // xử lý popupdiscount
+                        }
+                        p1.textContent = "Đã áp dụng mã -" + popupvalue * 100 + "%" + " từ popup"; // popuprate là số từ view popup
+                        summarytotalprice = summarytotalprice - (summarytotalprice * popupvalue);
                         var summarytotalprice2 = summarytotalprice - summarytotalprice * promovalue;
                         document.getElementById("CustomerCheckout_TotalPrice").value = Math.round(summarytotalprice2); 
                     }
@@ -445,13 +469,19 @@
             }  
         } 
     }
-
+    /* 
+    Sửa ô input lưu dữ liệu gần nhất vừa nhập. 
+    Sửa ô popup discount thành input text và lưu sẳn (gợi ý mã giảm giá cho họ nhập - mã giảm là discount_code trong db)
+    */
 
     $(document).ready(function(){
 	    setTimeout("SummaryCart()",2000);
 	    });
     $(document).ready(function(){
 	    setTimeout("Summarytotalprice()",2000);
+	    });
+    $(document).ready(function(){
+	    setTimeout("ApplyPopupDiscount()",1000);
 	    });
 
   </script>

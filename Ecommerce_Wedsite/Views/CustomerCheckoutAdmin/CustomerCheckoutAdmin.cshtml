@@ -15,11 +15,6 @@
                         <th>
                             ID
                         </th>
-                        <th>
-                            Customer Checkout First Name
-                        </th>
-                        <th>
-                            Customer Checkout Last Name
                         </th>
                         <th>
                             Customer Checkout Phone 
@@ -46,6 +41,9 @@
                             Promotion ID
                         </th>
                         <th>
+                            Customer Checkout Full Name
+                        </th>
+                        <th>
                             Edit
                         </th>
                         <th>
@@ -62,8 +60,6 @@
                             if(item != null){
                                 <tr>
                                 <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Id)</td>
-                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_FirstName)</td>
-                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_LastName)</td>
                                 <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Phone)</td> 
                                 <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Email)</td>
                                 <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Address)</td>
@@ -72,6 +68,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_TotalPrice)</td> 
                                 <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Mess)</td> 
                                 <td>@Html.DisplayFor(modelItem => item.Promotion_Id)</td> 
+                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_FullName)</td> 
                                 <td>@Html.ActionLink("Edit","#",item)</td>
                                 <td>@Html.ActionLink("Delete","#",item)</td>
                                 <!--Tao controller hay service cho edit va delete-->

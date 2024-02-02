@@ -20,6 +20,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
     {
         private readonly IConfigManagerService _configuration;
         private readonly IAddCartCookieService _addcartcookieService;
+        
         public CreateCartCookieService(IConfigManagerService configuration, IAddCartCookieService addcartcookieService)
         {
             _configuration = configuration;
@@ -28,6 +29,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
 
         public async Task<ShopCard_ViewModel> CreateCookieFunction(ShopCard_ViewModel card, Product product_ViewModels, int qty) // Lấy dữ liệu model từ db lên và hành động vào
         {
+
             if (!card.product_card.Any()) // Kiem tra giỏ có đang trống hay k. Lấy thông tin product lên ktra. Nếu trống:
                 // tinh toan va them san pham mới
                 card = await _addcartcookieService.them_san_pham_vao_goi_hang(card, product_ViewModels, qty);
@@ -52,6 +54,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                         if (item.id == product_ViewModels.Product_Id) // nếu có id cũ. code add tròng sp vào (k chạy service addcart như trên)
                         {
                             item.qty = item.qty + qty; // thì + dồn số lượng mới vào sl cũ 
+                                    
                             item.price = item.price + product_ViewModels.Product_Price * qty; // tiền mới = tiền cũ + tiền sp trùng mới * sl 
                             card.total_price = card.total_price + product_ViewModels.Product_Price * qty; // total mới = total cũ + tiền sp trùng mới * sl 
                             break;

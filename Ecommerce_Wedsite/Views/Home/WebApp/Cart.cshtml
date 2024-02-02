@@ -105,13 +105,17 @@
 																<div class="form-outline">
 																	<input onblur="ProductCartQuantity(@item.id)" id="form1" min="0" name="quantity" value="@item.qty" type="number" class="form-control" />
 																	<label class="form-label" for="form1">Quantity</label>
+																	<p class="text-start text-md-center">
+																		<strong>Price: @item.price.000đ</strong>
+																	</p>
+																	<button class="form-cart-button" onclick="CartXoa(@item.id)" style="border-radius: 5px; width: 100%; text-align: center; background-color: #337ab7; color: white;">
+																		<i class="fa fa-trash"> Delete</i>
+																	</button>
 																</div>
 															</div>
 															<!-- Quantity -->
 															<!-- Price -->
-															<p class="text-start text-md-center">
-																<strong>@item.price</strong>
-															</p>
+															
 															<!-- Price -->
 														</div>
 													</div>
@@ -328,7 +332,7 @@
 					for (var i = 0; i < item.length; i++) {
 						if (item[i] !== null) {
 							for (var j = 0; j < item[i].length; j++) {
-								n++;
+								n += item[i][j].qty;
 							}
 						}
 					}

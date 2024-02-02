@@ -427,12 +427,17 @@
                             cache: !1,
                             "async": !0,
                             success: function (a) { // a là kết quả return từ controller sang
-                                console.log(a); // hiện nó lên (ở trong )
-                                n.success ? (togles(), ReadCookie(), LoadNumber()) : alert("Đã mua hàng thành công"); // alert biến a đó nếu thành công
-                                window.location = "https://localhost:7037/product";
+                                if (a == true) {
+                                    console.log(a); // hiện nó lên (ở trong )
+                                    n.success ? (togles(), ReadCookie(), LoadNumber()) : alert("Đã mua hàng thành công"); // alert biến a đó nếu thành công
+                                    window.location = "https://localhost:7037/product";
+                                }
+                                else {
+                                    alert(a);
+                                }
+                                
                             },
                             error: function (a) {
-                                console.log(a);
                                 alert(a);
                             }
                         });

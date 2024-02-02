@@ -32,6 +32,7 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public IEnumerable<AboutUs> aboutus { get; set; } = new List<AboutUs>();
         public IEnumerable<AboutUsMem> aboutusmem { get; set; } = new List<AboutUsMem>();
 		public List<Producd_ShopCard> product_card { get; set; } = new List<Producd_ShopCard>();
+		public IEnumerable<Video> video { get; set; } = new List<Video>();
 
 		/*
             -   Tạo từng ViewModel từ Entities (có thể tạo nhiều entities trong 1 viewmodel để service gọi ra nhiều biến result giá trị để sử dụng đc
@@ -68,7 +69,9 @@ namespace Ecommerce_Wedsite.Models.ViewModel
 
         public ShopCard_ViewModel shopcard_ViewModels { get; set; }
 
-        public Producd_ShopCard productshopcard_ViewModels { get; set;}
+        public Producd_ShopCard productshopcard_ViewModels { get; set; }
 
-    }
+		public Video_ViewModel video_ViewModels { get; set; }
+
+	}
 }
