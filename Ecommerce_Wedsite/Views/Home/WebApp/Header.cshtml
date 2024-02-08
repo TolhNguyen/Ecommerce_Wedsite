@@ -58,6 +58,7 @@
             <div class="col-lg-9 col-md-9 col-xs-12 mobi_bt">
                 <div class="search-box">
                     <form method="get" id="search_mini_form" class="search-box">
+                        <!--value=Model: để hiện giá trị lưu từ model vào-->
                         <input class="change_pl" style="border-radius:20px; width:350px; height:34px;" placeholder="Tìm kiếm..." value="@Model.sort_ViewModels.proname" maxlength="170" id="sortname" >
                         <a href="#" onclick="SortName()">Tìm kiếm</a>
                     </form>
@@ -273,21 +274,20 @@
 </header>
     <script>
 	    // Vấn để: là chưa search loại 1 mình đc và Chưa search ở bên ngoài trang Home đc:
+        //Func Chạy chỉ chạy cho thanh tìm kiếm thôi :
         function SortName() {    
-		    var proname = document.getElementById("sortname").value; //get value input nếu k có thì là ""
-            if(proname != ""){ //Func Chạy ở Header thôi. Nếu có giá trị
+		    var proname = document.getElementById("sortname").value; //lấy giá trị khi gõ vào ô tìm kiếm
+            if(proname != ""){ 
 		        var page = 1; // lấy đỡ là 1
 		        var orderby = 1; 
-                //category = undefined; // lỗi k lấy đc
-			    var category = document.getElementById("categoryitem").value; // ở Header k cần category
-                console.log(category);
+                var category = 0; // tìm kiếm k cần category == 0
                 return sort(page, orderby, proname, category);
                 /*
                     -   Cách lưu vào value của input tìm kiếm: chỉ cần gọi Model.sort_ViewModels.proname là đủ
                     -   Vì bên model đã lưu tên biến này rồi, chỉ cần gọi ra, dùng, lưu lại cho view thôi.
                 */
             }
-            return; // nếu k có gõ thì k chạy
+            return; // nếu k gõ thì k chạy
 	    }
     </script>
     

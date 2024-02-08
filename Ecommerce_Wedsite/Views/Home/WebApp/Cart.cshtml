@@ -9,6 +9,7 @@
 -->
 <header>
 	<link href="~/css/cartproductcheckout3.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="~/css/boostrap5v3C.css" rel="stylesheet" type="text/css" media="all" />
 </header>
 <body>
 	@if (Model != null)
@@ -328,6 +329,7 @@
 					checkout.appendChild(checkoutbtn);
 					checkoutbtn.setAttribute("class", "btn btn-primary btn-lg btn-block");
 					checkoutbtn.setAttribute("type", "button");
+					checkoutbtn.style.fontSize = "14px";
 					checkoutbtn.setAttribute("onclick", "CheckingCheckout()");
 					for (var i = 0; i < item.length; i++) {
 						if (item[i] !== null) {

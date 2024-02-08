@@ -4657,13 +4657,13 @@ a.button.view-all {
         }
 
         .new_title h2 a:after {
-            content: '';
+            /*content: '';
             height: 2px;
             width: 120px;
             position: absolute;
             bottom: -5px;
             left: 0;
-            background: #6da53b
+            background: #6da53b*/
         }
 
 .new_title {

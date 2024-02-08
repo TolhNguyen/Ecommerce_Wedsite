@@ -15,6 +15,8 @@
   <!-- Heading -->
     <link href="~/css/cartproductcheckout3.css" rel="stylesheet" type="text/css" media="all" />
         <h1><a><b>Checkout Page</b></a></h1>
+    @* <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> *@
 </header>
 
 <body>
@@ -30,10 +32,10 @@
                         <div class="p-4">
                             <div class="row">
                                 <div class="col-6 mb-3">
-                                <p class="mb-0">Full name</p>
-                                <div class="form-outline">
-                                    <input type="text" id="CustomerCheckout_FullName" name="CustomerCheckout_FullName" placeholder="Type here" class="form-control" required/>
-                                </div>
+                                    <div class="form-floating">
+                                        <input type="text" id="CustomerCheckout_FullName" name="CustomerCheckout_FullName" placeholder="Type here" class="form-control" required/>
+                                        <label for="CustomerCheckout_FullName">Full name</label>
+                                    </div>
                                 </div>
 
                                 @* <div class="col-6">
@@ -158,15 +160,11 @@
                                 </div>
                                 </div>
                                 <div class="col-sm-4 col-6 mb-3">
-                                    <p class="mb-0">Popup Discount</p>
+                                    <p class="mb-0">Popup Discount:</p>
                                     <div class="form-outline">
                                         <!--Thêm cái hiện Model list của select option vô: là chọn tên ra
                                         -->
-                                        <select class="form-control" id="popupselect" name="popupselect" onChange="Summarytotalprice()">
-                                            <option value="0">
-                                                None
-                                            </option>
-                                        </select>
+                                        <input class="form-control" type="text" id="popupin" value="" onChange="Summarytotalprice()"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-8 mb-3">
@@ -329,7 +327,7 @@
                                     </section>
                                     <div class="float-end">
                                         <button onclick="" id="cancelid" class="btn btn-light border">Cancel</button>
-                                        <button type="submit" class="btn btn-success shadow-0 border">Xác nhận đơn hàng</button>
+                                        <button type="submit" class="btn btn-success shadow-0 border" onclick="CheckPopup()">Xác nhận đơn hàng</button>
                                     </div>
                                 </div>
                             </div>
@@ -418,17 +416,17 @@
     */
 
     // Chưa làm cho tổng tiền
+    
+
     function ApplyPopupDiscount(){
-        var popupselect = document.getElementById('popupselect');
-        var popuprate = document.getElementById("popuprate").getAttribute("value"); // lấy % từ trang Popup
-        if (getCookie('popupdiscount') == 'true') { // nếu true thì tạo 1 option select
-            var opt = document.createElement("option");
-            opt.textContent = "Mã giảm popup " + popuprate*100 + "%";
-            opt.setAttribute("value", popuprate); // lưu value
-            popupselect.appendChild(opt);
+        var popupcode = getCookie('popupcode');
+        var popupin = document.getElementById('popupin');
+        if (getCookie('popupdiscount') == 'true') { // nếu true thì input value là popupcode
+            document.getElementById('popupin').value = popupcode; // cách áp value cho input (attribute)
+            popupin.setAttribute("placeholder", "Mã đã có sẵn: " + popupcode);
         }
-        
     }
+
     function Summarytotalprice() {
         var summarytotalprice = parseInt(document.getElementById("CustomerCheckout_TotalPrice").getAttribute("value"));
         var cityselect = document.getElementById('cityselect');
@@ -440,8 +438,9 @@
         var promoid = promoselect.options[promoselect.selectedIndex].id; // lấy id đc select ra
         var getpromoId = document.getElementById('Promotion_Id');
 
-        var popupselect = document.getElementById('popupselect');
-        var popupvalue = popupselect.options[popupselect.selectedIndex].value; // lấy value khi chọn option
+        var popuprate = 0;
+        var popupcode = getCookie('popupcode');
+        var popupinvalue = document.getElementById('popupin').value;
 
         var checkouttp = document.getElementById('checkouttp');
         var p1 = document.getElementById('p1');
@@ -457,11 +456,13 @@
                     summarytotalprice = item[i]; // lấy totalprice từ obj ra
                     if (summarytotalprice > 0) {
                         //Tính tiền tổng:
-                        if (popupvalue != 0) {
-                            setCookie('popupdiscount', 'false', 365); // xử lý popupdiscount
+                        if (getCookie('popupdiscount') == 'true') {
+                            if(popupinvalue == popupcode){
+                                popuprate = document.getElementById("popuprate").getAttribute("value");
+                            }
                         }
-                        p1.textContent = "Đã áp dụng mã -" + popupvalue * 100 + "%" + " từ popup"; // popuprate là số từ view popup
-                        summarytotalprice = summarytotalprice - (summarytotalprice * popupvalue);
+                        p1.textContent = "Đã áp dụng mã -" + popuprate * 100 + "%" + " từ popup"; // popuprate là số từ view popup
+                        summarytotalprice = summarytotalprice - (summarytotalprice * popuprate);
                         var summarytotalprice2 = summarytotalprice - summarytotalprice * promovalue;
                         document.getElementById("CustomerCheckout_TotalPrice").value = Math.round(summarytotalprice2); 
                     }
@@ -469,14 +470,21 @@
             }  
         } 
     }
+
+    function CheckPopup() { // nút xác nhận thì xét lại đk rồi set cookie
+        var popupcode = getCookie('popupcode');
+        var popupinvalue = document.getElementById('popupin').value;
+        if (getCookie('popupdiscount') == 'true' && popupcode == popupinvalue) {
+            setCookie("popupdiscount", "false", "365");
+            setCookie("popupcode", "", "365");
+        }
+    }
+
     /* 
     Sửa ô input lưu dữ liệu gần nhất vừa nhập. 
     Sửa ô popup discount thành input text và lưu sẳn (gợi ý mã giảm giá cho họ nhập - mã giảm là discount_code trong db)
     */
 
-    $(document).ready(function(){
-	    setTimeout("SummaryCart()",2000);
-	    });
     $(document).ready(function(){
 	    setTimeout("Summarytotalprice()",2000);
 	    });

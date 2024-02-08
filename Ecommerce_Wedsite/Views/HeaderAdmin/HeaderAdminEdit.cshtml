@@ -55,27 +55,27 @@
                                     </div> *@
                                 </div>
                                 @*<!-- Form Group (email address)-->
-                        <div class="mb-3">
-                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                            <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="name@example.com">
-                        </div>
-                        *@
-                            <!-- Form Row-->
-                            <div class="row gx-3 mb-3">
-                                <!-- Form Group (phone number)-->
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="HeaderType_Id">Header Type Id</label>
-                                    <input class="form-control" id="HeaderType_Id" type="tel" placeholder="HeaderType_Id" value="@item.HeaderType_Id" required>
+                                    <div class="mb-3">
+                                        <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                                        <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="name@example.com">
+                                    </div>
+                                *@
+                                <!-- Form Row-->
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (phone number)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="HeaderType_Id">Header Type Id</label>
+                                        <input class="form-control" id="HeaderType_Id" type="tel" placeholder="HeaderType_Id" value="@item.HeaderType_Id" required>
+                                    </div>
+                                    <!-- Form Group (birthday)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="HeaderAction">Header Action</label>
+                                        <input class="form-control" id="HeaderAction" type="text" name="HeaderAction" placeholder="HeaderAction" value="@item.HeaderAction" required>
+                                    </div>
                                 </div>
-                                <!-- Form Group (birthday)-->
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="HeaderAction">Header Action</label>
-                                    <input class="form-control" id="HeaderAction" type="text" name="HeaderAction" placeholder="HeaderAction" value="@item.HeaderAction" required>
-                                </div>
+                                   <!-- Save changes button-->
+                                <input id="button_1" onclick="Editlog()" type="button" value="Save Edit" class="btn btn-primary rounded submit p-3 px-5"/>
                             </div>
-                               <!-- Save changes button-->
-                            <input id="button_1" onclick="Editlog()" type="button" value="Save Edit" class="btn btn-primary rounded submit p-3 px-5"/>
-                        </div>
                         }
                     }
                 </div>

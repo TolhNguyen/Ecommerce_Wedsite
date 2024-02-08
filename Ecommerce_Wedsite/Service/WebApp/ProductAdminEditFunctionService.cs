@@ -52,6 +52,8 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     product.Product_Href = productitem.Product_Href;
                     product.ProductType_Id = productitem.ProductType_Id;
                     product.Product_Condition = productitem.Product_Condition;
+                    product.Product_Quantity = productitem.Product_Quantity;
+                    product.Product_Info2 = productitem.Product_Info2;
                     product.Product_ShortDescription = productitem.Product_ShortDescription;
                     product.Product_Size = productitem.Product_Size;
 

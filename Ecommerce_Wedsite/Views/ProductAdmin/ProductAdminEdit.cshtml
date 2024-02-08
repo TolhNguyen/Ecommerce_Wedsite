@@ -3,57 +3,181 @@
     ViewData["Title"] = "Admin Page";
     Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
 }
-<div class="login-form">
-	@if (Model != null)
+@if (Model != null)
+{
+	@foreach (var item in Model.product_ViewModels.product)
 	{
-		@foreach (var item in Model.product_ViewModels.product)
-		{
-			<div class="form-group">
-				<input type="text" id="Product_Id" name="Product_Id" class="form-control rounded-left" placeholder="Product_Id" value="@item.Product_Id" readonly>
-			</div>
-			<div class="form-group">
-				<input type="text" id="Product_Name" name="Product_Name" class="form-control rounded-left" placeholder="Product_Name" value="@item.Product_Name" required>
-			</div>
-			<div class="form-group">
-				<input type="text" id="ProductType_Id" name="ProductType_Id" class="form-control rounded-left" placeholder="ProductType_Id" value="@item.ProductType_Id" required>
-			</div>
-			<div class="form-group">
-				<input type="text" id="Picture_Id" name="Picture_Id" class="form-control rounded-left" placeholder="Picture_Id" value="@item.Picture_Id" required>
-			</div>
-			<div class="form-group">
-				<input type="text" id="Logo_Id" name="Logo_Id" class="form-control rounded-left" placeholder="Logo_Id" value="@item.Logo_Id" required>
-			</div>
-			<div class="form-group">
-				<input type="text" id="Product_Price" name="Product_Price" class="form-control rounded-left" placeholder="Product_Price" value="@item.Product_Price" required>
-			</div>
-			<div class="form-group">
-				<input type="text" id="Product_PromoPrice" name="Product_PromoPrice" class="form-control rounded-left" placeholder="Product_PromoPrice" value="@item.Product_PromoPrice" required>
-			</div>
-			<div class="form-group">
-				<input type="text" id="Product_ShortDescription" name="ProdProduct_ShortDescriptionuct_Name" class="form-control rounded-left" placeholder="Product_ShortDescription" value="@item.Product_ShortDescription" required>
-			</div>
-			<div class="form-group">
-				<input type="text" id="Product_Manufacturers" name="Product_Manufacturers" class="form-control rounded-left" placeholder="Product_Manufacturers" value="@item.Product_Manufacturers" required>
-			</div>
-			<div class="form-group">
-				<input type="text" id="Product_Condition" name="Product_Condition" class="form-control rounded-left" placeholder="Product_Condition" value="@item.Product_Condition" required>
-			</div>
-			<div class="form-group">
-				<input type="text" id="Product_Info" name="Product_Info" class="form-control rounded-left" placeholder="Product_Info" value="@item.Product_Info" required>
-			</div>
-			<div class="form-group">
-				<input type="text" id="Product_Size" name="Product_Size" class="form-control rounded-left" placeholder="Product_Size" value="@item.Product_Size" required>
-			</div>
-			<div class="form-group">
-				<input type="text" id="Product_Href" name="Product_Href" class="form-control rounded-left" placeholder="Product_Href" value="@item.Product_Href" required>
-			</div>
-			<div class="form-group">
-				<input id="button_1" onclick="Editlog2()" type="button" value="Submit" class="btn btn-primary rounded submit p-3 px-5"/>
-			</div>
-		}
+        <div class="container-xl px-4 mt-4" >
+            <!-- Account page navigation-->
+            <nav class="nav nav-borders">
+                <a class="nav-link active ms-0" href="#" target="__blank">Profile</a>
+                <a class="nav-link" href="#" target="__blank">Billing</a>
+                <a class="nav-link" href="#" target="__blank">Security</a>
+                <a class="nav-link" href="#" target="__blank">Notifications</a>
+            </nav>
+            <hr class="mt-0 mb-4">
+            <div class="row">
+                <div class="col-xl-8">
+                    <!-- Account details card-->
+                    <div class="card mb-4">
+                        <div class="card-header">Details</div>
+                        <div class="card-body">
+                            <form action="/ProductAdmin/ProductAdminEditFunction">
+                                <!-- Form Group (username)-->
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="Product_Id">Product Id</label>
+                                    <input class="form-control" id="Product_Id" name="Product_Id" type="tel" placeholder="Header_Id" value="@item.Product_Id" readonly>
+                                </div>
+                                <!-- Form Row-->
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (first name)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Product_Name">Product Name</label>
+                                        <input class="form-control" id="Product_Name" name="Product_Name" type="text" placeholder="Product_Name" value="@item.Product_Name" required>
+                                    </div>
+                                    <!-- Form Group (last name)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="ProductType_Id">Product Type</label>
+                                        <input class="form-control" id="ProductType_Id" name="ProductType_Id" type="tel" placeholder="ProductType_Id" value="@item.ProductType_Id" required>
+                                    </div>
+                                </div>
+                                <!-- Form Row-->
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (organization name)-->
+                                        <div class="col-md-6">
+                                        <label class="small mb-1" for="Picture_Id">Picture Id</label>
+                                        <input class="form-control" id="Picture_Id" name="Picture_Id" type="tel" placeholder="Picture_Id" value="@item.Picture_Id" required>
+                                        </div>
+                                    <!-- Form Group (location)-->
+                                        <div class="col-md-6">
+                                        <label class="small mb-1" for="Logo_Id">Logo Id</label>
+                                        <input class="form-control" id="Logo_Id" name="Logo_Id" type="tel" placeholder="Logo_Id" value="@item.Logo_Id" required>
+                                        </div>
+                                </div>
+                                     <!-- Form Group (email address)-->
+                                @* <div class="mb-3">
+                                <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                                <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="name@example.com">
+                                </div>
+                                     *@
+                                <!-- Form Row-->
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (phone number)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Product_Price">Product Price</label>
+                                        <input class="form-control" id="Product_Price" type="tel" name="Product_Price" placeholder="Product_Price" value="@item.Product_Price" required>
+                                    </div>
+                                    <!-- Form Group (birthday)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Product_PromoPrice">Product Promotion Price</label>
+                                        <input class="form-control" id="Product_PromoPrice" type="tel" name="Product_PromoPrice" placeholder="Product_PromoPrice" value="@item.Product_PromoPrice" required>
+                                    </div>
+                                </div>
+                                <!-- Form Row-->
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (phone number)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Product_ShortDescription">Product Description</label>
+                                        <input class="form-control" id="Product_ShortDescription" name="Product_ShortDescription" type="text" placeholder="Product_ShortDescription" value="@item.Product_ShortDescription" required>
+                                    </div>
+                                    <!-- Form Group (birthday)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Product_Manufacturers">Product Manufacture</label>
+                                        <input class="form-control" id="Product_Manufacturers" type="text" name="Product_Manufacturers" placeholder="Product_Manufacturers" value="@item.Product_Manufacturers" required>
+                                    </div>
+                                </div>
+                                <!-- Form Row-->
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (phone number)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Product_Condition">Product Condition (1: avail 2: unavail)</label>
+                                        <input class="form-control" id="Product_Condition" name="Product_Condition" type="tel" placeholder="Product_Condition" value="@item.Product_Condition" required>
+                                    </div>
+                                    <!-- Form Group (birthday)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Product_Size">Product Size</label>
+                                        <input class="form-control" id="Product_Size" type="text" name="Product_Size" placeholder="Product_Size" value="@item.Product_Size" required>
+                                    </div>
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (phone number)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Product_Href">Product Href</label>
+                                        <input class="form-control" id="Product_Href" name="Product_Href" type="text" placeholder="Product_Href" value="@item.Product_Href" required>
+                                    </div>
+                                    <!-- Form Group (birthday)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Product_Quantity">Product Quantity</label>
+                                        <input class="form-control" id="Product_Quantity" type="tel" name="Product_Quantity" placeholder="Product_Quantity" value="@item.Product_Quantity"required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <!--Ngon rồi ok rồi, còn info2-->
+                                    <label class="small mb-1" for="Product_Info">Product Info</label>
+                                    <textarea id="Product_Info" name="Product_Info" class="form-control rounded-left" placeholder="Product_Info" value="@item.Product_Info" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <!--Ngon rồi ok rồi, còn info2-->
+                                    <label class="small mb-1" for="Product_Info2">Product Info 2</label>
+                                    <textarea id="Product_Info2" name="Product_Info2" class="form-control rounded-left" placeholder="Product_Info2" value="@item.Product_Info2" required></textarea>
+                                </div>
+                                <!-- Save changes button-->
+                                <button type="submit" class="btn btn-primary rounded submit p-3 px-5">Submit Edit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 	}
-</div>
-<script>
+}
+@section Scripts {
+    <!--thu vien di trươc sau đó code-->
+    @* <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> *@
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet/less" type="text/css" href="/css/panels.less" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Product_Info').summernote({
+                tabsize: 3,
+                height: 150,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#Product_Info2').summernote({
+                tabsize: 3,
+                height: 150,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+        });
+    </script>
+}
+<!--Lỗi k load được, viết được nhiều dữ liệu của html.raw,
+-->
+
+@* <script> 
 	function Editlog2() {
         $.ajax({
             url: "ProductAdmin/ProductAdminEditFunction",
@@ -73,6 +197,8 @@
                 Product_Info: $('#Product_Info').val(),
                 Product_Size: $('#Product_Size').val(),
                 Product_Href: $('#Product_Href').val(),
+				Product_Info2: $('#Product_Info2').val(),
+				Product_Quantity: $('#Product_Quantity').val(),
             },
             cache: !1,
             success:
@@ -89,5 +215,5 @@
             }
         });
     };
-</script>
+</script> *@
 

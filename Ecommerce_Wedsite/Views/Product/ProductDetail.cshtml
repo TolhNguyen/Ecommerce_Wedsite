@@ -373,21 +373,17 @@
                                                     <div id="productTabContent" class="tab-content">
                                                         <div class="tab-pane fade in active" id="product_tabs_description">
                                                             <div class="std justify add_apper">
-
-                                                                <ul>
-                                                                    <li>@item1.Product_Info</li>
-                                                                </ul>
-                                                                <ol>
-                                                                    <li>Thay đất định kỳ 6 - 8 tháng</li>
-                                                                    <li>Sử dụng giá thể hoặc đát tro xốp</li>
-                                                                </ol>
+                                                                @Html.Raw(item1.Product_Info)
 
                                                             </div>
                                                         </div>
 
                                                         <div class="tab-pane fade" id="product_tabs_custom">
+                                                            <div class="std justify add_apper">
+                                                                @Html.Raw(item1.Product_Info2)
+                                                            </div>
                                                             <div class="product-tabs-content-inner clearfix">
-                                                                #Product_Info2
+                                                                
                                                                 Nội dung đang cập nhật ...
 
                                                             </div>

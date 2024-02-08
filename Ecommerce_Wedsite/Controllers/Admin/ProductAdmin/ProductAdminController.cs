@@ -21,6 +21,7 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly IProductAdminEditFunctionService _productadmineditfunctionService;
         private readonly IProductAdminEditService _productadmineditService;
         private readonly IAdminMenuService _adminmenuService;
+
         public ProductAdminController(ILogger<ProductAdminController> logger, IProductAdminService productadminService, IProductTypeAdminService producttypeadminService, IProductAdminDeleteService productadmindeleteService, IProductAdminCreateService productadmincreateService, IProductAdminEditFunctionService productadmineditfunctionService, IProductAdminEditService productadmineditService, IAdminMenuService adminmenuService)
         {
             _logger = logger;
@@ -76,8 +77,9 @@ namespace Ecommerce_Wedsite.Controllers
             var All = new AllLayout();
 
             var product_ViewModels = await _productadmineditService.Service_Test(Product_Id);
-
-            All.product_ViewModels = product_ViewModels.Data;
+			var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+			All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
+			All.product_ViewModels = product_ViewModels.Data;
 
             return View("ProductAdminEdit", All);
         }
@@ -85,7 +87,7 @@ namespace Ecommerce_Wedsite.Controllers
         public async Task<IActionResult> ProductAdminEditFunction(Product productitem) // nên đổi sang ajax
         {
             var product_ViewModels = await _productadmineditfunctionService.Service_Test(productitem);
-            return Json(product_ViewModels);
+            return RedirectToAction("ProductAdmin");
         }
 
         [Route("~/producttypeadmin")]

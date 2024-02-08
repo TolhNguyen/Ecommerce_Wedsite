@@ -181,17 +181,29 @@ namespace Ecommerce_Wedsite.Controllers
                 card = JsonSerializer.Deserialize<ShopCard_ViewModel>(cookieCard); // đổi từ string sang json
                 if (card != null) // card k đc null 
                 {
-                    card = _deletecartcookieService.DeleteCartCookieFunction(card, id); // xử lý sp trong giỏ hàng
+                    card = _deletecartcookieService.DeleteCartCookieFunction(card, id); // xử lý xóa sp trong giỏ hàng 
+                    string productvalue = JsonSerializer.Serialize(card);// đổi lại từ jsonobj sang string là productvalue
+                    if (card.product_card.Count == 0) // nếu == 0 thì xóa cart luôn
+                    {                         
+                        CookieOptions option = new CookieOptions();
+                        option.Secure = true;
+                        option.HttpOnly = false;
+                        option.SameSite = SameSiteMode.None;
+                        option.Path = "/";
+                        option.Expires = DateTime.Now.AddMilliseconds(1); // Xóa ngay cookie luôn
+                        HttpContext.Response.Cookies.Append("cart", productvalue, option); 
+                    }
+                    else
+                    {
+                        CookieOptions option = new CookieOptions();
+                        option.Secure = true;
+                        option.HttpOnly = false;
+                        option.SameSite = SameSiteMode.None;
+                        option.Path = "/";
+                        option.Expires = DateTime.Now.AddDays(1);
+                        HttpContext.Response.Cookies.Append("cart", productvalue, option);
+                    }
                 }
-                string productvalue = JsonSerializer.Serialize(card); // đổi lại từ jsonobj sang string là productvalue
-                CookieOptions option = new CookieOptions();
-                option.Secure = true;
-                option.HttpOnly = false;
-                option.SameSite = SameSiteMode.None;
-                option.Path = "/";
-                option.Expires = DateTime.Now.AddDays(1);
-                HttpContext.Response.Cookies.Append("cart", productvalue, option); // lưu những thay đổi vào cart
-
                 return Json(true); // nếu function chạy thành công thì true
             }
             return Json(false); // nếu function k chạy được thì false

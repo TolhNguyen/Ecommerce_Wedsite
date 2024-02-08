@@ -129,7 +129,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
 
         //Chức năng check sl sp trước khi sang trang checkout (còn sai thì ở Cart)
         public async Task<IActionResult> CheckingCheckout(string cartcookie) // dữ liệu từ ajax. Lỗi trả về trang checkout
-        {
+            {
             var cartcookieobj = new ShopCard_ViewModel();
 			cartcookieobj = JsonSerializer.Deserialize<ShopCard_ViewModel>(cartcookie); // 2 biến này giống cookiecard và card
             if (cartcookieobj != null)
