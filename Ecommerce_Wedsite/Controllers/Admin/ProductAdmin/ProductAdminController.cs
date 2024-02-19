@@ -48,15 +48,15 @@ namespace Ecommerce_Wedsite.Controllers
         }
 
         [Route("~/productadmindeletefunction")]
-        public async Task<IActionResult> ProductAdminDeleteFunction(Product productitem) // nên đổi sang ajax
+        public async Task<IActionResult> ProductAdminDeleteFunction(int Product_Id) // nên đổi sang ajax
         {
             var All = new AllLayout();
 
-            var product_ViewModels = await _productadmindeleteService.Service_Test(productitem);
+            var product_ViewModels = await _productadmindeleteService.Service_Test(Product_Id);
             
             All.product_ViewModels = product_ViewModels.Data;
 
-            return View("SuccessPage", All); // sau khi chạy service ở trên r mới trả view ra
+            return RedirectToAction("ProductAdmin"); // sau khi chạy service ở trên r mới trả view ra
         }
 
         [Route("~/productadmincreate")]
@@ -84,10 +84,14 @@ namespace Ecommerce_Wedsite.Controllers
             return View("ProductAdminEdit", All);
         }
 
+        [HttpPost]
         public async Task<IActionResult> ProductAdminEditFunction(Product productitem) // nên đổi sang ajax
         {
             var product_ViewModels = await _productadmineditfunctionService.Service_Test(productitem);
-            return RedirectToAction("ProductAdmin");
+            if(product_ViewModels.success == true) {
+                return Json(true);
+            }
+            return Json(false);
         }
 
         [Route("~/producttypeadmin")]

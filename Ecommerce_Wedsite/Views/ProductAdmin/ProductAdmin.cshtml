@@ -85,8 +85,10 @@
                                 <td>@Html.DisplayFor(modelItem => item.Product_Href)</td>
                                 <td>@Html.Raw(item.Product_Info2)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_Quantity)</td>
-                                <td>@Html.ActionLink("Edit","productadminedit",item)</td>
-                                <td>@Html.ActionLink("Delete","productadmindeletefunction",item)</td>
+
+                                <!--Cách chỉ gửi 1 para thôi-->
+                                <td>@Html.ActionLink("Edit", "productadminedit", new { Product_Id = item.Product_Id})</td>
+                                <td>@Html.ActionLink("Delete", "productadmindeletefunction", new { Product_Id = item.Product_Id })</td>
                             </tr>
                         }
                     }

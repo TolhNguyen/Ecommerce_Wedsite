@@ -12,7 +12,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
 {
     public interface IProductAdminDeleteService // Tạo Interface
     {
-        Task<ResponseMessageObject<Product_ViewModel>> Service_Test(Product productitem); //Model lớn chứa Model nhỏ. Tạo Phương Thức     
+        Task<ResponseMessageObject<Product_ViewModel>> Service_Test(int Product_Id); //Model lớn chứa Model nhỏ. Tạo Phương Thức     
     }
     public class ProductAdminDeleteService : IProductAdminDeleteService // Thừa kế các thuộc tính từ Interface 
     {
@@ -22,7 +22,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
             _configuration = configuration;
         }
 
-        public async Task<ResponseMessageObject<Product_ViewModel>> Service_Test(Product productitem) // Lấy dữ liệu model từ db lên và hành động vào
+        public async Task<ResponseMessageObject<Product_ViewModel>> Service_Test(int Product_Id) // Lấy dữ liệu model từ db lên và hành động vào
         {
             var data = new ResponseMessageObject<Product_ViewModel>();
             data.Data = new Product_ViewModel();
@@ -32,7 +32,11 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 {
                     await dbConn.OpenAsync(); // mở sync
 
-                    var it = dbConn.Delete(productitem); // hành động và lưu model vào db
+                    var query = dbConn.QueryBuilder($"select * from Product where Product_Id = {Product_Id}");
+
+                    var productdelete = await query.QueryFirstOrDefaultAsync<Product>();
+
+                    var it = dbConn.Delete(productdelete); // hành động và lưu model vào db
 
                     await dbConn.CloseAsync();
                 }
