@@ -1,1 +1,93 @@
-﻿
+﻿@model AllLayout
+@{
+    ViewData["Title"] = "Header Admin Page";
+    Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
+}
+<div>
+    <h1>Header Table</h1>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <!---Tạo bảng-->
+                <thead>
+                    <!--Danh sách bảng-->
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            List News ID
+                        </th>
+                        <th>
+                            Picture ID
+                        </th>
+                        <th>
+                            News Title
+                        </th>
+                        <th>
+                            News SubTitle
+                        </th>
+                        <th>
+                            Author
+                        </th>
+                        <th>
+                            News Content
+                        </th>
+                        <th>
+                            News DataPost
+                        </th>
+                        <th>
+                            Edit
+                        </th>
+                        <th>
+                            Delete
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model != null)
+                    {
+                        // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
+                        @foreach (var item in Model.news_ViewModels.news)
+                        {
+                            if (item != null)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.News_Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ListNews_Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Picture_Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.News_Title)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.News_SubTitle)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Author)</td>
+                                    <td>@Html.Raw(item.News_Content)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.News_DatePost)</td>
+                                    <td>@Html.ActionLink("Edit", "newsadminedit", item.News_Id)</td>
+                                    <td>@Html.ActionLink("Delete", "#", item)</td>
+                                    <!--Tao controller hay service cho edit va delete-->
+                                </tr>
+                            }
+
+                        }
+                    }
+                </tbody>
+            </table>
+            <div class="clearfix">
+                <div class="hint-text">Showing <b>5</b> out of <b>10</b> entries</div>
+                <ul class="pagination">
+                    <li class="page-item disabled"><a href="#">Previous</a></li>
+                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
+            </div>
+            <div>
+                <a href="/HeaderAdminCreate">Create New Item</a>
+            </div>
+        </div>
+    </div>
+</div>
+

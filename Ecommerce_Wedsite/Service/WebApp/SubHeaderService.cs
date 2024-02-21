@@ -34,7 +34,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     data.Data.subheaderproducttype = await query.QueryAsync<ProductType>();
 
                     // Công thức câu query chọn ra 5 sp của mỗi loại type id khác nhau:
-                    var query2 = dbConn.QueryBuilder($"SELECT * FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY ProductType_Id ORDER BY Product_Price DESC) AS RowNum FROM Product) AS RankedData WHERE RowNum <= 5;");
+                    var query2 = dbConn.QueryBuilder($"SELECT * FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY ProductType_Id ORDER BY NEWID()) AS RowNum FROM Product) AS RankedData WHERE RowNum <= 5;");
                     data.Data.subheaderproduct = await query2.QueryAsync<Product>();
 
                     var query3 = dbConn.QueryBuilder($"SELECT * FROM NewsCategory");

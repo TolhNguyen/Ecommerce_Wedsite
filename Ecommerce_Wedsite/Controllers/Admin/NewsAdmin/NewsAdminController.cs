@@ -15,11 +15,16 @@ namespace Ecommerce_Wedsite.Controllers
     {
         private readonly ILogger<NewsAdminController> _logger;
         private readonly IAdminMenuService _adminmenuService;
+        private readonly INewsAdminService _newsadminService;
+        private readonly INewsAdminEditService _newsadmineditService;
+        private readonly INewsAdminEditFunctionService _newsadmineditfunctionService;
 
-        public NewsAdminController(ILogger<NewsAdminController> logger, IAdminMenuService adminmenuService)
+        public NewsAdminController(ILogger<NewsAdminController> logger, IAdminMenuService adminmenuService, INewsAdminService newsadminService, INewsAdminEditService newsadmineditService, INewsAdminEditFunctionService newsadmineditfunctionService)
         {
             _logger = logger;
             _adminmenuService = adminmenuService;
+            _newsadminService = newsadminService;
+            _newsadmineditService = newsadmineditService;
         }
         [Route("~/newsadmin")]
         public async Task<IActionResult> NewsAdmin()
@@ -27,31 +32,29 @@ namespace Ecommerce_Wedsite.Controllers
             var All = new AllLayout();
 
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+            var news_ViewModels = await _newsadminService.Service_Test(); // view model xài chung dc, nhưng service khác
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
-
+            All.news_ViewModels = news_ViewModels.Data;
             return View("NewsAdmin", All);
         }
+        [Route("~/newsadminedit")]
+        public async Task<IActionResult> NewsAdminEdit(int News_Id) // Tạo thêm trang riêng function riêng
+        {
+            var All = new AllLayout();
+
+            var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+            var news_ViewModels = await _newsadmineditService.Service_Test(News_Id);
+            All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
+            All.news_ViewModels = news_ViewModels.Data;
+            return View("NewsAdminEdit", All);
+        }   
+        public async Task<IActionResult> NewsAdminEditFunction(News newsitem) // controller kiểu ajax thì mới đọc đc                                                                          // Tạo thêm trang riêng function riêng
+        {
+            // cần có 1  model layout admin riêng
+            var news_ViewModels = await _newsadmineditfunctionService.Service_Test(newsitem);
+            return Json(news_ViewModels); // sau khi chạy service ở trên r mới trả thông báo bằng ajax. rồi về lại trang chủ.
+        }
         /*
-            [Route("~/discountadminedit")]
-            public async Task<IActionResult> DiscountAdminEdit(int Discount_Id) // Tạo thêm trang riêng function riêng
-            {
-                var All = new AllLayout();
-
-                var discountt_ViewModels = await _discounttadmineditService.Service_Test(Discount_Id);
-                var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
-                All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
-                All.discountt_ViewModels = discountt_ViewModels.Data;
-
-                return View("DiscountAdminEdit", All);
-            }   
-
-            public async Task<IActionResult> DiscountAdminEditFunction(Discountt discountitem) // controller kiểu ajax thì mới đọc đc                                                                          // Tạo thêm trang riêng function riêng
-            {
-                // cần có 1  model layout admin riêng
-                var discount_ViewModels = await _discountadmineditfunctionService.Service_Test(discountitem);
-                return Json(discount_ViewModels); // sau khi chạy service ở trên r mới trả thông báo bằng ajax. rồi về lại trang chủ.
-            }
-
             [Route("~/discountadmindelete")]
             public async Task<IActionResult> DiscountAdminDelete(Discountt discountitem) // Delete, Edit nên chung 1 controller hay tách ra
             {
