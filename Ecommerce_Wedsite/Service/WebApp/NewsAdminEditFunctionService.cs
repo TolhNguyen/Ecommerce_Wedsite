@@ -50,7 +50,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     news.News_Content = newsitem.News_Content;
                     news.News_DatePost = newsitem.News_DatePost;
 
-                    var it = dbConn.Update(news);
+                    dbConn.Update(news);
 
                     await dbConn.CloseAsync();
                 }

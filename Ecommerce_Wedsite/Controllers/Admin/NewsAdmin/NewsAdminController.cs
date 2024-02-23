@@ -25,6 +25,7 @@ namespace Ecommerce_Wedsite.Controllers
             _adminmenuService = adminmenuService;
             _newsadminService = newsadminService;
             _newsadmineditService = newsadmineditService;
+            _newsadmineditfunctionService = newsadmineditfunctionService;
         }
         [Route("~/newsadmin")]
         public async Task<IActionResult> NewsAdmin()
@@ -47,12 +48,18 @@ namespace Ecommerce_Wedsite.Controllers
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.news_ViewModels = news_ViewModels.Data;
             return View("NewsAdminEdit", All);
-        }   
+        }
+
+        [HttpPost]
         public async Task<IActionResult> NewsAdminEditFunction(News newsitem) // controller kiểu ajax thì mới đọc đc                                                                          // Tạo thêm trang riêng function riêng
         {
             // cần có 1  model layout admin riêng
             var news_ViewModels = await _newsadmineditfunctionService.Service_Test(newsitem);
-            return Json(news_ViewModels); // sau khi chạy service ở trên r mới trả thông báo bằng ajax. rồi về lại trang chủ.
+            if (news_ViewModels.success == true)
+            {
+                return Json(true);
+            }
+            return Json(false);
         }
         /*
             [Route("~/discountadmindelete")]

@@ -11,7 +11,7 @@
                 <thead> <!--Danh sách bảng-->
                     <tr>
                         <th>
-                            ID
+                            Product ID
                         </th>
                         <th>
                             Product Name
@@ -73,7 +73,16 @@
                                 <td>@Html.DisplayFor(modelItem => item.Product_Id)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_Name)</td> <!--Truyền dữ liệu xuống -->
                                 <td>@Html.DisplayFor(modelItem => item.ProductType_Id)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Picture_Id)</td>
+                                <td>  
+                                    @Html.DisplayFor(modelItem => item.Picture_Id).
+                                    @foreach(var item2 in Model.picture_ViewModels.picture)
+                                    {
+                                        if(item.Picture_Id == item2.Picture_Id)
+                                        {
+                                            <img style="width:120px; height:120px" data-img="@item2.Picture_FileName" src="@item2.Picture_FileName" data-lazyload="@item2.Picture_FileName" alt="@item2.Picture_Desciption">
+                                        }
+                                    }
+                                </td>
                                 <td>@Html.DisplayFor(modelItem => item.Logo_Id)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_Price)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_PromoPrice)</td>

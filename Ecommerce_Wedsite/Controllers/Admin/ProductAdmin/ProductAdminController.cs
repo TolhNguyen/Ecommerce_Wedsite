@@ -21,8 +21,9 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly IProductAdminEditFunctionService _productadmineditfunctionService;
         private readonly IProductAdminEditService _productadmineditService;
         private readonly IAdminMenuService _adminmenuService;
+        private readonly IPictureService _pictureService;
 
-        public ProductAdminController(ILogger<ProductAdminController> logger, IProductAdminService productadminService, IProductTypeAdminService producttypeadminService, IProductAdminDeleteService productadmindeleteService, IProductAdminCreateService productadmincreateService, IProductAdminEditFunctionService productadmineditfunctionService, IProductAdminEditService productadmineditService, IAdminMenuService adminmenuService)
+        public ProductAdminController(ILogger<ProductAdminController> logger, IProductAdminService productadminService, IProductTypeAdminService producttypeadminService, IProductAdminDeleteService productadmindeleteService, IProductAdminCreateService productadmincreateService, IProductAdminEditFunctionService productadmineditfunctionService, IProductAdminEditService productadmineditService, IAdminMenuService adminmenuService, IPictureService pictureService)
         {
             _logger = logger;
             _productadminService = productadminService;
@@ -32,17 +33,19 @@ namespace Ecommerce_Wedsite.Controllers
             _productadmineditfunctionService = productadmineditfunctionService;
             _productadmineditService = productadmineditService;
             _adminmenuService = adminmenuService;
+            _pictureService = pictureService;
         }
 
         [Route("~/productadmin")]
         public async Task<IActionResult> ProductAdmin()
         {
             var All = new AllLayout();
-
+            var picture_ViewModels = await _pictureService.Service_Test();
             var product_ViewModels = await _productadminService.Service_Test();
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.product_ViewModels = product_ViewModels.Data;
+            All.picture_ViewModels = picture_ViewModels.Data;
 
             return View("ProductAdmin", All);
         }

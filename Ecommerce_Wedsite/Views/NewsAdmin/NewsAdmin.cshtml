@@ -3,8 +3,8 @@
     ViewData["Title"] = "Header Admin Page";
     Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
 }
-<div>
-    <h1>Header Table</h1>
+<div style="Overflow-x:scroll">
+    <h1>News Table</h1>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -13,7 +13,7 @@
                     <!--Danh sách bảng-->
                     <tr>
                         <th>
-                            ID
+                            News ID
                         </th>
                         <th>
                             List News ID
@@ -62,7 +62,7 @@
                                     <td>@Html.DisplayFor(modelItem => item.Author)</td>
                                     <td>@Html.Raw(item.News_Content)</td>
                                     <td>@Html.DisplayFor(modelItem => item.News_DatePost)</td>
-                                    <td>@Html.ActionLink("Edit", "newsadminedit", item.News_Id)</td>
+                                    <td>@Html.ActionLink("Edit", "newsadminedit", new { News_Id = item.News_Id })</td>
                                     <td>@Html.ActionLink("Delete", "#", item)</td>
                                     <!--Tao controller hay service cho edit va delete-->
                                 </tr>
