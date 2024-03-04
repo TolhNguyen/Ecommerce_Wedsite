@@ -178,15 +178,15 @@
 														<div class="actions">
 															<form action="/cart/add" method="post" class="variants" data-id="product-actions-15887794" enctype="multipart/form-data">
 																<input type="hidden" name="variantId" value="27843194">
-																<button class="button btn-cart add_to_cart" title="Mua hàng" fdprocessedid="e99jd6">Mua hàng</button>
-																<button class="button btn-cart btn-more" title="Chi tiết sản phẩm" type="button" onclick="window.location.href='/dia-lan-y'" fdprocessedid="uhiyki">
+																<button class="button btn-cart add_to_cart" title="Mua hàng" fdprocessedid="e99jd6" type="button" onclick="window.location.href='/productdetail/@item4.Product_Href'">Mua hàng</button>
+																<button class="button btn-cart btn-more" title="Chi tiết sản phẩm" type="button" onclick="window.location.href='/productdetail/@item4.Product_Href'" fdprocessedid="uhiyki">
 																	<img alt="Mew Nature" src="/img/Logo/eye.png">
 																</button>
 															</form>
 														</div>
 													</div>
-													<div class="thumb-wrapper" onclick="window.location.href='/xuong-rong-bang-coc'">
-														<a href="/xuong-rong-bang-coc" class="thumb flip"  title="@item4.Product_Name">
+													<div class="thumb-wrapper" onclick="window.location.href='/productdetail/@item4.Product_Href'">
+														<a href="/productdetail/@item4.Product_Href" class="thumb flip" title="@item4.Product_Name">
 															@foreach (var item3 in Model.picture_ViewModels.picture)
 															{
 																@if (item3.Picture_Id == item4.Picture_Id)
@@ -228,7 +228,7 @@
 																	<div class="item-inner-menu">
 																		<div class="product-wrapper">
 																			<div class="thumb-wrapper" onclick="window.location.href='/sen-da-la-ngoc'">
-																				<a href="/sen-da-la-ngoc" class="thumb flip" title="@item5.Product_Name">
+																				<a href="/productdetail/@item5.Product_Href" class="thumb flip" title="@item5.Product_Name">
 																					@foreach (var item3 in Model.picture_ViewModels.picture)
 																					{
 																						@if (item3.Picture_Id == item5.Picture_Id)
@@ -241,7 +241,7 @@
 																		</div>
 																		<div class="item-info-menu">
 																			<div class="info-inner">
-																				<a href="#" title="Sen đá lá ngọc">
+																				<a href="/productdetail/@item5.Product_Href" title="Sen đá lá ngọc">
 																					<h3 class="item-title line_2">@item5.Product_Name</h3>
 																				</a>
 																				<div class="item-content">
@@ -256,7 +256,7 @@
 																						</div>
 																					</div>
 																					<div class="desrc_mn hidden-xs hidden-sm">
-																						@item5.Product_ShortDescription
+																						@item5.Product_Name
 																					</div>
 																				</div>
 																				<div class="countdown">
@@ -411,7 +411,7 @@
 															<div class="item-inner">
 																<div class="product-wrapper">
 																	<div class="thumb-wrapper" onclick="window.location.href='/luas-nuide'">
-																		<a href="/luas-nuide" class="thumb flip"  title="@item8.Product_Name">
+																		<a href="/productdetail/@item8.Product_Href" class="thumb flip"  title="@item8.Product_Name">
 																			@foreach (var item3 in Model.picture_ViewModels.picture)
 																			{
 																				@if (item3.Picture_Id == item8.Picture_Id)
@@ -453,11 +453,11 @@
 
 																	<div class="actions hidden-xs hidden-sm remove_html">
 																		<form action="/cart/add" method="post" class="variants" data-id="product-actions-15887884" enctype="multipart/form-data">
-																			<button class="button btn-cart btn-more" title="Chi tiết sản phẩm" type="button" onclick="window.location.href='/luas-nuide'" >
+																			<button class="button btn-cart btn-more" title="Chi tiết sản phẩm" type="button" onclick="window.location.href='/productdetail/@item8.Product_Href'" >
 																				<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/eye.png?1676649124511">
 																			</button>
 																			<input type="hidden" name="variantId" value="27843379" />
-																			<button class="button btn-cart add_to_cart" title="Mua hàng">
+																			<button class="button btn-cart add_to_cart" title="Mua hàng" type="button" onclick="window.location.href='/productdetail/@item8.Product_Href'">
 																				<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/basket.png?1676649124511">
 																			</button>
 																		</form>       

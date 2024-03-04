@@ -181,8 +181,20 @@
       "PackagePath": "staticwebassets\\img\\Logo\\eye.png"
     },
     {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Logo\\favicon.png",
+      "PackagePath": "staticwebassets\\img\\Logo\\favicon.png"
+    },
+    {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Logo\\logo.jpg",
       "PackagePath": "staticwebassets\\img\\Logo\\logo.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Logo\\logo2.png",
+      "PackagePath": "staticwebassets\\img\\Logo\\logo2.png"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Logo\\logoheader.png",
+      "PackagePath": "staticwebassets\\img\\Logo\\logoheader.png"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Logo\\userlogo.jpg",

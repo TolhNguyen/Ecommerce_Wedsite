@@ -28,12 +28,12 @@ namespace Ecommerce_Wedsite.Controllers
         }
 
         [Route("~/adminloginpage")]
-        public async Task<IActionResult> AdminLoginPage() // trang admin login
+        public IActionResult AdminLoginPage() // trang admin login
         {
-            var All = new AllLayout();
-            var headerandfooter_ViewModels = await _headerandfooterService.HeaderAndFooter_ServiceTest();
-            All.headerandfooter_ViewModels = headerandfooter_ViewModels.Data;
-            return View("AdminLoginPage", All);
+            //var All = new AllLayout();
+            //var headerandfooter_ViewModels = await _headerandfooterService.HeaderAndFooter_ServiceTest();
+            //All.headerandfooter_ViewModels = headerandfooter_ViewModels.Data;
+            return View("AdminLoginPage");
         }
 
         [Route("~/adminpage")]
