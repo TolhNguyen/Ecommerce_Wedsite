@@ -9,6 +9,8 @@ namespace Ecommerce_Wedsite.Models.Entities
         public int UserLogin_Id { get; set; }
         public string UserLogin_Name { get; set; }
         public string UserLogin_Password { get; set; }
+        public string UserLogin_WebName {  get; set; }
+        public string UserLogin_Email { get; set; }
     }
 
 }

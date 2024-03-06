@@ -44,12 +44,11 @@
                 <div class="l_o_mb hidden-lg hidden-md">
                     <img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/user.png?1676649124511" class="cl_lg">
                     <div class="box_log mb_cl">
-
                         <div class="login">
                             <a href="/userloginpage">Đăng nhập</a>
                         </div>
-                        <div class="res">
-                            <a href="/account/register">Đăng ký</a>
+                        <div class="login">
+                            <a href="/userregisterpage">Đăng ký</a>
                         </div>
 
                     </div>
@@ -65,15 +64,20 @@
                     <div class="fix-cart">
                         <div class="l_o hidden-xs hidden-sm">
                             <img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/user.png?1676649124511">
-                            <div class="box_log">
-
+                            <div class="box_log" id="login">
                                 <div class="login">
                                     <a href="/userloginpage">Đăng nhập</a>
                                 </div>
                                 <div class="res">
-                                    <a href="/account/register">Đăng ký</a>
+                                    <a href="/userregisterpage">Đăng ký</a>
                                 </div>
+                            </div>
+                            <div class="box_log">
+                                <div class="res">
+                                    <a href="#" id="webname">
 
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="top-cart-contain pull-right">
@@ -289,5 +293,19 @@
             }
             return; // nếu k gõ thì k chạy
 	    }
+
+        function WebName() {
+            if (getCookie("webname") != "") {
+                var logintag = document.getElementById("login");
+                logintag.style.display = "none";
+                var webname = document.getElementById("webname");
+                webname.textContent = getCookie("webname");
+            }
+        }
+
+        $(document).ready(function () {
+        setTimeout("WebName()", 500);
+        });
+
     </script>
     
