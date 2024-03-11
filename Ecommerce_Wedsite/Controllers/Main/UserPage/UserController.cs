@@ -56,7 +56,7 @@ namespace Ecommerce_Wedsite.Controllers
             else return RedirectToAction("UserLoginPage"); // kq sai
         }
 
-        [Route("~/userregisterpage")]
+        [Route("~/userregisterpage")]   
         public IActionResult UserRegisterPage() // trang admin login
         {
             return View("UserRegisterPage");

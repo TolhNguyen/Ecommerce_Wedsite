@@ -22,8 +22,9 @@ namespace Ecommerce_Wedsite.Controllers.Main
         private readonly ICityService _cityService;
         private readonly ISubHeaderService _subheaderService;
         private readonly ICheckingQuantityService _checkingquantityService;
+        private readonly IGetIdWebNameService _getidwebNnameService;
 
-        public CheckoutController(ILogger<CheckoutController> logger, IHeaderAndFooterService headerandfooterService, IPictureService pictureService, ICustomerCheckoutService customercheckoutService, IProductCheckoutService productcheckoutService, IPromotionService promotionService, IDiscounttService discounttService, IDecreasePromoQuantityService decreasepromoquantityService, ICityService cityService, ISubHeaderService subheaderService, ICheckingQuantityService checkingquantityService)
+        public CheckoutController(ILogger<CheckoutController> logger, IHeaderAndFooterService headerandfooterService, IPictureService pictureService, ICustomerCheckoutService customercheckoutService, IProductCheckoutService productcheckoutService, IPromotionService promotionService, IDiscounttService discounttService, IDecreasePromoQuantityService decreasepromoquantityService, ICityService cityService, ISubHeaderService subheaderService, ICheckingQuantityService checkingquantityService, IGetIdWebNameService getidwebnameService)
         {
             _logger = logger;
             _headerandfooterService = headerandfooterService;
@@ -36,6 +37,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             _cityService = cityService;
             _subheaderService = subheaderService;
             _checkingquantityService = checkingquantityService;
+            _getidwebNnameService = getidwebnameService;
         }
 
         [Route("~/checkout")]
@@ -69,9 +71,11 @@ namespace Ecommerce_Wedsite.Controllers.Main
 
 
         [Route("~/checkoutfunction")]
-        public async Task<IActionResult> CheckoutFunction(CustomerCheckout customercheckout) // l
+        public async Task<IActionResult> CheckoutFunction(CustomerCheckout customercheckout, string UserLogin_WebName) // l
         {
-            await _customercheckoutService.CustomerCheckoutFunction(customercheckout); // xong
+            var idwebname = 0;
+            idwebname = await _getidwebNnameService.GetIdWebName(UserLogin_WebName, idwebname);
+            await _customercheckoutService.CustomerCheckoutFunction(customercheckout, idwebname); // xong
             int cscheckoutid = customercheckout.CustomerCheckout_Id; // lấy cus id ra so sánh
             int promoid = customercheckout.Promotion_Id; // lấy id để - số lượng
             var cookieCard = HttpContext.Request.Cookies["cart"]; //lấy giỏ hàng từ cookie

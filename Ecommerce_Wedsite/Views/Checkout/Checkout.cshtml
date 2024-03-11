@@ -135,19 +135,19 @@
                                             </select>
                                         </div>
 
-                                        @* <div class="col-sm-4 col-6 mb-3">
-                            <p class="mb-0">Postal code</p>
-                            <div class="form-outline">
-                                <input type="tel" id="CustomerCheckout_PostCode" name="CustomerCheckout_PostCode" class="form-control" required/>
-                            </div>
-                            </div>
+                                                    @* <div class="col-sm-4 col-6 mb-3">
+                                        <p class="mb-0">Postal code</p>
+                                        <div class="form-outline">
+                                            <input type="tel" id="CustomerCheckout_PostCode" name="CustomerCheckout_PostCode" class="form-control" required/>
+                                        </div>
+                                        </div>
 
-                            <div class="col-sm-4 col-6 mb-3">
-                            <p class="mb-0">Zip</p>
-                            <div class="form-outline">
-                                <input type="tel" id="CustomerCheckout_Zip" name="CustomerCheckout_Zip" class="form-control" required/>
-                            </div>
-                            </div> *@
+                                        <div class="col-sm-4 col-6 mb-3">
+                                        <p class="mb-0">Zip</p>
+                                        <div class="form-outline">
+                                            <input type="tel" id="CustomerCheckout_Zip" name="CustomerCheckout_Zip" class="form-control" required/>
+                                        </div>
+                                        </div> *@
                                         <div class="col-sm-4 col-6 mb-3">
                                             <p class="mb-0">Promotion</p>
                                             <div class="form-outline">
@@ -161,6 +161,8 @@
                                                         </option>
                                                     }
                                                     <input type="hidden" id="Promotion_Id" name="Promotion_Id" value="0"/>
+                                                    <input type="hidden" id="UserLogin_WebName" name="UserLogin_WebName" value="0" />
+                                                    <input type="hidden" id="CustomerCheckout_TotalPrice" name="CustomerCheckout_TotalPrice" value="0"/>
                                                 </select>
                                             </div>
                                         </div>
@@ -307,7 +309,7 @@
                                                 <p class="mb-0">(including VAT)</p>
                                             </strong>
                                         </div>
-                                        <strong><input type="text" id="CustomerCheckout_TotalPrice" name="CustomerCheckout_TotalPrice" value="@Model.shopcard_ViewModels.total_price"></strong>
+                                        <strong><input id="TotalPrice" name="TotalPrice" value="@Model.shopcard_ViewModels.total_price" readonly></strong>
                                         <span><strong>.000đ</strong></span>
                                     </li>
                                     <!--Bổ sung: giao hàng, thẻ ngân hàng vv-->
@@ -423,69 +425,74 @@
             + dùng js select id ra và truyền vào value chủa input hidden bên ngoài
             */
 
-            // Chưa làm cho tổng tiền
-
-
-            function ApplyPopupDiscount(){
-            var popupcode = getCookie('popupcode');
-            var popupin = document.getElementById('popupin');
-            if (getCookie('popupdiscount') == 'true') { // nếu true thì input value là popupcode
-            document.getElementById('popupin').value = popupcode; // cách áp value cho input (attribute)
-            popupin.setAttribute("placeholder", "Mã đã có sẵn: " + popupcode);
+            function GetWebName() {
+                var webname = getCookie('webname');
+                var webnamevalue = document.getElementById('UserLogin_WebName');
+                webnamevalue.value = webname; // áp webname để lưu người đăng nhập
             }
+            function ApplyPopupDiscount(){
+                var popupcode = getCookie('popupcode');
+                var popupin = document.getElementById('popupin');
+                if (getCookie('popupdiscount') == 'true') { // nếu true thì input value là popupcode
+                    document.getElementById('popupin').value = popupcode; // cách áp value cho input (attribute)
+                    popupin.setAttribute("placeholder", "Mã đã có sẵn: " + popupcode);
+                }
             }
 
             function Summarytotalprice() {
-            var summarytotalprice = parseInt(document.getElementById("CustomerCheckout_TotalPrice").getAttribute("value"));
-            var cityselect = document.getElementById('cityselect');
-            var cityid = cityselect.options[cityselect.selectedIndex].id; // lấy id đc select ra
-            var getcityId = document.getElementById('City_Id'); 
+                var totalprice = document.getElementById("TotalPrice"); // để hiện thôi
+                var cstotalprice = document.getElementById("CustomerCheckout_TotalPrice"); // getAttr(value): lay gái trị trong o. Để add vào db
+                var cityselect = document.getElementById('cityselect');
+                var cityid = cityselect.options[cityselect.selectedIndex].id; // lấy id đc select ra
+                var getcityId = document.getElementById('City_Id'); 
 
-            var promoselect = document.getElementById('promoselect');
-            var promovalue = promoselect.options[promoselect.selectedIndex].value; // value để tính total price lại
-            var promoid = promoselect.options[promoselect.selectedIndex].id; // lấy id đc select ra
-            var getpromoId = document.getElementById('Promotion_Id');
+                var promoselect = document.getElementById('promoselect');
+                var promovalue = promoselect.options[promoselect.selectedIndex].value; // value để tính total price lại
+                var promoid = promoselect.options[promoselect.selectedIndex].id; // lấy id đc select ra
+                var getpromoId = document.getElementById('Promotion_Id');
 
-            var popuprate = 0;
-            var popupcode = getCookie('popupcode');
-            var popupinvalue = document.getElementById('popupin').value;
+                var popuprate = 0;
+                var popupcode = getCookie('popupcode');
+                var popupinvalue = document.getElementById('popupin').value;
 
-            var checkouttp = document.getElementById('checkouttp');
-            var p1 = document.getElementById('p1');
+                var checkouttp = document.getElementById('checkouttp');
+                var p1 = document.getElementById('p1');
 
-            getcityId.value = cityid;
-            getpromoId.value = promoid; // lưu id select vào model để gửi đi
-            if (getCart('cart') !== "") {
-            var cartcookie = getCart('cart').substring(0);
-            var cartcookieobj = JSON.parse(cartcookie);
-            let item = Object.values(cartcookieobj);
-            for (var i = 0; i < item.length; i++) {
-            if (typeof item[i] === "number") {
-            summarytotalprice = item[i]; // lấy totalprice từ obj ra
-            if (summarytotalprice > 0) {
-            //Tính tiền tổng:
-            if (getCookie('popupdiscount') == 'true') {
-            if(popupinvalue == popupcode){
-            popuprate = document.getElementById("popuprate").getAttribute("value");
-            }
-            }
-            p1.textContent = "Đã áp dụng mã -" + popuprate * 100 + "%" + " từ popup"; // popuprate là số từ view popup
-            summarytotalprice = summarytotalprice - (summarytotalprice * popuprate);
-            var summarytotalprice2 = summarytotalprice - summarytotalprice * promovalue;
-            document.getElementById("CustomerCheckout_TotalPrice").value = Math.round(summarytotalprice2); 
-            }
-            }
-            }  
-            } 
+                getcityId.value = cityid;
+                getpromoId.value = promoid; // lưu id select vào model để gửi đi
+                if (getCart('cart') !== "") {
+                    var cartcookie = getCart('cart').substring(0);
+                    var cartcookieobj = JSON.parse(cartcookie);
+                    let item = Object.values(cartcookieobj);
+                    for (var i = 0; i < item.length; i++) {
+                        if (typeof item[i] === "number") {
+                            var summarytotalprice = item[i]; // lấy totalprice từ obj ra
+                            if (summarytotalprice > 0) {
+                            //Tính tiền tổng:
+                                if (getCookie('popupdiscount') == 'true') {
+                                    if(popupinvalue == popupcode){
+                                        popuprate = document.getElementById("popuprate").getAttribute("value");
+                                        p1.textContent = "Đã áp dụng mã -" + popuprate * 100 + "%" + " từ popup"; // popuprate là số từ view popup
+                                        summarytotalprice = summarytotalprice - (summarytotalprice * popuprate);
+                                    }
+                                }
+                                var summarytotalprice2 = summarytotalprice - summarytotalprice * promovalue;
+                                console.log(summarytotalprice2);
+                                totalprice.value = Math.round(summarytotalprice2); // để hiển thị cho người dùng
+                                cstotalprice.value = Math.round(summarytotalprice2); // để bỏ vào form lưu xuống db
+                            }
+                        }
+                    }  
+                } 
             }
 
             function CheckPopup() { // nút xác nhận thì xét lại đk rồi set cookie
-            var popupcode = getCookie('popupcode');
-            var popupinvalue = document.getElementById('popupin').value;
-            if (getCookie('popupdiscount') == 'true' && popupcode == popupinvalue) {
-            setCookie("popupdiscount", "false", "365");
-            setCookie("popupcode", "", "365");
-            }
+                var popupcode = getCookie('popupcode');
+                var popupinvalue = document.getElementById('popupin').value;
+                if (getCookie('popupdiscount') == 'true' && popupcode == popupinvalue) {
+                    setCookie("popupdiscount", "false", "365");
+                    setCookie("popupcode", "", "365");
+                }
             }
 
             /* 
@@ -499,7 +506,9 @@
             $(document).ready(function(){
             setTimeout("ApplyPopupDiscount()",1000);
             });
-
+            $(document).ready(function () {
+                setTimeout("GetWebName()", 1000);
+            });
         </script>
 
     </body>

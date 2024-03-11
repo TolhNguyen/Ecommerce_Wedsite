@@ -104,7 +104,7 @@
 															<!-- Quantity -->
 															<div class="d-flex mb-4" style="max-width: 300px">
 																<div class="form-outline">
-																	<input onblur="ProductCartQuantity(@item.id)" id="form1" min="0" name="quantity" value="@item.qty" type="number" class="form-control" />
+																	<input onblur="ProductCartQuantity(@item.id)" id="@item.id" min="0" name="quantity" value="@item.qty" type="number" class="form-control" />
 																	<label class="form-label" for="form1">Quantity</label>
 																	<p class="text-start text-md-center">
 																		<strong>Price: @item.price.000đ</strong>
@@ -352,7 +352,7 @@
 						for (var j = 0; j < item[i].length; j++) {
 							if (productid == item[i][j].id) { // no là id của item đó trong card
 								// lấy .value là giá trị trong ô input và .getAttribute("value") là giá trị trong value=""x
-								var productno = parseInt(document.getElementById("form1").value);
+								var productno = document.getElementById(productid).value; //lỗi vì cùng id form1. Sửa: là cho id = id sp. Xác định theo id sp đó.
 								console.log(productno);
 								$.ajax({
 									type: "GET",

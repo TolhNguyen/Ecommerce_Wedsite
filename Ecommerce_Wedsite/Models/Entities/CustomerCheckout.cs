@@ -17,6 +17,7 @@ namespace Ecommerce_Wedsite.Models.Entities
         public int Promotion_Id { get; set; }
         public int City_Id { get; set; }
         public string CustomerCheckout_FullName { get; set; }
+        public int UserLogin_Id { get; set; }
     }
     //public enum Promo
     //{

@@ -25,16 +25,16 @@ namespace Ecommerce_Wedsite.Service.WebApp
 		{
 			foreach (var item in card.product_card) // product_card là object chứa các sp trong giỏ hàng (card là obj lớn)
 			{
-				if (id == item.id) // chỉ lấy sp có id đó ra từ giỏ hàng
+				if (id == item.id) // chỉ lấy sp có id đó ra thay đổi từ giỏ hàng
 				{
-					if(item.qty != qty)
+					if(item.qty != qty) // sl giỏ hàng và sl thay đổi phải khác nhau
 					{
-						card.total_price -= item.price;
+						card.total_price -= item.price; // trừ giá cũ ra
 						item.price /= item.qty; // trừ sl cũ
-						item.qty = qty; // sl mới
-						item.price *= item.qty;
-						card.total_price += item.price;
-						break;
+						item.qty = qty; //truyền sl mới vào giỏ
+						item.price *= item.qty; // giá sl mới
+						card.total_price += item.price; // giá sl tổng
+						break; // break để k lặp cho những mục khác
 					}
 				}
 			}

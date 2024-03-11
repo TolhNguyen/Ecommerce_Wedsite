@@ -12,7 +12,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
 {
     public interface ICustomerCheckoutService // Tạo Interface
     {
-        Task<CustomerCheckout> CustomerCheckoutFunction(CustomerCheckout customercheckout); //Model lớn chứa Model nhỏ. Tạo Phương Thức     
+        Task<CustomerCheckout> CustomerCheckoutFunction(CustomerCheckout customercheckout, int idwebname); //Model lớn chứa Model nhỏ. Tạo Phương Thức     
     }
     public class CustomerCheckoutService : ICustomerCheckoutService // Thừa kế các thuộc tính từ Interface 
     {
@@ -23,13 +23,15 @@ namespace Ecommerce_Wedsite.Service.WebApp
             
             // chèn promotionservice vô
         }
-        public async Task<CustomerCheckout> CustomerCheckoutFunction(CustomerCheckout customercheckout) // tạo riêng 1 service. (bỏ static r)
+        public async Task<CustomerCheckout> CustomerCheckoutFunction(CustomerCheckout customercheckout, int idwebname) // tạo riêng 1 service. (bỏ static r)
         {
             using (var dbConn = new SqlConnection(_configuration.GetConnectionString("ConnectionString")))
             {
                 await dbConn.OpenAsync(); // mở sync
 
                 //await _promotionService.PromotionFunction(cscheckouttp);
+
+                customercheckout.UserLogin_Id = idwebname;
                 
                 dbConn.Insert(customercheckout); // hành động và lưu model vào db
 
