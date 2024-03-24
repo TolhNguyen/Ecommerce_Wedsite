@@ -33,7 +33,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 {
                     await dbConn.OpenAsync(); // mở sync
 
-                    var query = dbConn.QueryBuilder($"select * from Header where HeaderType_Id = 1"); // thao tác querry 
+                    var query = dbConn.QueryBuilder($"select * from Header where HeaderCondition = 1 order by Header_Order asc"); // thao tác querry 
                     // Gọi lên các thông tin dữ liệu thuộc các "header cha" (là lv1)
 
                     //data.Data = await query.QueryAsync<AllLayout>(); // lưu vào dữ liệu

@@ -16,10 +16,14 @@ namespace Ecommerce_Wedsite.Models.Entities
         public int PictureGrp_Id { get; set; }
         public int HTML_Id { get; set; }
         public int Video_Id { get; set; }
+        public string HomePage_Img { get; set; }
+        public string HomePage_Summary { get; set; }
+        public int HomePage_Order {  get; set; }
+        public string HomePage_Video {  get; set; }
     }
     public enum Bit3
     {
-        True,
-        Flase
+        False, // 0
+        True // 1
     }
 }

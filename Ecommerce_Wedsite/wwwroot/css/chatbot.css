@@ -1,15 +1,15 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-* {
+/** {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-}
+}*/
 
-body {
+/*body {
     background: #E3F2FD;
-}
+}*/
 
 .chatbot-toggler {
     position: fixed;
@@ -86,9 +86,9 @@ body.show-chatbot .chatbot {
         transform: translateY(-50%);
     }
 
-header h2 {
+/*header h2 {
     font-size: 1.4rem;
-}
+}*/
 
 .chatbot .chatbox {
     overflow-y: auto;

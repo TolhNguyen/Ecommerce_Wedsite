@@ -94,15 +94,11 @@
                                             <div class="product-img-box col-sm-6 col-xs-12 col-md-5 col-lg-5">
                                                 <div class="product-detail-left product-images">
                                                     <div class="col_large_full large-image">
-                                                        @foreach (var item3 in Model.picture_ViewModels.picture) // vòng for này chỉ 1 ảnh duy nhất ở đây
-                                                        {
-                                                            @if (item1.Picture_Id == item3.Picture_Id) // luôn kiểm tra để chỉ lấy 1 id
-                                                            {
-                                                                <a href="@item3.Picture_FileName" class="large_image_url checkurl" data-rel="prettyPhoto[product-gallery]">
-                                                                    <img id="img_01" value="@item3.Picture_Id" class="img-responsive" alt="#Product_Name" src="@item3.Picture_FileName" data-zoom-image="@item3.Picture_FileName" />
-                                                                </a>
-                                                            }
-                                                        }
+                                                        <!--Sửa tiếp cho các ảnh khác-->
+                                                        <a href="@item1.Product_Img" class="large_image_url checkurl" data-rel="prettyPhoto[product-gallery]">
+                                                            <img id="img_01" value="@item1.Picture_Id" class="img-responsive" alt="#Product_Name" src="@item1.Product_Img" data-zoom-image="@item1.Product_Img" />
+                                                        </a>
+
                                                         <div class="offset_nop hidden">
 
                                                             <div class="item">
@@ -186,17 +182,12 @@
                                                             if (item5.ProductType_Id == item1.ProductType_Id && item5.Product_Name != item1.Product_Name) // nếu có cùng loại id và khác tên sp chính. Nếu sp loại khác và cùng tên sẽ bị loại ra.
                                                             {
                                                                 n++; // tăng 1 mỗi lần có 1 sp
-                                                            //var product_name = @item1.Product_Name;
+                                                                if (n > 3) break;
+                                                                //var product_name = @item1.Product_Name;
                                                                 <div class="aside-content mini-products-list2">
                                                                     <div class="product-item clearfix on-sale">
                                                                         <a href="/thong-kim-mini" class="product-img" title="#">
-                                                                            @foreach (var item3 in Model.picture_ViewModels.picture)
-                                                                            {
-                                                                                if (item5.Picture_Id == item3.Picture_Id)
-                                                                                {
-                                                                                    <img src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="">
-                                                                                }
-                                                                            }
+                                                                            <img src="@item5.Product_Img" data-lazyload="@item5.Product_Img" alt="">
                                                                         </a>
                                                                         <div class="info-inner">
                                                                             <h3 class="item-title"> <a href="~/productdetail/@item5.Product_Href" title="">@item5.Product_Name</a></h3>
@@ -218,9 +209,7 @@
                                                                                                 <span class="price">@item5.Product_Price.000đ</span>
                                                                                             </p>
                                                                                         }
-
                                                                                     </div>
-
                                                                                 </div>
                                                                                 <!-- Holder for Product Review -->
                                                                             </div>
@@ -234,10 +223,6 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                if (n == 3)
-                                                                {
-                                                                    break;
-                                                                }
                                                             }
                                                         }
                                                         <a href="/chau-canh" class="btn-view-more" title="Xem thêm">
@@ -284,7 +269,8 @@
 
                                                                 </div>
 
-                                                                <div data-value="35 x 35cm" class="swatch-element 35 x 35cm">
+                                                                <!--Size loại 2-->
+                                                                @* <div data-value="35 x 35cm" class="swatch-element 35 x 35cm">
 
 
                                                                     <input id="swatch-0-35 x 35cm" type="radio" name="option-0" value="35 x 35cm" />
@@ -293,7 +279,7 @@
                                                                         Product_Size 2 cm
                                                                     </label>
 
-                                                                </div>
+                                                                </div> *@
 
 
                                                             </div>
@@ -414,7 +400,7 @@
                     var n = parseInt(document.getElementById("itemid").getAttribute("value"));
                     var itemprice = parseInt(document.getElementById("itemprice").getAttribute("value"));
                     var p = itemprice * n;
-                    var i = document.getElementById("img_01").getAttribute('value');
+                    var i = document.getElementById("img_01").getAttribute('value'); // lấy id hình 
                     var numnoti = document.getElementById("numnoti");
                     if (t != 0) {
                         $.ajax({
@@ -426,7 +412,8 @@
                                 if (a == true) {
                                     console.log(a); // hiện nó lên (ở trong )
                                     n.success ? (togles(), ReadCookie(), LoadNumber()) : alert("Đã mua hàng thành công"); // alert biến a đó nếu thành công
-                                    window.location = "https://localhost:7037/product";
+                                    /* window.location = "https://localhost:7037/product"; */
+                                        location.reload();
                                 }
                                 else {
                                     alert(a);

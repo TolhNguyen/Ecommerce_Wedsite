@@ -33,7 +33,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 {
                     await dbConn.OpenAsync(); // mở sync
 
-                    var query = dbConn.QueryBuilder($"select * from HomePage where HomePage_Type = 1 and HomePage_Levels = 1 "); // thao tác querry 
+                    var query = dbConn.QueryBuilder($"select * from HomePage where HomePage_Type = 1 and HomePage_Levels = 1 order by HomePage_Order asc"); // thao tác querry 
                     //data.Data = await query.QueryAsync<AllLayout>(); // lưu vào dữ liệu
 
                     data.Data.homepage_Vl1 = await query.QueryAsync<HomePage>(); // chỉ lấy mỗi 1 header_Lv1 nên là dạng Object
@@ -49,9 +49,8 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     data.Data.picture_Id = await query.QueryAsync<HomePage>();
 
                     query = dbConn.QueryBuilder($"SELECT TOP 4 * FROM Product ORDER BY Product_Id DESC"); // thao tác querry 
-                    // Gọi lên các thông tin dữ liệu thuộc các "header cha" (là lv1)
-
-                    //data.Data = await query.QueryAsync<AllLayout>(); // lưu vào dữ liệu
+                    
+                    // Select sp lên:
                     data.Data.newproduct = await query.QueryAsync<Product>();
                     // Vào biến lớn "data." đến biến nhỏ hơn "Data." sau đó vào danh sách nhỏ nữa là "header_VL1(trong model header_ViewModel"
                     //Gom nguyên một danh sách title này thành 1 object gọi là header_lv1 2

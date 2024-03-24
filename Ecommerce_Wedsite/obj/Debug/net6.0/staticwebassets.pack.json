@@ -65,8 +65,8 @@
       "PackagePath": "staticwebassets\\bizweb.dktcdn.net\\themes\\collection.css"
     },
     {
-      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\bizweb.dktcdn.net\\themes\\mewint_css.scss.css",
-      "PackagePath": "staticwebassets\\bizweb.dktcdn.net\\themes\\mewint_css.scss.css"
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\bizweb.dktcdn.net\\themes\\mewint.css",
+      "PackagePath": "staticwebassets\\bizweb.dktcdn.net\\themes\\mewint.css"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\bizweb.dktcdn.net\\themes\\owlcarousel.scss.css",
@@ -103,6 +103,14 @@
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\cartproductcheckout3.css",
       "PackagePath": "staticwebassets\\css\\cartproductcheckout3.css"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\chatbot.css",
+      "PackagePath": "staticwebassets\\css\\chatbot.css"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\chatbot2.css",
+      "PackagePath": "staticwebassets\\css\\chatbot2.css"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\checkout.css",
@@ -455,6 +463,10 @@
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\worktable2.jpg",
       "PackagePath": "staticwebassets\\img\\Picture\\worktable2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\js\\chatbotjs.js",
+      "PackagePath": "staticwebassets\\js\\chatbotjs.js"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\js\\demo\\chart-area-demo.js",

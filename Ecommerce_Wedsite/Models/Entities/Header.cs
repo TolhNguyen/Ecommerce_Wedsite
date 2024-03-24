@@ -13,7 +13,9 @@ namespace Ecommerce_Wedsite.Models.Entities
         public string HeaderAction { get; set; }
         public Bit HeaderCondition { get; set; }
         public int Header_HTML { get; set; }
-
+        public int Header_Order { get; set; }
+        public string Header_Summary { get; set; }
+        public string Header_Img {  get; set; }
         /*
          ? Có thể cần thêm public HeaderParnt_condition k: tùy
          ? Có cần thêm table Subheader riêng k: subheader, id parent, level, ...

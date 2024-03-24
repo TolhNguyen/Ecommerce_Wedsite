@@ -19,6 +19,8 @@
 		var btncart = document.getElementById("btncart");
         var btncart2 = document.createElement("a");
         var n = 0;
+		var totalnum = document.getElementById("totalnum");
+		var num = 0;
 		
         var cartcookie = getCart('cart').substring(0); // lấy value đó ra và bỏ dấu = ở đầu. Này là type string
 		// decodeURIComponent() : cách encode
@@ -43,6 +45,7 @@
 						img.style.margin = "10px";
 
 						li.textContent = n + ") Id: " + item[i][j].id + " ,số lượng: " + item[i][j].qty + " , giá: " + item[i][j].price + ".000đ";
+						num += item[i][j].qty; // + dồn số lượng
 						btncartxoa.setAttribute("onclick", "CartXoa("+ item[i][j].id +");");
 						btncartxoa.style.color = "white";
 						btncartxoa.style.backgroundColor = "#6da53b";
@@ -54,6 +57,7 @@
 						li.appendChild(btncartxoa);
 						ul.appendChild(li); // add lines
 					}
+					totalnum.textContent = "Tổng số lượng: " + num;
 				}
 				if(typeof item[i] === "number"){
 					totalprice = item[i];

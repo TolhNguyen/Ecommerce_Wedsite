@@ -5,7 +5,7 @@
 }
 <div>
     <h1>Header Table</h1>
-    <div class="card-body">
+    <div class="card-body" style="overflow-x:auto">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> <!---Tạo bảng-->
                 <thead> <!--Danh sách bảng-->
@@ -24,6 +24,18 @@
                         </th>
                         <th>
                             Header action
+                        </th>
+                        <th>
+                            Header_HTML
+                        </th>
+                        <th>
+                            Header_Order
+                        </th>
+                        <th>
+                            Header_Summary
+                        </th>
+                        <th>
+                            Header_Img
                         </th>
                         <th>
                             Edit
@@ -46,6 +58,10 @@
                                 <td>@Html.DisplayFor(modelItem => item.HeaderCondition)</td>
                                 <td>@Html.DisplayFor(modelItem => item.HeaderType_Id)</td>
                                 <td>@Html.DisplayFor(modelItem => item.HeaderAction)</td> 
+                                <td>@Html.DisplayFor(modelItem => item.Header_HTML)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Header_Order)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Header_Summary)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Header_Img)</td>
                                 <td>@Html.ActionLink("Edit","headeradminedit",item)</td>
                                 <td>@Html.ActionLink("Delete","headeradmindelete",item)</td>
                                 <!--Tao controller hay service cho edit va delete-->

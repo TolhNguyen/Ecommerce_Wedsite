@@ -33,7 +33,7 @@ namespace Ecommerce_Wedsite.Controllers
         }
 
         [Route("~/headeradmin")]
-        public async Task<IActionResult> HeaderAdmin(Header headeritem) 
+        public async Task<IActionResult> HeaderAdmin() 
         {
             var All = new AllLayout();
 

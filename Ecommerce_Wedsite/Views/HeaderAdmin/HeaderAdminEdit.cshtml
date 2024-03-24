@@ -73,6 +73,30 @@
                                         <input class="form-control" id="HeaderAction" type="text" name="HeaderAction" placeholder="HeaderAction" value="@item.HeaderAction" required>
                                     </div>
                                 </div>
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (phone number)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Header_HTML">Header HTML TYPE ID</label>
+                                        <input class="form-control" id="Header_HTML" type="tel" placeholder="Header_HTML" value="@item.Header_HTML" required>
+                                    </div>
+                                    <!-- Form Group (birthday)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Header_Order">Header Order</label>
+                                        <input class="form-control" id="Header_Order" type="text" name="Header_Order" placeholder="Header_Order" value="@item.Header_Order" required>
+                                    </div>
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (phone number)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Header_Summary">Header Summary</label>
+                                        <input class="form-control" id="Header_Summary" type="tel" placeholder="Header_Summary" value="@item.Header_Summary" required>
+                                    </div>
+                                    <!-- Form Group (birthday)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Header_Img">Header Image</label>
+                                        <input class="form-control" id="Header_Img" type="text" name="Header_Img" placeholder="Header_Img" value="@item.Header_Img" required>
+                                    </div>
+                                </div>
                                    <!-- Save changes button-->
                                 <input id="button_1" onclick="Editlog()" type="button" value="Save Edit" class="btn btn-primary rounded submit p-3 px-5"/>
                             </div>
@@ -98,6 +122,11 @@
                 HeaderLevels: $('#HeaderLevels').val(),
                 HeaderType_Id: $('#HeaderType_Id').val(),
                 HeaderAction: $('#HeaderAction').val(),
+                Header_HTML: $('#Header_HTML').val(),
+                Header_Order: $('#Header_Order').val(),
+                Header_Summary: $('#Header_Summary').val(),
+                Header_Img: $('#Header_Img').val(),
+
             },
             cache: !1,
             success:

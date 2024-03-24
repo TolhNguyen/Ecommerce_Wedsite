@@ -1,0 +1,119 @@
+﻿@model AllLayout
+@{
+    ViewData["Title"] = "Header Admin Page";
+    Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
+}
+<div style="overflow-x: auto">
+    <h1>Home Page Table</h1>
+    <div class="card-body">
+        <div class="table-responsive" >
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <!---Tạo bảng-->
+                <thead>
+                    <!--Danh sách bảng-->
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            Home Page ID
+                        </th>
+                        <th>
+                            Home Page Title 
+                        </th>
+                        <th>
+                            Home Page Condition
+                        </th>
+                        <th>
+                            Home Page Parent ID
+                        </th>
+                        <th>
+                            Home Page Level
+                        </th>
+                        <th>
+                            Home Page Type
+                        </th>
+                        <th>
+                            Logo ID
+                        </th>
+                        <th>
+                            Picture Group ID
+                        </th>
+                        <th>
+                            HTML ID
+                        </th>
+                        <th>
+                            Video ID
+                        </th>
+                        <th>
+                            Home Page Image
+                        </th>
+                        <th>
+                            Home Page Summary
+                        </th>
+                        <th>
+                            Home Page Order
+                        </th>
+                        <th>
+                            Home Page Video
+                        </th>
+                        <th>
+                            Edit
+                        </th>
+                        <th>
+                            Delete
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model != null)
+                    {
+                        // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
+                        @foreach (var item in Model.homepage_ViewModels.homepage)
+                        {
+                            if (item != null)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Title)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Condition)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePageParent_Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Levels)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Type)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Logo_Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PictureGrp_Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HTML_Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Video_Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Img)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Order)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Video)</td>
+                                    <td>@Html.ActionLink("Edit", "#", item)</td>
+                                    <td>@Html.ActionLink("Delete", "#", item)</td>
+                                    <!--Tao controller hay service cho edit va delete-->
+                                </tr>
+                            }
+
+                        }
+                    }
+                </tbody>
+            </table>
+            <div class="clearfix">
+                <div class="hint-text">Showing <b>5</b> out of <b>10</b> entries</div>
+                <ul class="pagination">
+                    <li class="page-item disabled"><a href="#">Previous</a></li>
+                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
+            </div>
+            <div>
+                <a href="/HeaderAdminCreate">Create New Item</a>
+            </div>
+        </div>
+    </div>
+</div>
+
