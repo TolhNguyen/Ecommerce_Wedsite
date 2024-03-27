@@ -21,9 +21,10 @@ namespace Ecommerce_Wedsite.Controllers.Main
         private readonly IDiscounttService _discounttService;
         private readonly ISubHeaderService _subheaderService;
         private readonly IVideoService _videoService;
+        private readonly IHomePageProductDisplayService _homepageproductdisplayService;
         // private readonly ISort
 
-        public HomeController(ILogger<HomeController> logger, INewWebAppService newWebAppService, IHomePageService homepageService, IPictureService pictureService, ILogoService logoService, ICheckoutAdminService checkoutadminService, IHeaderAndFooterService headerandfooterService, IDiscounttService discounttService, ISubHeaderService subheaderService, IVideoService videoService) //Khai báo Interface
+        public HomeController(ILogger<HomeController> logger, INewWebAppService newWebAppService, IHomePageService homepageService, IPictureService pictureService, ILogoService logoService, ICheckoutAdminService checkoutadminService, IHeaderAndFooterService headerandfooterService, IDiscounttService discounttService, ISubHeaderService subheaderService, IVideoService videoService, IHomePageProductDisplayService homepageproductdisplayService) //Khai báo Interface
         {
             _logger = logger;
             _newWebAppService = newWebAppService; // Tạo 1 tham chiếu 
@@ -35,6 +36,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             _headerandfooterService = headerandfooterService;
             _subheaderService = subheaderService;
             _videoService = videoService;
+            _homepageproductdisplayService = homepageproductdisplayService;
         }
         /// <summary>
         /// Trang Chu
@@ -48,7 +50,8 @@ namespace Ecommerce_Wedsite.Controllers.Main
 
             var headerandfooter_ViewModels = await _headerandfooterService.HeaderAndFooter_ServiceTest();
             var homepage_ViewModels = await _homepageService.HomePage_ServiceTest();
-            var picture_ViewModels = await _pictureService.Service_Test();
+			var homepageproductdisplay_ViewModels = await _homepageproductdisplayService.GetProductDisplay(homepage_ViewModels.Data.homepage_Vl1); // truyền list LV1 vào
+			var picture_ViewModels = await _pictureService.Service_Test();
             var logo_ViewModels = await _logoService.Service_Test();
             var discountt_ViewModels = await _discounttService.PopupDiscount();
             var subheader_ViewModels = await _subheaderService.SubHeader();
@@ -61,6 +64,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             All.discountt_ViewModels = discountt_ViewModels.Data;
             All.subheader_ViewModels = subheader_ViewModels.Data;
             All.video_ViewModels = video_ViewModels.Data;
+            All.homepageproductdisplay_ViewModels = homepageproductdisplay_ViewModels.Data;
 
             return View("WebApp/Index", All); // Truyền dữ liệu. Hiển thị view đúng địa chỉ. 
         }

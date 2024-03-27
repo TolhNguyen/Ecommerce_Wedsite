@@ -59,6 +59,10 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     header.HeaderType_Id = headeritem.HeaderType_Id;
                     header.HeaderAction = headeritem.HeaderAction;
                     header.HeaderCondition = headeritem.HeaderCondition;
+                    header.Header_HTML = headeritem.Header_HTML;
+                    header.Header_Order = headeritem.Header_Order;
+                    header.Header_Summary = headeritem.Header_Summary;
+                    header.Header_Img = headeritem.Header_Img;
 
                     var it = dbConn.Update(header);
 

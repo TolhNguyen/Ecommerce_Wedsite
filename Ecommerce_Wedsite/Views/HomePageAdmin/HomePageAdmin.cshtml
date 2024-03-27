@@ -13,19 +13,16 @@
                     <!--Danh sách bảng-->
                     <tr>
                         <th>
-                            ID
-                        </th>
-                        <th>
                             Home Page ID
                         </th>
                         <th>
-                            Home Page Title 
+                            Home Page Title
                         </th>
                         <th>
                             Home Page Condition
                         </th>
                         <th>
-                            Home Page Parent ID
+                            Home Page Parent Id
                         </th>
                         <th>
                             Home Page Level
@@ -34,10 +31,10 @@
                             Home Page Type
                         </th>
                         <th>
-                            Logo ID
+                            Logo Id
                         </th>
                         <th>
-                            Picture Group ID
+                            Picture Group Id
                         </th>
                         <th>
                             HTML ID
@@ -56,6 +53,9 @@
                         </th>
                         <th>
                             Home Page Video
+                        </th>
+                        <th>
+                            Home Page Product Display Id
                         </th>
                         <th>
                             Edit
@@ -86,9 +86,12 @@
                                     <td>@Html.DisplayFor(modelItem => item.HTML_Id)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Video_Id)</td>
                                     <td>@Html.DisplayFor(modelItem => item.HomePage_Img)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Summary)</td>
                                     <td>@Html.DisplayFor(modelItem => item.HomePage_Order)</td>
                                     <td>@Html.DisplayFor(modelItem => item.HomePage_Video)</td>
-                                    <td>@Html.ActionLink("Edit", "#", item)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_ProductDisplayId)</td>
+                                    <td>@Html.ActionLink("Edit", "homepageadminedit", new {HomePage_Id = item.HomePage_Id})</td>
+                                    <!--Chỉ cần gửi id thôi-->
                                     <td>@Html.ActionLink("Delete", "#", item)</td>
                                     <!--Tao controller hay service cho edit va delete-->
                                 </tr>

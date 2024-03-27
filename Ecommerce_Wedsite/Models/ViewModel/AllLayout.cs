@@ -73,5 +73,7 @@ namespace Ecommerce_Wedsite.Models.ViewModel
 
 		public Video_ViewModel video_ViewModels { get; set; }
 
+        public HomePageProductDisplay_ViewModel homepageproductdisplay_ViewModels { get; set; }
+
 	}
 }

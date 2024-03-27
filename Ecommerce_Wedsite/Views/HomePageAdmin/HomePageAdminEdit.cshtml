@@ -1,0 +1,157 @@
+﻿@model AllLayout
+@{
+    ViewData["Title"] = "Home Page Admin Edit";
+    Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
+}
+<div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+    <nav class="nav nav-borders">
+        <a class="nav-link active ms-0" href="#" target="__blank">Profile</a>
+        <a class="nav-link" href="#" target="__blank">Billing</a>
+        <a class="nav-link" href="#" target="__blank">Security</a>
+        <a class="nav-link" href="#" target="__blank">Notifications</a>
+    </nav>
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Details</div>
+                <div class="card-body">
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model.homepage_ViewModels.homepage)
+                        {
+                            <div>
+                                <!-- Form Group (username)-->
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="HomePage_Id">Home Page Id</label>
+                                    <input class="form-control" id="HomePage_Id" name="HomePage_Id" type="tel" placeholder="HomePage_Id" value="@item.HomePage_Id" readonly>
+                                </div>
+                                <!-- Form Row-->
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (first name)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="HomePage_Title">Home Page Title</label>
+                                        <input class="form-control" id="HomePage_Title" name="HomePage_Title" type="text" placeholder="HomePage_Title" value="@item.HomePage_Title" required>
+                                    </div>
+                                    <!-- Form Group (last name)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="HomePage_Condition">Home Page Condition</label>
+                                        <input class="form-control" id="HomePage_Condition" name="HomePage_Condition" type="tel" placeholder="HomePage_Condition" value="@item.HomePage_Condition" required>
+                                    </div>
+                                </div>
+                                <!-- Form Row-->
+                                <!-- Form Row-->
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (phone number)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="HomePageParent_Id">Home Page Parent Id</label>
+                                        <input class="form-control" id="HomePageParent_Id" name="HomePageParent_Id" type="tel" placeholder="HomePageParent_Id" value="@item.HomePageParent_Id" required>
+                                    </div>
+                                    <!-- Form Group (birthday)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="HomePage_Levels">Home Page Levels</label>
+                                        <input class="form-control" id="HomePage_Levels" type="tel" name="HomePage_Levels" placeholder="HomePage_Levels" value="@item.HomePage_Levels" required>
+                                    </div>
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (phone number)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="HomePage_Type">Home Page Type</label>
+                                        <input class="form-control" id="HomePage_Type" type="tel" name="HomePage_Type" placeholder="HomePage_Type" value="@item.HomePage_Type" required>
+                                    </div>
+                                    <!-- Form Group (birthday)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="HomePage_Order">Home Page Order</label>
+                                        <input class="form-control" id="HomePage_Order" type="tel" name="HomePage_Order" placeholder="HomePage_Order" value="@item.HomePage_Order" required>
+                                    </div>
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (phone number)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Logo_Id">Logo Id</label>
+                                        <input class="form-control" id="Logo_Id" type="tel" name="Logo_Id" placeholder="Logo_Id" value="@item.Logo_Id" required>
+                                    </div>
+                                    <!-- Form Group (birthday)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="PictureGrp_Id">Picture Group Id</label>
+                                        <input class="form-control" id="PictureGrp_Id" type="tel" name="PictureGrp_Id" placeholder="PictureGrp_Id" value="@item.PictureGrp_Id" required>
+                                    </div>
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (phone number)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="HTML_Id">HTML ID</label>
+                                        <input class="form-control" id="HTML_Id" type="tel" name="HTML_Id" placeholder="HTML_Id" value="@item.HTML_Id" required>
+                                    </div>
+                                    <!-- Form Group (birthday)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="Video_Id">Video Id</label>
+                                        <input class="form-control" id="Video_Id" type="tel" name="Video_Id" placeholder="Video_Id" value="@item.Video_Id" required>
+                                    </div>
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (phone number)-->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="HomePage_Summary">Home Page Summary</label>
+                                        <input class="form-control" id="HomePage_Summary" type="text" name="HomePage_Summary" placeholder="HomePage_Summary" value="@item.HomePage_Summary" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="HomePage_ProductDisplayId">Home Page Product Display Ids</label>
+                                        <input class="form-control" id="HomePage_ProductDisplayId" type="text" name="HomePage_ProductDisplayId" placeholder="HomePage_ProductDisplay" value="@item.HomePage_ProductDisplayId" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="HomePage_Img">Home Page Image</label>
+                                    <input class="form-control" id="HomePage_Img" name="HomePage_Img" type="tel" placeholder="HomePage_Img" value="@item.HomePage_Img" required>
+                                </div>
+                                <!-- Save changes button-->
+                                <input id="button_1" onclick="Editlog()" type="button" value="Save Edit" class="btn btn-primary rounded submit p-3 px-5" />
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Editlog() {
+        $.ajax({
+            url: "HomePageAdmin/HomePageAdminEditFunction",
+            dataType: "text",
+            type: "POST",
+            data: {
+                HomePage_Id: $('#HomePage_Id').val(),
+                HomePage_Title: $('#HomePage_Title').val(),
+                HomePage_Condition: $('#HomePage_Condition').val(),
+                HomePageParent_Id: $('#HomePageParent_Id').val(),
+                HomePage_Levels: $('#HomePage_Levels').val(),
+                HomePage_Type: $('#HomePage_Type').val(),
+                HomePage_Order: $('#HomePage_Order').val(),
+                Logo_Id: $('#Logo_Id').val(),
+                PictureGrp_Id: $('#PictureGrp_Id').val(),
+                HTML_Id: $('#HTML_Id').val(),
+                Video_Id: $('#Video_Id').val(),
+                HomePage_Summary: $('#HomePage_Summary').val(),
+                HomePage_ProductDisplayId: $('#HomePage_ProductDisplayId').val(),
+                HomePage_Img: $('#HomePage_Img').val()
+            },
+            cache: !1,
+            success:
+                function (result) {
+                    var obj = JSON.parse(result);
+                    if (obj.success == true) {
+                        alert(obj.message);
+                        window.location = 'https://localhost:7037/homepageadmin'; // Nếu đúng thì chạy tiếp sang trang Admin
+                    }
+                    else {
+                        alert(obj.message);
+                        window.location = 'https://localhost:7037/homepageadminedit'; // nếu false thì về lại trang login
+                    }
+                }
+        });
+    };
+</script>

@@ -16,16 +16,20 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly ILogger<HomePageAdminController> _logger;
         private readonly IAdminMenuService _adminmenuService;
         private readonly IHomePageAdminService _homepageadminService;
+        private readonly IHomePageAdminEditService _homepageadmineditService;
+        private readonly IHomePageAdminEditFunctionService _homepageadmineditfunctionService;
 
-        public HomePageAdminController(ILogger<HomePageAdminController> logger, IAdminMenuService adminmenuService, IHomePageAdminService homepageadminService)
+        public HomePageAdminController(ILogger<HomePageAdminController> logger, IAdminMenuService adminmenuService, IHomePageAdminService homepageadminService, IHomePageAdminEditService homepageadmineditService, IHomePageAdminEditFunctionService homepageadmineditfunctionService)
         {
             _logger = logger;
             _adminmenuService = adminmenuService;
             _homepageadminService = homepageadminService;
+            _homepageadmineditService = homepageadmineditService;
+            _homepageadmineditfunctionService = homepageadmineditfunctionService;
         }
 
         [Route("~/homepageadmin")]
-        public async Task<IActionResult> HomePageAdmin(HomePage homepageitem)
+        public async Task<IActionResult> HomePageAdmin()
         {
             var All = new AllLayout();
 
@@ -65,33 +69,26 @@ namespace Ecommerce_Wedsite.Controllers
         //    return View("HeaderAdminCreate", All);
         //}
 
-        //[Route("~/headeradmincreatefunction")]
-        //public async Task<IActionResult> HeaderAdminCreateFunction(Header headeritem) // Function create
-        //{
-        //    var All = new AllLayout();
+        public async Task<IActionResult> HomePageAdminEditFunction(HomePage homepageitem) // controller kiểu ajax thì mới đọc đc 
+                                                                                    // Tạo thêm trang riêng function riêng
+        {
+            // cần có 1  model layout admin riêng
+            var homepage_ViewModels = await _homepageadmineditfunctionService.EditFunction(homepageitem);
+            return Json(homepage_ViewModels); // sau khi chạy service ở trên r mới trả view ra
+        }
 
-        //    var header_ViewModels = await _headeradminCreateService.Service_Test(headeritem);
+        [Route("~/homepageadminedit")]
+        public async Task<IActionResult> HomePageAdminEdit(int HomePage_Id) // chỉ cần id thôi để xác định thôi
+        {
+            var All = new AllLayout();
 
-        //    var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
-        //    All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
-        //    All.header_ViewModels = header_ViewModels.Data;
+            var homepage_ViewModels = await _homepageadmineditService.HomePageAdminEdit(HomePage_Id);    
+            var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+            All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
+            All.homepage_ViewModels = homepage_ViewModels.Data;
 
-        //    return View("SuccessPage", All); // sau khi chạy service ở trên r mới trả view ra
-        //}
-
-        //[Route("~/headeradminedit")]
-        //public async Task<IActionResult> HeaderAdminEdit(int Header_Id) // Tạo thêm trang riêng function riêng
-        //{
-        //    var All = new AllLayout();
-
-        //    var header_ViewModels = await _headeradminEditService.Service_Test(Header_Id);
-
-        //    var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
-        //    All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
-        //    All.header_ViewModels = header_ViewModels.Data;
-
-        //    return View("HeaderAdminEdit", All);
-        //}
+            return View("HomePageAdminEdit", All);
+        }
 
         //public async Task<IActionResult> HeaderAdminEditFunction(Header headeritem) // controller kiểu ajax thì mới đọc đc 
         //                                                                            // Tạo thêm trang riêng function riêng

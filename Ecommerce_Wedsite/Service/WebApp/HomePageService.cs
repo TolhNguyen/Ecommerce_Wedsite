@@ -33,36 +33,39 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 {
                     await dbConn.OpenAsync(); // mở sync
 
-                    var query = dbConn.QueryBuilder($"select * from HomePage where HomePage_Type = 1 and HomePage_Levels = 1 order by HomePage_Order asc"); // thao tác querry 
+                    var query1 = dbConn.QueryBuilder($"select * from HomePage where HomePage_Type = 1 and HomePage_Levels = 1 order by HomePage_Order asc"); // thao tác querry 
                     //data.Data = await query.QueryAsync<AllLayout>(); // lưu vào dữ liệu
 
-                    data.Data.homepage_Vl1 = await query.QueryAsync<HomePage>(); // chỉ lấy mỗi 1 header_Lv1 nên là dạng Object
+                    data.Data.homepage_Vl1 = await query1.QueryAsync<HomePage>(); // chỉ lấy mỗi 1 header_Lv1 nên là dạng Object
+
                     // Vào biến lớn "data." đến biến nhỏ hơn "Data." sau đó vào danh sách nhỏ nữa là "header_VL1(trong model header_ViewModel"
 
-                    query = dbConn.QueryBuilder($"select * from HomePage where HomePage_Type = 1 and HomePage_Levels = 2"); // thao tác querry
+                    var query2 = dbConn.QueryBuilder($"select * from HomePage where HomePage_Type = 1 and HomePage_Levels = 2"); // thao tác querry
 
                     //data.Data = await query.QueryAsync<AllLayout>(); // lưu vào dữ liệu
-                    data.Data.homepage_Vl2 = await query.QueryAsync<HomePage>(); // lấy dữ liệu từ Entities Header (để có title riêng của header_lv1 2 ra)
+                    data.Data.homepage_Vl2 = await query2.QueryAsync<HomePage>(); // lấy dữ liệu từ Entities Header (để có title riêng của header_lv1 2 ra)
 
-                    query = dbConn.QueryBuilder($"select * from HomePage");
+                    //foreach (var item in data.Data.homepage_Vl1)
+                    //{
+                    //    data.Data.productdisplay = item.HomePage_ProductDisplay;
+                    //}
 
-                    data.Data.picture_Id = await query.QueryAsync<HomePage>();
-
-                    query = dbConn.QueryBuilder($"SELECT TOP 4 * FROM Product ORDER BY Product_Id DESC"); // thao tác querry 
+                    //var query4 = dbConn.QueryBuilder($"SELECT TOP 4 * FROM Product ORDER BY Product_Id DESC"); // thao tác querry 
                     
-                    // Select sp lên:
-                    data.Data.newproduct = await query.QueryAsync<Product>();
-                    // Vào biến lớn "data." đến biến nhỏ hơn "Data." sau đó vào danh sách nhỏ nữa là "header_VL1(trong model header_ViewModel"
-                    //Gom nguyên một danh sách title này thành 1 object gọi là header_lv1 2
+                    //// Select sp lên:
+                    //data.Data.newproduct = await query4.QueryAsync<Product>();
+                    //// Vào biến lớn "data." đến biến nhỏ hơn "Data." sau đó vào danh sách nhỏ nữa là "header_VL1(trong model header_ViewModel"
+                    ////Gom nguyên một danh sách title này thành 1 object gọi là header_lv1 2
 
-                    query = dbConn.QueryBuilder($"SELECT * FROM Product where Product_PromoPrice != 0"); // thao tác querry 
+                    //var query5 = dbConn.QueryBuilder($"SELECT * FROM Product where Product_PromoPrice != 0"); // thao tác querry 
 
-                    //data.Data = await query.QueryAsync<AllLayout>(); // gán và lưu vào dữ liệu
-                    data.Data.promoproduct = await query.QueryAsync<Product>();
+                    ////data.Data = await query.QueryAsync<AllLayout>(); // gán và lưu vào dữ liệu
+                    //data.Data.promoproduct = await query5.QueryAsync<Product>();
 
-                    query = dbConn.QueryBuilder($"select * from Users");
+                    //Xử lý này sau:
+                    //var query6 = dbConn.QueryBuilder($"select * from Users");
 
-                    data.Data.users = await query.QueryAsync<Users>();
+                    //data.Data.users = await query6.QueryAsync<Users>();
 
                     await dbConn.CloseAsync(); // đóng sync sau khi sử dụng
                 }

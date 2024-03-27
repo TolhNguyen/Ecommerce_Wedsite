@@ -153,53 +153,59 @@
 						<div class="container">
 							<div class="product-sock">
 								<div class="sock_slide">
-									@foreach(var item4 in Model.homepage_ViewModels.newproduct)
+									@foreach (var item8 in Model.homepageproductdisplay_ViewModels.productdisplayGrp)
 									{
-										<div class="item">
-											<div class="col-item">
-												<div class ="item-inner">
-													<div class="info-inner">
-														<!--Nội dung muốn hiện thị phụ thuộc vào query ở Service-->
-														<h3 class="item-title"><a href="#" title="#">@item4.Product_Name</a></h3>
-														<div class="item-content">
-															<div class="item-price">
-																<div class="price-box">
-																	@if(item4.Product_PromoPrice == 0)
-																	{
-																		<p class="special-price"><span class="price">@item4.Product_Price.000đ</span></p>
-																	}
-																	else
-																	{
-																		<p class="special-price"><span class="price">@item4.Product_PromoPrice.000đ</span></p>
-																		<p class="old-price"><span class="price">@item4.Product_Price.000đ</span></p>
-																	}
+										@if(item8.HomePage_Id == item.HomePage_Id)
+										{
+											@foreach (var item4 in item8.productdisplay)
+											{
+												<div class="item">
+													<div class="col-item">
+														<div class="item-inner">
+															<div class="info-inner">
+																<!--Nội dung muốn hiện thị phụ thuộc vào query ở Service-->
+																<h3 class="item-title"><a href="#" title="#">@item4.Product_Name</a></h3>
+																<div class="item-content">
+																	<div class="item-price">
+																		<div class="price-box">
+																			@if (item4.Product_PromoPrice == 0)
+																			{
+																				<p class="special-price"><span class="price">@item4.Product_Price.000đ</span></p>
+																			}
+																			else
+																			{
+																				<p class="special-price"><span class="price">@item4.Product_PromoPrice.000đ</span></p>
+																				<p class="old-price"><span class="price">@item4.Product_Price.000đ</span></p>
+																			}
+																		</div>
+																	</div>
+																</div>
+																<div class="actions">
+																	<form action="/cart/add" method="post" class="variants" data-id="product-actions-15887794" enctype="multipart/form-data">
+																		<input type="hidden" name="variantId" value="27843194">
+																		<button class="button btn-cart add_to_cart" title="Mua hàng" fdprocessedid="e99jd6" type="button" onclick="window.location.href='/productdetail/@item4.Product_Href'">Mua hàng</button>
+																		<button class="button btn-cart btn-more" title="Chi tiết sản phẩm" type="button" onclick="window.location.href='/productdetail/@item4.Product_Href'" fdprocessedid="uhiyki">
+																			<img alt="Mew Nature" src="/img/Logo/eye.png">
+																		</button>
+																	</form>
 																</div>
 															</div>
+															<div class="thumb-wrapper" onclick="window.location.href='/productdetail/@item4.Product_Href'">
+																<a href="/productdetail/@item4.Product_Href" class="thumb flip" title="@item4.Product_Name">
+																	@foreach (var item3 in Model.picture_ViewModels.picture)
+																	{
+																		@if (item3.Picture_Id == item4.Picture_Id)
+																		{
+																			<img src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="Sen đá lá ngọc">
+																		}
+																	}
+																</a>
+															</div>
 														</div>
-														<div class="actions">
-															<form action="/cart/add" method="post" class="variants" data-id="product-actions-15887794" enctype="multipart/form-data">
-																<input type="hidden" name="variantId" value="27843194">
-																<button class="button btn-cart add_to_cart" title="Mua hàng" fdprocessedid="e99jd6" type="button" onclick="window.location.href='/productdetail/@item4.Product_Href'">Mua hàng</button>
-																<button class="button btn-cart btn-more" title="Chi tiết sản phẩm" type="button" onclick="window.location.href='/productdetail/@item4.Product_Href'" fdprocessedid="uhiyki">
-																	<img alt="Mew Nature" src="/img/Logo/eye.png">
-																</button>
-															</form>
-														</div>
-													</div>
-													<div class="thumb-wrapper" onclick="window.location.href='/productdetail/@item4.Product_Href'">
-														<a href="/productdetail/@item4.Product_Href" class="thumb flip" title="@item4.Product_Name">
-															@foreach (var item3 in Model.picture_ViewModels.picture)
-															{
-																@if (item3.Picture_Id == item4.Picture_Id)
-																{
-																	<img src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="Sen đá lá ngọc">
-																}
-															}
-														</a>
 													</div>
 												</div>
-											</div>
-										</div>
+											}
+										}
 									}
 								</div>
 							</div>
@@ -223,53 +229,70 @@
 											<div class="slider-items-products">
 												<div id="best-seller-slider" class="product-flexslider hidden-buttons">							
 													<div class="slider-items slider-width-col6">
-														@foreach(var item5 in Model.homepage_ViewModels.promoproduct)
+														@foreach (var item8 in Model.homepageproductdisplay_ViewModels.productdisplayGrp)
 														{
-															<div class="col-xs-12 item_hm odd">
-																<div class="col-item">
-																	<div class="item-inner-menu">
-																		<div class="product-wrapper">
-																			<div class="thumb-wrapper" onclick="window.location.href='/sen-da-la-ngoc'">
-																				<a href="/productdetail/@item5.Product_Href" class="thumb flip" title="@item5.Product_Name">
-																					@foreach (var item3 in Model.picture_ViewModels.picture)
-																					{
-																						@if (item3.Picture_Id == item5.Picture_Id)
-																						{
-																							<img src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="Sen đá lá ngọc">
-																						}
-																					}	
-																				</a>
-																			</div>
-																		</div>
-																		<div class="item-info-menu">
-																			<div class="info-inner">
-																				<a href="/productdetail/@item5.Product_Href" title="Sen đá lá ngọc">
-																					<h3 class="item-title line_2">@item5.Product_Name</h3>
-																				</a>
-																				<div class="item-content">
-																					<div class="item-price">    
-																						<div class="price-box"> 							
-																							<p class="special-price"> 
-																								<span class="price">@item5.Product_PromoPrice.000đ</span> 
-																							</p>
-																							<p class="old-price"> 
-																								<span class="price">@item5.Product_Price.000đ</span> 
-																							</p>
-																						</div>
-																					</div>
-																					<div class="desrc_mn hidden-xs hidden-sm">
-																						@item5.Product_Name
+															@if (item8.HomePage_Id == item.HomePage_Id)
+															{
+																@foreach (var item5 in item8.productdisplay)
+																{
+																	<div class="col-xs-12 item_hm odd">
+																		<div class="col-item">
+																			<div class="item-inner-menu">
+																				<div class="product-wrapper">
+																					<div class="thumb-wrapper" onclick="window.location.href='/sen-da-la-ngoc'">
+																						<a href="/productdetail/@item5.Product_Href" class="thumb flip" title="@item5.Product_Name">
+																							@foreach (var item3 in Model.picture_ViewModels.picture)
+																							{
+																								@if (item3.Picture_Id == item5.Picture_Id)
+																								{
+																									<img src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="Sen đá lá ngọc">
+																								}
+																							}
+																						</a>
 																					</div>
 																				</div>
-																				<div class="countdown">
-																					<p class="text-countdown"><span>Ưu đãi kết thúc sau:</span></p>
-																					<div class="clockdiv" data-countdown="2024/12/13" style="display: block !important;"></div>
+																				<div class="item-info-menu">
+																					<div class="info-inner">
+																						<a href="/productdetail/@item5.Product_Href" title="Sen đá lá ngọc">
+																							<h3 class="item-title line_2">@item5.Product_Name</h3>
+																						</a>
+																						<div class="item-content">
+																							<div class="item-price">
+																								@if(@item5.Product_PromoPrice == 0)
+																								{
+																									<div class="price-box">
+																										<p class="special-price">
+																											<span class="price">@item5.Product_Price.000đ</span>
+																										</p>
+																									</div>
+																								}
+																								else
+																								{
+																									<div class="price-box">
+																										<p class="special-price">
+																											<span class="price">@item5.Product_PromoPrice.000đ</span>
+																										</p>
+																										<p class="old-price">
+																											<span class="price">@item5.Product_Price.000đ</span>
+																										</p>
+																									</div>
+																								}
+																							</div>
+																							<div class="desrc_mn hidden-xs hidden-sm">
+																								@item5.Product_Name
+																							</div>
+																						</div>
+																						<div class="countdown">
+																							<p class="text-countdown"><span>Ưu đãi kết thúc sau:</span></p>
+																							<div class="clockdiv" data-countdown="2024/12/13" style="display: block !important;"></div>
+																						</div>
+																					</div>
 																				</div>
 																			</div>
 																		</div>
 																	</div>
-																</div>
-															</div>
+																}
+															}
 														}
 													</div>				
 												</div>
@@ -286,7 +309,7 @@
 				{
 					// Đã có ở dưới
 				}
-				@if(item.HTML_Id == 5)
+				@* @if(item.HTML_Id == 5) // User chưa xử lý:
 				{
 					<section class="small-product-slider test_people" style="background-image:url(@item.HomePage_Img)">
 						<div class="container">
@@ -327,7 +350,7 @@
 							</div>
 						</div>
 					</section>
-				}
+				} *@
 
 				<!--Chèn ảnh thêm ở sau mỗi mục-->
 				<!--
@@ -348,6 +371,53 @@
 						}
 					} 
 				-->
+				@* Tham khảo ở http://vuoncaysenda.com/ khả năng slide kéo thả.
+				<div class="main-col sock_to_day">
+					<div class="container">
+						<div class="product-sock">
+							<div class="new_title">
+								<h2>
+									<a href="/san-pham/" title="Sản phẩm mới">
+										Sản phẩm mới
+									</a>
+								</h2>
+							</div>
+							<div class="sock_slide">
+								<div class="item">
+									<div class="col-item">
+										<div class="item-inner">
+											<div class="info-inner">
+												<div class="thumb-wrapper">
+													<a href="/gia-the-trong-sen-da-tron-san-1kg.html" class="thumb flip" title="Giá thể trồng sen đá trộn sẵn (1kg)">
+														<img src="/images/mewnature.gif?1580358137773" class="hinh_sp" data-lazyload="http://vuoncaysenda.com/uploads/pro_photos/cay-sen-da-167-16115569176.jpg" alt="Giá thể trồng sen đá trộn sẵn (1kg)">
+													</a>
+													<a class="gio_hang_mb add_to_cart" onclick="add_gio_hang2(166,1)"> <i class="fa fa-cart-plus"></i></a>
+												</div>
+
+												<h3 class="item-title "><a href="/gia-the-trong-sen-da-tron-san-1kg.html" title="Giá thể trồng sen đá trộn sẵn (1kg)">Giá thể trồng sen đá trộn sẵn (1kg)</a> </h3>
+												<div class="item-content">
+													<div class="item-price">
+														<div class="price-box clearfix">
+
+															<div class="special-price">
+																<span class="price product-price">23,000 ₫</span>
+															</div>
+
+														</div>
+													</div>
+												</div>
+												<div class="actions">
+													<input type="hidden" name="variantId" value="166" />
+													<button class="button btn-cart add_to_cart " onclick="add_gio_hang2(166,1)" title="Mua hàng">Mua hàng</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> *@
 				@if (item.HTML_Id == 6) // video banner:
 				{
 					<div class="container">
@@ -393,77 +463,84 @@
 								<div class="container">
 									<div class="slider-items-products">
 										<div id="featured-product-slider" class="product-flexslider hidden-buttons">			
-											<div class="slider-items slider-width-col6 row">					
-												@foreach(var item8 in Model.homepage_ViewModels.newproduct)
+											<div class="slider-items slider-width-col6 row">
+												@foreach (var item9 in Model.homepageproductdisplay_ViewModels.productdisplayGrp)
 												{
-													<div class="item col-md-3 col-sm-4 col-xs-6">
-														<div class="col-item">
-															@if(item8.Product_PromoPrice != 0)
-															{
-																<div class="sale-label sale-top-right">- 
-																	17% 
-																</div>
-															}
-															<div class="item-inner">
-																<div class="product-wrapper">
-																	<div class="thumb-wrapper" onclick="window.location.href='/luas-nuide'">
-																		<a href="/productdetail/@item8.Product_Href" class="thumb flip"  title="@item8.Product_Name">
-																			@foreach (var item3 in Model.picture_ViewModels.picture)
-																			{
-																				@if (item3.Picture_Id == item8.Picture_Id)
-																				{
-																					<img src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="@item8.Product_Name">
-																				}
-																			}
-																		</a>
-																	</div>
-																</div>
-																<div class="item-info">
-																	<div class="info-inner">
-																		<h3 class="item-title"> <a href="/luas-nuide" title="@item8.Product_Name">@item8.Product_Name</a> </h3>
-																		<div class="item-content">
-																			<div class="item-price">    
-						
-																				<div class="price-box"> 
-																					@if(item8.Product_PromoPrice != 0)
-																					{
-																						<p class="special-price"> 
-																							<span class="price">@item8.Product_PromoPrice.000₫</span> 
-																						</p>
-																						<p class="old-price"> 
-																							<span class="price">@item8.Product_Price.000₫</span> 
-																						</p>
-																					}
-																					else
-																					{
-																						<p class="special-price"> 
-																							<span class="price">@item8.Product_Price.000₫</span> 
-																						</p>
-																					}
-																			</div>
-						
-																			</div>
-																			<!-- Holder for Product Review -->
+													@if (item9.HomePage_Id == item.HomePage_Id)
+													{
+														@foreach (var item8 in item9.productdisplay)
+														{
+															<div class="item col-md-3 col-sm-4 col-xs-6">
+																<div class="col-item">
+																	@if (item8.Product_PromoPrice != 0)
+																	{
+																		<div class="sale-label sale-top-right">
+																			-
+																			17%
 																		</div>
-																	</div>
+																	}
+																	<div class="item-inner">
+																		<div class="product-wrapper">
+																			<div class="thumb-wrapper" onclick="window.location.href='/luas-nuide'">
+																				<a href="/productdetail/@item8.Product_Href" class="thumb flip" title="@item8.Product_Name">
+																					@foreach (var item3 in Model.picture_ViewModels.picture)
+																					{
+																						@if (item3.Picture_Id == item8.Picture_Id)
+																						{
+																							<img src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="@item8.Product_Name">
+																						}
+																					}
+																				</a>
+																			</div>
+																		</div>
+																		<div class="item-info">
+																			<div class="info-inner">
+																				<h3 class="item-title"> <a href="/luas-nuide" title="@item8.Product_Name">@item8.Product_Name</a> </h3>
+																				<div class="item-content">
+																					<div class="item-price">
 
-																	<div class="actions hidden-xs hidden-sm remove_html">
-																		<form action="/cart/add" method="post" class="variants" data-id="product-actions-15887884" enctype="multipart/form-data">
-																			<button class="button btn-cart btn-more" title="Chi tiết sản phẩm" type="button" onclick="window.location.href='/productdetail/@item8.Product_Href'" >
-																				<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/eye.png?1676649124511">
-																			</button>
-																			<input type="hidden" name="variantId" value="27843379" />
-																			<button class="button btn-cart add_to_cart" title="Mua hàng" type="button" onclick="window.location.href='/productdetail/@item8.Product_Href'">
-																				<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/basket.png?1676649124511">
-																			</button>
-																		</form>       
+																						<div class="price-box">
+																							@if (item8.Product_PromoPrice != 0)
+																							{
+																								<p class="special-price">
+																									<span class="price">@item8.Product_PromoPrice.000₫</span>
+																								</p>
+																								<p class="old-price">
+																									<span class="price">@item8.Product_Price.000₫</span>
+																								</p>
+																							}
+																							else
+																							{
+																								<p class="special-price">
+																									<span class="price">@item8.Product_Price.000₫</span>
+																								</p>
+																							}
+																						</div>
+
+																					</div>
+																					<!-- Holder for Product Review -->
+																				</div>
+																			</div>
+
+																			<div class="actions hidden-xs hidden-sm remove_html">
+																				<form action="/cart/add" method="post" class="variants" data-id="product-actions-15887884" enctype="multipart/form-data">
+																					<button class="button btn-cart btn-more" title="Chi tiết sản phẩm" type="button" onclick="window.location.href='/productdetail/@item8.Product_Href'">
+																						<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/eye.png?1676649124511">
+																					</button>
+																					<input type="hidden" name="variantId" value="27843379" />
+																					<button class="button btn-cart add_to_cart" title="Mua hàng" type="button" onclick="window.location.href='/productdetail/@item8.Product_Href'">
+																						<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/basket.png?1676649124511">
+																					</button>
+																				</form>
+																			</div>
+
+																		</div>
 																	</div>
 
 																</div>
 															</div>
-
-														</div>
-													</div>
+														}																																																																				
+													}
 												}
 											</div>
 										</div>

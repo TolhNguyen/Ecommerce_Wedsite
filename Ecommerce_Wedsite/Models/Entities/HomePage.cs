@@ -20,6 +20,7 @@ namespace Ecommerce_Wedsite.Models.Entities
         public string HomePage_Summary { get; set; }
         public int HomePage_Order {  get; set; }
         public string HomePage_Video {  get; set; }
+        public string HomePage_ProductDisplayId { get; set; }
     }
     public enum Bit3
     {
