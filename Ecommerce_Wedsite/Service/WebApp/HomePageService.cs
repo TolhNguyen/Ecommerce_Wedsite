@@ -63,9 +63,9 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     //data.Data.promoproduct = await query5.QueryAsync<Product>();
 
                     //Xử lý này sau:
-                    //var query6 = dbConn.QueryBuilder($"select * from Users");
+                    var query6 = dbConn.QueryBuilder($"select * from Users");
 
-                    //data.Data.users = await query6.QueryAsync<Users>();
+                    data.Data.users = await query6.QueryAsync<Users>();
 
                     await dbConn.CloseAsync(); // đóng sync sau khi sử dụng
                 }

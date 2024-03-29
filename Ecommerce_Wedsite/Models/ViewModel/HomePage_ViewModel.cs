@@ -10,7 +10,7 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public IEnumerable<Product> productdisplay { get; set; }
         //public IEnumerable<Product> newproduct { get; set; }
         //public IEnumerable<Product> promoproduct { get; set; }
-        //public IEnumerable<Users> users { get; set; }
+        public IEnumerable<Users> users { get; set; }
 
     }
 }

@@ -49,7 +49,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     //data.Data = await query.QueryAsync<AllLayout>(); // lưu vào dữ liệu
                     //data.Data.header_LV2 = await query.QueryAsync<Header>();
 
-                    var query2 = dbConn.QueryBuilder($"select * from Footer where FooterType_Id = 1 and FooterLevels = 1"); 
+                    var query2 = dbConn.QueryBuilder($"select * from Footer where Footer_Condition = 1 and FooterLevels = 1 order by Footer_Order asc"); 
                     
                     data.Data.footer_Vl1 = await query2.QueryAsync<Footer>();
                     

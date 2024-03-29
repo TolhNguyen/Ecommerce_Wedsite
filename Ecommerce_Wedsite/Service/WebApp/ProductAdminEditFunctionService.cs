@@ -56,6 +56,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     product.Product_Info2 = productitem.Product_Info2;
                     product.Product_ShortDescription = productitem.Product_ShortDescription;
                     product.Product_Size = productitem.Product_Size;
+                    product.Product_Img = productitem.Product_Img;
 
                     var it = dbConn.Update(product);
 
