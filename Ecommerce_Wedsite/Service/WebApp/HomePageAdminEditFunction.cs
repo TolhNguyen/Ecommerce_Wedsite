@@ -35,8 +35,8 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     var query = dbConn.QueryBuilder($"select top 1 * from HomePage where HomePage_Id = {homepageitem.HomePage_Id}"); // select theo top id
                     var homepage = await query.QueryFirstOrDefaultAsync<HomePage>(); /// du lieu tu db. tạo biến lưu dữ liệu mới vào. Dùng QueryFODA để lấy những column duy nhất ra.
 
-                    //  map du lieu db  cli
-                    //  mapper 
+                    // map du lieu db 
+                    // mapper 
                     // map tay 
 
                     homepage.HomePage_Title = homepageitem.HomePage_Title;

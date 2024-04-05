@@ -22,8 +22,9 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly IProductAdminEditService _productadmineditService;
         private readonly IAdminMenuService _adminmenuService;
         private readonly IPictureService _pictureService;
+        private readonly IProductAdminConditionService _productadminconditionService;
 
-        public ProductAdminController(ILogger<ProductAdminController> logger, IProductAdminService productadminService, IProductTypeAdminService producttypeadminService, IProductAdminDeleteService productadmindeleteService, IProductAdminCreateService productadmincreateService, IProductAdminEditFunctionService productadmineditfunctionService, IProductAdminEditService productadmineditService, IAdminMenuService adminmenuService, IPictureService pictureService)
+        public ProductAdminController(ILogger<ProductAdminController> logger, IProductAdminService productadminService, IProductTypeAdminService producttypeadminService, IProductAdminDeleteService productadmindeleteService, IProductAdminCreateService productadmincreateService, IProductAdminEditFunctionService productadmineditfunctionService, IProductAdminEditService productadmineditService, IAdminMenuService adminmenuService, IPictureService pictureService, IProductAdminConditionService productadminconditionService)
         {
             _logger = logger;
             _productadminService = productadminService;
@@ -34,6 +35,7 @@ namespace Ecommerce_Wedsite.Controllers
             _productadmineditService = productadmineditService;
             _adminmenuService = adminmenuService;
             _pictureService = pictureService;
+            _productadminconditionService = productadminconditionService;
         }
 
         [Route("~/productadmin")]
@@ -97,6 +99,14 @@ namespace Ecommerce_Wedsite.Controllers
             return Json(false);
         }
 
+        public async Task<IActionResult> ProductAdminCondition(int id, int condition)
+        {
+
+            await _productadminconditionService.CheckCondition(id, condition);
+
+            return RedirectToAction("ProductAdmin");
+        }
+
         [Route("~/producttypeadmin")]
         public async Task<IActionResult> ProductTypeAdmin()
         {
@@ -110,7 +120,7 @@ namespace Ecommerce_Wedsite.Controllers
             return View("ProductTypeAdmin", All);  
         }
 
-
+        
 
         //[Route("/producttypecrud")]
         //public async Task<IActionResult> ProductTypeAdminCRUD()

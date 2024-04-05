@@ -32,7 +32,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 {
                     await dbConn.OpenAsync(); // mở sync
 
-                    var query = dbConn.QueryBuilder($"SELECT * FROM Product where 1=1");
+                    var query = dbConn.QueryBuilder($"SELECT * FROM Product where 1=1 and Product_Condition = 1");
                     if(proname != null)
                     {
                         query += $"and (Product_Name like {"%"+proname+"%"} or Product_ShortDescription like {"%" + proname + "%"})";

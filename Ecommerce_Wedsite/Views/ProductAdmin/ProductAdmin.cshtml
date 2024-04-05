@@ -39,6 +39,7 @@
                         </th>
                         <th>
                             Product condition
+                            
                         </th>
                         <th>
                             Product information
@@ -86,7 +87,20 @@
                                 <td>@Html.DisplayFor(modelItem => item.Product_PromoPrice)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_ShortDescription)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_Manufacturers)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Product_Condition)</td>
+                                <td value="@item.Product_Condition" id="ConditionBox">
+                                    @Html.DisplayFor(modelItem => item.Product_Condition)
+                                    @{
+                                        if (item.Product_Condition == Ecommerce_Wedsite.Models.Entities.Bit4.Available) // nếu là chữ availble
+                                                {
+                                            <input type="checkbox" id="checkbox" name="checkbox" onclick="CheckCondition(@item.Product_Id, 0)" checked> // int condition lấy số 0. Nếu char thêm ''.
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" id="checkbox" name="checkbox" onclick="CheckCondition(@item.Product_Id, 1)">
+                                        }
+                                    }
+                                    
+                                </td>
                                 <td>@Html.Raw(item.Product_Info)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_Size)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_Href)</td>
@@ -115,10 +129,29 @@
 	        </div>
             <div>
               <a href="/ProductAdminCreate">Create New Item</a>
-              
+              `
             </div>
         </div>
     </div>
 </div>
+<script>
+    function CheckCondition(itemid, itemcondition) 
+    {
+        console.log(itemid);
+        console.log(itemcondition);
+        $.ajax({
+            type: "GET",
+            url: "/ProductAdmin/ProductAdminCondition?id=" + itemid + "&condition=" + itemcondition,
+            cache: !1,
+            "async": !0,
+            success: function (a) { // a là ktra trả về từ controller.
+                window.location.reload();
+            },
+            error: function (a) {
+                alert("Thất bại");
+            }
+        });
+    }
+</script>
 
 
