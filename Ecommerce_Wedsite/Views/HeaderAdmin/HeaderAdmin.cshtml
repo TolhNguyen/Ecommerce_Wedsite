@@ -3,89 +3,122 @@
     ViewData["Title"] = "Header Admin Page";
     Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
 }
+<link href="/css/admintable.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <div>
-    <h1>Header Table</h1>
     <div class="card-body" style="overflow-x:auto">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> <!---Tạo bảng-->
-                <thead> <!--Danh sách bảng-->
-                    <tr>
-                        <th>
-                            ID
-                        </th>
-                        <th>
-                            Header title
-                        </th>
-                        <th>
-                            Header condition
-                        </th>
-                        <th>
-                            Header Type ID
-                        </th>
-                        <th>
-                            Header action
-                        </th>
-                        <th>
-                            Header_HTML
-                        </th>
-                        <th>
-                            Header_Order
-                        </th>
-                        <th>
-                            Header_Summary
-                        </th>
-                        <th>
-                            Header_Img
-                        </th>
-                        <th>
-                            Edit
-                        </th>
-                        <th>
-                            Delete
-                        </th>
-                    </tr>
-                </thead>
+        
 
-                <tbody> 
-                    @if (Model != null) 
-                    {
-                        // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
-                        @foreach (var item in Model.header_ViewModels.header){
-                            if(item != null){
-                                <tr>
-                                <td>@Html.DisplayFor(modelItem => item.Header_Id)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Header_Title)</td>
-                                <td>@Html.DisplayFor(modelItem => item.HeaderCondition)</td>
-                                <td>@Html.DisplayFor(modelItem => item.HeaderType_Id)</td>
-                                <td>@Html.DisplayFor(modelItem => item.HeaderAction)</td> 
-                                <td>@Html.DisplayFor(modelItem => item.Header_HTML)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Header_Order)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Header_Summary)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Header_Img)</td>
-                                <td>@Html.ActionLink("Edit","headeradminedit",item)</td>
-                                <td>@Html.ActionLink("Delete","headeradmindelete",item)</td>
-                                <!--Tao controller hay service cho edit va delete-->
-                            </tr>
-                            }
-                            
-                        }
+        @*   <tbody> 
+            @if (Model != null) 
+            {
+                // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
+                @foreach (var item in Model.header_ViewModels.header){
+                    if(item != null){
+                        <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Header_Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Header_Title)</td>
+                        <td>@Html.DisplayFor(modelItem => item.HeaderCondition)</td>
+                        <td>@Html.DisplayFor(modelItem => item.HeaderType_Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.HeaderAction)</td> 
+                        <td>@Html.DisplayFor(modelItem => item.Header_HTML)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Header_Order)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Header_Summary)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Header_Img)</td>
+                        <td>@Html.ActionLink("Edit","headeradminedit",item)</td>
+                        <td>@Html.ActionLink("Delete","headeradmindelete",item)</td>
+                        <!--Tao controller hay service cho edit va delete-->
+                    </tr>
                     }
-                </tbody>
-            </table>
-            <div class="clearfix">
-				<div class="hint-text">Showing <b>5</b> out of <b>10</b> entries</div>
-				<ul class="pagination">
-					<li class="page-item disabled"><a href="#">Previous</a></li>
-					<li class="page-item"><a href="#" class="page-link">1</a></li>
-					<li class="page-item"><a href="#" class="page-link">2</a></li>
-					<li class="page-item active"><a href="#" class="page-link">3</a></li>
-					<li class="page-item"><a href="#" class="page-link">4</a></li>
-					<li class="page-item"><a href="#" class="page-link">5</a></li>
-					<li class="page-item"><a href="#" class="page-link">Next</a></li>
-				</ul>
-	        </div>
-            <div>
-              <a href="/HeaderAdminCreate">Create New Item</a>
+                            
+                }
+            }
+        </tbody>
+        *@
+
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h2>Header <b>Table</b></h2>
+                        </div>
+                        <div class="col-sm-7">
+                            <a href="/HeaderAdminCreate" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Header Id</th>
+                            <th>Header Title</th>
+                            <th>Header Condition</th>
+                            <th>Header Type</th>
+                            <th>Header Action</th>
+                            <th>Header HTML</th>
+                            <th>Header Order</th>
+                            <th>Header Summary</th>
+                            <th>Header Image</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
+                            @foreach (var item in Model.header_ViewModels.header)
+                            {
+                                if (item != null)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Header_Id)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Header_Title)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.HeaderCondition)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.HeaderType_Id)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.HeaderAction)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Header_HTML)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Header_Order)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Header_Summary)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Header_Img)</td>
+                                        <td title="Edit">@Html.ActionLink("Edit", "headeradminedit", item)<i class="material-icons">&#xE8B8;</i></td>
+                                        <td title="Delete">@Html.ActionLink("Delete", "headeradmindelete", item)<i class="material-icons">&#xE5C9;</i></td>
+                                        
+                                        <!--Tao controller hay service cho edit va delete-->
+                                    </tr>
+                                }
+
+                            }
+                        }
+                    </tbody>
+                    @* <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><a href="#"><img src="/examples/images/avatar/1.jpg" class="avatar" alt="Avatar"> Michael Holz</a></td>
+                            <td>04/10/2013</td>
+                            <td>Admin</td>
+                            <td><span class="status text-success">&bull;</span> Active</td>
+                            <td>
+                                <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
+                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                            </td>
+                        </tr>
+                    </tbody> *@
+                </table>
+                <div class="clearfix">
+                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                    <ul class="pagination">
+                        <li class="page-item disabled"><a href="#">Previous</a></li>
+                        <li class="page-item"><a href="#" class="page-link">1</a></li>
+                        <li class="page-item"><a href="#" class="page-link">2</a></li>
+                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                        <li class="page-item"><a href="#" class="page-link">4</a></li>
+                        <li class="page-item"><a href="#" class="page-link">5</a></li>
+                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

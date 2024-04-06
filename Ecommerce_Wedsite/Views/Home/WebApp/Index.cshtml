@@ -153,11 +153,11 @@
 						<div class="container">
 							<div class="product-sock">
 								<div class="sock_slide">
-									@foreach (var item8 in Model.homepageproductdisplay_ViewModels.productdisplayGrp)
+									@foreach (var item8 in Model.homepageproductdisplay_ViewModels.productdisplayGrp) // đề lấy productdisplay và id Home Page
 									{
-										@if(item8.HomePage_Id == item.HomePage_Id)
+										@if(item8.HomePage_Id == item.HomePage_Id) // xác định phải cùng id cho nhóm sp đó
 										{
-											@foreach (var item4 in item8.productdisplay)
+											@foreach (var item4 in item8.productdisplay) // lấy thông tin từng sp trong nhóm sp product display
 											{
 												<div class="item">
 													<div class="col-item">
@@ -472,11 +472,15 @@
 														{
 															<div class="item col-md-3 col-sm-4 col-xs-6">
 																<div class="col-item">
+																	@{
+																		// không cần dùng js. Phải chuyển từ int về double để tính %. Round để làm tròn
+																		double percenttag = Math.Round(((double)(item8.Product_Price - item8.Product_PromoPrice) / item8.Product_Price) * 100, 2); 
+																	}
 																	@if (item8.Product_PromoPrice != 0)
 																	{
-																		<div class="sale-label sale-top-right">
-																			-
-																			17%
+
+																		<div id="percenttag" class="sale-label sale-top-right" value="0">
+																			<p>@percenttag%</p>
 																		</div>
 																	}
 																	<div class="item-inner">

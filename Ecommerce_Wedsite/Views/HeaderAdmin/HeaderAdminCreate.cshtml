@@ -3,27 +3,76 @@
     ViewData["Title"] = "Header Admin Page";
     Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
 }
-<form action="/headeradmincreatefunction" class="login-form">
-	<div class="form-group">
-		<input type="text" id="Header_Title" name="Header_Title" class="form-control rounded-left" placeholder="Header_Title" required>
-	</div>
-	<div class="form-group">
-		<input type="text" id="HeaderCondition" name="HeaderCondition" class="form-control rounded-left" placeholder="HeaderCondition" required>
-	</div>
-	<div class="form-group">
-		<input type="text" id="HeaderParent_Id" name="HeaderParent_Id" class="form-control rounded-left" placeholder="HeaderParent_Id" required>
-	</div>
-	<div class="form-group">
-		<input type="text" id="HeaderLevels" name="HeaderLevels" class="form-control rounded-left" placeholder="HeaderLevels" required>
-	</div>
-	<div class="form-group">
-		<input type="text" id="HeaderType_Id" name="HeaderType_Id" class="form-control rounded-left" placeholder="HeaderType_Id" required>
-	</div>
-	<div class="form-group">
-		<input type="text" id="HeaderAction" name="HeaderAction" class="form-control rounded-left" placeholder="HeaderAction" required>
-	</div>
-	<div class="form-group">
-		<button type="submit" class="btn btn-primary rounded submit p-3 px-5">Submit</button>
-		<!--Khi submit -> link controller -> service -> new view -->
-	</div>
-</form>
+<div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+    <nav class="nav nav-borders">
+        <a class="nav-link active ms-0" href="#" target="__blank">Profile</a>
+        <a class="nav-link" href="#" target="__blank">Billing</a>
+        <a class="nav-link" href="#" target="__blank">Security</a>
+        <a class="nav-link" href="#" target="__blank">Notifications</a>
+    </nav>
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Details</div>
+                <div class="card-body">
+                    <form action="/headeradmincreatefunction" class="login-form">
+                            <!-- Form Group (username)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="Header_Title">Header Title</label>
+                            <input type="text" id="Header_Title" name="Header_Title" class="form-control" placeholder="Header_Title" required>
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="HeaderCondition">Header Condition</label>
+                                <input type="text" id="HeaderCondition" name="HeaderCondition" class="form-control"  placeholder="HeaderCondition" required>
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="HeaderType_Id">Header Type id</label>
+                                <input type="text" id="HeaderType_Id" name="HeaderType_Id" class="form-control rounded-left" placeholder="HeaderType_Id" required>
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="HeaderAction">Header Action</label>
+                                <input type="text" id="HeaderAction" name="HeaderAction" class="form-control rounded-left" placeholder="HeaderAction" required>
+                            </div>
+                            <!-- Form Group (birthday)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="Header_HTML">Header HTML id</label>
+                                <input type="text" id="Header_HTML" name="Header_HTML" class="form-control" placeholder="Header_HTML" required>
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="Header_Order">Header Order</label>
+                                <input type="text" id="Header_Order" name="Header_Order" class="form-control" placeholder="Header_Order" required>
+                            </div>
+                            <!-- Form Group (birthday)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="Header_Img">Header Image</label>
+                                <input type="text" id="Header_Img" name="Header_Img" class="form-control" placeholder="Header_Img" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" for="Header_Summary">Header Summary</label>
+                            <input type="text" id="Header_Summary" name="Header_Summary" class="form-control" placeholder="Header_Summary" required>
+                        </div>
+                        <!-- Save changes button-->
+	                    <div class="form-group">
+		                    <button type="submit" class="btn btn-primary rounded submit p-3 px-5">Submit</button>
+		                    <!--Khi submit -> link controller -> service -> new view -->
+	                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

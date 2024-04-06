@@ -12,6 +12,7 @@ namespace Ecommerce_Wedsite.Models.Entities
         public int FooterLevels { get; set; }
         public int FooterType_Id { get; set; }
         public Bit2 FooterCondition { get; set; }
+        public int Footer_Order {  get; set; }
     }
     public enum Bit2
     {
