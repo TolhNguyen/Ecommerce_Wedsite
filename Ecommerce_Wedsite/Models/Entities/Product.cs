@@ -33,3 +33,9 @@ namespace Ecommerce_Wedsite.Models.Entities
     }
 }
 // Bit giống giới tính trong New web site 2
+
+/* Muốn tạo liên kết giữa header Product và trang Product của bạn để:
+ *  - Header Product id nào thì với trang Product riêng cho nó. 
+ *  - Như vậy để có thể thay đổi Header Product khác thì nd trang Product cũng sẽ khác theo
+ *  => View model: id header product và list<Trang Product>
+ */
