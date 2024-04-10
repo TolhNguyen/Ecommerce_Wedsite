@@ -131,10 +131,9 @@ namespace Ecommerce_Wedsite.Controllers.Main
 }
 /*
  Lưu ý:
-    - Thêm đường dẫn href cho header và sản phẩm - chưa liền
     - cHO showCart hiện lên khi gọi / chạy trang
     - thêm link cho sản phẩm
-    - hiện bảng sp mỗi khi add cart
+    - hiện bảng sp mỗi khi add cart9
     - chia nhỏ controller, service ra thành từng thư mục riêng biệt nhiều tầng lớp để dễ quản lý và đẹp
     - có thể cho chạy nhìu service nhỏ chung 1 service lớn để gọn (vd: edit, delete, create trong 1 ...admin)
     - gọi từng service nhỏ trong những service lớn hơn, ... tương tự cho đến controller lớn nhất (càng gọn càng tốt).

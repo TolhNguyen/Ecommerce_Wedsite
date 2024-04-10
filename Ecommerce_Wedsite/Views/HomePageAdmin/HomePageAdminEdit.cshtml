@@ -3,6 +3,8 @@
     ViewData["Title"] = "Home Page Admin Edit";
     Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
 }
+
+<link href="~/css/idtable.css" rel="stylesheet" type="text/css" media="all" />
 <div class="container-xl px-4 mt-4">
     <!-- Account page navigation-->
     <nav class="nav nav-borders">
@@ -99,8 +101,11 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="HomePage_ProductDisplayId">Home Page Product Display Ids</label>
-                                        <input class="form-control" id="HomePage_ProductDisplayId" type="text" name="HomePage_ProductDisplayId" placeholder="HomePage_ProductDisplay" value="@item.HomePage_ProductDisplayId" required>
+                                        <input class="form-control" id="HomePage_ProductDisplayId" type="text" name="HomePage_ProductDisplayId" placeholder="HomePage_ProductDisplay" value="@item.HomePage_ProductDisplayId" readonly>
                                     </div>
+                                </div>
+                                <div class="mb-3">
+                                    <input onclick="IdTable()" type="button" value="Select Id" class="btn btn-primary rounded submit p-3 px-5" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="small mb-1" for="HomePage_Img">Home Page Image</label>
@@ -116,7 +121,125 @@
         </div>
     </div>
 </div>
+<div class="idtable" >
+    <div class="container px-3 my-5 clearfix" id="idtable" style="margin-left: inherit;">
+        <!-- Shopping cart table -->
+        <div class="card">
+            <div class="card-header">
+                <h2>Select Display Items</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive" style="max-height: 350px;">
+                    <table class="table table-bordered m-0">
+                        <thead>
+                            <tr>
+                                <!-- Set columns width -->
+                                <th class="text-center py-3 px-4" style="min-width: 400px;">Product Name &amp; Details</th>
+                                <th class="text-right py-3 px-4" style="width: 100px;">Price</th>
+                                <th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
+                                <th class="text-right py-3 px-4" style="width: 100px;">Product Type Id</th>
+                                <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
+                            </tr>
+                        </thead>
+                        <tbody style="">
+                            @if (Model != null)
+                            {
+                                // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
+                                @foreach (var item in Model.product_ViewModels.product)
+                                {
+                                    <tr>
+                                        <td class="p-4">
+                                            <div class="media align-items-center">
+                                                <img src="@item.Product_Img" class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                                                <div class="media-body">
+                                                    <a href="#" class="d-block text-dark">@item.Product_Name</a>
+                                                    <small>
+                                                        <span class="text-muted">Color:</span>
+                                                        <span class="ui-product-color ui-product-color-sm align-text-bottom" style="background:#e81e2c;"></span> &nbsp;
+                                                        @* <span class="text-muted">Size: </span> EU 37 &nbsp; *@
+                                                        <span class="text-muted">Size: </span> @item.Product_Size
+                                                        <span class="text-muted">Ships from: </span> @item.Product_Manufacturers
+                                                        <span class="text-muted">Id: </span> @item.Product_Id
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-right font-weight-semibold align-middle p-4">@item.Product_Price.000đ</td>
+                                        <td class="align-middle p-4"><input type="text" class="form-control text-center" value="@item.Product_Quantity" readonly></td>
+                                        <td class="text-right font-weight-semibold align-middle p-4">@item.ProductType_Id</td>
+                                        <td class="text-center align-middle px-0"><input class="checkbox" type="checkbox" id="@item.Product_Id" name="checkbox"></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- / Shopping cart table -->
 
+                <div class="float-right">
+                    <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" onclick="CloseTable()">Back to shopping</button>
+                    <button type="button" class="btn btn-lg btn-primary mt-2" id="sendBtn">Confirm</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div> 
+<script>
+    let idsArray = [];
+    function IdTable() {
+        document.querySelector('.idtable').style.display = 'flex';
+    }
+    function CloseTable()
+    {
+        document.querySelector('.idtable').style.display = 'none';
+    }
+    function CheckIdArray() {
+        idsArray = [];
+        let checkboxes = document.querySelectorAll('.checkbox'); // lấy những class có tên checkbox
+        checkboxes.forEach((checkbox) => { // foreach từng input trong đó
+            if (checkbox.checked) { // kiểm tra nếu checked
+                idsArray.push(checkbox.id);
+            }
+        });
+        console.log(idsArray); 
+    }
+    
+    // Call onchange lên những class checkbox mỗi khi thay đổi:
+    document.querySelectorAll('.checkbox').forEach((checkbox) => {
+        checkbox.addEventListener('change', CheckIdArray);
+    });
+
+    function AddIdsArray(idsarr) {
+        $.ajax({
+            url: "HomePageAdmin/HomePageAdminIdTableFunction",
+            dataType: "text",
+            type: "POST",
+            data: {
+                idsArray: idsarr,
+                HomePage_Id: $('#HomePage_Id').val()
+            },
+            cache: !1,
+            success:
+                function (result) {
+                    var obj = JSON.parse(result);
+                    if (obj.success == true) {
+                        alert("Thành công!");
+                        document.querySelector('.idtable').style.display = 'none'; // Nếu đúng thì chạy tiếp sang trang Admin
+                        window.location.reload();
+                    }
+                    else {
+                        alert("Thất bại");
+                    }
+                }
+        });
+    }
+
+    // click button để chạy ajax:
+    $('#sendBtn').click(function () {
+        AddIdsArray(idsArray);
+    });
+</script>
 <script>
     function Editlog() {
         $.ajax({

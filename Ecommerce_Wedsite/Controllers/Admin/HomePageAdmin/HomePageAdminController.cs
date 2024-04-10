@@ -18,14 +18,18 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly IHomePageAdminService _homepageadminService;
         private readonly IHomePageAdminEditService _homepageadmineditService;
         private readonly IHomePageAdminEditFunctionService _homepageadmineditfunctionService;
+        private readonly IHomePageAdminIdTableService _homepageadminidtableService;
+        private readonly IIdTableFuncService _idtablefuncService;
 
-        public HomePageAdminController(ILogger<HomePageAdminController> logger, IAdminMenuService adminmenuService, IHomePageAdminService homepageadminService, IHomePageAdminEditService homepageadmineditService, IHomePageAdminEditFunctionService homepageadmineditfunctionService)
+        public HomePageAdminController(ILogger<HomePageAdminController> logger, IAdminMenuService adminmenuService, IHomePageAdminService homepageadminService, IHomePageAdminEditService homepageadmineditService, IHomePageAdminEditFunctionService homepageadmineditfunctionService, IHomePageAdminIdTableService homepageadminidtableService, IIdTableFuncService idtablefuncService)
         {
             _logger = logger;
             _adminmenuService = adminmenuService;
             _homepageadminService = homepageadminService;
             _homepageadmineditService = homepageadmineditService;
             _homepageadmineditfunctionService = homepageadmineditfunctionService;
+            _homepageadminidtableService = homepageadminidtableService;
+            _idtablefuncService = idtablefuncService;
         }
 
         [Route("~/homepageadmin")]
@@ -84,19 +88,24 @@ namespace Ecommerce_Wedsite.Controllers
 
             var homepage_ViewModels = await _homepageadmineditService.HomePageAdminEdit(HomePage_Id);    
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+            var idtable_ViewModels = await _homepageadminidtableService.IdTable();
+            All.product_ViewModels = idtable_ViewModels.Data;
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
-            All.homepage_ViewModels = homepage_ViewModels.Data;
+            All.homepage_ViewModels = homepage_ViewModels.Data; 
 
             return View("HomePageAdminEdit", All);
         }
 
-        //public async Task<IActionResult> HeaderAdminEditFunction(Header headeritem) // controller kiểu ajax thì mới đọc đc 
-        //                                                                            // Tạo thêm trang riêng function riêng
-        //{
-        //    // cần có 1  model layout admin riêng
-        //    var header_ViewModels = await _headeradminEditFunctionService.Service_Test(headeritem);
-        //    return Json(header_ViewModels); // sau khi chạy service ở trên r mới trả view ra
-        //}
+        public async Task<IActionResult> HomePageAdminIdTableFunction(List<string> idsArray, int HomePage_Id) // nên đổi sang ajax
+        {
+            var result = await _idtablefuncService.IdTableFunction(idsArray, HomePage_Id);
+            if(result.success == true)
+            {
+                return Json(result);
+            }
+            return Json(result);
+        }
+
     }
 }
 
