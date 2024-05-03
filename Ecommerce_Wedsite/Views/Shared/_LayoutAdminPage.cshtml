@@ -34,7 +34,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB     Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Tree Admin</div>
             </a>
 
             <!-- Divider -->
@@ -194,7 +194,7 @@
         </ul>
         <!-- End of Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">
-            <div id="content">
+            <div id="content" style="background-image: url(); background-repeat: no-repeat; background-size: cover;">
              <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -404,11 +404,11 @@
     <!-- Bootstrap core JavaScript-->
     @*<script src="vendor/jquery.min.js"></script>*@
     <script> 
-        function SortAdmin() {
-            var sortadmin = document.getElementById("sortadmin").value;
+        function SortAdmin() { // chức năng tìm dựa theo tên trang. K cần chức năng controller
+            var sortadmin = document.getElementById("sortadmin").value; // lấy giá trị từ ô tìm kiếm admin
             if (sortadmin != "") { // khac null
                 sortadmin = sortadmin.replace(/\s+/g, '');// bỏ khoảng cách ở giữa => thành dính lại với nhau hết.
-                window.location.href = "/" + sortadmin.toLowerCase();
+                window.location.href = "/" + sortadmin.toLowerCase(); // load trang theo tên
             }
             return;
         }

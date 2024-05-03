@@ -93,16 +93,16 @@
       "PackagePath": "staticwebassets\\css\\admintable.css"
     },
     {
-      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\boostrap5v3AU3.css",
-      "PackagePath": "staticwebassets\\css\\boostrap5v3AU3.css"
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\boostrap5v3AU4.css",
+      "PackagePath": "staticwebassets\\css\\boostrap5v3AU4.css"
     },
     {
-      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\boostrap5v3C2.css",
-      "PackagePath": "staticwebassets\\css\\boostrap5v3C2.css"
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\boostrap5v3C3.css",
+      "PackagePath": "staticwebassets\\css\\boostrap5v3C3.css"
     },
     {
-      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\boostrap5v3CO2.css",
-      "PackagePath": "staticwebassets\\css\\boostrap5v3CO2.css"
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\boostrap5v3CO3.css",
+      "PackagePath": "staticwebassets\\css\\boostrap5v3CO3.css"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\cartproductcheckout3.css",
@@ -215,6 +215,30 @@
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Logo\\userlogo.jpg",
       "PackagePath": "staticwebassets\\img\\Logo\\userlogo.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\NewsImg\\FlowerNews.jpg",
+      "PackagePath": "staticwebassets\\img\\NewsImg\\FlowerNews.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\NewsImg\\OtherNews.jpg",
+      "PackagePath": "staticwebassets\\img\\NewsImg\\OtherNews.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\NewsImg\\PlantNews.jpg",
+      "PackagePath": "staticwebassets\\img\\NewsImg\\PlantNews.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\NewsImg\\ReadMore.jpg",
+      "PackagePath": "staticwebassets\\img\\NewsImg\\ReadMore.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\NewsImg\\ReadMore2.jpg",
+      "PackagePath": "staticwebassets\\img\\NewsImg\\ReadMore2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\NewsImg\\TreeNews.jpg",
+      "PackagePath": "staticwebassets\\img\\NewsImg\\TreeNews.jpg"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\NewsImg\\ads-1.jpg",
@@ -439,6 +463,22 @@
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\bkg-img4.jpg",
       "PackagePath": "staticwebassets\\img\\Picture\\bkg-img4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\bkgadmin.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\bkgadmin.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\bkgadmin2.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\bkgadmin2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\bkgadmin3.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\bkgadmin3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\bkgadmin4.jpg",
+      "PackagePath": "staticwebassets\\img\\Picture\\bkgadmin4.jpg"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\davidbeckham.jpg",

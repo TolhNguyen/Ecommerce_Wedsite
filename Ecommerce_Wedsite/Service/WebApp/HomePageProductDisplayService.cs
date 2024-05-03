@@ -37,7 +37,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                         if(p.HomePage_ProductDisplayId == null) continue; // nếu có cái null thì pass 
 						p.HomePage_ProductDisplayId = p.HomePage_ProductDisplayId.Trim('(', ')'); // bỏ khoảng trắng
 						List<int> ids = p.HomePage_ProductDisplayId.Split(',').Select(int.Parse).ToList(); // convert thành list int
-						var query = dbConn.QueryBuilder($"select * from Product where Product_Id in {ids}"); 
+						var query = dbConn.QueryBuilder($"select * from Product where Product_Id in {ids} and Product_Condition = 1"); 
 						var item = new ProducdDisplay(); // mỗi lần sẽ tạo mới item chứa
 						item.productdisplay = await query.QueryAsync<Product>();
 						item.HomePage_Id = p.HomePage_Id;

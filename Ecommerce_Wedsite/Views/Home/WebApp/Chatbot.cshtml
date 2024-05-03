@@ -54,7 +54,7 @@
     var botmess = "";
     var usermess = "";
     let chatHistories = [];
-    const API_KEY = "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"; // Paste your API key here
+    const API_KEY = "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"; // API key của chat gpt here
     const inputInitHeight = chatInput.scrollHeight;
     const createChatLi = (message, className) => {
         // Create a chat <li> element with passed message and className
@@ -67,7 +67,11 @@
     }
     
     const generateResponse = (chatElement) => { // Function create answer chat of bot
-        const API_URL = "https://api.openai.com/v1/chat/completions ";
+        //const API_URL = "https://api.openai.com/v1/chat/completions "; // API bth cho bot GPT trl.
+        const API_URL = "https://api.coze.com/open_api/v2/chat";
+        const API_KEY2 = 'pat_fj0BbOc2cX8WSUTGnIAtvDvYCYRj6BfTtpmiw9L2WO12era4P2eQFMg20hregrGH'; // API key Coze token chỉ khi tạo mới có.
+        const Bot_Id = '7351683108242145288'; // trên đường dẫn của con bot Coze
+        const yourQuery = 'your_query_here'; // nội dung gửi cho bot là chatHistories
         const messageElement = chatElement.querySelector("p");
         // Define the properties and message for the API request
 
@@ -75,11 +79,17 @@
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${API_KEY}`
+                "Authorization": `Bearer ${API_KEY2}`,
+                "Accept": "*/*",
+                "Host": "api.coze.com",
+                "Connection": "keep-alive"
             },
             body: JSON.stringify({
-                model: "gpt-3.5-turbo",
-                messages: chatHistories, // feed it with histories. With memory. start with null
+                // model: "gpt-3.5-turbo",
+                conversation_id: "123",
+                bot_id: Bot_Id,
+                user: "123333333",
+                messages: chatHistories, // feed it with histories. start with null
             })
         }
 
@@ -97,9 +107,9 @@
         // }
 
         // Send POST request to API, get response and set the reponse as paragraph text
-
         // Hàm chat của Bot:
-        fetch(API_URL, requestOptions).then(res => res.json()).then(data => { // chat response
+        fetch(API_URL, requestOptions).then(res => res.json()).then(data => { // gửi API và nd chat người dùng + lịch sử chat trước đó.
+            //messageElement.textContent = data.choices[0].message.content.trim(); // kết quả trả về từ GPT bằng API
             messageElement.textContent = data.choices[0].message.content.trim();
             chatHistories.push({ role: "assistant", content: messageElement.textContent }); // each answer memorise. Run 2nd
             botmess = messageElement.textContent; // lấy nội dung của bot mess gần nhất
@@ -131,7 +141,32 @@
         }, 600);
     }
 
-    // function chatMemory() // Không cần onclick. Gọi hàm là chạy thôi chatMemory()
+    
+
+    chatInput.addEventListener("input", () => {
+        // Adjust the height of the input textarea based on its content
+        chatInput.style.height = `${inputInitHeight}px`;
+        chatInput.style.height = `${chatInput.scrollHeight}px`;
+    });
+    chatInput.addEventListener("keydown", (e) => {
+        // If Enter key is pressed without Shift key and the window
+        // width is greater than 800px, handle the chat
+        if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+            e.preventDefault();
+            handleChat();
+        }
+    });
+
+    sendChatBtn.addEventListener("click", handleChat);
+    closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
+    chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+
+    
+</script>
+
+<!--Vị trị file js rất quan trọng-->
+@* <script src="/js/chatbotjs.js" defer></script> 
+    // function chatMemory() // Không cần onclick. Gọi hàm là chạy thôi chatMemory(). CN: Để lưu đoạn chat giữa ng dùng và bot
     // {
     //     console.log(botmess);
     //     console.log(userMessage);
@@ -157,29 +192,4 @@
     //         });
     //     }
     // }
-
-    chatInput.addEventListener("input", () => {
-        // Adjust the height of the input textarea based on its content
-        chatInput.style.height = `${inputInitHeight}px`;
-        chatInput.style.height = `${chatInput.scrollHeight}px`;
-    });
-    chatInput.addEventListener("keydown", (e) => {
-        // If Enter key is pressed without Shift key and the window
-        // width is greater than 800px, handle the chat
-        if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
-            e.preventDefault();
-            handleChat();
-        }
-    });
-
-    //Tạo 1 chức năng while riêng để nạp userMess và data.choices[0].message.content.trim() của chat bot nạp vào: theo công thức trong python
-
-    sendChatBtn.addEventListener("click", handleChat);
-    closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
-    chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
-
-    
-</script>
-
-<!--Vị trị file js rất quan trọng-->
-@* <script src="/js/chatbotjs.js" defer></script> *@
+*@

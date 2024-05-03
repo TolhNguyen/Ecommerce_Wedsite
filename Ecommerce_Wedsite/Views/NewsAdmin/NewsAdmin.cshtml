@@ -1,12 +1,20 @@
 ﻿@model AllLayout
 @{
-    ViewData["Title"] = "Header Admin Page";
+    ViewData["Title"] = "News    Admin Page";
     Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
 }
-<div style="Overflow-x:auto">
-    <h1>News Table</h1>
+<link href="/css/admintable.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<div style="Overflow-x:hidden">
     <div class="card-body">
-        <div class="table-responsive">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>News <b>Table</b></h2>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive" style="max-height: 525px; max-width: 2000px;">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <!---Tạo bảng-->
                 <thead>
@@ -73,7 +81,7 @@
                 </tbody>
             </table>
             <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>10</b> entries</div>
+                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                 <ul class="pagination">
                     <li class="page-item disabled"><a href="#">Previous</a></li>
                     <li class="page-item"><a href="#" class="page-link">1</a></li>
@@ -83,9 +91,6 @@
                     <li class="page-item"><a href="#" class="page-link">5</a></li>
                     <li class="page-item"><a href="#" class="page-link">Next</a></li>
                 </ul>
-            </div>
-            <div>
-                <a href="/HeaderAdminCreate">Create New Item</a>
             </div>
         </div>
     </div>

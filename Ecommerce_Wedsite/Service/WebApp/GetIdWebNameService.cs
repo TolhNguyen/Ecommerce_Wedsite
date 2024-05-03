@@ -30,13 +30,17 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 {
                     await dbConn.OpenAsync(); // mở sync
 
-                    var query = dbConn.QueryBuilder($"select * from UserLogin where UserLogin_WebName = '{UserLogin_WebName}'");
+                    var query = dbConn.QueryBuilder($"select * from UserLogin where UserLogin_WebName = '{UserLogin_WebName}'"); // nếu có tên trong đăng ký
 
                     // == null vì k có / lấy ra được dữ liệu từ sql => sai 
 
                     var wb = await query.QueryFirstOrDefaultAsync<UserLogin>();
 
-                    idwebname = wb.UserLogin_Id;
+                    if (wb != null) // nếu không có đăng nhập
+                    {
+                        idwebname = wb.UserLogin_Id;
+                    }
+                    else idwebname = 0;
 
                     await dbConn.CloseAsync(); // đóng sync sau khi sử dụng
                 }

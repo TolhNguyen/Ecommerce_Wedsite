@@ -71,7 +71,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
 
 
         [Route("~/checkoutfunction")]
-        public async Task<IActionResult> CheckoutFunction(CustomerCheckout customercheckout, string UserLogin_WebName) // l
+        public async Task<IActionResult> CheckoutFunction(CustomerCheckout customercheckout, string UserLogin_WebName) // Lấy cả customercheckout và tên web người dùng
         {
             var idwebname = 0;
             idwebname = await _getidwebNnameService.GetIdWebName(UserLogin_WebName, idwebname);

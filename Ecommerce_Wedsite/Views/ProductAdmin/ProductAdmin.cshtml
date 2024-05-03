@@ -3,12 +3,24 @@
     ViewData["Title"] = "Login Admin Page";
     Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
 }
-<div style="Overflow-x:auto">
-    <h1>Product Table</h1>
+<link href="/css/admintable.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<div style ="Overflow-x:hidden">
     <div class="card-body">
-        <div class="table-responsive">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Product <b>Table</b></h2>
+                </div>
+                <div class="col-sm-7">
+                    <a href="/ProductAdminCreate" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive" style="max-height: 550px;">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> <!---Tạo bảng-->
-                <thead> <!--Danh sách bảng-->
+                <thead >
+                    <!--Danh sách bảng-->
                     <tr>
                         <th>
                             Product ID
@@ -57,9 +69,6 @@
                             Product Quantity
                         </th>
                         <th>
-                            Product Image
-                        </th>
-                        <th>
                             Edit
                         </th>
                         <th>
@@ -87,7 +96,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.Product_PromoPrice)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_ShortDescription)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_Manufacturers)</td>
-                                <td value="@item.Product_Condition" id="ConditionBox">
+                                <td value="@item.Product_Condition" id="ConditionBox">  
                                     @Html.DisplayFor(modelItem => item.Product_Condition)
                                     @{
                                         if (item.Product_Condition == Ecommerce_Wedsite.Models.Entities.Bit4.Available) // nếu là chữ availble
@@ -101,14 +110,13 @@
                                     }
                                     
                                 </td>
-                                <td>@Html.Raw(item.Product_Info)</td>
+                                <td style="max-width:200px; overflow-y: hidden; max-height:100px;">@Html.Raw(item.Product_Info)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_Size)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_Href)</td>
-                                <td>@Html.Raw(item.Product_Info2)</td>
+                                <td style="max-width:200px; overflow-y: hidden; max-height:100px;">@Html.Raw(item.Product_Info2)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_Quantity)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Product_Img)</td>
                                 <!--Cách chỉ gửi 1 para thôi-->
-                                <td>@Html.ActionLink("Edit", "productadminedit", new { Product_Id = item.Product_Id})</td>
+                                <td>@Html.ActionLink("Edit", "productadminedit", new { Product_Id = item.Product_Id })</td>
                                 <td>@Html.ActionLink("Delete", "productadmindeletefunction", new { Product_Id = item.Product_Id })</td>
                             </tr>
                         }
@@ -116,20 +124,16 @@
                 </tbody>
             </table>
             <div class="clearfix">
-				<div class="hint-text">Showing <b>5</b> out of <b>10</b> entries</div>
-				<ul class="pagination">
-					<li class="page-item disabled"><a href="#">Previous</a></li>
-					<li class="page-item"><a href="#" class="page-link">1</a></li>
-					<li class="page-item"><a href="#" class="page-link">2</a></li>
-					<li class="page-item active"><a href="#" class="page-link">3</a></li>
-					<li class="page-item"><a href="#" class="page-link">4</a></li>
-					<li class="page-item"><a href="#" class="page-link">5</a></li>
-					<li class="page-item"><a href="#" class="page-link">Next</a></li>
-				</ul>
-	        </div>
-            <div>
-              <a href="/ProductAdminCreate">Create New Item</a>
-              `
+                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                <ul class="pagination">
+                    <li class="page-item disabled"><a href="#">Previous</a></li>
+                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
             </div>
         </div>
     </div>

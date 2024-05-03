@@ -50,7 +50,8 @@ namespace Ecommerce_Wedsite.Controllers.Main
 
             var headerandfooter_ViewModels = await _headerandfooterService.HeaderAndFooter_ServiceTest();
             var homepage_ViewModels = await _homepageService.HomePage_ServiceTest();
-			var homepageproductdisplay_ViewModels = await _homepageproductdisplayService.GetProductDisplay(homepage_ViewModels.Data.homepage_Vl1); // truyền list LV1 vào
+			
+            var homepageproductdisplay_ViewModels = await _homepageproductdisplayService.GetProductDisplay(homepage_ViewModels.Data.homepage_Vl1); // truyền list LV1 vào
 			var picture_ViewModels = await _pictureService.Service_Test();
             var logo_ViewModels = await _logoService.Service_Test();
             var discountt_ViewModels = await _discounttService.PopupDiscount();
