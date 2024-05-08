@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+<!-- Coding By CodingNepal - www.   .com -->
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
@@ -10,7 +10,6 @@
         <!-- Google Fonts Link For Icons -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" /> 
-        
     </head>
     <body>
     <button class="chatbot-toggler" style="margin-right: 30px;">
@@ -54,7 +53,7 @@
     var botmess = "";
     var usermess = "";
     let chatHistories = [];
-    const API_KEY = "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"; // API key của chat gpt here
+    const API_KEY = "sk-proj-lRcXij8pLpB7ivZFiY8VT3BlbkFJEpuVEMyrYbfAZHgFsvXv"; // API key của chat gpt here
     const inputInitHeight = chatInput.scrollHeight;
     const createChatLi = (message, className) => {
         // Create a chat <li> element with passed message and className
@@ -67,8 +66,9 @@
     }
     
     const generateResponse = (chatElement) => { // Function create answer chat of bot
-        //const API_URL = "https://api.openai.com/v1/chat/completions "; // API bth cho bot GPT trl.
-        const API_URL = "https://api.coze.com/open_api/v2/chat";
+        const API_URL = "https://api.openai.com/v1/completions"; // API bth cho bot GPT trl.
+        //const API_URL = "https://api.coze.com/open_api/v2/chat";
+        const API_KEY = "sk-proj-lRcXij8pLpB7ivZFiY8VT3BlbkFJEpuVEMyrYbfAZHgFsvXv"; // Tài khoản bị expired api key r: https://whatsthebigdata.com/how-to-get-openai-api-key/
         const API_KEY2 = 'pat_fj0BbOc2cX8WSUTGnIAtvDvYCYRj6BfTtpmiw9L2WO12era4P2eQFMg20hregrGH'; // API key Coze token chỉ khi tạo mới có.
         const Bot_Id = '7351683108242145288'; // trên đường dẫn của con bot Coze
         const yourQuery = 'your_query_here'; // nội dung gửi cho bot là chatHistories
@@ -79,16 +79,10 @@
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${API_KEY2}`,
-                "Accept": "*/*",
-                "Host": "api.coze.com",
-                "Connection": "keep-alive"
-            },
+                "Authorization": `Bearer ${API_KEY}`,
+            },  
             body: JSON.stringify({
-                // model: "gpt-3.5-turbo",
-                conversation_id: "123",
-                bot_id: Bot_Id,
-                user: "123333333",
+                model: "gpt-3.5-turbo",
                 messages: chatHistories, // feed it with histories. start with null
             })
         }
@@ -119,7 +113,6 @@
             messageElement.textContent = "Oops! Something went wrong. Please try again.";
         }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
     }
-
     const handleChat = () => { // Hàm chat User:
         userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace
         if (!userMessage) return;
@@ -141,7 +134,7 @@
         }, 600);
     }
 
-    
+    console.log(chatHistories);
 
     chatInput.addEventListener("input", () => {
         // Adjust the height of the input textarea based on its content
@@ -160,8 +153,6 @@
     sendChatBtn.addEventListener("click", handleChat);
     closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
     chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
-
-    
 </script>
 
 <!--Vị trị file js rất quan trọng-->

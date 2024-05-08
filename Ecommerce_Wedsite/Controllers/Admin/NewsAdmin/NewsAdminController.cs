@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text.Json;
+using static IronPython.Modules._ast;
 
 
 namespace Ecommerce_Wedsite.Controllers
@@ -18,14 +19,16 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly INewsAdminService _newsadminService;
         private readonly INewsAdminEditService _newsadmineditService;
         private readonly INewsAdminEditFunctionService _newsadmineditfunctionService;
+        private readonly INewsAdminCreateService _newsadmincreateService;
 
-        public NewsAdminController(ILogger<NewsAdminController> logger, IAdminMenuService adminmenuService, INewsAdminService newsadminService, INewsAdminEditService newsadmineditService, INewsAdminEditFunctionService newsadmineditfunctionService)
+        public NewsAdminController(ILogger<NewsAdminController> logger, IAdminMenuService adminmenuService, INewsAdminService newsadminService, INewsAdminEditService newsadmineditService, INewsAdminEditFunctionService newsadmineditfunctionService, INewsAdminCreateService newsadmincreateService)
         {
             _logger = logger;
             _adminmenuService = adminmenuService;
             _newsadminService = newsadminService;
             _newsadmineditService = newsadmineditService;
             _newsadmineditfunctionService = newsadmineditfunctionService;
+            _newsadmincreateService = newsadmincreateService;
         }
         [Route("~/newsadmin")]
         public async Task<IActionResult> NewsAdmin()
@@ -60,6 +63,22 @@ namespace Ecommerce_Wedsite.Controllers
                 return Json(true);
             }
             return Json(false);
+        }
+
+        [Route("~/newsadmincreate")]
+        public async Task<IActionResult> NewsAdminCreate()
+        {
+            var All = new AllLayout();
+            var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+            All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
+            return View("NewsAdminCreate", All);
+        }
+
+        [Route("~/newsadmincreatefunction")]
+        public async Task<IActionResult> NewsAdminCreateFunction(News newsitem)
+        {
+            await _newsadmincreateService.Service_Test(newsitem);
+            return RedirectToAction("NewsAdmin");
         }
         /*
             [Route("~/discountadmindelete")]
