@@ -55,7 +55,7 @@
 															<source media="(min-width: 1025px)" srcset="@item3.Picture_FileName" />
 															<source media="(min-width: 768px) and (max-width: 1024px)" srcset="@item3.Picture_FileName"  />
 															<source media="(max-width: 480px)" srcset="@item3.Picture_FileName"  />
-															<img onclick="window.location.href='#'" src="@item3.Picture_FileName" alt="Mew Nature">
+															<img loading="lazy" onclick="window.location.href='#'" src="@item3.Picture_FileName" alt="Mew Nature">
 														</picture>
 													</a>
 												</div>
@@ -65,7 +65,7 @@
 															<source media="(min-width: 1025px)" srcset="@item3.Picture_FileName" />
 															<source media="(min-width: 768px) and (max-width: 1024px)" srcset="@item3.Picture_FileName"  />
 															<source media="(max-width: 480px)" srcset="@item3.Picture_FileName"  />
-															<img onclick="window.location.href='#'" src="@item3.Picture_FileName" class="img-responsive" alt="Mew Nature">
+															<img loading="lazy" onclick="window.location.href='#'" src="@item3.Picture_FileName" class="img-responsive" alt="Mew Nature">
 														</picture>
 													</a>
 												</div>
@@ -89,7 +89,7 @@
 								<div class="box_set">
 									<a href="#" title="Free ship toàn quốc">
 										<div class="icon">
-											<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/set_cf1.png?1676649124511">
+											<img loading="lazy" alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/set_cf1.png?1676649124511">
 										</div>
 										<div class="set_content">
 											<p class="tt_boxser">
@@ -104,7 +104,7 @@
 								<div class="box_set">
 									<a href="#" title="Tư vấn 24/7">
 										<div class="icon">
-											<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/set_cf2.png?1676649124511">
+											<img loading="lazy" alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/set_cf2.png?1676649124511">
 										</div>
 										<div class="set_content">
 											<p class="tt_boxser">
@@ -119,7 +119,7 @@
 								<div class="box_set">
 									<a href="#" title="Cây ươm tại vườn">
 										<div class="icon">
-											<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/set_cf3.png?1676649124511">
+											<img loading="lazy" alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/set_cf3.png?1676649124511">
 										</div>
 										<div class="set_content">
 											<p class="tt_boxser">
@@ -186,7 +186,7 @@
 																		<input type="hidden" name="variantId" value="27843194">
 																		<button class="button btn-cart add_to_cart" title="Mua hàng" fdprocessedid="e99jd6" type="button" onclick="window.location.href='/productdetail/@item4.Product_Href'">Mua hàng</button>
 																		<button class="button btn-cart btn-more" title="Chi tiết sản phẩm" type="button" onclick="window.location.href='/productdetail/@item4.Product_Href'" fdprocessedid="uhiyki">
-																			<img alt="Mew Nature" src="/img/Logo/eye.png">
+																			<img loading="lazy" alt="Mew Nature" src="/img/Logo/eye.png">
 																		</button>
 																	</form>
 																</div>
@@ -197,7 +197,7 @@
 																	{
 																		@if (item3.Picture_Id == item4.Picture_Id)
 																		{
-																			<img src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="Sen đá lá ngọc">
+																			<img loading="lazy" src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="Sen đá lá ngọc">
 																		}
 																	}
 																</a>
@@ -246,7 +246,7 @@
 																							{
 																								@if (item3.Picture_Id == item5.Picture_Id)
 																								{
-																									<img src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="Sen đá lá ngọc">
+																									<img loading="lazy" src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="Sen đá lá ngọc">
 																								}
 																							}
 																						</a>
@@ -334,8 +334,8 @@
 																@foreach(var item7 in Model.logo_ViewModels.logo)
 																{
 																	if(item6.Logo_Id == item7.Logo_Id)
-																	{	
-																		<p><img alt="@item6.User_Name" src="@item7.Logo_FileName"  data-lazyload="@item7.Logo_FileName"></p>
+																	{
+																			<p><img loading="lazy" alt="@item6.User_Name" src="@item7.Logo_FileName" data-lazyload="@item7.Logo_FileName"></p>
 																	}
 																}
 																<p class="name">@item6.User_Name</p>	
@@ -492,7 +492,7 @@
 																					{
 																						@if (item3.Picture_Id == item8.Picture_Id)
 																						{
-																							<img src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="@item8.Product_Name">
+																							<img loading="lazy" src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="@item8.Product_Name">
 																						}
 																					}
 																				</a>
@@ -530,11 +530,11 @@
 																			<div class="actions hidden-xs hidden-sm remove_html">
 																				<form action="/cart/add" method="post" class="variants" data-id="product-actions-15887884" enctype="multipart/form-data">
 																					<button class="button btn-cart btn-more" title="Chi tiết sản phẩm" type="button" onclick="window.location.href='/productdetail/@item8.Product_Href'">
-																						<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/eye.png?1676649124511">
+																						<img loading="lazy" alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/eye.png?1676649124511">
 																					</button>
 																					<input type="hidden" name="variantId" value="27843379" />
 																					<button class="button btn-cart add_to_cart" title="Mua hàng" type="button" onclick="window.location.href='/productdetail/@item8.Product_Href'">
-																						<img alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/basket.png?1676649124511">
+																						<img loading="lazy" alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/basket.png?1676649124511">
 																					</button>
 																				</form>
 																			</div>

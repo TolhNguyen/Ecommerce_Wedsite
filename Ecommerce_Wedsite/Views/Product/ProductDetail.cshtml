@@ -30,7 +30,7 @@
                             <ul class="breadcrumb">
                                 <li class="home">
                                     <a asp-controller="Home" asp-action="Index"><span>Trang chủ</span></a>
-                                    <span><img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/right-arrow.png?1676649124511" alt="Mew Nature"></span>
+                                    <span><img loading="lazy" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/right-arrow.png?1676649124511" alt="Mew Nature"></span>
                                 </li>
                                 <li>
                                     @foreach(var item7 in Model.producttype_ViewModels.producttype) // vào view model trưoc để chỉ lấy những biến có dữ liệu cần hiện view ra.
@@ -41,7 +41,7 @@
                                         }
                                         
                                     }
-                                    <span><img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/right-arrow.png?1676649124511" alt="Mew Nature"></span>
+                                    <span><img loading="lazy" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/right-arrow.png?1676649124511" alt="Mew Nature"></span>
                                 </li>
 
                                 <li><strong><span>@item1.Product_Name</span></strong>
@@ -96,7 +96,7 @@
                                                     <div class="col_large_full large-image">
                                                         <!--Sửa tiếp cho các ảnh khác-->
                                                         <a href="@item1.Product_Img" class="large_image_url checkurl" data-rel="prettyPhoto[product-gallery]">
-                                                            <img id="img_01" value="@item1.Picture_Id" class="img-responsive" alt="#Product_Name" src="@item1.Product_Img" data-zoom-image="@item1.Product_Img" />
+                                                            <img loading="lazy" id="img_01" value="@item1.Picture_Id" class="img-responsive" alt="#Product_Name" src="@item1.Product_Img" data-zoom-image="@item1.Product_Img" />
                                                         </a>
 
                                                         <div class="offset_nop hidden">
@@ -123,7 +123,7 @@
                                                                     <!--Luôn có ảnh cha trước-->
                                                                     <div class="item">
                                                                         <a href="#" data-image="@item3.Picture_FileName" data-zoom-image="@item3.Picture_FileName">
-                                                                            <img data-img="@item3.Picture_FileName" src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="@item3.Picture_Desciption">
+                                                                            <img loading="lazy" data-img="@item3.Picture_FileName" src="@item3.Picture_FileName" data-lazyload="@item3.Picture_FileName" alt="@item3.Picture_Desciption">
                                                                         </a>
                                                                     </div>
 
@@ -133,7 +133,7 @@
                                                                     {
                                                                         <div class="item">
                                                                             <a href="#" data-image="https://bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" data-zoom-image="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967">
-                                                                                <img data-img="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" alt="Sen đá lá ngọc">
+                                                                                <img loading="lazy" data-img="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" alt="Sen đá lá ngọc">
                                                                             </a>
                                                                         </div>
                                                                     }
@@ -145,7 +145,7 @@
                                                                             {
                                                                                 <div class="item">
                                                                                     <a href="#" data-image="@item6.Picture_FileName" data-zoom-image="@item6.Picture_FileName">
-                                                                                        <img data-img="@item6.Picture_FileName" src="@item6.Picture_FileName" data-lazyload="@item6.Picture_FileName" alt="@item6.Picture_Desciption">
+                                                                                        <img loading="lazy" data-img="@item6.Picture_FileName" src="@item6.Picture_FileName" data-lazyload="@item6.Picture_FileName" alt="@item6.Picture_Desciption">
                                                                                     </a>
                                                                                 </div>
                                                                             }
@@ -187,7 +187,7 @@
                                                                 <div class="aside-content mini-products-list2">
                                                                     <div class="product-item clearfix on-sale">
                                                                         <a href="/thong-kim-mini" class="product-img" title="#">
-                                                                            <img src="@item5.Product_Img" data-lazyload="@item5.Product_Img" alt="">
+                                                                            <img loading="lazy" src="@item5.Product_Img" data-lazyload="@item5.Product_Img" alt="">
                                                                         </a>
                                                                         <div class="info-inner">
                                                                             <h3 class="item-title"> <a href="~/productdetail/@item5.Product_Href" title="">@item5.Product_Name</a></h3>
@@ -226,7 +226,7 @@
                                                             }
                                                         }
                                                         <a href="/chau-canh" class="btn-view-more" title="Xem thêm">
-                                                            Xem thêm <img src="//bizweb.dktcdn.net/thumb/icon/100/364/767/themes/737174/assets/right-arrow.png?1676649124511" alt="Mew Nature">
+                                                            Xem thêm <img loading="lazy" src="//bizweb.dktcdn.net/thumb/icon/100/364/767/themes/737174/assets/right-arrow.png?1676649124511" alt="Mew Nature">
                                                         </a>
                                                     </div>
 
