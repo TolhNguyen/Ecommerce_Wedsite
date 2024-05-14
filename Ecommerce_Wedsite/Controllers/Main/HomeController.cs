@@ -22,9 +22,10 @@ namespace Ecommerce_Wedsite.Controllers.Main
         private readonly ISubHeaderService _subheaderService;
         private readonly IVideoService _videoService;
         private readonly IHomePageProductDisplayService _homepageproductdisplayService;
+        private readonly ISHomePageService _shomepageService;
         // private readonly ISort
 
-        public HomeController(ILogger<HomeController> logger, INewWebAppService newWebAppService, IHomePageService homepageService, IPictureService pictureService, ILogoService logoService, ICheckoutAdminService checkoutadminService, IHeaderAndFooterService headerandfooterService, IDiscounttService discounttService, ISubHeaderService subheaderService, IVideoService videoService, IHomePageProductDisplayService homepageproductdisplayService) //Khai báo Interface
+        public HomeController(ILogger<HomeController> logger, INewWebAppService newWebAppService, IHomePageService homepageService, IPictureService pictureService, ILogoService logoService, ICheckoutAdminService checkoutadminService, IHeaderAndFooterService headerandfooterService, IDiscounttService discounttService, ISubHeaderService subheaderService, IVideoService videoService, IHomePageProductDisplayService homepageproductdisplayService, ISHomePageService shomepageService) //Khai báo Interface
         {
             _logger = logger;
             _newWebAppService = newWebAppService; // Tạo 1 tham chiếu 
@@ -37,6 +38,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             _subheaderService = subheaderService;
             _videoService = videoService;
             _homepageproductdisplayService = homepageproductdisplayService;
+            _shomepageService = shomepageService;
         }
         /// <summary>
         /// Trang Chu
@@ -57,6 +59,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             var discountt_ViewModels = await _discounttService.PopupDiscount();
             var subheader_ViewModels = await _subheaderService.SubHeader();
             var video_ViewModels = await _videoService.Service_Test();
+            var shomepage_ViewModels = await _shomepageService.Service_Test();
 
             All.headerandfooter_ViewModels = headerandfooter_ViewModels.Data;
             All.homepage_ViewModels = homepage_ViewModels.Data;
@@ -66,6 +69,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             All.subheader_ViewModels = subheader_ViewModels.Data;
             All.video_ViewModels = video_ViewModels.Data;
             All.homepageproductdisplay_ViewModels = homepageproductdisplay_ViewModels.Data;
+            All.shomepage_ViewModels= shomepage_ViewModels.Data;
 
             return View("WebApp/Index", All); // Truyền dữ liệu. Hiển thị view đúng địa chỉ. 
         }
@@ -102,7 +106,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
         }
 
         [Route("~/checkoutadmin")]
-        public async Task<IActionResult> CheckoutAdmin()
+        public async Task<IActionResult> CheckoutAdmin() // chưa làm gì hết. Cả service cũng vậy
         {
             var All = new AllLayout();
 

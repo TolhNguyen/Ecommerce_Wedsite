@@ -4,7 +4,6 @@
     ViewData["Title"] = "Categories Page";
     Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
 }
-<!--Website tham khảo: https://freshgarden.exdomain.net/-->
 <body>
 	@if (Model != null)
 	{
@@ -86,51 +85,27 @@
 								</div>
 							</div>
 							<div class="col-md-3 col-sm-12 col-xs-12 boxer">
-								<div class="box_set">
-									<a href="#" title="Free ship toàn quốc">
-										<div class="icon">
-											<img loading="lazy" alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/set_cf1.png?1676649124511">
+								@foreach (var item4 in Model.shomepage_ViewModels.shomepage)
+								{
+									@if (item4.HomePage_Id == item.HomePage_Id)
+									{
+										<div class="box_set">
+											<a href="#" title="@item4.SHomePage_Title">
+												<div class="icon">
+													<img loading="lazy" alt="Mew Nature" src="@item4.SHomePage_Icon">
+												</div>
+												<div class="set_content">
+													<p class="tt_boxser">
+														@item4.SHomePage_Title
+													</p>
+													<p class="content_boxer">
+														@item4.SHomePage_Content
+													</p>
+												</div>
+											</a>
 										</div>
-										<div class="set_content">
-											<p class="tt_boxser">
-												Free ship toàn quốc
-											</p>
-											<p class="content_boxer">
-												Free Ship tất cả các hóa đơn từ 500k
-											</p>
-										</div>
-									</a>
-								</div>
-								<div class="box_set">
-									<a href="#" title="Tư vấn 24/7">
-										<div class="icon">
-											<img loading="lazy" alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/set_cf2.png?1676649124511">
-										</div>
-										<div class="set_content">
-											<p class="tt_boxser">
-												Tư vấn 24/7
-											</p>
-											<p class="content_boxer">
-												Hotline: 1900 6750
-											</p>
-										</div>
-									</a>
-								</div>
-								<div class="box_set">
-									<a href="#" title="Cây ươm tại vườn">
-										<div class="icon">
-											<img loading="lazy" alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/set_cf3.png?1676649124511">
-										</div>
-										<div class="set_content">
-											<p class="tt_boxser">
-												Cây ươm tại vườn
-											</p>
-											<p class="content_boxer">
-												Các loại cây được thuần dưỡng với khí hậu Việt Nam
-											</p>
-										</div>
-									</a>
-								</div>
+									}
+								}
 							</div>
 						</div>
 					</div>
@@ -335,7 +310,7 @@
 																{
 																	if(item6.Logo_Id == item7.Logo_Id)
 																	{
-																			<p><img loading="lazy" alt="@item6.User_Name" src="@item7.Logo_FileName" data-lazyload="@item7.Logo_FileName"></p>
+																		<p><img loading="lazy" alt="@item6.User_Name" src="@item7.Logo_FileName" data-lazyload="@item7.Logo_FileName"></p>
 																	}
 																}
 																<p class="name">@item6.User_Name</p>	
@@ -355,7 +330,7 @@
 
 				<!--Chèn ảnh thêm ở sau mỗi mục-->
 				<!--
-					oreach (var item3 in Model.picture_ViewModels.picture)
+					foreach (var item3 in Model.picture_ViewModels.picture)
 					{
 						f (item.PictureGrp_Id == item3.PictureGrp_Id)
 						{
@@ -429,11 +404,11 @@
 										<source src="@item.HomePage_Video" type="video/mp4"/>
 									</video>
 									<div class="herocontent">
-										<h1 >
+										<h1>
 											Trending Things
 											<!--Cần 1 sub title trong db HomePage-->
 										</h1>
-										<a href="#">
+										<a href="/Product">
 											Explore Now!
 										</a>
 									</div>

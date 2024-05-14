@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8">
         <title>Chatbot in JavaScript | CodingNepal</title>
-        <link rel="stylesheet" href="~/css/chatbot2.css" type="text/css" media="all">
+        <link rel="stylesheet" href="~/css/chatbot3.css" type="text/css" media="all">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Google Fonts Link For Icons -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -64,7 +64,29 @@
         chatLi.querySelector("p").textContent = message;
         return chatLi; // return chat <li> element
     }
-    
+
+    // const generateResponse = (chatElement) => {
+    //     const messageElement = chatElement.querySelector("p");
+    //     const API_URL = "https://api.coze.com/open_api/v2/chat";
+    //     const requestOptions = {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Authorization": "Bearer {YOUR_PERSONAL_ACCESS_TOKEN}",
+    //             "Accept": "*/*",
+    //             "Host": "api.coze.com",
+    //             "Connection": "keep-alive"
+    //         },
+    //         body: JSON.stringify({
+    //             conversation_id: "123",
+    //             bot_id: "{YOUR_BOT_ID}",
+    //             user: "29032201862555",
+    //             query: userMessage,  // The user's input message
+    //             stream: true
+    //         })
+    //     };
+    // }
+
     const generateResponse = (chatElement) => { // Function create answer chat of bot
         const API_URL = "https://api.openai.com/v1/completions"; // API bth cho bot GPT trl.
         //const API_URL = "https://api.coze.com/open_api/v2/chat";

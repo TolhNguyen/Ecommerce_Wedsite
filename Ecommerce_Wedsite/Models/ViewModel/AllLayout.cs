@@ -33,14 +33,15 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public IEnumerable<AboutUsMem> aboutusmem { get; set; } = new List<AboutUsMem>();
 		public List<Producd_ShopCard> product_card { get; set; } = new List<Producd_ShopCard>();
 		public IEnumerable<Video> video { get; set; } = new List<Video>();
+        public IEnumerable<SHomePage> shomepage { get; set; } = new List<SHomePage>();
 
-		/*
+        /*
             -   Tạo từng ViewModel từ Entities (có thể tạo nhiều entities trong 1 viewmodel để service gọi ra nhiều biến result giá trị để sử dụng đc
             -   truyền ViewModels vào Alllayout bằng 1 biến mới (gọi trong alllayout dùng chung):
             -   
          */
 
-		public Header_ViewModel header_ViewModels { get; set; } // tạo model con riêng chỉ để thực hiện function trên View (từ model header). Chỉ lấy 1 dữ liệu (là 1 RMObject) xài mỗi lần
+        public Header_ViewModel header_ViewModels { get; set; } // tạo model con riêng chỉ để thực hiện function trên View (từ model header). Chỉ lấy 1 dữ liệu (là 1 RMObject) xài mỗi lần
         public Footer_ViewModel footer_ViewModels { get; set; }
         public HeaderAndFooter_ViewModel headerandfooter_ViewModels { get; set; } // Gom model cho header và footer chung
         public HomePage_ViewModel homepage_ViewModels { get; set; }
@@ -74,6 +75,7 @@ namespace Ecommerce_Wedsite.Models.ViewModel
 		public Video_ViewModel video_ViewModels { get; set; }
 
         public HomePageProductDisplay_ViewModel homepageproductdisplay_ViewModels { get; set; }
+        public SHomePage_ViewModel shomepage_ViewModels { get; set; }
 
-	}
+    }
 }
