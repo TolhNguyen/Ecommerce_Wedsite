@@ -1,0 +1,122 @@
+﻿@model AllLayout
+@{
+	ViewData["Title"] = "Contact Page";
+	Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Contact V2</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+@* 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css"> *@
+
+	<link rel="stylesheet" type="text/css" href="/css/animateC.css">
+
+	<link rel="stylesheet" type="text/css" href="/css/hamburgers.min.css">
+
+	<link rel="stylesheet" type="text/css" href="/css/select2.min.css">
+
+	<link rel="stylesheet" type="text/css" href="/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/css/mainC.css">
+
+	<meta name="robots" content="noindex, follow">
+</head>
+<body>
+	<div class="breadcrumbs">
+		<div class="container">
+			<div class="inner">
+				<ul class="breadcrumb">
+					<li class="home">
+						<a href="/"><span>Trang chủ</span></a>
+						<span><img src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/right-arrow.png?1676649124511" alt="Mew Nature"></span>
+					</li>
+					<li><strong><span>Contact</span></strong></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="bg-contact2">
+		<div class="container-contact2">
+			<div class="wrap-contact2">
+				<div class="contact2-form validate-form">
+					<span class="contact2-form-title">
+						Contact Us
+					</span>
+					<div class="wrap-input2 validate-input" data-validate="Name is required">
+						<input id="Contact_UserName" class="input2" type="text" name="Contact_UserName" style="border: none">
+						<span class="focus-input2" data-placeholder="NAME"></span>
+					</div>
+					<div class="wrap-input2 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+						<input id="Contact_UserEmail" name="Contact_UserEmail" class="input2" type="text" style="border: none">
+						<span class="focus-input2" data-placeholder="EMAIL"></span>
+					</div>
+					<div class="wrap-input2 validate-input" data-validate="Message is required">
+						<textarea id="Contact_UserContent" name="Contact_UserContent" class="input2" style="border: none"></textarea>
+						<span class="focus-input2" data-placeholder="MESSAGE"></span>
+					</div>
+					<div class="container-contact2-form-btn">
+						<div class="wrap-contact2-form-btn">
+							<div class="contact2-form-bgbtn"></div>
+							<button class="contact2-form-btn" style="border: none">
+								Send Your Message
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+
+	<script src="vendor/bootstrap/js/popper.js"></script>
+
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+	<script src="vendor/select2/select2.min.js"></script>
+
+	<script src="js/main.js"></script>
+
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-23581568-13');
+	</script>
+	<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vedd3670a3b1c4e178fdfb0cc912d969e1713874337387" integrity="sha512-EzCudv2gYygrCcVhu65FkAxclf3mYM6BCwiGUm6BEuLzSb5ulVhgokzCZED7yMIkzYVg65mxfIBNdNra5ZFNyQ==" data-cf-beacon='{"rayId":"886a8211293c8345","version":"2024.4.1","token":"cd0b4b3a733644fc843ef0b185f98241"}' crossorigin="anonymous"></script>
+	@* <script>
+		function SendContact() {
+			$.ajax({
+				url: "NewsAdmin/NewsAdminEditFunction",
+				dataType: "text",
+				type: "POST",
+				data: {
+					News_Id: $('#News_Id').val(),
+					News_Title: $('#News_Title').val(),
+					News_SubTitle: $('#News_SubTitle').val(),
+					Picture_Id: $('#Picture_Id').val(),
+					ListNews_Id: $('#ListNews_Id').val(),
+					Author: $('#Author').val(),
+					News_DatePost: $('#News_DatePost').val(),
+					News_Content: $('#News_Content').val(),
+				},
+				cache: !1,
+				success:
+					function (result) {
+						if (result == 'true') {
+							window.location = 'https://localhost:7037/newsadmin';
+						}
+						else {
+							alert(result);
+						}
+					}
+			});
+		}
+	</script> *@
+</body>
+</html>
+

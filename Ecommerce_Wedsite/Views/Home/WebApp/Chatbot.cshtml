@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - www.   .com -->
+<!-- Coding By CodingNepal - www.com -->
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
@@ -41,6 +41,8 @@
         Vấn đề:
             Chưa lưu những câu trò chuyện của người dùng và chat bot vào db. Để mỗi lần chạy thì sẽ ghi nhớ lại lời thoại trước.
             Chưa có và cần add thêm knowledge base. Giải pháp: tạo một file KB riêng, 
+        Nhờ a Tín:
+            - Xem giúp code: add API Coze không run được vì sao? 
         
     */ 
     
@@ -65,28 +67,40 @@
         return chatLi; // return chat <li> element
     }
 
-    // const generateResponse = (chatElement) => {
-    //     const messageElement = chatElement.querySelector("p");
-    //     const API_URL = "https://api.coze.com/open_api/v2/chat";
-    //     const requestOptions = {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Authorization": "Bearer {YOUR_PERSONAL_ACCESS_TOKEN}",
-    //             "Accept": "*/*",
-    //             "Host": "api.coze.com",
-    //             "Connection": "keep-alive"
-    //         },
-    //         body: JSON.stringify({
-    //             conversation_id: "123",
-    //             bot_id: "{YOUR_BOT_ID}",
-    //             user: "29032201862555",
-    //             query: userMessage,  // The user's input message
-    //             stream: true
-    //         })
-    //     };
-    // }
-
+     const generateResponse = (chatElement) => {
+         const messageElement = chatElement.querySelector("p");
+         const API_URL = "https://api.coze.com/open_api/v2/chat";
+         const Bot_Id = '7362008468863320072';
+         const yourQuery = chatHistories;
+         const API_KEY2 = 'pat_o7wRRXrEnbRh8VFQsRx0WYgaeEIiOxKxFcr0XUHqfVKiGMowADPX4KPKxbvUctJr';
+         const requestOptions = {
+             method: "POST",
+             headers: {
+                 "Content-Type": "application/json",
+                 "Authorization": `Bearer ${API_KEY2}`,
+                 "Accept": "*/*",
+                 "Host": "api.coze.com",
+                 "Connection": "keep-alive"
+             },
+             body: JSON.stringify({ 
+                 conversation_id: "123",
+                 bot_id: Bot_Id,
+                 user: "29032201862555",
+                 query: userMessage,  // The user's input message
+                 stream: true
+             })
+         }
+         fetch(API_URL, requestOptions).then(res => res.json()).then(data => { // gửi API và nd chat người dùng + lịch sử chat trước đó.
+            //messageElement.textContent = data.choices[0].message.content.trim(); // kết quả trả về từ GPT bằng API
+            messageElement.textContent = data.choices[0].message.content.trim();
+            chatHistories.push({ role: "assistant", content: messageElement.textContent }); // each answer memorise. Run 2nd
+            botmess = messageElement.textContent; // lấy nội dung của bot mess gần nhất
+        }).catch(() => { // nếu bắt lỗi:
+            messageElement.classList.add("error");
+            messageElement.textContent = "Oops! Something went wrong. Please try again.";
+        }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+    }
+    @*
     const generateResponse = (chatElement) => { // Function create answer chat of bot
         const API_URL = "https://api.openai.com/v1/completions"; // API bth cho bot GPT trl.
         //const API_URL = "https://api.coze.com/open_api/v2/chat";
@@ -129,26 +143,23 @@
             messageElement.textContent = data.choices[0].message.content.trim();
             chatHistories.push({ role: "assistant", content: messageElement.textContent }); // each answer memorise. Run 2nd
             botmess = messageElement.textContent; // lấy nội dung của bot mess gần nhất
-            //chatMemory(); // gọi hàm là chạy.
         }).catch(() => { // nếu bắt lỗi:
             messageElement.classList.add("error");
             messageElement.textContent = "Oops! Something went wrong. Please try again.";
         }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
     }
+    *@
     const handleChat = () => { // Hàm chat User:
         userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace
         if (!userMessage) return;
-        // Clear the input textarea and set its height to default
         chatInput.value = "";
         chatInput.style.height = `${inputInitHeight}px`;
-        // Append the user's message to the chatbox
         chatbox.appendChild(createChatLi(userMessage, "outgoing"));
         chatbox.scrollTo(0, chatbox.scrollHeight);
         chatHistories.push({ role: "user", content: userMessage }); // each question memorise. Run 1st
         usermess = userMessage; // lấy nội dung của user mess gần nhất trước
 
         setTimeout(() => {
-            // Display "Thinking..." message while waiting for the response
             const incomingChatLi = createChatLi("Thinking...", "incoming");
             chatbox.appendChild(incomingChatLi);
             chatbox.scrollTo(0, chatbox.scrollHeight);
@@ -164,8 +175,6 @@
         chatInput.style.height = `${chatInput.scrollHeight}px`;
     });
     chatInput.addEventListener("keydown", (e) => {
-        // If Enter key is pressed without Shift key and the window
-        // width is greater than 800px, handle the chat
         if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
             e.preventDefault();
             handleChat();

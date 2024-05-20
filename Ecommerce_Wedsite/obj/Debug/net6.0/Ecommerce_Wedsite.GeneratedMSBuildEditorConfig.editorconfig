@@ -38,6 +38,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcQ2hlY2tvdXRGaW5hbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Contact/Contact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxDb250YWN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/CustomerCheckoutAdmin/CustomerCheckoutAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJDaGVja291dEFkbWluXEN1c3RvbWVyQ2hlY2tvdXRBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -96,6 +100,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Home/WebApp/Chatbot.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXZWJBcHBcQ2hhdGJvdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Home/WebApp/ChatbotCoze.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXZWJBcHBcQ2hhdGJvdENvemUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Home/WebApp/ChatbotDify.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXZWJBcHBcQ2hhdGJvdERpZnkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Dong Quan/Documents/Clone-HVNetWebsite/Ecommerce_Wedsite/Ecommerce_Wedsite/Views/Home/WebApp/CheckoutAdmin.cshtml]
