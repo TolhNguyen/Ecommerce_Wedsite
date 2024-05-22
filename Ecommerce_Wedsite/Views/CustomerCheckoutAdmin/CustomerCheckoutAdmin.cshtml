@@ -52,12 +52,6 @@
                         <th>
                             Customer Checkout Full Name
                         </th>
-                        <th>
-                            Edit
-                        </th>
-                        <th>
-                            Delete
-                        </th>
                     </tr>
                 </thead>
 
@@ -78,8 +72,6 @@
                                 <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Mess)</td> 
                                 <td>@Html.DisplayFor(modelItem => item.Promotion_Id)</td> 
                                 <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_FullName)</td> 
-                                <td>@Html.ActionLink("Edit","#",item)</td>
-                                <td>@Html.ActionLink("Delete","#",item)</td>
                                 <!--Tao controller hay service cho edit va delete-->
                             </tr>
                             }

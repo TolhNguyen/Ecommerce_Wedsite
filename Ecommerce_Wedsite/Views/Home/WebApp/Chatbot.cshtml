@@ -73,6 +73,7 @@
          const Bot_Id = '7362008468863320072';
          const yourQuery = chatHistories;
          const API_KEY2 = 'pat_o7wRRXrEnbRh8VFQsRx0WYgaeEIiOxKxFcr0XUHqfVKiGMowADPX4KPKxbvUctJr';
+         let fullMessage = '';
          const requestOptions = {
              method: "POST",
              headers: {
@@ -82,23 +83,29 @@
                  "Host": "api.coze.com",
                  "Connection": "keep-alive"
              },
-             body: JSON.stringify({ 
-                 conversation_id: "123",
-                 bot_id: Bot_Id,
-                 user: "29032201862555",
-                 query: userMessage,  // The user's input message
-                 stream: true
-             })
+             body: JSON.stringify({
+                conversation_id: "123",
+                bot_id: "7362008468863320072",
+                user: "29032201862555",
+                query: userMessage, 
+                stream: false
+            })
          }
+         console.log("error here");
          fetch(API_URL, requestOptions).then(res => res.json()).then(data => { // gửi API và nd chat người dùng + lịch sử chat trước đó.
-            //messageElement.textContent = data.choices[0].message.content.trim(); // kết quả trả về từ GPT bằng API
-            messageElement.textContent = data.choices[0].message.content.trim();
-            chatHistories.push({ role: "assistant", content: messageElement.textContent }); // each answer memorise. Run 2nd
-            botmess = messageElement.textContent; // lấy nội dung của bot mess gần nhất
+            for (var i = 0; i < data.messages.length; i++){
+                if(data.messages[i].type == "answer")
+                {
+                    messageElement.textContent =  data.messages[i].content; // k trả ra được. chay qua hết
+                    chatHistories.push({ role: "assistant", content: messageElement.textContent }); // each answer memorise. Run 2nd
+                    botmess = messageElement.textContent; // lấy nội dung của bot mess gần nhất
+                }
+            }
         }).catch(() => { // nếu bắt lỗi:
             messageElement.classList.add("error");
             messageElement.textContent = "Oops! Something went wrong. Please try again.";
         }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+        console.log("error here 2");
     }
     @*
     const generateResponse = (chatElement) => { // Function create answer chat of bot
