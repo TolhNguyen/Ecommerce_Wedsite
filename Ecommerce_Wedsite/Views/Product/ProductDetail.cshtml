@@ -129,15 +129,7 @@
 
                                                                     var check = Model.picture_ViewModels.subpicture.Where(p => p.Picture_ParentId == item3.Picture_Id).FirstOrDefault(); // kiểm tra có ảnh con không
                                                                     <!--Biến check để ktra có list con k. Và câu điều kiện where... để xác định. FOD sắp xếp các đối tượng thành 1 ds-->
-                                                                    @if (check == null) // nếu k có con
-                                                                    {
-                                                                        <div class="item">
-                                                                            <a href="#" data-image="https://bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" data-zoom-image="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967">
-                                                                                <img loading="lazy" data-img="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/products/product-13.jpg?v=1570121932967" alt="Sen đá lá ngọc">
-                                                                            </a>
-                                                                        </div>
-                                                                    }
-                                                                    else
+                                                                    @if (check != null) // nếu có con   
                                                                     {
                                                                         @foreach (var item6 in Model.picture_ViewModels.subpicture)
                                                                         {

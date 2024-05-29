@@ -31,7 +31,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 {
                     await dbConn.OpenAsync(); // mở sync
 
-                    var query = dbConn.QueryBuilder($"SELECT * FROM Promotion");
+                    var query = dbConn.QueryBuilder($"SELECT * FROM Promotion where Promotion_Condition = 1");
 
                     data.Data.promo = await query.QueryAsync<Promotion>();
 

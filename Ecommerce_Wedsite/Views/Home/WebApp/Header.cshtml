@@ -139,7 +139,7 @@
                                             <a href="~/@item.HeaderAction" class="menu-item"><span>@item.Header_Title</span></a>
                                             <div class="mega-menu">
                                                 <div class="content">
-                                                    <div class="col">
+                                                    @* <div class="col">
                                                         <section>
                                                             <h2>Featured 1</h2>
                                                             <a href="#" class="img-wrapper">
@@ -186,7 +186,7 @@
                                                             </a>
                                                             <p>Lorem ipsum dolor sit amet.</p>
                                                         </section>
-                                                    </div>
+                                                    </div> *@
                                                     @foreach(var item2 in Model.subheader_ViewModels.subheaderproducttype)
                                                     {
                                                         if(item.Header_Id == item2.Header_Id) // nếu id header nó là Product

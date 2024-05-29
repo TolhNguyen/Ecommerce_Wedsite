@@ -18,7 +18,7 @@
         </button>
         <div class="chatbot" style="z-index: 99998;">
             <header>
-                <h2>Chatbot</h2>
+                <h2>Chat bot</h2>
                 <span class="close-btn material-symbols-outlined">close</span>
             </header>
             <ul class="chatbox">
@@ -89,14 +89,14 @@
                 user: "29032201862555",
                 query: userMessage, 
                 stream: false
-            })
+            })  
          }
          console.log("error here");
-         fetch(API_URL, requestOptions).then(res => res.json()).then(data => { // gửi API và nd chat người dùng + lịch sử chat trước đó.
+         fetch(API_URL, requestOptions).then(res => res.json()).then(data => { // gửi API và nd chat người dùng + tin nhắn.
             for (var i = 0; i < data.messages.length; i++){
                 if(data.messages[i].type == "answer")
                 {
-                    messageElement.textContent =  data.messages[i].content; // k trả ra được. chay qua hết
+                    messageElement.textContent =  data.messages[i].content;
                     chatHistories.push({ role: "assistant", content: messageElement.textContent }); // each answer memorise. Run 2nd
                     botmess = messageElement.textContent; // lấy nội dung của bot mess gần nhất
                 }
