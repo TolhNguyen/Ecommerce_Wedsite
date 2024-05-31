@@ -74,11 +74,15 @@ namespace Ecommerce_Wedsite.Controllers
             return View("NewsAdminCreate", All);
         }
 
-        [Route("~/newsadmincreatefunction")]
+        [HttpPost]
         public async Task<IActionResult> NewsAdminCreateFunction(News newsitem)
         {
-            await _newsadmincreateService.Service_Test(newsitem);
-            return RedirectToAction("NewsAdmin");
+            var news_ViewModels = await _newsadmincreateService.Service_Test(newsitem);
+            if (news_ViewModels.success == true)
+            {
+                return Json(true);
+            }
+            return Json(false);
         }
         /*
             [Route("~/discountadmindelete")]

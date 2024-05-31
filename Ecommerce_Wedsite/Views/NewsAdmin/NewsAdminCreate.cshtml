@@ -18,55 +18,53 @@
             <div class="card mb-4">
                 <div class="card-header">Details</div>
                 <div class="card-body">
-                    <form action="/newsadmincreatefunction" class="login-form">
-                        <!-- Form Group (username)-->
-                        <!-- Form Row-->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (first name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="ListNews_Id">ListNews Id</label>
-                                <input type="text" id="ListNews_Id" name="ListNews_Id" class="form-control" placeholder="ListNews_Id" required>
-                            </div>
-                            <!-- Form Group (last name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="News_Title">News Title</label>
-                                <input type="text" id="News_Title" name="News_Title" class="form-control rounded-left" placeholder="News_Title" required>
-                            </div>
+                    <!-- Form Group (username)-->
+                    <!-- Form Row-->
+                    <div class="row gx-3 mb-3">
+                        <!-- Form Group (first name)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="ListNews_Id">ListNews Id</label>
+                            <input type="text" id="ListNews_Id" name="ListNews_Id" class="form-control" placeholder="ListNews_Id" required>
                         </div>
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (phone number)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="News_SubTitle">News Sub Title</label>
-                                <input type="text" id="News_SubTitle" name="News_SubTitle" class="form-control rounded-left" placeholder="News_SubTitle" required>
-                            </div>
-                            <!-- Form Group (birthday)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="Author">Author</label>
-                                <input type="text" id="Author" name="Author" class="form-control" placeholder="Author" required>
-                            </div>
+                        <!-- Form Group (last name)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="News_Title">News Title</label>
+                            <input type="text" id="News_Title" name="News_Title" class="form-control rounded-left" placeholder="News_Title" required>
                         </div>
-                        <div class="mb-3">
-                            <!--Ngon rồi ok rồi, còn info2-->
-                            <label class="small mb-1" for="News_Content">News Content</label>
-                            <textarea id="News_Content" name="News_Content" class="form-control rounded-left" placeholder="News_Content" required></textarea>
+                    </div>
+                    <div class="row gx-3 mb-3">
+                        <!-- Form Group (phone number)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="News_SubTitle">News Sub Title</label>
+                            <input type="text" id="News_SubTitle" name="News_SubTitle" class="form-control rounded-left" placeholder="News_SubTitle" required>
                         </div>
-                        <div class="mb-3">
-                            <label class="small mb-1" for="News_DatePost">News Date Post</label>
-                            <input type="text" id="News_DatePost" name="News_DatePost" class="form-control" placeholder="News_DatePost" required>
+                        <!-- Form Group (birthday)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="Author">Author</label>
+                            <input type="text" id="Author" name="Author" class="form-control" placeholder="Author" required>
                         </div>
-                        <!-- Save changes button-->
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary rounded submit p-3 px-5">Submit</button>
-                            <!--Khi submit -> link controller -> service -> new view -->
-                        </div>
-                    </form>
+                    </div>
+                    <div class="mb-3">
+                        <label class="small mb-1" for="News_DatePost">News Date Post</label>
+                        <input type="text" id="News_DatePost" name="News_DatePost" class="form-control" placeholder="News_DatePost" required>
+                    </div>
+                    <div class="mb-3">
+                        <!--Ngon rồi ok rồi, còn info2-->
+                        <label class="small mb-1" for="News_Content">News Content</label>
+                        <textarea id="News_Content" name="News_Content" class="form-control rounded-left" placeholder="News_Content" required></textarea>
+                    </div>
+                    <!-- Save changes button-->
+                    <div class="form-group">
+                        <button onclick="Createlog()" class="btn btn-primary rounded submit p-3 px-5">Submit</button>
+                        <!--Khi submit -> link controller -> service -> new view -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@* <script>
-    function Createlog() {
+ <script>
+    function Createlog(){
         $.ajax({
             url: "NewsAdmin/NewsAdminCreateFunction",
             dataType: "text",
@@ -82,19 +80,17 @@
             },
             cache: !1,
             success:
-            function (result) {
-                var obj = JSON.parse(result);
-                if (obj.success == true) {
-                    alert(obj.message);
+            function(result) {
+                if (result == 'true') {
                     window.location = 'https://localhost:7037/newsadmin';
                 }
-                else {
-                    alert(obj.message);
+                else{
+                    alert(result);
                 }
             }
         });
     };
-</script> *@
+</script> 
 @section Scripts {
     <!--thu vien di trươc sau đó code-->
     @* <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> *@
