@@ -101,19 +101,41 @@
                                     @{
                                         if (item.Product_Condition == Ecommerce_Wedsite.Models.Entities.Bit4.Available) // nếu là chữ availble
                                                 {
-                                            <input type="checkbox" id="checkbox" name="checkbox" onclick="CheckCondition(@item.Product_Id, 0)" checked> // int condition lấy số 0. Nếu char thêm ''.
+                                                    <input type="checkbox" id="checkbox" name="checkbox" onclick="CheckCondition(@item.Product_Id, 0)" checked> // int condition lấy số 0. Nếu char thêm ''.
                                         }
                                         else
                                         {
-                                            <input type="checkbox" id="checkbox" name="checkbox" onclick="CheckCondition(@item.Product_Id, 1)">
+                                           <input type="checkbox" id="checkbox" name="checkbox" onclick="CheckCondition(@item.Product_Id, 1)">
                                         }
                                     }
                                     
                                 </td>
-                                <td style="max-width:200px; overflow-y: hidden; max-height:100px;">@Html.Raw(item.Product_Info)</td>
+                                @{
+                                    // Tạm thời, tìm giải pháp khác:
+                                    if(item.Product_Info != null)
+                                    {
+                                        <td style="max-width:200px; overflow-y: hidden; max-height:100px;"><a id="idrm" href="#" onclick="MiniInfo('ReadMore')">ReadMore</a> <div class="ReadMore" id="@item.Product_Id" style="display: none;">@Html.Raw(item.Product_Info)</div></td>
+                                    }
+                                    else
+                                    {
+                                        <td>Chưa có nội dung</td>
+                                    }
+                                }
+
                                 <td>@Html.DisplayFor(modelItem => item.Product_Size)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_Href)</td>
-                                <td style="max-width:200px; overflow-y: hidden; max-height:100px;">@Html.Raw(item.Product_Info2)</td>
+
+                                @{
+                                    if (item.Product_Info2 != null)
+                                    {
+                                        <td style="max-width:200px; overflow-y: hidden; max-height:100px;"><a id="idrm" href="#" onclick="MiniInfo('ReadMore')">ReadMore</a> <div class="ReadMore" id="@item.Product_Id" style="display: none;">@Html.Raw(item.Product_Info2)</div></td>
+                                    }
+                                    else
+                                    {
+                                        <td>Chưa có nội dung</td>
+                                    }
+                                }
+
                                 <td>@Html.DisplayFor(modelItem => item.Product_Quantity)</td>
                                 <!--Cách chỉ gửi 1 para thôi-->
                                 <td>@Html.ActionLink("Edit", "productadminedit", new { Product_Id = item.Product_Id })</td>
@@ -156,6 +178,21 @@
             }
         });
     }
+
+
+    function MiniInfo(ReadMore){
+        var elements = document.getElementsByClassName(ReadMore);
+        for (var i = 0; i < elements.length; i++) {
+            var element = elements[i];
+            if (element.style.display != 'none') {
+                element.style.display = 'none';
+            } else {
+                element.style.display = 'block';
+            }
+        }   
+    }
+
+
 </script>
 
 
