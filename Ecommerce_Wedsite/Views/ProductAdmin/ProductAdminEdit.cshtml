@@ -43,21 +43,25 @@
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
                                 <!-- Form Group (organization name)-->
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="Picture_Id">Picture Id</label>
-                                        <input class="form-control" id="Picture_Id" name="Picture_Id" type="tel" placeholder="Picture_Id" value="@item.Picture_Id" required>
-                                    </div>
-                                <!-- Form Group (location)-->
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="Product_Img">Product Image</label>
-                                        <input class="form-control" id="Product_Img" name="Product_Img" type="tel" placeholder="Product_Img" value="@item.Product_Img" required>
-                                    </div>
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="Product_Img2">Image Simulator:</label>
+                                    <img id="Product_Img2" style="width:120px; height:120px" data-img="@item.Product_Img" src="@item.Product_Img" data-lazyload="@item.Product_Img" alt="">
+                                </div>
+                            <!-- Form Group (location)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="Product_Img">Product Image</label>
+                                    <input class="form-control" id="Product_Img" name="Product_Img" type="tel" placeholder="Product_Img" value="@item.Product_Img" required>
+                                </div>
                             </div>
                             <div class="row gx-3 mb-3">
                                 <!-- Form Group (organization name)-->
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="Logo_Id">Logo Id</label>
                                     <input class="form-control" id="Logo_Id" name="Logo_Id" type="tel" placeholder="Logo_Id" value="@item.Logo_Id" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="Picture_Id">Picture Id</label>
+                                    <input class="form-control" id="Picture_Id" name="Picture_Id" type="tel" placeholder="Picture_Id" value="@item.Picture_Id" required>
                                 </div>
                             </div>
                                     <!-- Form Group (email address)-->

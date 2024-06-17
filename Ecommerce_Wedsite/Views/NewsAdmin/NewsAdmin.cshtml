@@ -71,7 +71,14 @@
                                     <td>@Html.DisplayFor(modelItem => item.News_Title)</td>
                                     <td>@Html.DisplayFor(modelItem => item.News_SubTitle)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Author)</td>
-                                    <td>@Html.Raw(item.News_Content)</td>
+                                    @if(item.News_Content != null)
+                                    {
+                                        <td><a href="#" onclick="MiniInfo(@item.News_Id)">ReadMore</a> <div class="ReadMore" id="@item.News_Id" style="display: none;">@Html.Raw(item.News_Content)</div></td>
+                                    }
+                                    else
+                                    {
+                                        <td>Không có nội dung</td>
+                                    }
                                     <td>@Html.DisplayFor(modelItem => item.News_DatePost)</td>
                                     <td>@Html.ActionLink("Edit", "newsadminedit", new { News_Id = item.News_Id })</td>
                                     <td>@Html.ActionLink("Delete", "#", item)</td>
@@ -98,4 +105,14 @@
         </div>
     </div>
 </div>
+<script>
+    function MiniInfo(id){
+        var element = document.getElementById(id);
+        if(element.style.display != 'none'){
+            element.style.display = 'none';
+        }else {
+            element.style.display = 'block';
+        }
+    }
+</script>
 

@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="table-responsive" style="max-height: 550px;">
+        <div class="table-responsive" style="max-height: 650px;">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> <!---Tạo bảng-->
                 <thead >
                     <!--Danh sách bảng-->
@@ -28,22 +28,22 @@
                         <th>
                             Product Name
                         </th>
-                        <th>
+                        <th > 
                             Product type ID
                         </th>
-                        <th>
+                        <th >
                             Picture ID
                         </th>
-                        <th>
+                        <th >
                            Logo ID
                         </th>
-                        <th>
+                        <th >
                             Product price
                         </th>
-                        <th>
+                        <th >
                             Product promotion price
                         </th>
-                        <th>
+                        <th >
                             Product description
                         </th>
                         <th>
@@ -77,11 +77,13 @@
                     </tr>
                 </thead>
 
-                <tbody> 
+                <tbody > 
                     @if (Model != null) 
                     {
                         // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
-                        @foreach (var item in Model.product_ViewModels.product){ 
+                        var n = 100; // Tạo 1 id random riêng
+                        @foreach (var item in Model.product_ViewModels.product){
+                            n++; // mỗi lần lặp sẽ +1, gán cho id info2 => mỗi info2 có 1 id riêng. Vì chỉ 1 proid dùng cho info1 thôi.
                             <tr>
                                 <td>@Html.DisplayFor(modelItem => item.Product_Id)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_Name)</td> <!--Truyền dữ liệu xuống -->
@@ -89,7 +91,6 @@
                                 <td>  
                                     @Html.DisplayFor(modelItem => item.Picture_Id).
                                     <img style="width:120px; height:120px" data-img="@item.Product_Img" src="@item.Product_Img" data-lazyload="@item.Product_Img" alt="">
-
                                 </td>
                                 <td>@Html.DisplayFor(modelItem => item.Logo_Id)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Product_Price)</td>
@@ -114,7 +115,7 @@
                                     // Tạm thời, tìm giải pháp khác:
                                     if(item.Product_Info != null)
                                     {
-                                        <td style="max-width:200px; overflow-y: hidden; max-height:100px;"><a id="idrm" href="#" onclick="MiniInfo('ReadMore')">ReadMore</a> <div class="ReadMore" id="@item.Product_Id" style="display: none;">@Html.Raw(item.Product_Info)</div></td>
+                                        <td style="max-width:200px; overflow-y: hidden; max-height:100px;"><a href="#" onclick="MiniInfo(@item.Product_Id)">ReadMore</a> <div class="ReadMore" id="@item.Product_Id" style="display: none;">@Html.Raw(item.Product_Info)</div></td>
                                     }
                                     else
                                     {
@@ -128,7 +129,7 @@
                                 @{
                                     if (item.Product_Info2 != null)
                                     {
-                                        <td style="max-width:200px; overflow-y: hidden; max-height:100px;"><a id="idrm" href="#" onclick="MiniInfo('ReadMore')">ReadMore</a> <div class="ReadMore" id="@item.Product_Id" style="display: none;">@Html.Raw(item.Product_Info2)</div></td>
+                                        <td style="max-width:200px; overflow-y: hidden; max-height:100px;"><a href="#" onclick="MiniInfo(@n)">ReadMore</a> <div class="ReadMore" id="@n" style="display: none;">@Html.Raw(item.Product_Info2)</div></td>
                                     }
                                     else
                                     {
@@ -180,19 +181,15 @@
     }
 
 
-    function MiniInfo(ReadMore){
-        var elements = document.getElementsByClassName(ReadMore);
-        for (var i = 0; i < elements.length; i++) {
-            var element = elements[i];
-            if (element.style.display != 'none') {
-                element.style.display = 'none';
-            } else {
-                element.style.display = 'block';
-            }
-        }   
+    function MiniInfo(id){
+        var element = document.getElementById(id);
+        console.log(element);
+        if(element.style.display != 'none'){
+            element.style.display = 'none';
+        }else {
+            element.style.display = 'block';
+        }
     }
-
-
 </script>
 
 
