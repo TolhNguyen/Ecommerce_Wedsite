@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "brsA4jFZFgm7ZhuHKHHeOduQIgijZMPtwWPy3SQlDwwA/iAevbwFdYioPZiSPjVoTNtrNOCKDFzmuppY0ihWPA==",
+  "dgSpecHash": "aAajZgc5wWcM+Q8iyruv0E0WqfqECRTGU95gjlgocDYdUjb8dlz0OapjewDaYvsifKzKGtsgP7G9VtfaUKuWnw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite.csproj",
   "expectedPackageFiles": [
@@ -91,7 +91,7 @@
     "C:\\Users\\Dong Quan\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\Dong Quan\\.nuget\\packages\\mono.unix\\7.1.0-final.1.21458.1\\mono.unix.7.1.0-final.1.21458.1.nupkg.sha512",
     "C:\\Users\\Dong Quan\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
-    "C:\\Users\\Dong Quan\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Dong Quan\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Dong Quan\\.nuget\\packages\\nuget.common\\6.3.1\\nuget.common.6.3.1.nupkg.sha512",
     "C:\\Users\\Dong Quan\\.nuget\\packages\\nuget.configuration\\6.3.1\\nuget.configuration.6.3.1.nupkg.sha512",
     "C:\\Users\\Dong Quan\\.nuget\\packages\\nuget.dependencyresolver.core\\6.3.1\\nuget.dependencyresolver.core.6.3.1.nupkg.sha512",
@@ -103,6 +103,7 @@
     "C:\\Users\\Dong Quan\\.nuget\\packages\\nuget.versioning\\6.3.1\\nuget.versioning.6.3.1.nupkg.sha512",
     "C:\\Users\\Dong Quan\\.nuget\\packages\\pagedlist\\1.17.0\\pagedlist.1.17.0.nupkg.sha512",
     "C:\\Users\\Dong Quan\\.nuget\\packages\\pagedlist.mvc\\4.5.0\\pagedlist.mvc.4.5.0.nupkg.sha512",
+    "C:\\Users\\Dong Quan\\.nuget\\packages\\payos.net5\\1.0.3\\payos.net5.1.0.3.nupkg.sha512",
     "C:\\Users\\Dong Quan\\.nuget\\packages\\pythonnet\\3.0.3\\pythonnet.3.0.3.nupkg.sha512",
     "C:\\Users\\Dong Quan\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\Dong Quan\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",

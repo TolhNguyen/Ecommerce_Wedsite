@@ -34,6 +34,7 @@ namespace Ecommerce_Wedsite.Models.ViewModel
 		public List<Producd_ShopCard> product_card { get; set; } = new List<Producd_ShopCard>();
 		public IEnumerable<Video> video { get; set; } = new List<Video>();
         public IEnumerable<SHomePage> shomepage { get; set; } = new List<SHomePage>();
+        public IEnumerable<Payment> payment { get; set; } = new List<Payment>();
 
         /*
             -   Tạo từng ViewModel từ Entities (có thể tạo nhiều entities trong 1 viewmodel để service gọi ra nhiều biến result giá trị để sử dụng đc
@@ -76,6 +77,7 @@ namespace Ecommerce_Wedsite.Models.ViewModel
 
         public HomePageProductDisplay_ViewModel homepageproductdisplay_ViewModels { get; set; }
         public SHomePage_ViewModel shomepage_ViewModels { get; set; }
+        public Payment_ViewModel paymnet_ViewModels { get; set; }
 
     }
 }

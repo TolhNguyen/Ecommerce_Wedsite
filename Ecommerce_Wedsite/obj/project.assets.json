@@ -6007,15 +6007,15 @@
           "System.Xml.XDocument": "4.3.0"
         }
       },
-      "Newtonsoft.Json/13.0.1": {
+      "Newtonsoft.Json/13.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -6192,6 +6192,22 @@
         "runtime": {
           "lib/net40/PagedList.Mvc.dll": {
             "related": ".XML"
+          }
+        }
+      },
+      "payOS.Net5/1.0.3": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "compile": {
+          "lib/net5.0/payos-lib-backend-dotnet-5.dll": {
+            "related": ".runtimeconfig.json"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/payos-lib-backend-dotnet-5.dll": {
+            "related": ".runtimeconfig.json"
           }
         }
       },
@@ -12154,14 +12170,15 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/13.0.1": {
-      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+    "Newtonsoft.Json/13.0.3": {
+      "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
       "type": "package",
-      "path": "newtonsoft.json/13.0.1",
+      "path": "newtonsoft.json/13.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.md",
+        "README.md",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
         "lib/net35/Newtonsoft.Json.dll",
@@ -12170,13 +12187,15 @@
         "lib/net40/Newtonsoft.Json.xml",
         "lib/net45/Newtonsoft.Json.dll",
         "lib/net45/Newtonsoft.Json.xml",
+        "lib/net6.0/Newtonsoft.Json.dll",
+        "lib/net6.0/Newtonsoft.Json.xml",
         "lib/netstandard1.0/Newtonsoft.Json.dll",
         "lib/netstandard1.0/Newtonsoft.Json.xml",
         "lib/netstandard1.3/Newtonsoft.Json.dll",
         "lib/netstandard1.3/Newtonsoft.Json.xml",
         "lib/netstandard2.0/Newtonsoft.Json.dll",
         "lib/netstandard2.0/Newtonsoft.Json.xml",
-        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.13.0.3.nupkg.sha512",
         "newtonsoft.json.nuspec",
         "packageIcon.png"
       ]
@@ -12367,6 +12386,20 @@
         "lib/net40/PagedList.Mvc.dll",
         "pagedlist.mvc.4.5.0.nupkg.sha512",
         "pagedlist.mvc.nuspec"
+      ]
+    },
+    "payOS.Net5/1.0.3": {
+      "sha512": "2seqvpAegKisCXxTsCuXvF8ygd8vNkWM8TZ43s4vTxCEvx4MxJYJp/tKTQ3qx2gytu2oaAOvw5jFKkaGk0MhFQ==",
+      "type": "package",
+      "path": "payos.net5/1.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net5.0/payos-lib-backend-dotnet-5.dll",
+        "lib/net5.0/payos-lib-backend-dotnet-5.runtimeconfig.json",
+        "payos.net5.1.0.3.nupkg.sha512",
+        "payos.net5.nuspec"
       ]
     },
     "pythonnet/3.0.3": {
@@ -16721,6 +16754,7 @@
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.13",
       "PagedList.Mvc >= 4.5.0",
       "System.Data.SqlClient >= 4.8.5",
+      "payOS.Net5 >= 1.0.3",
       "pythonnet >= 3.0.3"
     ]
   },
@@ -16817,6 +16851,10 @@
           "System.Data.SqlClient": {
             "target": "Package",
             "version": "[4.8.5, )"
+          },
+          "payOS.Net5": {
+            "target": "Package",
+            "version": "[1.0.3, )"
           },
           "pythonnet": {
             "target": "Package",

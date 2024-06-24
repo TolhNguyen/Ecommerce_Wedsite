@@ -18,6 +18,8 @@
         <h1><a><b>Checkout Page</b></a></h1>
     @* <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> *@
+    <link rel="stylesheet" href="~/css/tailwind.css">
+    <link rel="stylesheet" href="~/css/payment3.css">
 </header>
 @if (Model != null)
 {
@@ -186,6 +188,36 @@
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
                                         <label class="form-check-label" for="flexCheckDefault1">Save this address</label>
                                     </div>
+                                    <p><strong>Chọn phương thức thanh toán</strong></p>
+                                        <div class="card mb-4 mb-lg-0" style="width: 330px;">
+                                            <div class="payment-method">
+                                                @foreach (var item2 in Model.paymnet_ViewModels.payment)
+                                                {
+                                                    <input type="radio" name="payment-method" id="method-1">
+                                                    <label for="method-1" class="payment-method-item">
+                                                        <img src="@item2.Payment_Img" alt="">
+                                                    </label>
+                                                }
+
+                                                @* <input type="radio" name="payment-method" id="method-1" checked>
+                                                <label for="method-1" class="payment-method-item">
+                                                    <img src="/img/Picture/visa.png" alt="">
+                                                </label>
+                                                <input type="radio" name="payment-method" id="method-2">
+                                                <label for="method-2" class="payment-method-item">
+                                                    <img src="/img/Picture/mastercard.png" alt="">
+                                                </label>
+                                                <input type="radio" name="payment-method" id="method-3">
+                                                <label for="method-3" class="payment-method-item">
+                                                    <img src="/img/Picture/paypal.png" alt="">
+                                                </label>
+                                                <input type="radio" name="payment-method" id="method-4">
+                                                <label for="method-4" class="payment-method-item">
+                                                    <img src="/img/Picture/stripe.png" alt="">
+                                                </label> *@
+                                            </div>
+                                        </div>
+                                    <input type="hidden" id="radioId" name="radioId">
                                     <div class="row">
                                         <div class="">
                                             <h2 class="mb-0"><b>Thông tin đơn hàng:</b></h2>
@@ -273,8 +305,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="float-end">
-                                                    <button onclick="" id="cancelid" class="btn btn-light border">Cancel</button>
-                                                    <button type="submit" class="btn btn-success shadow-0 border" onclick="CheckPopup()">Xác nhận đơn hàng</button>
+                                                    <button  id="cancelid" class="btn btn-light border">Cancel</button>
+                                                    <button href="/create-payment-link" type="submit" class="btn btn-success shadow-0 border" onclick="CheckPopup()">Xác nhận đơn hàng</button>
                                                 </div>
                                             </section>
                                         </div>
@@ -321,22 +353,29 @@
                                             </div>
                                         </div>
                                     </li>
+                                    @* <p><strong>Chọn phương thức thanh toán</strong></p>
                                     <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                                         <div class="card mb-4 mb-lg-0">
-                                            <div class="card-body">
-                                                <p><strong>Phương thức thanh toán</strong></p>
-                                                <img class="me-2" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/payment-1.png?1676649124511" alt="payment-1">
-
-                                                <img class="me-2" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/payment-2.png?1676649124511" alt="payment-2">
-
-
-                                                <img class="me-2" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/payment-3.png?1676649124511" alt="payment-3">
-
-
-                                                <img class="me-2" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/rolling.svg?1676649124511" data-lazyload="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/payment-4.png?1676649124511" alt="payment-4">
+                                            <div class="payment-method">
+                                                <input type="radio" name="payment-method" id="method-1" checked>
+                                                <label for="method-1" class="payment-method-item">
+                                                    <img src="/img/Picture/visa.png" alt="">
+                                                </label>
+                                                <input type="radio" name="payment-method" id="method-2">
+                                                <label for="method-2" class="payment-method-item">
+                                                    <img src="/img/Picture/mastercard.png" alt="">
+                                                </label>
+                                                <input type="radio" name="payment-method" id="method-3">
+                                                <label for="method-3" class="payment-method-item">
+                                                    <img src="/img/Picture/paypal.png" alt="">
+                                                </label>
+                                                <input type="radio" name="payment-method" id="method-4">
+                                                <label for="method-4" class="payment-method-item">
+                                                    <img src="/img/Picture/stripe.png" alt="">
+                                                </label>
                                             </div>
                                         </div>
-                                    </li>
+                                    </li> *@
                                     <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                                         <p id="p1">Không có áp dụng mã giảm giá từ Popup</p>
                                     </li>
@@ -483,7 +522,9 @@
                 } 
             }
 
-            function CheckPopup() { // nút xác nhận thì xét lại đk rồi set cookie
+            function Pay
+
+            function CheckPopup() { // nút xác nhận r thì xét lại đk rồi set cookie
                 var popupcode = getCookie('popupcode');
                 var popupinvalue = document.getElementById('popupin').value;
                 if (getCookie('popupdiscount') == 'true' && popupcode == popupinvalue) {

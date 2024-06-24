@@ -95,6 +95,10 @@
               "target": "Package",
               "version": "[4.8.5, )"
             },
+            "payOS.Net5": {
+              "target": "Package",
+              "version": "[1.0.3, )"
+            },
             "pythonnet": {
               "target": "Package",
               "version": "[3.0.3, )"

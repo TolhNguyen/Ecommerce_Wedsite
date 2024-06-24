@@ -4,8 +4,11 @@ using Ecommerce_Wedsite.Models.Helpers.Response;
 using Ecommerce_Wedsite.Models.ViewModel;
 using Ecommerce_Wedsite.Service.WebApp;
 using Microsoft.AspNetCore.Mvc;
+//using Net.payOS.Types;
+//using Net.payOS;
 using System.Diagnostics;
 using System.Text.Json;
+using static IronPython.Modules._ast;
 
 namespace Ecommerce_Wedsite.Controllers.Main
 {
@@ -23,8 +26,10 @@ namespace Ecommerce_Wedsite.Controllers.Main
         private readonly ISubHeaderService _subheaderService;
         private readonly ICheckingQuantityService _checkingquantityService;
         private readonly IGetIdWebNameService _getidwebNnameService;
+        private readonly IPaymentService _paymentService;
+        //private readonly PayOS _payOS;
 
-        public CheckoutController(ILogger<CheckoutController> logger, IHeaderAndFooterService headerandfooterService, IPictureService pictureService, ICustomerCheckoutService customercheckoutService, IProductCheckoutService productcheckoutService, IPromotionService promotionService, IDiscounttService discounttService, IDecreasePromoQuantityService decreasepromoquantityService, ICityService cityService, ISubHeaderService subheaderService, ICheckingQuantityService checkingquantityService, IGetIdWebNameService getidwebnameService)
+        public CheckoutController(ILogger<CheckoutController> logger, IHeaderAndFooterService headerandfooterService, IPictureService pictureService, ICustomerCheckoutService customercheckoutService, IProductCheckoutService productcheckoutService, IPromotionService promotionService, IDiscounttService discounttService, IDecreasePromoQuantityService decreasepromoquantityService, ICityService cityService, ISubHeaderService subheaderService, ICheckingQuantityService checkingquantityService, IGetIdWebNameService getidwebnameService/*, PayOS payOS*/, IPaymentService paymentService)
         {
             _logger = logger;
             _headerandfooterService = headerandfooterService;
@@ -38,12 +43,14 @@ namespace Ecommerce_Wedsite.Controllers.Main
             _subheaderService = subheaderService;
             _checkingquantityService = checkingquantityService;
             _getidwebNnameService = getidwebnameService;
+            _paymentService = paymentService;
+            //_payOS = payOS;
         }
 
         [Route("~/checkout")]
         public async Task<IActionResult> Checkout() // chạy ra trang checkout trước function phải là 1 controller khác
         {
-            var All = new AllLayout();
+             var All = new AllLayout();
 
             var headerandfooter_ViewModels = await _headerandfooterService.HeaderAndFooter_ServiceTest();
             var promotion_ViewModels = await _promotionService.Service_Test();
@@ -51,6 +58,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             var discountt_ViewModels = await _discounttService.PopupDiscount();
             var city_ViewModels = await _cityService.Service_Test();
             var subheader_ViewModels = await _subheaderService.SubHeader();
+            var payment_ViewModels = await _paymentService.Service_Test();
 
             All.headerandfooter_ViewModels = headerandfooter_ViewModels.Data;
             All.picture_ViewModels = picture_ViewModels.Data;
@@ -58,6 +66,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             All.discountt_ViewModels = discountt_ViewModels.Data;
             All.city_ViewModels = city_ViewModels.Data;
             All.subheader_ViewModels = subheader_ViewModels.Data;
+            All.paymnet_ViewModels = payment_ViewModels.Data;
 
             var cookieCard = HttpContext.Request.Cookies["cart"]; // lấy value từ cart cookie
             var card = new ShopCard_ViewModel(); // tạo 1 biến lưu dữ liệu đó
@@ -133,7 +142,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
 
         //Chức năng check sl sp trước khi sang trang checkout (còn sai thì ở Cart)
         public async Task<IActionResult> CheckingCheckout(string cartcookie) // dữ liệu từ ajax. Lỗi trả về trang checkout
-            {
+        {
             var cartcookieobj = new ShopCard_ViewModel();
 			cartcookieobj = JsonSerializer.Deserialize<ShopCard_ViewModel>(cartcookie); // 2 biến này giống cookiecard và card
             if (cartcookieobj != null)
@@ -148,6 +157,28 @@ namespace Ecommerce_Wedsite.Controllers.Main
 			}
 			return Json(false); // hiện page kết quả và nội dung các dữ liệu checkout và order
         }
+
+        //[HttpPost("/create-payment-link")]
+        //public async Task<IActionResult> PayOSCheckout()
+        //{
+        //    try
+        //    {
+        //        int orderCode = int.Parse(DateTimeOffset.Now.ToString("ffffff"));
+        //        ItemData item = new ItemData("Mì tôm hảo hảo ly", 1, 2000);
+        //        List<ItemData> items = new List<ItemData>();
+        //        items.Add(item);
+        //        PaymentData paymentData = new PaymentData(orderCode, 2000, "Thanh toan don hang", items, "https://localhost:3002/cancel", "https://localhost:3002/success");
+
+        //        CreatePaymentResult createPayment = await _payOS.createPaymentLink(paymentData);
+
+        //        return Redirect(createPayment.checkoutUrl);
+        //    }
+        //    catch (System.Exception exception)
+        //    {
+        //        Console.WriteLine(exception);
+        //        return Redirect("CheckoutFinal");
+        //    }
+        //}
     }
 }
 /*

@@ -173,6 +173,14 @@
       "PackagePath": "staticwebassets\\css\\panels.less"
     },
     {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\payment3.css",
+      "PackagePath": "staticwebassets\\css\\payment3.css"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\payos.css",
+      "PackagePath": "staticwebassets\\css\\payos.css"
+    },
+    {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\popup13.css",
       "PackagePath": "staticwebassets\\css\\popup13.css"
     },
@@ -207,6 +215,10 @@
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\style2.css",
       "PackagePath": "staticwebassets\\css\\style2.css"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\tailwind.css",
+      "PackagePath": "staticwebassets\\css\\tailwind.css"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\util.css",
@@ -565,6 +577,10 @@
       "PackagePath": "staticwebassets\\img\\Picture\\caytrongnha.jpg"
     },
     {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\chip.png",
+      "PackagePath": "staticwebassets\\img\\Picture\\chip.png"
+    },
+    {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\davidbeckham.jpg",
       "PackagePath": "staticwebassets\\img\\Picture\\davidbeckham.jpg"
     },
@@ -575,6 +591,14 @@
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\long-banner.jpg",
       "PackagePath": "staticwebassets\\img\\Picture\\long-banner.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\mastercard.png",
+      "PackagePath": "staticwebassets\\img\\Picture\\mastercard.png"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\paypal.png",
+      "PackagePath": "staticwebassets\\img\\Picture\\paypal.png"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\ronaldobanner.jpg",
@@ -591,6 +615,14 @@
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\slide-img2.jpg",
       "PackagePath": "staticwebassets\\img\\Picture\\slide-img2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\stripe.png",
+      "PackagePath": "staticwebassets\\img\\Picture\\stripe.png"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\visa.png",
+      "PackagePath": "staticwebassets\\img\\Picture\\visa.png"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\worktable.jpg",

@@ -34,7 +34,7 @@
                                     Available Now
                                 </p>
                             </div>
-                            <input class="popupemail" type="email" id="popupemail" name="popupemail" placeholder="Gmail" required />
+                            <input class="popupemail" type="email" id="popupemail" name="popupemail" placeholder="any gmail.com" required />
                             <p id="submess" class="submess"></p>
                             <button class="buttonS" onclick="GetPopupDiscount()" type="submit">Submit</button>
                         </div>
@@ -66,7 +66,8 @@
     }
     
 </div>
-
+    <script src="https://smtpjs.com/v3/smtp.js">
+    </script>
     <script>   
         var popupranid = document.getElementById("popupranid").getAttribute("value"); // random id của popup
         var popupno = parseInt(document.getElementById("popupno").getAttribute("value")); // số lượng discount còn
@@ -107,19 +108,14 @@
                 setCookie('popupdiscount', 'false', 365);
             }
          );
-
-        // function isValidEmail(email) {
-        //     // Regular expression for validating email addresses
-        //     const emailRegex
-  
-        //     // Test the email against the regular expression
-        //     return emailRegex.test(email);
-        // }
+        function sendEmail(){
+            
+        }
         function GetPopupDiscount() {
             var popupemail = document.getElementById("popupemail").value; //Đến lúc gõ value rồi mới lấy của email. Trước đó là rỗng
             var popupemail2 = encodeURIComponent(popupemail);
             var popupranid2 =  encodeURIComponent(popupranid);
-            if (popupemail2 != "" && popupemail2.includes("%40gmail.com")) { // ktra có rỗng không và có email k %40. Chưa ktra dạng email valid hay k 
+            if (popupemail2 != "" && popupemail2.includes("%40")) { // ktra có rỗng không và có email k %40. Chưa ktra dạng email valid hay k 
                 document.querySelector('.bg-modal').style.display = 'none'; // submit r thì xóa bg
                 setCookie('bg-modal', 'false', 365);
                 $.ajax({
@@ -134,6 +130,17 @@
                             setCookie('popupdiscount', 'true', 365); // xác định xem người dùng có mã discount hay k. Nếu true
                             setCookie('popupcode', popupcode, 365); // mã code của 
                             document.querySelector('.popupcontainer').style.display = 'flex';
+                            Email.send({ // cần trả tiền cho tài khoản gmail https://app.elasticemail.com/marketing
+                                Host : "smtp.gmail.com",
+                                Username : "beenquan15@gmail.com",
+                                Password : "Beenquan15",
+                                To : popupemail,
+                                From : "Beenquan15.com",
+                                Subject : "You receive a big vourcher",
+                                Body : "Go back to the website and make your first purchase for " + popuprate * 100 + "%"
+                            }).then(
+                              message => alert(message)
+                            );
                         }
                         else{ // nếu false = hết mã
                             setCookie('popupdiscount', 'false', 365);
