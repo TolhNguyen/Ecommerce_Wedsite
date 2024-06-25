@@ -193,12 +193,11 @@
                                             <div class="payment-method">
                                                 @foreach (var item2 in Model.paymnet_ViewModels.payment)
                                                 {
-                                                    <input type="radio" name="payment-method" id="method-1">
-                                                    <label for="method-1" class="payment-method-item">
+                                                    <input type="radio" name="payment-method" id="@item2.Payment_HTMLId" onclick="PaymentID(@item2.Payment_Id)"> // tạo thêm  HTML ID trong Database
+                                                    <label for="@item2.Payment_HTMLId" class="payment-method-item">
                                                         <img src="@item2.Payment_Img" alt="">
                                                     </label>
                                                 }
-
                                                 @* <input type="radio" name="payment-method" id="method-1" checked>
                                                 <label for="method-1" class="payment-method-item">
                                                     <img src="/img/Picture/visa.png" alt="">
@@ -217,7 +216,7 @@
                                                 </label> *@
                                             </div>
                                         </div>
-                                    <input type="hidden" id="radioId" name="radioId">
+                                    <input type="hidden" id="Payment_Id" name="Payment_Id">
                                     <div class="row">
                                         <div class="">
                                             <h2 class="mb-0"><b>Thông tin đơn hàng:</b></h2>
@@ -263,7 +262,7 @@
                                                                                 <!-- Data -->
                                                                                 <p>
                                                                                     <strong>Tên sản phẩm: @item.name</strong>
-                                                                                    <input type="hidden" id="ProductCheckout_Name" name="ProductCheckout_Name" value="@@item.name">
+                                                                                    <input type="hidden" id="ProductCheckout_Name" name="ProductCheckout_Name" value="@item.name">
                                                                                 </p>
                                                                                 <p>
                                                                                     Mã sản phẩm: @item.id
@@ -522,8 +521,6 @@
                 } 
             }
 
-            function Pay
-
             function CheckPopup() { // nút xác nhận r thì xét lại đk rồi set cookie
                 var popupcode = getCookie('popupcode');
                 var popupinvalue = document.getElementById('popupin').value;
@@ -531,6 +528,10 @@
                     setCookie("popupdiscount", "false", "365");
                     setCookie("popupcode", "", "365");
                 }
+            }
+
+            function PaymentID(id) { // lấy payment id
+                document.getElementById('Payment_Id').value = id; // value gán = id
             }
 
             /* 

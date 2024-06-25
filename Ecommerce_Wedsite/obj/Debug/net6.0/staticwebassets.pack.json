@@ -177,6 +177,10 @@
       "PackagePath": "staticwebassets\\css\\payment3.css"
     },
     {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\paymentpage.css",
+      "PackagePath": "staticwebassets\\css\\paymentpage.css"
+    },
+    {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\payos.css",
       "PackagePath": "staticwebassets\\css\\payos.css"
     },
@@ -663,6 +667,10 @@
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\js\\easing\\easing.min.js",
       "PackagePath": "staticwebassets\\js\\easing\\easing.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\js\\logic.js",
+      "PackagePath": "staticwebassets\\js\\logic.js"
     },
     {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\js\\news.js",

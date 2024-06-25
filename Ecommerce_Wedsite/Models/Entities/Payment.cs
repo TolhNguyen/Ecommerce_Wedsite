@@ -12,6 +12,7 @@ namespace Ecommerce_Wedsite.Models.Entities
         public string Payment_Color { get; set; }
         public string Payment_Color2 { get; set; }
         public Bit9 Paymnet_Condition { get; set; }
+        public string Payment_HTMLId { get; set; }
     }
     public enum Bit9 // false là 0, true là 1
     {

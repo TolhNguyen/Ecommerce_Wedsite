@@ -50,7 +50,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
         [Route("~/checkout")]
         public async Task<IActionResult> Checkout() // chạy ra trang checkout trước function phải là 1 controller khác
         {
-             var All = new AllLayout();
+            var All = new AllLayout();
 
             var headerandfooter_ViewModels = await _headerandfooterService.HeaderAndFooter_ServiceTest();
             var promotion_ViewModels = await _promotionService.Service_Test();
@@ -103,12 +103,20 @@ namespace Ecommerce_Wedsite.Controllers.Main
                 option.Path = "/";
                 option.Expires = DateTime.Now.AddDays(1);
                 HttpContext.Response.Cookies.Append("cart", productvalue, option);
-                return RedirectToAction("CheckoutFinal"); // chuyển sang controller khác
+                return RedirectToAction("PaymentPage", new {id = customercheckout.Payment_Id }); // chuyển sang controller khác và gửi param theo
             }
             else return Json(false);
         }
 
-        [Route("~/checkoutfinal")]
+        public async Task<IActionResult> PaymentPage(int id)
+        {
+            var All = new AllLayout();
+            var payment_ViewModels = await _paymentService.Service_Test2(id);
+            All.paymnet_ViewModels = payment_ViewModels.Data;
+            return View("Payment",All);
+        }
+
+            [Route("~/checkoutfinal")]
         public async Task<IActionResult> CheckoutFinal() 
         {
             var All = new AllLayout();

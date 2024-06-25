@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lRs8pBx7tq20axpIMEBXFXaszAVteH/BsUQKcQH7ouA=",
+  "Hash": "4j+U/v/LlBHXisw33F2nqR3NyomHlxou6F+druuS8d4=",
   "Source": "Ecommerce_Wedsite",
   "BasePath": "_content/Ecommerce_Wedsite",
   "Mode": "Default",
@@ -851,6 +851,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\payment3.css"
+    },
+    {
+      "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\paymentpage.css",
+      "SourceId": "Ecommerce_Wedsite",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\",
+      "BasePath": "_content/Ecommerce_Wedsite",
+      "RelativePath": "css/paymentpage.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\paymentpage.css"
     },
     {
       "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\payos.css",
@@ -3169,6 +3188,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\easing\\easing.min.js"
+    },
+    {
+      "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\js\\logic.js",
+      "SourceId": "Ecommerce_Wedsite",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\",
+      "BasePath": "_content/Ecommerce_Wedsite",
+      "RelativePath": "js/logic.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\logic.js"
     },
     {
       "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\js\\news.js",

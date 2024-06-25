@@ -14,6 +14,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
         //RMObject chỉ lấy từng 1 dữ liệu ( vd là model có từng danh sách 1 như Header_ViewModel)
         // Sẽ là RM khi lấy toàn bộ dữ liệu cùng lúc (vd là model có nhiều dữ liệu đi chung như Header)
         Task<ResponseMessageObject<Payment_ViewModel>> Service_Test(); //Model lớn chứa Model nhỏ. Tạo Phương Thức     
+        Task<ResponseMessageObject<Payment_ViewModel>> Service_Test2(int id);
     }
     public class PaymentService : IPaymentService // Thừa kế các thuộc tính từ Interface 
     {
@@ -37,6 +38,31 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     data.Data.payment = await query.QueryAsync<Payment>();
 
                     await dbConn.CloseAsync(); 
+                }
+            }
+            catch (Exception e) // Gặp lỗi
+            {
+                data.message = e.Message;
+                data.success = false;
+            }
+            return data;
+        }
+
+        // Có thể có nhiều chức năng trong 1 service (những chức năng có điểm giống nhau nên bỏ chung 1 service)
+        public async Task<ResponseMessageObject<Payment_ViewModel>> Service_Test2(int id)
+        {
+            var data = new ResponseMessageObject<Payment_ViewModel>();
+            data.Data = new Payment_ViewModel();
+            try
+            {
+                using (var dbConn = new SqlConnection(_configuration.GetConnectionString("ConnectionString")))
+                {
+                    await dbConn.OpenAsync(); // mở sync
+
+                    var query = dbConn.QueryBuilder($"select * from Payment where Payment_Condition = 1 and Payment_Id = '{id}'");
+                    data.Data.payment = await query.QueryAsync<Payment>();
+
+                    await dbConn.CloseAsync();
                 }
             }
             catch (Exception e) // Gặp lỗi
