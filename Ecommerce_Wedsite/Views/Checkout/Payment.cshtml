@@ -5,7 +5,7 @@
 }
 @foreach(var item1 in Model.paymnet_ViewModels.payment)
 {
-    <div class="masterContainer">
+    <div class="masterContainer" style="background:@item1.Payment_Color3">
         <div class="cardContainer">
             <div class="frontSection" style="background:@item1.Payment_Color">
                 <div class="imageSection">
@@ -16,7 +16,7 @@
                 <div class="flexbox">
                     <div class="box">
                         <span>card holder</span>
-                        <div class="cardHolderName">full name</div>
+                        <div class="cardHolderName" id="cardHolderName">full name</div>
                     </div>
                     <div class="box">
                         <span>expiration</span>
@@ -31,24 +31,27 @@
                 <div class="stripeSection"></div>
                 <div class="box">
                     <span>CVV</span>
-                    <div class="cvvBox"></div>
-                    <img src="./img/visa.png" alt="" />
+                    <div class="cvvBox" id="cvvBox"></div>
+                    <img src="@item1.Payment_Img" alt="" />
                 </div>
             </div>
         </div>
         <form action="">
+            <span>Total payment</span>
+            <div id="TotalPrice"></div>
             <div class="inputBox">
                 <span>card number</span>
-                <input type="text" maxlength="16" class="cardNumber" />
+                <input type="text" maxlength="19" class="cardNumber" placeholder="1234 5678 9012 3456"/>
             </div>
             <div class="inputBox">
                 <span>card holder</span>
-                <input type="text" class="cardHolder" />
+                <input type="text" class="cardHolder" maxlength="50" id="cardHolderInput" />
             </div>
             <div class="flexBox">
                 <div class="inputBox">
                     <span>expiration mm</span>
                     <select name="" id="" class="monthInput">
+                        <!--Cần đổi thành database-->
                         <option value="month" selected disabled>month</option>
                         <option value="01">01</option>
                         <option value="02">02</option>
@@ -67,6 +70,7 @@
                 <div class="inputBox">
                     <span>expiration yy</span>
                     <select name="" id="" class="yearInput">
+                        <!--Cần đổi thành database-->
                         <option value="month" selected disabled>year</option>
                         <option value="2023">2023</option>
                         <option value="2024">2024</option>
@@ -80,10 +84,117 @@
                 </div>
                 <div class="inputBox">
                     <span>CVV</span>
-                    <input type="text" maxlength="4" class="cvvInput"/>
+                    <input type="text" maxlength="4" class="cvvInput" id="cvvInput" placeholder="Enter CVV" />
                 </div>
             </div>
             <input style="background:@item1.Payment_Color" type="submit" value="get otp" class="otp-btn" />
         </form>
     </div>
+    <script>
+        function CartTotal() {
+            var totalprice = document.getElementById("TotalPrice"); // để hiện thôi
+            if (getCart('cart') !== "") {
+                var cartcookie = getCart('cart').substring(0);
+                var cartcookieobj = JSON.parse(cartcookie);
+                let item = Object.values(cartcookieobj);
+                for (var i = 0; i < item.length; i++) {
+                    // Xác định là total price. Cần tìm cách khác là: item[i].total_price (khi đã biết trước element của nó)
+                    // totalprice.textContent = "Total Pay: " + item[i].total_price;
+                    if (typeof item[i] === "number") { 
+                        console.log(item[i]);
+                        totalprice.textContent = item[i] + ".000 đ";
+                    }
+                }
+            }
+        }
+        $(document).ready(function () {
+            setTimeout("CartTotal()", 1500);
+        });
+        // Set card number:
+        document.addEventListener('DOMContentLoaded', () => {
+            const cardNumberInput = document.querySelector('.cardNumber');
+
+            cardNumberInput.addEventListener('input', (event) => {
+                let input = event.target.value.replace(/\D/g, ''); // Remove all non-digit characters
+                input = input.substring(0, 16); // Limit to 16 digits
+
+                let formattedInput = '';
+                for (let i = 0; i < input.length; i += 4) {
+                    if (i > 0) {
+                        formattedInput += ' ';
+                    }
+                    formattedInput += input.substring(i, i + 4);
+                }
+
+                event.target.value = formattedInput.trim();
+            });
+
+            cardNumberInput.addEventListener('keydown', (event) => {
+                const key = event.key;
+                const input = event.target.value;
+
+                // Allow control keys
+                const allowedKeys = ['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight'];
+                if (allowedKeys.includes(key)) {
+                    return;
+                }
+
+                // Ensure only numbers can be input
+                if (key < '0' || key > '9') {
+                    event.preventDefault();
+                }
+
+                // Prevent typing more than 19 characters
+                if (input.length >= 19 && key !== 'Backspace') {
+                    event.preventDefault();
+                }
+            });
+        });
+
+        // Set card holder:
+        document.addEventListener('DOMContentLoaded', () => {
+            const cardHolderInput = document.getElementById('cardHolderInput');
+            const cardHolderName = document.getElementById('cardHolderName');
+
+            cardHolderInput.addEventListener('input', (event) => {
+                let input = event.target.value;
+
+                // Remove digits and special characters, allow only letters and spaces
+                input = input.replace(/[^a-zA-Z\s]/g, '');
+
+                // Capitalize the first letter of each word
+                input = input.replace(/\b\w/g, (char) => char.toUpperCase());
+
+                // Update the display
+                cardHolderName.textContent = input.trim();
+            });
+
+            cardHolderInput.addEventListener('keydown', (event) => {
+                // Allow control keys and letters only
+                const allowedKeys = ['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', ' '];
+                const isLetter = /^[a-zA-Z\s]$/.test(event.key);
+
+                if (!allowedKeys.includes(event.key) && !isLetter) {
+                    event.preventDefault();
+                }
+            });
+        });
+
+        //Set CVV:
+        document.addEventListener('DOMContentLoaded', () => {
+            const cvvInput = document.getElementById('cvvInput');
+            const cvvBox = document.getElementById('cvvBox');
+
+            cvvInput.addEventListener('input', (event) => {
+                let input = event.target.value;
+
+                // Restrict to digits only and limit to 4 characters
+                input = input.replace(/\D/g, '').slice(0, 4);
+
+                // Update the input field and the display
+                event.target.value = input;
+                cvvBox.textContent = input;
+            });
+        });
+    </script>
 }
