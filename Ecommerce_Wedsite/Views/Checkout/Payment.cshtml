@@ -5,91 +5,113 @@
 }
 @foreach(var item1 in Model.paymnet_ViewModels.payment)
 {
-    <div class="masterContainer" style="background:@item1.Payment_Color3">
-        <div class="cardContainer">
-            <div class="frontSection" style="background:@item1.Payment_Color">
-                <div class="imageSection">
-                    <img src="/img/Picture/chip.png" alt="" />
-                    <img src="@item1.Payment_Img" alt="" />
-                </div>
-                <div class="cardNumberBox">################</div>
-                <div class="flexbox">
-                    <div class="box">
-                        <span>card holder</span>
-                        <div class="cardHolderName" id="cardHolderName">full name</div>
+    @if(item1.Payment_TypeId == 1)
+    {
+        <div class="masterContainer" style="background:@item1.Payment_Color3">
+            <div class="cardContainer">
+                <div class="frontSection" style="background:@item1.Payment_Color">
+                    <div class="imageSection">
+                        <img src="/img/Picture/chip.png" alt="" />
+                        <img src="@item1.Payment_Img" alt="" />
                     </div>
-                    <div class="box">
-                        <span>expiration</span>
-                        <div class="expiration">
-                            <span class="exp-month">mm</span>
-                            <span class="exp-year">yy</span>
+                    <div class="cardNumberBox">################</div>
+                    <div class="flexbox">
+                        <div class="box">
+                            <span>card holder</span>
+                            <div class="cardHolderName" id="cardHolderName">full name</div>
+                        </div>
+                        <div class="box">
+                            <span>expiration</span>
+                            <div class="expiration">
+                                <span class="exp-month">mm</span>
+                                <span class="exp-year">yy</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="backSection" style="background:@item1.Payment_Color">
-                <div class="stripeSection"></div>
-                <div class="box">
-                    <span>CVV</span>
-                    <div class="cvvBox" id="cvvBox"></div>
-                    <img src="@item1.Payment_Img" alt="" />
+                <div class="backSection" style="background:@item1.Payment_Color">
+                    <div class="stripeSection"></div>
+                    <div class="box">
+                        <span>CVV</span>
+                        <div class="cvvBox" id="cvvBox"></div>
+                        <img src="@item1.Payment_Img" alt="" />
+                    </div>
                 </div>
             </div>
+            <form action="">
+                <span>Total payment</span>
+                <div id="TotalPrice"></div>
+                <div class="inputBox">
+                    <span>card number</span>
+                    <input type="text" maxlength="19" class="cardNumber" placeholder="1234 5678 9012 3456" />
+                </div>
+                <div class="inputBox">
+                    <span>card holder</span>
+                    <input type="text" class="cardHolder" maxlength="50" id="cardHolderInput" />
+                </div>
+                <div class="flexBox">
+                    <div class="inputBox">
+                        <span>expiration mm</span>
+                        <select name="" id="" class="monthInput">
+                            <!--Cần đổi thành database-->
+                            <option value="month" selected disabled>month</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
+                    <div class="inputBox">
+                        <span>expiration yy</span>
+                        <select name="" id="" class="yearInput">
+                            <!--Cần đổi thành database-->
+                            <option value="month" selected disabled>year</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                            <option value="2029">2029</option>
+                            <option value="2030">2030</option>
+                        </select>
+                    </div>
+                    <div class="inputBox">
+                        <span>CVV</span>
+                        <input type="text" maxlength="4" class="cvvInput" id="cvvInput" placeholder="Enter CVV" />
+                    </div>
+                </div>
+                <input style="background:@item1.Payment_Color" type="submit" value="get otp" class="otp-btn" />
+            </form>
         </div>
-        <form action="">
-            <span>Total payment</span>
-            <div id="TotalPrice"></div>
-            <div class="inputBox">
-                <span>card number</span>
-                <input type="text" maxlength="19" class="cardNumber" placeholder="1234 5678 9012 3456"/>
-            </div>
-            <div class="inputBox">
-                <span>card holder</span>
-                <input type="text" class="cardHolder" maxlength="50" id="cardHolderInput" />
-            </div>
-            <div class="flexBox">
-                <div class="inputBox">
-                    <span>expiration mm</span>
-                    <select name="" id="" class="monthInput">
-                        <!--Cần đổi thành database-->
-                        <option value="month" selected disabled>month</option>
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
-                </div>
-                <div class="inputBox">
-                    <span>expiration yy</span>
-                    <select name="" id="" class="yearInput">
-                        <!--Cần đổi thành database-->
-                        <option value="month" selected disabled>year</option>
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
-                        <option value="2027">2027</option>
-                        <option value="2028">2028</option>
-                        <option value="2029">2029</option>
-                        <option value="2030">2030</option>
-                    </select>
-                </div>
-                <div class="inputBox">
-                    <span>CVV</span>
-                    <input type="text" maxlength="4" class="cvvInput" id="cvvInput" placeholder="Enter CVV" />
+    }
+
+    @if (item1.Payment_TypeId == 2)
+    {
+        <main style="align-items: center; justify-content: center;">
+            <div class="card">
+                <img src="@item1.Payment_Img2" class="card-img-top" alt="..." style="border-radius: 10px !important; width: 288px !important; height: 288px;" />
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Improve your front-end skills by building projects
+                    </h5>
+                    <p class="card-text">
+                        Scan the QR code to visit Frontend Mentor and take your coding
+                        skills to the next level
+                    </p>
                 </div>
             </div>
-            <input style="background:@item1.Payment_Color" type="submit" value="get otp" class="otp-btn" />
-        </form>
-    </div>
+        </main>
+    }
+
     <script>
         function CartTotal() {
             var totalprice = document.getElementById("TotalPrice"); // để hiện thôi
