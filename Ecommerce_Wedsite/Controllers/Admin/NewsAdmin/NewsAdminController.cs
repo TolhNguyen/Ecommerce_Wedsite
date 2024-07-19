@@ -42,7 +42,7 @@ namespace Ecommerce_Wedsite.Controllers
             return View("NewsAdmin", All);
         }
         [Route("~/newsadminedit")]
-        public async Task<IActionResult> NewsAdminEdit(int News_Id) // Tạo thêm trang riêng function riêng
+        public async Task<IActionResult> NewsAdminEdit(int News_Id) // Chỉ nhận mỗi id thôi đủ. Tạo thêm trang riêng function riêng
         {
             var All = new AllLayout();
 

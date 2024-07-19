@@ -80,8 +80,9 @@
                                         <td>Không có nội dung</td>
                                     }
                                     <td>@Html.DisplayFor(modelItem => item.News_DatePost)</td>
+                                    <!--Chỉ gửi mỗi id là đủ:-->
                                     <td>@Html.ActionLink("Edit", "newsadminedit", new { News_Id = item.News_Id })</td>
-                                    <td>@Html.ActionLink("Delete", "#", item)</td>
+                                    <td>@Html.ActionLink("Delete", "#", new { News_Id = item.News_Id })</td>
                                     <!--Tao controller hay service cho edit va delete-->
                                 </tr>
                             }
