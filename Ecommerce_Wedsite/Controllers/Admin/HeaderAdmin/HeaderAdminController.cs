@@ -4,7 +4,6 @@ using Ecommerce_Wedsite.Models.Helpers.Response;
 using Ecommerce_Wedsite.Models.ViewModel;
 using Ecommerce_Wedsite.Service.WebApp;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -20,8 +19,10 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly IHeaderAdminService _headeradminService;
         private readonly IHeaderAdminEditFunctionService _headeradminEditFunctionService;
         private readonly IAdminMenuService _adminmenuService;
+        private readonly IAdminService _adminService;
+        private readonly INoticeAdminService _noticeadminService;
 
-        public HeaderAdminController(ILogger<HeaderAdminController> logger, IHeaderAdminService headeradminService, IHeaderAdminEditService headeradminEditService, IHeaderAdminDeleteService headeradminDeleteService, IHeaderAdminCreateService headeradminCreateService, IHeaderAdminEditFunctionService headeradminEditFunctionService, IAdminMenuService adminmenuService)
+        public HeaderAdminController(ILogger<HeaderAdminController> logger, IHeaderAdminService headeradminService, IHeaderAdminEditService headeradminEditService, IHeaderAdminDeleteService headeradminDeleteService, IHeaderAdminCreateService headeradminCreateService, IHeaderAdminEditFunctionService headeradminEditFunctionService, IAdminMenuService adminmenuService, IAdminService adminService, INoticeAdminService noticeadminService)
         {
             _logger = logger;
             _headeradminService = headeradminService;
@@ -30,6 +31,8 @@ namespace Ecommerce_Wedsite.Controllers
             _headeradminEditService = headeradminEditService;
             _headeradminEditFunctionService = headeradminEditFunctionService;
             _adminmenuService = adminmenuService;
+            _adminService = adminService;
+            _noticeadminService = noticeadminService;
         }
 
         [Route("~/headeradmin")]
@@ -37,9 +40,21 @@ namespace Ecommerce_Wedsite.Controllers
         {
             var All = new AllLayout();
 
-            var header_ViewModels = await _headeradminService.Service_Test();
+            int id = 0;
+            string? idstr = HttpContext.Request.Cookies["adminid"];
+            var check = int.TryParse(idstr, out id);
+            var admin_ViewModels = await _adminService.AdminInfo(id);
+            var noticookie = HttpContext.Request.Cookies["noticookie"];
+            if (noticookie != null) // nếu có tb rồi, chỉ hiện thôi
+            {
+                var notiVM = new NoticeAdmin_ViewModel();
+                notiVM = JsonSerializer.Deserialize<NoticeAdmin_ViewModel>(noticookie);
+                All.noticeadmin_ViewModels = notiVM;
+            }
 
+            var header_ViewModels = await _headeradminService.Service_Test();
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+            All.admin_ViewModels = admin_ViewModels.Data;
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.header_ViewModels = header_ViewModels.Data;
 
@@ -65,17 +80,29 @@ namespace Ecommerce_Wedsite.Controllers
         {
             var All = new AllLayout();
 
-            var header_ViewModels = await _headeradminService.Service_Test();
+            int id = 0;
+            string? idstr = HttpContext.Request.Cookies["adminid"];
+            var check = int.TryParse(idstr, out id);
+            var admin_ViewModels = await _adminService.AdminInfo(id);
+            var noticookie = HttpContext.Request.Cookies["noticookie"];
+            if (noticookie != null) // nếu có tb rồi
+            {
+                var notiVM = new NoticeAdmin_ViewModel();
+                notiVM = System.Text.Json.JsonSerializer.Deserialize<NoticeAdmin_ViewModel>(noticookie);
+                All.noticeadmin_ViewModels = notiVM;
+            }
 
+            var header_ViewModels = await _headeradminService.Service_Test();
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.header_ViewModels = header_ViewModels.Data;
-
+            All.admin_ViewModels = admin_ViewModels.Data;
             return View("HeaderAdminCreate", All);
         }
 
         [Route("~/headeradmincreatefunction")]
-        public async Task<IActionResult> HeaderAdminCreateFunction(Header headeritem) // Function create
+        public async Task<IActionResult> HeaderAdminCreateFunction(Header headeritem, string pagename) // Function create
         {
             var All = new AllLayout();
 
@@ -85,7 +112,7 @@ namespace Ecommerce_Wedsite.Controllers
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.header_ViewModels = header_ViewModels.Data;
 
-            return View("SuccessPage", All); // sau khi chạy service ở trên r mới trả view ra
+            return RedirectToAction("NoticeAdminFunction", "Admin", new { pagename = pagename }); // sau khi chạy service ở trên r mới trả view ra
         }
 
         [Route("~/headeradminedit")]
@@ -93,21 +120,34 @@ namespace Ecommerce_Wedsite.Controllers
         {
             var All = new AllLayout();
 
+            int id = 0;
+            string? idstr = HttpContext.Request.Cookies["adminid"];
+            var check = int.TryParse(idstr, out id);
+            var admin_ViewModels = await _adminService.AdminInfo(id);
+            var noticookie = HttpContext.Request.Cookies["noticookie"];
+            if (noticookie != null) // nếu có tb rồi
+            {
+                var notiVM = new NoticeAdmin_ViewModel();
+                notiVM = System.Text.Json.JsonSerializer.Deserialize<NoticeAdmin_ViewModel>(noticookie);
+                All.noticeadmin_ViewModels = notiVM;
+            }
+
             var header_ViewModels = await _headeradminEditService.Service_Test(Header_Id);
 
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.header_ViewModels = header_ViewModels.Data;
+            All.admin_ViewModels = admin_ViewModels.Data;
 
             return View("HeaderAdminEdit", All);
         }
 
-        public async Task<IActionResult> HeaderAdminEditFunction(Header headeritem) // controller kiểu ajax thì mới đọc đc 
+        public async Task<IActionResult> HeaderAdminEditFunction(Header headeritem, string pagename) // controller kiểu ajax thì mới đọc đc 
             // Tạo thêm trang riêng function riêng
         {
             // cần có 1  model layout admin riêng
             var header_ViewModels = await _headeradminEditFunctionService.Service_Test(headeritem);
-            return Json(header_ViewModels); // sau khi chạy service ở trên r mới trả view ra
+            return RedirectToAction("NoticeAdminFunction", "Admin", new { pagename = pagename }); // sau khi chạy service ở trên r mới trả view ra
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
     public interface IAdminService // Tạo Interface
     {
         Task<ResponseMessageObject<Admin_ViewModel>> Service_Test(string? userName, string? passWord); //Model lớn chứa Model nhỏ. Tạo Phương Thức     
+        Task<ResponseMessageObject<Admin_ViewModel>> AdminInfo(int idcookie);
     }
     public class AdminService : IAdminService // Thừa kế các thuộc tính từ Interface 
     {
@@ -48,9 +49,33 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 data.message = e.Message;
                 data.success = false;
                 return new ResponseMessageObject<Admin_ViewModel> { success = false, message = e.Message, statusCode = 2 }; // false
-
             }
              return new ResponseMessageObject<Admin_ViewModel> { success = true, message = "Thành Công", statusCode = 0 }; // nếu có, đúng tk => true 
+        }
+        public async Task<ResponseMessageObject<Admin_ViewModel>> AdminInfo(int idcookie) // Code kiểm tra tài khoản đúng / sai
+        {
+            var data = new ResponseMessageObject<Admin_ViewModel>();
+            data.Data = new Admin_ViewModel();
+            try
+            {
+                using (var dbConn = new SqlConnection(_configuration.GetConnectionString("ConnectionString"))) // liên kết database
+                {
+                    await dbConn.OpenAsync(); // mở sync
+
+                    var query = dbConn.QueryBuilder($"select * from Admin where Admin_Id = '{idcookie}'");
+
+                    // == null vì k có / lấy ra được dữ liệu từ sql => sai 
+
+                    data.Data.admin = await query.QueryAsync<Admin>();
+                    await dbConn.CloseAsync(); // đóng sync sau khi sử dụng
+                }
+            }
+            catch (Exception e) // Gặp lỗi, sai
+            {
+                data.message = e.Message;
+                data.success = false;
+            }
+            return data;
         }
     }
 }

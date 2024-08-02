@@ -78,6 +78,7 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public HomePageProductDisplay_ViewModel homepageproductdisplay_ViewModels { get; set; }
         public SHomePage_ViewModel shomepage_ViewModels { get; set; }
         public Payment_ViewModel paymnet_ViewModels { get; set; }
+        public NoticeAdmin_ViewModel noticeadmin_ViewModels { get; set; }
 
     }
 }

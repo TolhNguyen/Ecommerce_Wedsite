@@ -14,5 +14,8 @@ namespace Ecommerce_Wedsite.Models.Entities
         public int AboutUsMem_HTML { get; set; }
         public int AboutUsMem_PictureId { get; set; }
         public int AboutUsMem_Level { get; set; }
+        public string AboutUsMem_Email { get; set; }
+        public int AboutUsMem_Phone { get; set; }
+        public string AboutUsMem_Address { get; set; }
     }
 }

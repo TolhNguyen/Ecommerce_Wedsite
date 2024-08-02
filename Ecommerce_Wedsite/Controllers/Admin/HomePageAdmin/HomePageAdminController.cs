@@ -20,8 +20,9 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly IHomePageAdminEditFunctionService _homepageadmineditfunctionService;
         private readonly IHomePageAdminIdTableService _homepageadminidtableService;
         private readonly IIdTableFuncService _idtablefuncService;
+        private readonly INoticeAdminService _noticeadminservice;
 
-        public HomePageAdminController(ILogger<HomePageAdminController> logger, IAdminMenuService adminmenuService, IHomePageAdminService homepageadminService, IHomePageAdminEditService homepageadmineditService, IHomePageAdminEditFunctionService homepageadmineditfunctionService, IHomePageAdminIdTableService homepageadminidtableService, IIdTableFuncService idtablefuncService)
+        public HomePageAdminController(ILogger<HomePageAdminController> logger, IAdminMenuService adminmenuService, IHomePageAdminService homepageadminService, IHomePageAdminEditService homepageadmineditService, IHomePageAdminEditFunctionService homepageadmineditfunctionService, IHomePageAdminIdTableService homepageadminidtableService, IIdTableFuncService idtablefuncService, INoticeAdminService noticeadminservice)
         {
             _logger = logger;
             _adminmenuService = adminmenuService;
@@ -30,6 +31,7 @@ namespace Ecommerce_Wedsite.Controllers
             _homepageadmineditfunctionService = homepageadmineditfunctionService;
             _homepageadminidtableService = homepageadminidtableService;
             _idtablefuncService = idtablefuncService;
+            _noticeadminservice = noticeadminservice;
         }
 
         [Route("~/homepageadmin")]

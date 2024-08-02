@@ -1,6 +1,6 @@
 ﻿@model AllLayout
 @{
-    ViewData["Title"] = "Header Admin Page";
+    ViewData["Title"] = "Header Admin Page"; // có thể lấy title của nó ở đây = value
     Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
 }
 <div class="container-xl px-4 mt-4">
@@ -65,11 +65,13 @@
                             <label class="small mb-1" for="Header_Summary">Header Summary</label>
                             <input type="text" id="Header_Summary" name="Header_Summary" class="form-control" placeholder="Header_Summary" required>
                         </div>
+                        <input type="hidden" id="pagename" value="@ViewData["Title"]" name="pagename">
                         <!-- Save changes button-->
 	                    <div class="form-group">
 		                    <button type="submit" class="btn btn-primary rounded submit p-3 px-5">Submit</button>
 		                    <!--Khi submit -> link controller -> service -> new view -->
 	                    </div>
+                        
                     </form>
                 </div>
             </div>

@@ -76,7 +76,7 @@
                                                 </li>
                                             </ul>
                                         </div>*@
-                                        <div id="categoryitem" value="@Model.sort_ViewModels.category">Loại: @Model.sort_ViewModels.category</div> 
+                                        <div id="categoryitem" value="@Model.sort_ViewModels.category">Loại đã chọn: @Model.sort_ViewModels.category</div> 
                                         <!--Thêm js vào đây k cần ở trên van đc-->
                                     </div>
 
@@ -221,21 +221,21 @@
                                                     <div class="h2 title-head margin-top-0"><span>Loại</span></div>
                                                 </div>
                                                 <div class="aside-content filter-group">
-                                                    <ul class="filter-type>
-                                                    @{
-                                                        var n = 0;
+                                                    <ul class="filter-type">
+                                                        @{
+                                                            var n2 = 0;
+                                                        }   
                                                         @foreach (var item2 in Model.producttype_ViewModels.producttype)
                                                         {
-                                                            n++;
-                                                            <li class="filter-item filter-item--check-box filter-item--green" id="sortcategorydplt" >
-                                                                <label data-filter="cây để bàn" >
-                                                                    <input type="checkbox" onchange="GetCategory(this);" data-group="Loại" data-field="product_type" data-text="@item2.ProductType_Name" value="@item2.ProductType_Id" name="@item2.ProductType_Name" data-operator="OR">
+                                                            n2++;
+                                                            <li class="filter-item filter-item--check-box filter-item--green" id="sortcategorydplt">
+                                                                <label data-filter="@item2.ProductType_Name">
+                                                                    <input type="checkbox" class="category-checkbox" onchange="GetCategory(this);" data-group="Loại" data-field="product_type" data-text="@item2.ProductType_Name" value="@item2.ProductType_Id" name="@item2.ProductType_Name" data-operator="OR">
                                                                     <i class="fa" for="@item2.ProductType_Name"></i>
-                                                                    Loại @n: @item2.ProductType_Name
+                                                                    Loại @n2: @item2.ProductType_Name
                                                                 </label>
                                                             </li>
                                                         }
-                                                    }
                                                     </ul>
                                                 </div>
                                             </aside>
@@ -453,18 +453,39 @@
 
         /*Vấn đề: 
             - chưa checked một ô đc: 
-            - Chưa tìm kiếm chỉ loại thôi được
+            - Chỉ tìm kiếm đc loại thôi được
             */
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkboxes = document.querySelectorAll('.category-checkbox');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    const checkedCheckboxes = document.querySelectorAll('.category-checkbox:checked');
+
+                    if (checkedCheckboxes.length > 0) {
+                        checkboxes.forEach(cb => {
+                            if (!cb.checked) {
+                                cb.disabled = true;
+                            }
+                        });
+                    } else {
+                        checkboxes.forEach(cb => {
+                            cb.disabled = false;
+                        });
+                    }
+                });
+            });
+        });
         function GetCategory(it) { // "it" là "this" là ô được chọn. Chỉ hiện 1 lần, chọn lại mới có. Hiện 1 lần lưu nếu thay đổi phải
             var categoryid = document.getElementById("categoryitem");
             var category = document.getElementById("categoryitem").value; // cái ô hiện tên cate ra
             if (it.checked) { // có checked thì mới có value
-                categoryid.textContent = it.name; // hiện name
+                categoryid.textContent = "Loại đã chọn: " + it.name; // hiện name
                 category = it.value; // lấy dc id r
                 document.getElementById("categoryitem").value = category;
             }
             else { // k có checked hoặc bỏ thì về rỗng
-                categoryid.textContent = ""; 
+                categoryid.textContent = "Loại đã chọn: "; 
                 category = "0";
                 document.getElementById("categoryitem").value = category;
             } 

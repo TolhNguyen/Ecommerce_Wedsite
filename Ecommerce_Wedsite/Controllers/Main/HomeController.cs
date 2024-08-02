@@ -69,7 +69,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             All.subheader_ViewModels = subheader_ViewModels.Data;
             All.video_ViewModels = video_ViewModels.Data;
             All.homepageproductdisplay_ViewModels = homepageproductdisplay_ViewModels.Data;
-            All.shomepage_ViewModels= shomepage_ViewModels.Data;
+            All.shomepage_ViewModels = shomepage_ViewModels.Data;
 
             return View("WebApp/Index", All); // Truyền dữ liệu. Hiển thị view đúng địa chỉ. 
         }

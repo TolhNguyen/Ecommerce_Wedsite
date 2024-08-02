@@ -97,8 +97,10 @@
                                         <input class="form-control" id="Header_Img" type="text" name="Header_Img" placeholder="Header_Img" value="@item.Header_Img" required>
                                     </div>
                                 </div>
+                                <input type="hidden" id="pagename" value="@ViewData["Title"]" name="pagename">
                                    <!-- Save changes button-->
                                 <input id="button_1" onclick="Editlog()" type="button" value="Save Edit" class="btn btn-primary rounded submit p-3 px-5"/>
+                                
                             </div>
                         }
                     }
@@ -110,6 +112,7 @@
 
 <script>
 	function Editlog() {
+        var pagename = document.getElementById('pagename').value;
         $.ajax({
             url: "HeaderAdmin/HeaderAdminEditFunction",
             dataType: "text",
@@ -126,18 +129,37 @@
                 Header_Order: $('#Header_Order').val(),
                 Header_Summary: $('#Header_Summary').val(),
                 Header_Img: $('#Header_Img').val(),
-
+                pagename: pagename
             },
             cache: !1,
             success:
             function(result) {
-                var obj = JSON.parse(result);
-                if (obj.success == true) {
-                    alert(obj.message);
-                    window.location = 'https://localhost:7037/headeradmin'; // Nếu đúng thì chạy tiếp sang trang Admin
+                if (result == true) {
+                    // Thì tạo notice:
+                    window.location = 'https://localhost:7037/headeradmin'
+                    @* var pagename = document.getElementById('pagename').value; // lấy giá trị
+                    $.ajax({
+                        url: "Admin/NoticeAdminFunction",
+                        dataType: "text",
+                        type: "POST",
+                        data: {
+                            pagename: pagename
+                        },
+                        cache: !1,
+                        success:
+                            function (result) {
+                                if (result.success == true) {
+                                    window.location = 'https://localhost:7037/headeradmin?noti=' + encodeURIComponent(result.noti); // Nếu đúng thì chạy tiếp sang trang Admin
+                                }
+                                else {
+                                    alert(result.message);
+                                    window.location = 'https://localhost:7037/headeradminedit'; // nếu false thì về lại trang login
+                                }
+                            }
+                    }); *@
                 }
                 else {
-                    alert(obj.message);
+                    alert("Thất bại");
                     window.location = 'https://localhost:7037/headeradminedit'; // nếu false thì về lại trang login
                 }
             }

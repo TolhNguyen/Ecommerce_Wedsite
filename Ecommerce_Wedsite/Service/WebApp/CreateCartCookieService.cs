@@ -47,7 +47,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 if (check.name == null) // gio hang khong co item trùng. Biến check k có id giống nhau
                     card = await _addcartcookieService.them_san_pham_vao_goi_hang(card, product_ViewModels, qty); // thì thêm sp mới vào giỏ hàng
 
-                else // gio hang co item trùng, san them vao 
+                else // gio hang co item trùng, san them vao. Cộng dồn sp
                 {
                     foreach (var item in card.product_card) // foreach từng sp trong giỏ hàng 
                     {
