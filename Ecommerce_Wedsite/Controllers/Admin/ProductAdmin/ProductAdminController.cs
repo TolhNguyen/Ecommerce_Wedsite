@@ -4,7 +4,6 @@ using Ecommerce_Wedsite.Models.Helpers.Response;
 using Ecommerce_Wedsite.Models.ViewModel;
 using Ecommerce_Wedsite.Service.WebApp;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -23,8 +22,10 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly IAdminMenuService _adminmenuService;
         private readonly IPictureService _pictureService;
         private readonly IProductAdminConditionService _productadminconditionService;
+        private readonly IAdminService _adminService;
+        private readonly INoticeAdminService _noticeadminService;
 
-        public ProductAdminController(ILogger<ProductAdminController> logger, IProductAdminService productadminService, IProductTypeAdminService producttypeadminService, IProductAdminDeleteService productadmindeleteService, IProductAdminCreateService productadmincreateService, IProductAdminEditFunctionService productadmineditfunctionService, IProductAdminEditService productadmineditService, IAdminMenuService adminmenuService, IPictureService pictureService, IProductAdminConditionService productadminconditionService)
+        public ProductAdminController(ILogger<ProductAdminController> logger, IProductAdminService productadminService, IProductTypeAdminService producttypeadminService, IProductAdminDeleteService productadmindeleteService, IProductAdminCreateService productadmincreateService, IProductAdminEditFunctionService productadmineditfunctionService, IProductAdminEditService productadmineditService, IAdminMenuService adminmenuService, IPictureService pictureService, IProductAdminConditionService productadminconditionService, IAdminService adminService, INoticeAdminService noticeadminService)
         {
             _logger = logger;
             _productadminService = productadminService;
@@ -36,15 +37,32 @@ namespace Ecommerce_Wedsite.Controllers
             _adminmenuService = adminmenuService;
             _pictureService = pictureService;
             _productadminconditionService = productadminconditionService;
+            _adminService = adminService;
+            _noticeadminService = noticeadminService;
         }
 
         [Route("~/productadmin")]
         public async Task<IActionResult> ProductAdmin()
         {
             var All = new AllLayout();
+
+            int id = 0;
+            string? idstr = HttpContext.Request.Cookies["adminid"];
+            var check = int.TryParse(idstr, out id);
+            var admin_ViewModels = await _adminService.AdminInfo(id);
+            var noticookie = HttpContext.Request.Cookies["noticookie"];
+            if (noticookie != null) // nếu có tb rồi, chỉ hiện thôi
+            {
+                var notiVM = new NoticeAdmin_ViewModel();
+                notiVM = JsonSerializer.Deserialize<NoticeAdmin_ViewModel>(noticookie);
+                All.noticeadmin_ViewModels = notiVM;
+            }
+
             var picture_ViewModels = await _pictureService.Service_Test();
             var product_ViewModels = await _productadminService.Service_Test();
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+
+            All.admin_ViewModels = admin_ViewModels.Data;
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.product_ViewModels = product_ViewModels.Data;
             All.picture_ViewModels = picture_ViewModels.Data;

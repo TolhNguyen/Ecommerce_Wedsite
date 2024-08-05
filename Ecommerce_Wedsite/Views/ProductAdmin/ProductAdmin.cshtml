@@ -3,7 +3,7 @@
     ViewData["Title"] = "Login Admin Page";
     Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
 }
-<link href="/css/admintable.css" rel="stylesheet" type="text/css">
+<link href="/css/admintable2.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <div style ="Overflow-x:hidden">
     <div class="card-body">
@@ -19,7 +19,7 @@
         </div>
         <div class="table-responsive" style="max-height: 650px;">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> <!---Tạo bảng-->
-                <thead >
+                <thead>
                     <!--Danh sách bảng-->
                     <tr>
                         <th>
@@ -77,7 +77,7 @@
                     </tr>
                 </thead>
 
-                <tbody > 
+                <tbody> 
                     @if (Model != null) 
                     {
                         // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
@@ -146,18 +146,6 @@
                     }
                 </tbody>
             </table>
-            <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                </ul>
-            </div>
         </div>
     </div>
 </div>

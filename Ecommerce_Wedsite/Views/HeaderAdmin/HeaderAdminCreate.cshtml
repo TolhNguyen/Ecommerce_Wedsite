@@ -18,7 +18,7 @@
             <div class="card mb-4">
                 <div class="card-header">Details</div>
                 <div class="card-body">
-                    <form action="/headeradmincreatefunction" class="login-form">
+                    <div class="login-form">
                             <!-- Form Group (username)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="Header_Title">Header Title</label>
@@ -68,13 +68,46 @@
                         <input type="hidden" id="pagename" value="@ViewData["Title"]" name="pagename">
                         <!-- Save changes button-->
 	                    <div class="form-group">
-		                    <button type="submit" class="btn btn-primary rounded submit p-3 px-5">Submit</button>
+                            <button type="  " id="submitButton" class="btn btn-primary rounded submit p-3 px-5">Submit</button>
 		                    <!--Khi submit -> link controller -> service -> new view -->
 	                    </div>
-                        
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div> 
+<script>
+    $(document).ready(function(){ // chuyển sang ajax hết để xài chung với edit
+        $('#submitButton').on('click', function (event) {
+            var pagename = $('#pagename').val();
+            $.ajax({
+                url: '@Url.Action("HeaderAdminCreateFunction", "HeaderAdmin")',
+                type: 'POST',
+                data: {
+                    Header_Title: $('#Header_Title').val(),
+                    HeaderCondition: $('#HeaderCondition').val(),
+                    HeaderType_Id: $('#HeaderType_Id').val(),
+                    HeaderAction: $('#HeaderAction').val(),
+                    Header_HTML: $('#Header_HTML').val(),
+                    Header_Order: $('#Header_Order').val(),
+                    Header_Summary: $('#Header_Summary').val(),
+                    Header_Img: $('#Header_Img').val(),
+                    pagename: pagename
+                },
+                success: function(response) {
+                    if (response == true) {
+                        alert('Data received successfully!');
+                        window.location = 'https://localhost:7037/headeradmin'
+                    } else {
+                        alert('Failed to receive data');
+                        window.location = 'https://localhost:7037/headeradmincreate'
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert('An error occurred: ' + error);
+                }
+            });
+        });
+    });
+</script>

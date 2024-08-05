@@ -62,17 +62,17 @@ namespace Ecommerce_Wedsite.Controllers
         }
 
         [Route("~/headeradmindelete")]
-        public async Task<IActionResult> HeaderAdminDelete(Header headeritem) // Delete, Edit nên chung 1 controller hay tách ra
+        public async Task<IActionResult> HeaderAdminDelete(int id, string pagename) // Chưa dùng noticeadmin được cần sửa.
         {
             var All = new AllLayout();
 
-            var header_ViewModels = await _headeradminDeleteService.Service_Test(headeritem);
+            var header_ViewModels = await _headeradminDeleteService.Service_Test(id);
 
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.header_ViewModels = header_ViewModels.Data;
 
-            return View("SuccessPage", All); // sau khi chạy service ở trên r mới trả view ra
+            return RedirectToAction("HeaderAdmin", "HeaderAdmin"); // sau khi chạy service ở trên r mới trả view ra
         }
 
         [Route("~/headeradmincreate")]
@@ -101,7 +101,6 @@ namespace Ecommerce_Wedsite.Controllers
             return View("HeaderAdminCreate", All);
         }
 
-        [Route("~/headeradmincreatefunction")]
         public async Task<IActionResult> HeaderAdminCreateFunction(Header headeritem, string pagename) // Function create
         {
             var All = new AllLayout();

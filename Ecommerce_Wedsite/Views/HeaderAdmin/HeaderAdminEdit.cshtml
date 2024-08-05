@@ -115,7 +115,7 @@
         var pagename = document.getElementById('pagename').value;
         $.ajax({
             url: "HeaderAdmin/HeaderAdminEditFunction",
-            dataType: "text",
+            dataType: "json",
             type: "POST",
             data: {
                 Header_Id: $('#Header_Id').val(),
@@ -134,29 +134,8 @@
             cache: !1,
             success:
             function(result) {
-                if (result == true) {
-                    // Thì tạo notice:
-                    window.location = 'https://localhost:7037/headeradmin'
-                    @* var pagename = document.getElementById('pagename').value; // lấy giá trị
-                    $.ajax({
-                        url: "Admin/NoticeAdminFunction",
-                        dataType: "text",
-                        type: "POST",
-                        data: {
-                            pagename: pagename
-                        },
-                        cache: !1,
-                        success:
-                            function (result) {
-                                if (result.success == true) {
-                                    window.location = 'https://localhost:7037/headeradmin?noti=' + encodeURIComponent(result.noti); // Nếu đúng thì chạy tiếp sang trang Admin
-                                }
-                                else {
-                                    alert(result.message);
-                                    window.location = 'https://localhost:7037/headeradminedit'; // nếu false thì về lại trang login
-                                }
-                            }
-                    }); *@
+                if (result === true) {
+                    window.location = 'https://localhost:7037/headeradmin';
                 }
                 else {
                     alert("Thất bại");

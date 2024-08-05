@@ -156,7 +156,7 @@ namespace Ecommerce_Wedsite.Controllers
             else return RedirectToAction("AdminLoginPage"); // kq sai
         }
 
-        [Route("~/notiadmin")]
+        [Route("~/noticeadminfunction")]
         public async Task<IActionResult> NoticeAdminFunction(string pagename) // nội dung và id hành động đó.
         {
             // Cần test và cb content.

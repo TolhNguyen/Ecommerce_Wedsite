@@ -12,7 +12,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
 {
     public interface IHeaderAdminDeleteService // Tạo Interface
     {
-        Task<ResponseMessageObject<Header_ViewModel>> Service_Test(Header headeritem); //Model lớn chứa Model nhỏ. Tạo Phương Thức     
+        Task<ResponseMessageObject<Header_ViewModel>> Service_Test(int id); //Model lớn chứa Model nhỏ. Tạo Phương Thức     
     }
     public class HeaderAdminDeleteService : IHeaderAdminDeleteService // Thừa kế các thuộc tính từ Interface 
     {
@@ -22,7 +22,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
             _configuration = configuration;
         }
 
-        public async Task<ResponseMessageObject<Header_ViewModel>> Service_Test(Header headeritem) // Lấy dữ liệu model từ db lên và hành động vào
+        public async Task<ResponseMessageObject<Header_ViewModel>> Service_Test(int id) // Lấy dữ liệu model từ db lên và hành động vào
         {
             var data = new ResponseMessageObject<Header_ViewModel>();
             data.Data = new Header_ViewModel();
@@ -30,9 +30,14 @@ namespace Ecommerce_Wedsite.Service.WebApp
             {
                 using (var dbConn = new SqlConnection(_configuration.GetConnectionString("ConnectionString")))
                 {
+
                     await dbConn.OpenAsync(); // mở sync
 
-                    var it = dbConn.Delete(headeritem); // hành động và lưu model vào db
+                    var query = dbConn.QueryBuilder($"select * from Header where Header_Id = {id}");
+
+                    var delete = await query.QueryFirstOrDefaultAsync<Header>();
+
+                    var it = dbConn.Delete(delete); // hành động và lưu model vào db
 
                     await dbConn.CloseAsync();
                 }
