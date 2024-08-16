@@ -62,7 +62,7 @@ namespace Ecommerce_Wedsite.Controllers
         }
 
         [Route("~/headeradmindelete")]
-        public async Task<IActionResult> HeaderAdminDelete(int id, string pagename) // Chưa dùng noticeadmin được cần sửa.
+        public async Task<IActionResult> HeaderAdminDelete(int id, string pagename) // Chưa dùng noticeadmin được cần sửa.ffff
         {
             var All = new AllLayout();
 
