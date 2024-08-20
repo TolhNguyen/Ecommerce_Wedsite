@@ -5,103 +5,94 @@
 }
 <link href="/css/admintable2.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<div style="Overflow-x:hidden">
+<link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<div>
     <div class="card-body">
-        <div class="table-title">
-            <div class="row">
-                <div class="col-sm-5">
-                    <h2>News <b>Table</b></h2>
+        <div class="table-responsive" style="max-height: 650px;">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h2>News <b>Table</b></h2>
+                        </div>
+                        <div class="col-sm-7">
+                            <a href="/newsadmincreate" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-7">
-                    <a href="/newsadmincreate" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
-                </div>
-            </div>
-        </div>
-        <div class="table-responsive" style="max-height: 525px; max-width: 2000px;">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <!---Tạo bảng-->
-                <thead>
-                    <!--Danh sách bảng-->
-                    <tr>
-                        <th>
-                            News ID
-                        </th>
-                        <th>
-                            List News ID
-                        </th>
-                        <th>
-                            Picture ID
-                        </th>
-                        <th>
-                            News Title
-                        </th>
-                        <th>
-                            News SubTitle
-                        </th>
-                        <th>
-                            Author
-                        </th>
-                        <th>
-                            News Content
-                        </th>
-                        <th>
-                            News DataPost
-                        </th>
-                        <th>
-                            Edit
-                        </th>
-                        <th>
-                            Delete
-                        </th>
-                    </tr>
-                </thead>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <!---Tạo bảng-->
+                    <thead>
+                        <!--Danh sách bảng-->
+                        <tr>
+                            <th>
+                                News ID
+                            </th>
+                            <th>
+                                List News ID
+                            </th>
+                            <th>
+                                Picture ID
+                            </th>
+                            <th>
+                                News Title
+                            </th>
+                            <th>
+                                News SubTitle
+                            </th>
+                            <th>
+                                Author
+                            </th>
+                            <th>
+                                News Content
+                            </th>
+                            <th>
+                                News DataPost
+                            </th>
+                            <th>
+                                Edit
+                            </th>
+                            <th>
+                                Delete
+                            </th>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                    @if (Model != null)
-                    {
-                        // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
-                        @foreach (var item in Model.news_ViewModels.news)
+                    <tbody>
+                        @if (Model != null)
                         {
-                            if (item != null)
+                            // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
+                            @foreach (var item in Model.news_ViewModels.news)
                             {
-                                <tr>
-                                    <td>@Html.DisplayFor(modelItem => item.News_Id)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.ListNews_Id)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Picture_Id)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.News_Title)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.News_SubTitle)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Author)</td>
-                                    @if(item.News_Content != null)
-                                    {
-                                        <td><a href="#" onclick="MiniInfo(@item.News_Id)">ReadMore</a> <div class="ReadMore" id="@item.News_Id" style="display: none;">@Html.Raw(item.News_Content)</div></td>
-                                    }
-                                    else
-                                    {
-                                        <td>Không có nội dung</td>
-                                    }
-                                    <td>@Html.DisplayFor(modelItem => item.News_DatePost)</td>
-                                    <!--Chỉ gửi mỗi id là đủ:-->
-                                    <td>@Html.ActionLink("Edit", "newsadminedit", new { News_Id = item.News_Id })</td>
-                                    <td>@Html.ActionLink("Delete", "#", new { News_Id = item.News_Id })</td>
-                                    <!--Tao controller hay service cho edit va delete-->
-                                </tr>
-                            }
+                                if (item != null)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.News_Id)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ListNews_Id)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Picture_Id)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.News_Title)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.News_SubTitle)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Author)</td>
+                                        @if(item.News_Content != null)
+                                        {
+                                            <td><a href="#" onclick="MiniInfo(@item.News_Id)">ReadMore</a> <div class="ReadMore" id="@item.News_Id" style="display: none;">@Html.Raw(item.News_Content)</div></td>
+                                        }
+                                        else
+                                        {
+                                            <td>Không có nội dung</td>
+                                        }
+                                        <td>@Html.DisplayFor(modelItem => item.News_DatePost)</td>
+                                        <!--Chỉ gửi mỗi id là đủ:-->
+                                        <td>@Html.ActionLink("Edit", "newsadminedit", new { News_Id = item.News_Id })</td>
+                                        <td>@Html.ActionLink("Delete", "#", new { News_Id = item.News_Id })</td>
+                                        <!--Tao controller hay service cho edit va delete-->
+                                    </tr>
+                                }
 
+                            }
                         }
-                    }
-                </tbody>
-            </table>
-            <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                </ul>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

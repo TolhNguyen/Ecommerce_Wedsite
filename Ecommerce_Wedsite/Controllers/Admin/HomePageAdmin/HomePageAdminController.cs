@@ -4,7 +4,6 @@ using Ecommerce_Wedsite.Models.Helpers.Response;
 using Ecommerce_Wedsite.Models.ViewModel;
 using Ecommerce_Wedsite.Service.WebApp;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -21,8 +20,9 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly IHomePageAdminIdTableService _homepageadminidtableService;
         private readonly IIdTableFuncService _idtablefuncService;
         private readonly INoticeAdminService _noticeadminservice;
+        private readonly IAdminService _adminService;
 
-        public HomePageAdminController(ILogger<HomePageAdminController> logger, IAdminMenuService adminmenuService, IHomePageAdminService homepageadminService, IHomePageAdminEditService homepageadmineditService, IHomePageAdminEditFunctionService homepageadmineditfunctionService, IHomePageAdminIdTableService homepageadminidtableService, IIdTableFuncService idtablefuncService, INoticeAdminService noticeadminservice)
+        public HomePageAdminController(ILogger<HomePageAdminController> logger, IAdminMenuService adminmenuService, IHomePageAdminService homepageadminService, IHomePageAdminEditService homepageadmineditService, IHomePageAdminEditFunctionService homepageadmineditfunctionService, IHomePageAdminIdTableService homepageadminidtableService, IIdTableFuncService idtablefuncService, INoticeAdminService noticeadminservice, IAdminService adminService)
         {
             _logger = logger;
             _adminmenuService = adminmenuService;
@@ -32,6 +32,7 @@ namespace Ecommerce_Wedsite.Controllers
             _homepageadminidtableService = homepageadminidtableService;
             _idtablefuncService = idtablefuncService;
             _noticeadminservice = noticeadminservice;
+            _adminService = adminService;
         }
 
         [Route("~/homepageadmin")]
@@ -39,10 +40,23 @@ namespace Ecommerce_Wedsite.Controllers
         {
             var All = new AllLayout();
 
+            int id = 0;
+            string? idstr = HttpContext.Request.Cookies["adminid"];
+            var check = int.TryParse(idstr, out id);
+            var admin_ViewModels = await _adminService.AdminInfo(id);
+            var noticookie = HttpContext.Request.Cookies["noticookie"];
+            if (noticookie != null) // nếu có tb rồi, chỉ hiện thôi
+            {
+                var notiVM = new NoticeAdmin_ViewModel();
+                notiVM = JsonSerializer.Deserialize<NoticeAdmin_ViewModel>(noticookie);
+                All.noticeadmin_ViewModels = notiVM;
+            }
+
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
             var homepage_ViewModels = await _homepageadminService.HomePageAdmin();
             All.homepage_ViewModels = homepage_ViewModels.Data;
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
+            All.admin_ViewModels = admin_ViewModels.Data;
 
             return View("HomePageAdmin", All);
         }

@@ -4,7 +4,6 @@ using Ecommerce_Wedsite.Models.Helpers.Response;
 using Ecommerce_Wedsite.Models.ViewModel;
 using Ecommerce_Wedsite.Service.WebApp;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -19,8 +18,9 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly IAdminMenuService _adminmenuService;
         private readonly IDiscountAdminEditFunctionService _discountadmineditfunctionService;
         private readonly IDiscounttAdminDeleteService _discountadmindeleteService;
+        private readonly IAdminService _adminService;
 
-        public DiscountAdminController(ILogger<DiscountAdminController> logger, IDiscountAdminService discountAdminService, IAdminMenuService adminmenuService, IDiscounttAdminEditService discounttadmineditService, IDiscountAdminEditFunctionService discountadmineditfunctionService, IDiscounttAdminDeleteService discountadmindeleteService)
+        public DiscountAdminController(ILogger<DiscountAdminController> logger, IDiscountAdminService discountAdminService, IAdminMenuService adminmenuService, IDiscounttAdminEditService discounttadmineditService, IDiscountAdminEditFunctionService discountadmineditfunctionService, IDiscounttAdminDeleteService discountadmindeleteService, IAdminService adminService)
         {
             _logger = logger;
             _discountAdminService = discountAdminService;
@@ -28,17 +28,30 @@ namespace Ecommerce_Wedsite.Controllers
             _discounttadmineditService = discounttadmineditService;
             _discountadmineditfunctionService = discountadmineditfunctionService;
             _discountadmindeleteService = discountadmindeleteService;
+            _adminService = adminService;
         }
         [Route("~/discountadmin")]
         public async Task<IActionResult> DiscountAdmin()
         {
             var All = new AllLayout();
 
+            int id = 0;
+            string? idstr = HttpContext.Request.Cookies["adminid"];
+            var check = int.TryParse(idstr, out id);
+            var admin_ViewModels = await _adminService.AdminInfo(id);
+            var noticookie = HttpContext.Request.Cookies["noticookie"];
+            if (noticookie != null) // nếu có tb rồi, chỉ hiện thôi
+            {
+                var notiVM = new NoticeAdmin_ViewModel();
+                notiVM = JsonSerializer.Deserialize<NoticeAdmin_ViewModel>(noticookie);
+                All.noticeadmin_ViewModels = notiVM;
+            }
+
             var discount_ViewModels = await _discountAdminService.Service_Test();
 
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
-
+            All.admin_ViewModels = admin_ViewModels.Data;
             All.discountt_ViewModels = discount_ViewModels.Data;
 
             return View("DiscountAdmin", All);

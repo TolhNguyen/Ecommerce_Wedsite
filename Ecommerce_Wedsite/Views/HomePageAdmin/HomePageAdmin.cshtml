@@ -5,26 +5,28 @@
 }
 <link href="/css/admintable2.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <!--
     Tìm cách sửa table bị tràn màn hình overwheeling:
     - Tham khảo các dạng bảng khác. vd: https://bootdey.com/snippets/tagged/cart shopping cart table
 -->
-<div style="overflow-x: hidden;">
+<div>
     <div class="card-body">
-        <div class="table-title">
-            <div class="row">
-                <div class="col-sm-5">
-                    <h2>Home Page <b>Table</b></h2>
-                </div>
-                <div class="col-sm-7">
-                    <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
-                </div>
-            </div>
-        </div>
+        
         <div class="table-responsive" style="max-height: 550px;">
-            <div class="table-wrapper" style="width: 2000px;"> 
+            <div class="table-wrapper" style="width: 2000px;">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h2>Home Page <b>Table</b></h2>
+                        </div>
+                        <div class="col-sm-7">
+                            <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
+                        </div>
+                    </div>
+                </div>
                 <div>
-                    <table class="table table-striped table-hover" style="">
+                    <table class="table table-bordered" id="dataTable">
                         <!---Tạo bảng-->
                         <thead>
                             <!--Danh sách bảng-->
@@ -65,10 +67,10 @@
                                 <th>
                                     Home Page Product Display Id
                                 </th>
-                                <th style="z-index: 2; position: sticky;" >
+                                <th>
                                     Edit
                                 </th>
-                                <th style="z-index: 2; position: sticky;">
+                                <th>
                                     Delete
                                 </th>
                             </tr>
@@ -108,18 +110,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                    </ul>
-                </div>
+                
             </div>
         </div>
     </div>

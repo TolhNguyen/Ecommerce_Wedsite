@@ -4,7 +4,6 @@ using Ecommerce_Wedsite.Models.Helpers.Response;
 using Ecommerce_Wedsite.Models.ViewModel;
 using Ecommerce_Wedsite.Service.WebApp;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text.Json;
 using static IronPython.Modules._ast;
@@ -20,8 +19,9 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly INewsAdminEditService _newsadmineditService;
         private readonly INewsAdminEditFunctionService _newsadmineditfunctionService;
         private readonly INewsAdminCreateService _newsadmincreateService;
+        private readonly IAdminService _adminService;
 
-        public NewsAdminController(ILogger<NewsAdminController> logger, IAdminMenuService adminmenuService, INewsAdminService newsadminService, INewsAdminEditService newsadmineditService, INewsAdminEditFunctionService newsadmineditfunctionService, INewsAdminCreateService newsadmincreateService)
+        public NewsAdminController(ILogger<NewsAdminController> logger, IAdminMenuService adminmenuService, INewsAdminService newsadminService, INewsAdminEditService newsadmineditService, INewsAdminEditFunctionService newsadmineditfunctionService, INewsAdminCreateService newsadmincreateService, IAdminService adminService)
         {
             _logger = logger;
             _adminmenuService = adminmenuService;
@@ -29,15 +29,29 @@ namespace Ecommerce_Wedsite.Controllers
             _newsadmineditService = newsadmineditService;
             _newsadmineditfunctionService = newsadmineditfunctionService;
             _newsadmincreateService = newsadmincreateService;
+            _adminService = adminService;
         }
         [Route("~/newsadmin")]
         public async Task<IActionResult> NewsAdmin()
         {
             var All = new AllLayout();
 
+            int id = 0;
+            string? idstr = HttpContext.Request.Cookies["adminid"];
+            var check = int.TryParse(idstr, out id);
+            var admin_ViewModels = await _adminService.AdminInfo(id);
+            var noticookie = HttpContext.Request.Cookies["noticookie"];
+            if (noticookie != null) // nếu có tb rồi, chỉ hiện thôi
+            {
+                var notiVM = new NoticeAdmin_ViewModel();
+                notiVM = JsonSerializer.Deserialize<NoticeAdmin_ViewModel>(noticookie);
+                All.noticeadmin_ViewModels = notiVM;
+            }
+
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
             var news_ViewModels = await _newsadminService.Service_Test(); // view model xài chung dc, nhưng service khác
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
+            All.admin_ViewModels = admin_ViewModels.Data;
             All.news_ViewModels = news_ViewModels.Data;
             return View("NewsAdmin", All);
         }
