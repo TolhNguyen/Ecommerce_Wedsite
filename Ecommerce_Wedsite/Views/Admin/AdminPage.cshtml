@@ -16,7 +16,7 @@
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Admin dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Số liệu thống kê</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                             <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
                         </a>
@@ -198,52 +198,57 @@
                             <!-- Project Card Example -->
                             @{
                                 int n = 0;
+
                             }
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Sản phẩm bán chạy</h6>
                                 </div>
                                 <div class="card-body">
-                                    @foreach (var item in Model.productcheckout_ViewModels.productcheckout)
+                                    @foreach (var item in Model.productcheckout_ViewModels.productcheckoutstatistic)
                                     {
-                                        //Vấn dề: cùng sp có nhiều dòng (tìm cách gom lại thành chỉ từng loại sp một thôi - giống nhau thành 1 hết)
-                                        <h4 class="small font-weight-bold">
-                                            @item.ProductCheckout_Name <span class="float-right">@item.ProductCheckout_Quantity</span>
-                                        </h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-                                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
+                                        if(@item.ProductCheckout_Name != null)
+                                        {
+                                            <h4 class="small font-weight-bold">
+                                               Cây @item.ProductCheckout_Name <span class="float-right">@item.TongSoLuong</span>
+                                            </h4>
+                                            <div class="progress mb-4">
+                                                @if (item.TongSoLuong >= 100)
+                                                {
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: @item.TongSoLuong%"
+                                                    aria-valuenow="@item.TongSoLuong" aria-valuemin="0" aria-valuemax="100"></div>
+                                                }
+                                                else if (@item.TongSoLuong >= 80 && @item.TongSoLuong < 100)
+                                                {
+                                                    <div class="progress-bar bg-info" role="progressbar" style="width: @item.TongSoLuong%"
+                                                         aria-valuenow="@item.TongSoLuong" aria-valuemin="0" aria-valuemax="100"></div>
+                                                }
+                                                else if (@item.TongSoLuong >= 60 && @item.TongSoLuong < 80)
+                                                {
+                                                    <div class="progress-bar" role="progressbar" style="width: @item.TongSoLuong%"
+                                                         aria-valuenow="@item.TongSoLuong" aria-valuemin="0" aria-valuemax="100"></div>
+                                                }
+                                                else if (@item.TongSoLuong >= 40 && @item.TongSoLuong < 60)
+                                                {
+                                                    <div class="progress-bar bg-warning" role="progressbar" style="width: @item.TongSoLuong%"
+                                                         aria-valuenow="@item.TongSoLuong" aria-valuemin="0" aria-valuemax="100"></div>
+                                                }
+                                                else if (@item.TongSoLuong < 40)
+                                                {
+                                                    <div class="progress-bar bg-danger" role="progressbar" style="width: @item.TongSoLuong%"
+                                                         aria-valuenow="@item.TongSoLuong" aria-valuemin="0" aria-valuemax="100"></div>
+                                                }
+                                            </div>
+                                        }
                                     }
                                     
-                                    <h4 class="small font-weight-bold">
+                                    @* <h4 class="small font-weight-bold">
                                         Sales Tracking <span class="float-right">40%</span>
                                     </h4>
-                                    <div class="progress mb-4">
+                                    <div class="progress mb-4"> - info success warning danger
                                         <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
                                              aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">
-                                        Customer Database <span class="float-right">60%</span>
-                                    </h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar" role="progressbar" style="width: 60%"
-                                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">
-                                        Payout Details <span class="float-right">80%</span>
-                                    </h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                             aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">
-                                        Account Setup <span class="float-right">Sold out!</span>
-                                    </h4>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                    </div> *@
                                 </div>
                             </div>
 

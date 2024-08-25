@@ -7,13 +7,14 @@ using Microsoft.AspNetCore.DataProtection;
 using System.Data.SqlClient;
 using Dapper;
 using Dapper.Contrib.Extensions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Ecommerce_Wedsite.Service.WebApp
 {
     public interface IProductCheckoutService // Tạo Interface
     {
         Task<ShopCard_ViewModel> ProductCheckoutFunction(ShopCard_ViewModel card, int cscheckoutid); //Model lớn chứa Model nhỏ. Tạo Phương Thức     
-        Task<ResponseMessageObject<ProductCheckout_ViewModel>> PorductCheckoutDisplay();
+        Task<ResponseMessageObject<ProductCheckout_ViewModel>> ProductCheckoutDisplay();
     }
     public class ProductCheckoutService : IProductCheckoutService // Thừa kế các thuộc tính từ Interface 
     {
@@ -64,8 +65,8 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 {
                     await dbConn.OpenAsync(); // mở sync
 
-                    var query = dbConn.QueryBuilder($"select * from ProductCheckout"); // thao tác querry 
-
+                    var query = dbConn.QueryBuilder($"select top 5 ProductCheckout_Name, SUM(ProductCheckout_Quantity) as TongSoLuong from ProductCheckout GROUP BY ProductCheckout_Name order by SUM(ProductCheckout_Quantity) DESC"); // thao tác querry 
+                    data.Data.productcheckoutstatistic = await query.QueryAsync<ProductCheckoutStatistic>();
                     await dbConn.CloseAsync(); // đóng sync sau khi sử dụng
                 }
             }

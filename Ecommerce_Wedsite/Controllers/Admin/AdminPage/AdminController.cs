@@ -100,7 +100,7 @@ namespace Ecommerce_Wedsite.Controllers
                 HttpContext.Response.Cookies.Append("noticookie", notistr, option);
             }
 
-            var productcheckout_ViewModels = await _productcheckoutService.PorductCheckoutDisplay();
+            var productcheckout_ViewModels = await _productcheckoutService.ProductCheckoutDisplay();
 
             var admin_ViewModels = await _adminService.AdminInfo(id);
             All.productcheckout_ViewModels = productcheckout_ViewModels.Data;
