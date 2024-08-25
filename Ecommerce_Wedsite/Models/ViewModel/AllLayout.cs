@@ -23,6 +23,7 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public IEnumerable<Order> order { get; set; } = new List<Order>();
         public IEnumerable<Promotion> promo { get; set; } = new List<Promotion>();
         public IEnumerable<CustomerCheckout> customercheckout { get; set; } = new List<CustomerCheckout>();
+        public IEnumerable<ProductCheckout> productcheckout { get; set; } = new List<ProductCheckout>();
         public IEnumerable<Discountt> discountt { get; set; } = new List<Discountt>();
         public IEnumerable<AdminMenu> adminmenu { get; set; } = new List<AdminMenu>();
         public IEnumerable<City> city { get; set; } = new List<City>();
@@ -79,6 +80,6 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public SHomePage_ViewModel shomepage_ViewModels { get; set; }
         public Payment_ViewModel paymnet_ViewModels { get; set; }
         public NoticeAdmin_ViewModel noticeadmin_ViewModels { get; set; }
-
+        public ProductCheckout_ViewModel productcheckout_ViewModels { get; set; }
     }
 }

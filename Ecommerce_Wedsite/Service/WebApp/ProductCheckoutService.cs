@@ -13,6 +13,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
     public interface IProductCheckoutService // Tạo Interface
     {
         Task<ShopCard_ViewModel> ProductCheckoutFunction(ShopCard_ViewModel card, int cscheckoutid); //Model lớn chứa Model nhỏ. Tạo Phương Thức     
+        Task<ResponseMessageObject<ProductCheckout_ViewModel>> PorductCheckoutDisplay();
     }
     public class ProductCheckoutService : IProductCheckoutService // Thừa kế các thuộc tính từ Interface 
     {
@@ -52,6 +53,28 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 await dbConn.CloseAsync();
             }
             return card;
+        }
+        public async Task<ResponseMessageObject<ProductCheckout_ViewModel>> ProductCheckoutDisplay() // Code cho Phương Thức Service
+        {
+            var data = new ResponseMessageObject<ProductCheckout_ViewModel>(); // Tạo biến dữ liệu. data là biến lớn của RMO
+            data.Data = new ProductCheckout_ViewModel(); // Tạo biến lưu trữ để Data Không lỗi báo rỗng. Data là biến nhỏ hơn là HVM. (Lỗi cơ bản)
+            try
+            {
+                using (var dbConn = new SqlConnection(_configuration.GetConnectionString("ConnectionString"))) // liên kết database
+                {
+                    await dbConn.OpenAsync(); // mở sync
+
+                    var query = dbConn.QueryBuilder($"select * from ProductCheckout"); // thao tác querry 
+
+                    await dbConn.CloseAsync(); // đóng sync sau khi sử dụng
+                }
+            }
+            catch (Exception e) // Gặp lỗi
+            {
+                data.message = e.Message;
+                data.success = false;
+            }
+            return data;
         }
     }
 }
