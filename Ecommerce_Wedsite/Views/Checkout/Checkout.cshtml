@@ -193,11 +193,14 @@
                                             <div class="payment-method">
                                                 @foreach (var item2 in Model.paymnet_ViewModels.payment)
                                                 {
-                                                    <input type="radio" name="payment-method" id="@item2.Payment_HTMLId" onclick="PaymentID(@item2.Payment_Id)"> // tạo thêm  HTML ID trong Database
+                                                    <input type="radio" name="payment-method" id="@item2.Payment_HTMLId" onclick="PaymentID(@item2.Payment_Id, '@item2.Payment_Name')">
+                                                    // tạo thêm  HTML ID trong Database
                                                     <label for="@item2.Payment_HTMLId" class="payment-method-item">
                                                         <img src="@item2.Payment_Img" alt="">
                                                     </label>
+                                                    
                                                 }
+                                                <input type="hidden" id="payment" name="payment" value="0"/>
                                                 @* <input type="radio" name="payment-method" id="method-1" checked>
                                                 <label for="method-1" class="payment-method-item">
                                                     <img src="/img/Picture/visa.png" alt="">
@@ -462,7 +465,7 @@
 
             function GetWebName() {
                 var webname = getCookie('webname');
-                var webnamevalue = document.getElementById('UserLogin_WebName');
+                var webnamevalue = document.getElementById('UserLogin_WebName'); // chèn vào value của hidden inpur
                 webnamevalue.value = webname; // áp webname để lưu người đăng nhập bằng hidden input
             }
             function ApplyPopupDiscount(){
@@ -530,8 +533,10 @@
                 }
             }
 
-            function PaymentID(id) { // lấy payment id
+            function PaymentID(id, name) { // lấy payment id
                 document.getElementById('Payment_Id').value = id; // value gán = id
+                var payment = document.getElementById('payment'); // lấy name của payment đó luôn
+                payment.value = name;
             }
 
             /* 

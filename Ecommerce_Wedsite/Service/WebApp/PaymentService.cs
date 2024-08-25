@@ -24,20 +24,20 @@ namespace Ecommerce_Wedsite.Service.WebApp
             _configuration = configuration;
         }
 
-        public async Task<ResponseMessageObject<Payment_ViewModel>> Service_Test() 
+        public async Task<ResponseMessageObject<Payment_ViewModel>> Service_Test()
         {
-            var data = new ResponseMessageObject<Payment_ViewModel>(); 
-            data.Data = new Payment_ViewModel(); 
+            var data = new ResponseMessageObject<Payment_ViewModel>();
+            data.Data = new Payment_ViewModel();
             try
             {
-                using (var dbConn = new SqlConnection(_configuration.GetConnectionString("ConnectionString"))) 
+                using (var dbConn = new SqlConnection(_configuration.GetConnectionString("ConnectionString")))
                 {
                     await dbConn.OpenAsync(); // mở sync
 
-                    var query = dbConn.QueryBuilder($"select * from Payment where Payment_Condition = 1"); 
+                    var query = dbConn.QueryBuilder($"select * from Payment where Payment_Condition = 1");
                     data.Data.payment = await query.QueryAsync<Payment>();
 
-                    await dbConn.CloseAsync(); 
+                    await dbConn.CloseAsync();
                 }
             }
             catch (Exception e) // Gặp lỗi
@@ -60,7 +60,19 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     await dbConn.OpenAsync(); // mở sync
 
                     var query = dbConn.QueryBuilder($"select * from Payment where Payment_Condition = 1 and Payment_Id = '{id}'");
-                    data.Data.payment = await query.QueryAsync<Payment>();
+
+
+
+                    var payment = await query.QueryFirstOrDefaultAsync<Payment>(); // lấy giá trị ra
+                    if (payment.Payment_Name == "Momo")
+                    {
+
+                        data.Data.payment = await query.QueryAsync<Payment>();
+                    }
+                    else
+                    {
+                        data.Data.payment = await query.QueryAsync<Payment>();
+                    }
 
                     await dbConn.CloseAsync();
                 }

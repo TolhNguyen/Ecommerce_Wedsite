@@ -1,9 +1,14 @@
-﻿using Ecommerce_Wedsite.Models;
+﻿using Ecommerce_Website.MoMo;
+using Ecommerce_Wedsite.Models;
 using Ecommerce_Wedsite.Models.Entities;
 using Ecommerce_Wedsite.Models.Helpers.Response;
 using Ecommerce_Wedsite.Models.ViewModel;
+using Ecommerce_Wedsite.MoMo;
 using Ecommerce_Wedsite.Service.WebApp;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
+
 //using Net.payOS.Types;
 //using Net.payOS;
 using System.Diagnostics;
@@ -80,11 +85,65 @@ namespace Ecommerce_Wedsite.Controllers.Main
 
 
         [Route("~/checkoutfunction")]
-        public async Task<IActionResult> CheckoutFunction(CustomerCheckout customercheckout, string UserLogin_WebName) // Lấy cả customercheckout và tên web người dùng
+        public async Task<IActionResult> CheckoutFunction(CustomerCheckout customercheckout, string UserLogin_WebName, string payment) // Lấy cả customercheckout và tên web người dùng
         {
+            
             var idwebname = 0;
             idwebname = await _getidwebNnameService.GetIdWebName(UserLogin_WebName, idwebname);
-            await _customercheckoutService.CustomerCheckoutFunction(customercheckout, idwebname); // xong
+
+            if(payment == "Momo") // kết nối với momo doanh nghiệp. https://developers.momo.vn/v2/#/?id=key-credential
+            {
+                // Thanh Toan MoMo
+                string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
+                string partnerCode = "MOMO7K7G20211228"; // Cần tài khoản doanh nghiệp của momo xác nhận
+                string accessKey = "SVbtyysg2FxvUfvz"; // tương tự
+                string serectkey = "BSmAXqo05I8q2OsR6nQY6KRkNIIy2nT1"; //
+                string orderInfo = "Thanh Toán Mua Hàng TreeWeb";
+                //string host = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, "");
+                //string returnUrl = host + "/CheckOut/MomoReturn";
+                //string notifyurl = host + "/NotifyMoMo";
+                string returnUrl = Url.Action("CheckoutFinal", "Checkout", null, Request.Scheme);
+                //string notifyUrl = Url.Action("NotifyMoMo", "YourControllerName", null, Request.Scheme);
+                string amount = customercheckout.CustomerCheckout_TotalPrice.ToString(); // gửi tổng tiền đi
+                string orderid = Guid.NewGuid().ToString();
+                string requestId = Guid.NewGuid().ToString();
+                string extraData = "";
+
+                //Before sign HMAC SHA256 signature. Đã bỏ: "&notifyUrl=" + notifyurl
+                string rawHash = "partnerCode=" +
+                    partnerCode + "&accessKey=" +
+                    accessKey + "&requestId=" +
+                    requestId + "&amount=" +
+                    amount + "&orderId=" +
+                    orderid + "&orderInfo=" +
+                    orderInfo + "&returnUrl=" +
+                    returnUrl + "&extraData=" +
+                    extraData;
+                MoMoSecurity crypto = new MoMoSecurity();
+                //sign signature SHA256
+                string signature = crypto.signSHA256(rawHash, serectkey);
+
+                //build body json request. Đã bỏ { "notifyUrl", notifyurl },
+                JObject message = new JObject{
+                { "partnerCode", partnerCode },
+                { "accessKey", accessKey },
+                { "requestId", requestId },
+                { "amount", amount },
+                { "orderId", orderid },
+                { "orderInfo", orderInfo },
+                { "returnUrl", returnUrl },
+                { "extraData", extraData },
+                { "requestType", "captureMoMoWallet" },
+                { "signature", signature }
+                };
+
+                string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
+                JObject jmessage = JObject.Parse(responseFromMomo);
+                string linkurl = jmessage.GetValue("payUrl").ToString();
+                return Redirect(linkurl);
+            }
+
+            await _customercheckoutService.CustomerCheckoutFunction(customercheckout, idwebname); // lưu vào db
             int cscheckoutid = customercheckout.CustomerCheckout_Id; // lấy cus id ra so sánh
             int promoid = customercheckout.Promotion_Id; // lấy id để - số lượng
             var cookieCard = HttpContext.Request.Cookies["cart"]; //lấy giỏ hàng từ cookie
