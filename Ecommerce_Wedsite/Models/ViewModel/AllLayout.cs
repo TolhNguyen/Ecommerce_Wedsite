@@ -80,6 +80,6 @@ namespace Ecommerce_Wedsite.Models.ViewModel
         public SHomePage_ViewModel shomepage_ViewModels { get; set; }
         public Payment_ViewModel paymnet_ViewModels { get; set; }
         public NoticeAdmin_ViewModel noticeadmin_ViewModels { get; set; }
-        public ProductCheckout_ViewModel productcheckout_ViewModels { get; set; }
+        public AdminStatistic_ViewModel adminstatistic_ViewModels { get; set; }
     }
 }

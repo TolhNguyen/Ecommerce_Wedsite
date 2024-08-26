@@ -22,8 +22,9 @@ namespace Ecommerce_Wedsite.Controllers
         private readonly IUserWebNameService _userwebnameService;
         private readonly INoticeAdminService _noticeadminService;
         private readonly IProductCheckoutService _productcheckoutService;
+        private readonly IAdminStatisticService _adminstatisticService;
 
-        public AdminController(ILogger<AdminController> logger, IAdminService adminService, IHeaderAndFooterService headerandfooterService, IAdminMenuService adminmenuService, IUserWebNameService userwebnameService, INoticeAdminService noticeadminService, IProductCheckoutService productcheckoutService)
+        public AdminController(ILogger<AdminController> logger, IAdminService adminService, IHeaderAndFooterService headerandfooterService, IAdminMenuService adminmenuService, IUserWebNameService userwebnameService, INoticeAdminService noticeadminService, IProductCheckoutService productcheckoutService, IAdminStatisticService adminstatisticService)
         {
             _logger = logger;
             _adminService = adminService;
@@ -32,6 +33,7 @@ namespace Ecommerce_Wedsite.Controllers
             _userwebnameService = userwebnameService;
             _noticeadminService = noticeadminService;
             _productcheckoutService = productcheckoutService;
+            _adminstatisticService = adminstatisticService;
         }
 
         [Route("~/adminloginpage")]
@@ -100,10 +102,10 @@ namespace Ecommerce_Wedsite.Controllers
                 HttpContext.Response.Cookies.Append("noticookie", notistr, option);
             }
 
-            var productcheckout_ViewModels = await _productcheckoutService.ProductCheckoutDisplay();
+            var adminstatistic_ViewModels = await _adminstatisticService.AdminStatistic();
 
             var admin_ViewModels = await _adminService.AdminInfo(id);
-            All.productcheckout_ViewModels = productcheckout_ViewModels.Data;
+            All.adminstatistic_ViewModels = adminstatistic_ViewModels.Data;
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             All.admin_ViewModels = admin_ViewModels.Data;
             
