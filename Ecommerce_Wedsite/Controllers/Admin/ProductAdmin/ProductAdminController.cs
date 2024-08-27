@@ -6,6 +6,7 @@ using Ecommerce_Wedsite.Service.WebApp;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Text.Json;
+using static IronPython.Modules._ast;
 
 
 namespace Ecommerce_Wedsite.Controllers
@@ -83,9 +84,27 @@ namespace Ecommerce_Wedsite.Controllers
         }
 
         [Route("~/productadmincreate")]
-        public IActionResult ProductAdminCreate()
+        public async Task<IActionResult> ProductAdminCreate()
         {
-            return View("ProductAdminCreate");
+            var All = new AllLayout();
+            int id = 0;
+            string? idstr = HttpContext.Request.Cookies["adminid"];
+            var check = int.TryParse(idstr, out id);
+            var admin_ViewModels = await _adminService.AdminInfo(id);
+            var noticookie = HttpContext.Request.Cookies["noticookie"];
+            if (noticookie != null) // nếu có tb rồi, chỉ hiện thôi
+            {
+                var notiVM = new NoticeAdmin_ViewModel();
+                notiVM = JsonSerializer.Deserialize<NoticeAdmin_ViewModel>(noticookie);
+                All.noticeadmin_ViewModels = notiVM;
+            }
+
+            var producttype_ViewModels = await _producttypeadminService.Service_Test();
+            var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+            All.producttype_ViewModels = producttype_ViewModels.Data;
+            All.admin_ViewModels = admin_ViewModels.Data;
+            All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
+            return View("ProductAdminCreate", All);
         }
 
         public async Task<IActionResult> ProductAdminCreateFunction(Product productitem) 

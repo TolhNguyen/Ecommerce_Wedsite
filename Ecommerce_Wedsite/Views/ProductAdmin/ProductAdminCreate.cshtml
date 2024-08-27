@@ -11,7 +11,13 @@
 		<input type="text" id="Product_Name" name="Product_Name" class="form-control rounded-left" placeholder="Product_Name" required>
 	</div>
 	<div class="form-group">
-		<input type="text" id="ProductType_Id" name="ProductType_Id" class="form-control rounded-left" placeholder="ProductType_Id" required>
+		<select id="ProductType_Id" name="ProductType_Id">
+			@foreach (var item2 in Model.producttype_ViewModels.producttype)
+			{
+				<option value="@item2.ProductType_Id">@item2.ProductType_Name</option>
+			}
+		</select>
+		@* <input type="text" id="ProductType_Id" name="ProductType_Id" class="form-control rounded-left" placeholder="ProductType_Id" required> *@
 	</div>
 	<div class="form-group">
 		<input type="text" id="Picture_Id" name="Picture_Id" class="form-control rounded-left" placeholder="Picture_Id" required>
