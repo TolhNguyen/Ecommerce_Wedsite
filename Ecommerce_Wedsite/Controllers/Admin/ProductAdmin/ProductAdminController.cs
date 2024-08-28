@@ -107,9 +107,9 @@ namespace Ecommerce_Wedsite.Controllers
             return View("ProductAdminCreate", All);
         }
 
-        public async Task<IActionResult> ProductAdminCreateFunction(Product productitem) 
+        public async Task<IActionResult> ProductAdminCreateFunction([FromForm] Product productitem, [FromForm] IFormFile productimg) 
         {
-            var product_ViewModels = await _productadmincreateService.Service_Test(productitem);
+            var product_ViewModels = await _productadmincreateService.Service_Test(productitem, productimg);
             return Json(product_ViewModels); 
         }
 

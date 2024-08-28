@@ -1,79 +1,151 @@
 ﻿@model AllLayout
 @{
-    ViewData["Title"] = "Admin Page";
+    ViewData["Title"] = "Product Admin Page";
     Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
 }
-<div class="login-form">
-	<div class="form-group">
-		<input type="text" id="Product_Id" name="Product_Id" class="form-control rounded-left" placeholder="Product_Id" required>
-	</div>
-	<div class="form-group">
-		<input type="text" id="Product_Name" name="Product_Name" class="form-control rounded-left" placeholder="Product_Name" required>
-	</div>
-	<div class="form-group">
-		<select id="ProductType_Id" name="ProductType_Id">
-			@foreach (var item2 in Model.producttype_ViewModels.producttype)
-			{
-				<option value="@item2.ProductType_Id">@item2.ProductType_Name</option>
-			}
-		</select>
-		@* <input type="text" id="ProductType_Id" name="ProductType_Id" class="form-control rounded-left" placeholder="ProductType_Id" required> *@
-	</div>
-	<div class="form-group">
-		<input type="text" id="Picture_Id" name="Picture_Id" class="form-control rounded-left" placeholder="Picture_Id" required>
-	</div>
-	<div class="form-group">
-		<input type="text" id="Logo_Id" name="Logo_Id" class="form-control rounded-left" placeholder="Logo_Id" required>
-	</div>
-	<div class="form-group">
-		<input type="text" id="Product_Price" name="Product_Price" class="form-control rounded-left" placeholder="Product_Price" required>
-	</div>
-	<div class="form-group">
-		<input type="text" id="Product_PromoPrice" name="Product_PromoPrice" class="form-control rounded-left" placeholder="Product_PromoPrice" required>
-	</div>
-	<div class="form-group">
-		<input type="text" id="Product_ShortDescription" name="ProdProduct_ShortDescriptionuct_Name" class="form-control rounded-left" placeholder="Product_ShortDescription" required>
-	</div>
-	<div class="form-group">
-		<input type="text" id="Product_Manufacturers" name="Product_Manufacturers" class="form-control rounded-left" placeholder="Product_Manufacturers" required>
-	</div>
-	<div class="form-group">
-		<input type="text" id="Product_Condition" name="Product_Condition" class="form-control rounded-left" placeholder="Product_Condition" required>
-	</div>
-	<div class="form-group">
-		<input type="text" id="Product_Info" name="Product_Info" class="form-control rounded-left" placeholder="Product_Info" required>
-	</div>
-	<div class="form-group">
-		<input type="text" id="Product_Size" name="Product_Size" class="form-control rounded-left" placeholder="Product_Size" required>
-	</div>
-	<div class="form-group">
-		<input type="text" id="Product_Href" name="Product_Href" class="form-control rounded-left" placeholder="Product_Href" required>
-	</div>
-	<div class="form-group">
-		<input id="button_1" onclick="Createlog()" type="button" value="Submit" class="btn btn-primary rounded submit p-3 px-5"/>
-	</div>
+<link href="/css/admintable2.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+    <nav class="nav nav-borders">
+        <a class="nav-link active ms-0" href="#" target="__blank">Profile</a>
+        <a class="nav-link" href="#" target="__blank">Billing</a>
+        <a class="nav-link" href="#" target="__blank">Security</a>
+        <a class="nav-link" href="#" target="__blank">Notifications</a>
+    </nav>
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Details</div>
+                <div class="card-body">
+                    <div class="login-form">
+                        <!-- Form Group (username)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="Product_Name">Product Name</label>
+                            <input type="text" id="Product_Name" name="Product_Name" class="form-control" placeholder="Product_Name" required>
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="ProductType_Id">Product Type</label>
+                                <select id="ProductType_Id" name="ProductType_Id">
+                                    @foreach (var item2 in Model.producttype_ViewModels.producttype)
+                                    {
+                                        <option value="@item2.ProductType_Id">@item2.ProductType_Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="Product_Quantity">Product Quantity</label>
+                                <input type="number" id="Product_Quantity" name="Product_Quantity" class="form-control rounded-left" placeholder="Product_Quantity" required>
+                            </div>
+                            <!-- Form Group (last name)-->
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="Product_Img">Product Img File Name</label>
+                                <input type="file" id="Product_Img" name="Product_Img" class="form-control rounded-left" placeholder="Product_Img" onchange="ChooseFile(this)" accept="image/gif, image/jpeg, image/png" required>
+                            </div>
+                            <img src="" id="imagesample" width="500" height="300" style="margin: 10px">
+                            
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="Product_Price">Product Price</label>
+                                <input type="number" id="Product_Price" name="Product_Price" class="form-control rounded-left" placeholder="Product_Price" required>
+                            </div>
+                            <!-- Form Group (birthday)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="Product_PromoPrice">Product Promotion Price</label>
+                                <input type="number" id="Product_PromoPrice" name="Product_PromoPrice" class="form-control" placeholder="Product_PromoPrice" required>
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="Product_ShortDescription">Product Short Description</label>
+                                <input type="text" id="Product_ShortDescription" name="Product_ShortDescription" class="form-control" placeholder="Product_ShortDescription" required>
+                            </div>
+                            <!-- Form Group (birthday)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="Product_Manufacturers">Product Manufacturers</label>
+                                <input type="text" id="Product_Manufacturers" name="Product_Manufacturers" class="form-control" placeholder="Product_Manufacturers" required>
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="Product Condition">Product Condition</label>
+                                <input type="number" id="Product_Condition" name="Product_Condition" class="form-control" placeholder="Product_Condition" required>
+                            </div>
+                            <!-- Form Group (birthday)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="Product_Size">Product_Size</label>
+                                <input type="text" id="Product_Size" name="Product_Size" class="form-control" placeholder="Product_Size" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" for="Product_Href">Product_Href</label>
+                            <input type="text" id="Product_Href" name="Product_Href" class="form-control" placeholder="Product_Href" required>
+                        </div>
+                        <div class="mb-3">
+                            <!--Ngon rồi ok rồi, còn info2-->
+                            <label class="small mb-1" for="Product_Info">Product Info</label>
+                            <textarea id="Product_Info" name="Product_Info" class="form-control rounded-left" placeholder="Product_Info" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <!--Ngon rồi ok rồi, còn info2-->
+                            <label class="small mb-1" for="Product_Info2">Product Info 2</label>
+                            <textarea id="Product_Info2" name="Product_Info2" class="form-control rounded-left" placeholder="Product_Info2" required></textarea>
+                        </div>
+                        <input type="hidden" id="pagename" value="@ViewData["Title"]" name="pagename">
+                        <!-- Save changes button-->
+                        <div class="form-group">
+                            <button onclick="Createlog()" id="submitButton" class="btn btn-primary rounded submit p-3 px-5">Submit</button>
+                            <!--Khi submit -> link controller -> service -> new view -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 <script>
 	function Createlog() {
+        var formData = new FormData();
+        var fileInput = document.getElementById("Product_Img").files[0]; // để lưu vào file Picture
+        var filename = fileInput.name;
+        var filepathcombine = "/img/Picture/" + fileInput.name;
+
+        formData.append("productimg", fileInput);
+        formData.append("Product_Name", $('#Product_Name').val());
+        formData.append("ProductType_Id", $('#ProductType_Id').val());
+        formData.append("Product_Price", $('#Product_Price').val());
+        formData.append("Product_Quantity", $('#Product_Quantity').val());
+        formData.append("Product_Img", filepathcombine);
+        formData.append("Product_PromoPrice", $('#Product_PromoPrice').val());
+        formData.append("Product_ShortDescription", $('#Product_ShortDescription').val());
+        formData.append("Product_Manufacturers", $('#Product_Manufacturers').val());
+        formData.append("Product_Condition", $('#Product_Condition').val());
+        formData.append("Product_Info", $('#Product_Info').val());
+        formData.append("Product_Info2", $('#Product_Info2').val());
+        formData.append("Product_Size", $('#Product_Size').val());
+        formData.append("Product_Href", $('#Product_Href').val());
+
+
         $.ajax({
             url: "ProductAdmin/ProductAdminCreateFunction",
             dataType: "text",
             type: "POST",
-            data: {
-                Product_Id: $('#Product_Id').val(),
-                Product_Name: $('#Product_Name').val(),
-                ProductType_Id: $('#ProductType_Id').val(),
-                Picture_Id: $('#Picture_Id').val(),
-                Logo_Id: $('#Logo_Id').val(),
-                Product_Price: $('#Product_Price').val(),
-                Product_PromoPrice: $('#Product_PromoPrice').val(),
-				Product_ShortDescription: $('#Product_ShortDescription').val(),
-                Product_Manufacturers: $('#Product_Manufacturers').val(),
-                Product_Condition: $('#Product_Condition').val(),
-                Product_Info: $('#Product_Info').val(),
-                Product_Size: $('#Product_Size').val(),
-                Product_Href: $('#Product_Href').val(),
-            },
+            data: formData,
+            processData: false,  // Không xử lý dữ liệu (FormData)
+            contentType: false,  // Không đặt Content-Type mặc định
             cache: !1,
             success:
             function(result) {
@@ -90,3 +162,57 @@
         });
     };
 </script>
+<script>
+    function ChooseFile(fileinput) {
+        if (fileinput.files && fileinput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagesample').attr("src", e.target.result);
+            }
+            reader.readAsDataURL(fileinput.files[0]);
+        }
+    }
+</script>
+@section Scripts {
+    <!--thu vien di trươc sau đó code-->
+    @* <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> *@
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet/less" type="text/css" href="/css/panels.less" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Product_Info').summernote({
+                tabsize: 3,
+                height: 150,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#Product_Info2').summernote({
+                tabsize: 3,
+                height: 150,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+        });
+    </script>
+}
