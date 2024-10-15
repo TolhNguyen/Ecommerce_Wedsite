@@ -26,7 +26,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
             _configuration = configuration;
         }
 
-        public async Task<ResponseMessageObject<string>> Service_Test(Product productitem, [FromForm] IFormFile productimg) // Lấy dữ liệu model từ db lên và hành động vào
+        public async Task<ResponseMessageObject<string>> Service_Test(Product productitem, [FromForm] IFormFile productimg) // Lấy dữ liệu hình ảnh theo 
         {
             try
             {
@@ -37,13 +37,15 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     if (productimg != null && productimg.Length > 0)
                     {
                         var imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Picture", productimg.FileName);
-
-                        using (var stream = new FileStream(imgPath, FileMode.Create))
+                        if (!File.Exists(imgPath))
                         {
-                            await productimg.CopyToAsync(stream); // đã chạy được là lưu được file ảnh cả cho database và trên file Picture
-                        }
+							using (var stream = new FileStream(imgPath, FileMode.Create)) // tạo file mới trong foler Picture trước
+							{
+								await productimg.CopyToAsync(stream); // lưu file ảnh trong folder Picture
+							}
+						}
                     }
-                    var it = dbConn.Insert(productitem); // hành động và lưu model vào db
+                    var it = dbConn.Insert(productitem); // lưu item vào db
 
                     await dbConn.CloseAsync();
                 }

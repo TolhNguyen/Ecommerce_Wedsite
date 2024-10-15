@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Rrba5VKhkxnI9FpnS1lR2R7bQcMC+lsZxtDpzlkTB64=",
+  "Hash": "Cbu28xeGMI80XZDZT2P1DW/LxDZvEZoSIG3lSPHqj4Q=",
   "Source": "Ecommerce_Wedsite",
   "BasePath": "_content/Ecommerce_Wedsite",
   "Mode": "Default",
@@ -758,12 +758,12 @@
       "OriginalItemSpec": "wwwroot\\css\\mainC.css"
     },
     {
-      "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\mainC2.css",
+      "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\mainC3.css",
       "SourceId": "Ecommerce_Wedsite",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\",
       "BasePath": "_content/Ecommerce_Wedsite",
-      "RelativePath": "css/mainC2.css",
+      "RelativePath": "css/mainC3.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -774,7 +774,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\mainC2.css"
+      "OriginalItemSpec": "wwwroot\\css\\mainC3.css"
     },
     {
       "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\news3.css",

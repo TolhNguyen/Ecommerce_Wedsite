@@ -37,21 +37,32 @@
                                 <!-- Form Group (last name)-->
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="ProductType_Id">Product Type</label>
-                                    <input class="form-control" id="ProductType_Id" name="ProductType_Id" type="tel" placeholder="ProductType_Id" value="@item.ProductType_Id" required>
+                                    <select id="ProductType_Id" name="ProductType_Id">
+                                        @foreach (var item2 in Model.producttype_ViewModels.producttype)
+                                        {
+                                            // Muốn mang cái tên có sẵn lên đầu
+                                            <option value="@item2.ProductType_Id">@item2.ProductType_Name</option>
+                                        }
+                                    </select>
                                 </div>
                             </div>
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
                                 <!-- Form Group (organization name)-->
-                                <div class="col-md-6">
+                                @* <div class="col-md-6">
                                     <label class="small mb-1" for="Product_Img2">Image Simulator:</label>
                                     <img id="Product_Img2" style="width:120px; height:120px" data-img="@item.Product_Img" src="@item.Product_Img" data-lazyload="@item.Product_Img" alt="">
-                                </div>
+                                </div> *@
                             <!-- Form Group (location)-->
-                                <div class="col-md-6">
+                                @* <div class="col-md-6">
                                     <label class="small mb-1" for="Product_Img">Product Image</label>
                                     <input class="form-control" id="Product_Img" name="Product_Img" type="tel" placeholder="Product_Img" value="@item.Product_Img" required>
+                                </div> *@
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="Product_Img">Product Img File Name</label>
+                                    <input type="file" id="Product_Img" name="Product_Img" class="form-control" placeholder="Product_Img" onchange="ChooseFile(this)" accept="image/gif, image/jpeg, image/png" value="@item.Product_Img" required>
                                 </div>
+                                <img src="@item.Product_Img" id="imagesample" width="300" height="300" style="margin: 10px">
                             </div>
                             <div class="row gx-3 mb-3">
                                 <!-- Form Group (organization name)-->
@@ -142,9 +153,7 @@
 }
 
 <!--
-    Lỗi: k load được, viết được nhiều dữ liệu của html.raw
-    Xử lỷ: đổi dạng dữ liệu đang là GET -> POST và là dạng json như cũ
-    (Tạm thời dùng được)
+    
 -->
 <script>
     function Editlog2() {
@@ -156,8 +165,6 @@
                 Product_Id: $('#Product_Id').val(),
                 Product_Name: $('#Product_Name').val(),
                 ProductType_Id: $('#ProductType_Id').val(),
-                Picture_Id: $('#Picture_Id').val(),
-                Logo_Id: $('#Logo_Id').val(),
                 Product_Price: $('#Product_Price').val(),
                 Product_PromoPrice: $('#Product_PromoPrice').val(),
                 Product_ShortDescription: $('#Product_ShortDescription').val(),
@@ -181,6 +188,17 @@
                 }
             }
         });
+    }
+</script>
+<script>
+    function ChooseFile(fileinput) {
+        if (fileinput.files && fileinput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagesample').attr("src", e.target.result);
+            }
+            reader.readAsDataURL(fileinput.files[0]);
+        }
     }
 </script>
 @section Scripts {

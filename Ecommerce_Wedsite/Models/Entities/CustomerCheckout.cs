@@ -18,12 +18,20 @@ namespace Ecommerce_Wedsite.Models.Entities
         public int City_Id { get; set; }
         public string CustomerCheckout_FullName { get; set; }
         public int UserLogin_Id { get; set; }
-        public int Payment_Id { get; set; }    
-    }
-    //public enum Promo
-    //{
-    //    None,
-    //    Special, // id: 1
-    //    VIP // id: 2
-    //}
+        public int Payment_Id { get; set; }
+		public Status CustomerCheckout_Status { get; set; }
+	}
+	//public enum Promo
+	//{
+	//    None,
+	//    Special, // id: 1
+	//    VIP // id: 2
+	//}
+	public enum Status
+	{
+		Unprocessed, // 0
+		Processing, // 1
+		Delivering, // 2
+        Finish // 3 
+	}
 }

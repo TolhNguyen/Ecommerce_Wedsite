@@ -24,21 +24,14 @@
                         <th>
                             ID
                         </th>
+                        <th>
+                            Customer Checkout Full Name
                         </th>
                         <th>
                             Customer Checkout Phone 
                         </th>
                         <th>
-                            Customer Checkout Email
-                        </th>
-                        <th>
                             Customer Checkout Address
-                        </th>
-                        <th>
-                            Customer Checkout Post Code
-                        </th>
-                        <th>
-                            Customer Checkout Zip
                         </th>
                         <th>
                             Customer Checkout Total Price
@@ -47,10 +40,13 @@
                             Customer Checkout Message / Feedback
                         </th>
                         <th>
-                            Promotion ID
+                            Customer Checkout Payment ID
                         </th>
                         <th>
-                            Customer Checkout Full Name
+                            Order Status
+                        </th>
+                        <th>
+                            Action
                         </th>
                     </tr>
                 </thead>
@@ -62,18 +58,26 @@
                         @foreach (var item in Model.customercheckout_ViewModels.customercheckout){
                             if(item != null){
                                 <tr>
-                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Id)</td>
-                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Phone)</td> 
-                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Email)</td>
-                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Address)</td>
-                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_PostCode)</td> 
-                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Zip)</td> 
-                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_TotalPrice)</td> 
-                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Mess)</td> 
-                                <td>@Html.DisplayFor(modelItem => item.Promotion_Id)</td> 
-                                <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_FullName)</td> 
-                                <!--Tao controller hay service cho edit va delete-->
-                            </tr>
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_FullName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Phone)</td> 
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Address)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_TotalPrice)</td> 
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Mess)</td> 
+                                    @foreach(var item2 in Model.paymnet_ViewModels.payment)
+                                    {
+                                        if(item.Payment_Id == item2.Payment_Id)
+                                        {
+                                            <td>@Html.DisplayFor(modelItem => item2.Payment_Name)</td>
+                                        }
+                                        else
+                                        {
+                                            <td>None</td>
+                                        }
+                                    }
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Status)</td>
+                                    <td>@Html.ActionLink("Process Order", "#", new { Product_Id = item.CustomerCheckout_Id })</td>
+                                </tr>
                             }
                             
                         }

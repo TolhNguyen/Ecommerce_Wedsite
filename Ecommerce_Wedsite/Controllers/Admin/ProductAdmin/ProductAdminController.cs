@@ -102,12 +102,13 @@ namespace Ecommerce_Wedsite.Controllers
             var producttype_ViewModels = await _producttypeadminService.Service_Test();
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
             All.producttype_ViewModels = producttype_ViewModels.Data;
+            
             All.admin_ViewModels = admin_ViewModels.Data;
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
             return View("ProductAdminCreate", All);
         }
 
-        public async Task<IActionResult> ProductAdminCreateFunction([FromForm] Product productitem, [FromForm] IFormFile productimg) 
+        public async Task<IActionResult> ProductAdminCreateFunction([FromForm] Product productitem, [FromForm] IFormFile productimg) // lấy file ảnh
         {
             var product_ViewModels = await _productadmincreateService.Service_Test(productitem, productimg);
             return Json(product_ViewModels); 
@@ -118,16 +119,31 @@ namespace Ecommerce_Wedsite.Controllers
         {
             var All = new AllLayout();
 
+            int id = 0;
+            string? idstr = HttpContext.Request.Cookies["adminid"];
+            var check = int.TryParse(idstr, out id);
+            var admin_ViewModels = await _adminService.AdminInfo(id);
+            var noticookie = HttpContext.Request.Cookies["noticookie"];
+            if (noticookie != null) // nếu có tb rồi, chỉ hiện thôi
+            {
+                var notiVM = new NoticeAdmin_ViewModel();
+                notiVM = JsonSerializer.Deserialize<NoticeAdmin_ViewModel>(noticookie);
+                All.noticeadmin_ViewModels = notiVM;
+            }
+
             var product_ViewModels = await _productadmineditService.Service_Test(Product_Id);
-			var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
-			All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
+            var producttype_ViewModels = await _producttypeadminService.Service_Test();
+            var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+            All.producttype_ViewModels = producttype_ViewModels.Data;
+            All.admin_ViewModels = admin_ViewModels.Data;
+            All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
 			All.product_ViewModels = product_ViewModels.Data;
 
             return View("ProductAdminEdit", All);
         }
 
         [HttpPost]
-        public async Task<IActionResult> ProductAdminEditFunction(Product productitem) // nên đổi sang ajax
+        public async Task<IActionResult> ProductAdminEditFunction([FromForm] Product productitem, [FromForm] IFormFile productimg) // nên đổi sang ajax
         {
             var product_ViewModels = await _productadmineditfunctionService.Service_Test(productitem);
             if(product_ViewModels.success == true) {

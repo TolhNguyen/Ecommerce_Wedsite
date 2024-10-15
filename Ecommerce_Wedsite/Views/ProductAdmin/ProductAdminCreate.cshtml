@@ -50,7 +50,7 @@
                                 <label class="small mb-1" for="Product_Img">Product Img File Name</label>
                                 <input type="file" id="Product_Img" name="Product_Img" class="form-control rounded-left" placeholder="Product_Img" onchange="ChooseFile(this)" accept="image/gif, image/jpeg, image/png" required>
                             </div>
-                            <img src="" id="imagesample" width="500" height="300" style="margin: 10px">
+                            <img src="" id="imagesample" width="300" height="300" style="margin: 10px">
                             
                         </div>
                         <div class="row gx-3 mb-3">
@@ -123,12 +123,12 @@
         var filename = fileInput.name;
         var filepathcombine = "/img/Picture/" + fileInput.name;
 
-        formData.append("productimg", fileInput);
+        formData.append("productimg", fileInput); // cho folder Picture
         formData.append("Product_Name", $('#Product_Name').val());
         formData.append("ProductType_Id", $('#ProductType_Id').val());
         formData.append("Product_Price", $('#Product_Price').val());
         formData.append("Product_Quantity", $('#Product_Quantity').val());
-        formData.append("Product_Img", filepathcombine);
+        formData.append("Product_Img", filepathcombine); // cho db
         formData.append("Product_PromoPrice", $('#Product_PromoPrice').val());
         formData.append("Product_ShortDescription", $('#Product_ShortDescription').val());
         formData.append("Product_Manufacturers", $('#Product_Manufacturers').val());
