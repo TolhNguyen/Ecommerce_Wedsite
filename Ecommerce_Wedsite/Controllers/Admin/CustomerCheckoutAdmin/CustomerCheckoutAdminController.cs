@@ -6,6 +6,7 @@ using Ecommerce_Wedsite.Service.WebApp;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Scripting.Utils;
 using System.Diagnostics;
+using System.Reflection.Metadata.Ecma335;
 using System.Text.Json;
 
 
@@ -114,6 +115,66 @@ namespace Ecommerce_Wedsite.Controllers
             All.paymnet_ViewModels = payment_ViewModels.Data;
 
             return View("CustomerCheckoutDeliverAdmin", All);
+        }
+
+        [Route("~/processfunction")]
+        public async Task<IActionResult> ProcessFunction(int id, int status) // ép kiểu status từ view trc khi sang controller .unpro -> pro -> deli
+        {
+            var stt = await _customercheckoutadminService.ProcessFunction(id, status); // trả về status int
+            if (stt == 1) // là process
+            {
+                return RedirectToAction("CustomerCheckoutProcessAdmin");
+            }
+            if (stt == 2) // là deliver
+            {
+                return RedirectToAction("CustomerCheckoutDeliverAdmin");
+            }
+            return RedirectToAction("CustomerCheckoutFinishAdmin"); // là finish
+        }
+
+        [Route("~/processreversedfunction")]
+        public async Task<IActionResult> ProcessReversedFunction(int id, int status) // nên tách ra làm 3 trang unpro -> pro -> deli
+        {
+            var stt = await _customercheckoutadminService.ProcessReversedFunction(id, status); // trả về status int
+            if(stt == 1) // là process
+            {
+                return RedirectToAction("CustomerCheckoutProcessAdmin");
+            }
+            if (stt == 2) // là deliver
+            {
+                return RedirectToAction("CustomerCheckoutDeliverAdmin");
+            }
+            return RedirectToAction("CustomerCheckoutFinishAdmin"); // là finish
+        }
+
+        [Route("~/customercheckoutfinishadmin")]
+        public async Task<IActionResult> CustomerCheckoutFinishAdmin() // nên tách ra làm 3 trang unpro -> pro -> deli
+        {
+            var All = new AllLayout();
+
+            int id = 0;
+            string? idstr = HttpContext.Request.Cookies["adminid"];
+            var check = int.TryParse(idstr, out id);
+            var admin_ViewModels = await _adminService.AdminInfo(id);
+
+            var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
+            var customercheckout_ViewModels = await _customercheckoutadminService.Finish();
+            var payment_ViewModels = await _paymentService.Service_Test();
+
+            var noticookie = HttpContext.Request.Cookies["noticookie"];
+            if (noticookie != null) // nếu có tb rồi, chỉ hiện thôi
+            {
+                var notiVM = new NoticeAdmin_ViewModel();
+                notiVM = JsonSerializer.Deserialize<NoticeAdmin_ViewModel>(noticookie);
+                All.noticeadmin_ViewModels = notiVM;
+            }
+
+            All.admin_ViewModels = admin_ViewModels.Data;
+            All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
+            All.customercheckout_ViewModels = customercheckout_ViewModels.Data;
+            All.paymnet_ViewModels = payment_ViewModels.Data;
+
+            return View("CustomerCheckoutFinishAdmin", All); // lỗi 
         }
     }
 }

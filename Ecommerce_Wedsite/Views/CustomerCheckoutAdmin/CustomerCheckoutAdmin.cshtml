@@ -74,26 +74,14 @@
                                         }
                                     </td>
                                     <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Status)</td>
-                                    <td>@Html.ActionLink("Process Order", "#", new { Product_Id = item.CustomerCheckout_Id })</td>
+                                    <td>@Html.ActionLink("Process", "processfunction", new { id = item.CustomerCheckout_Id, status = (int)item.CustomerCheckout_Status })</td> <!--Ép kiểu nó về int-->
                                 </tr>
-                            }
-                            
+                            } 
                         }
                     }
                 </tbody>
             </table>
-            <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                </ul>
-            </div>
         </div>
     </div>
 </div>
+

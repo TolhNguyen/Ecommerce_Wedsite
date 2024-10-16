@@ -10,7 +10,7 @@
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-5">
-                    <h2>Processing Checkout <b>Table</b></h2>
+                    <h2>Finish Checkout <b>Table</b></h2>
                 </div>
                 <div class="col-sm-7">
                     <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
@@ -50,9 +50,6 @@
                         <th>
                             Action
                         </th>
-                        <th>
-                            Action 2
-                        </th>
                     </tr>
                 </thead>
 
@@ -81,7 +78,6 @@
                                         }
                                     </td>
                                     <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Status)</td>
-                                    <td>@Html.ActionLink("Deliver", "processfunction", new { id = item.CustomerCheckout_Id, status = (int)item.CustomerCheckout_Status })</td>
                                     <td>@Html.ActionLink("Back", "processreversedfunction", new { id = item.CustomerCheckout_Id, status = (int)item.CustomerCheckout_Status })</td>
                                 </tr>
                             }
@@ -92,4 +88,5 @@
         </div>
     </div>
 </div>
+
 
