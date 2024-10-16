@@ -10,7 +10,7 @@
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-5">
-                    <h2>Customer Checkout <b>Table</b></h2>
+                    <h2>Process Checkout <b>Table</b></h2>
                 </div>
                 <div class="col-sm-7">
                     <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
@@ -18,8 +18,10 @@
             </div>
         </div>
         <div class="table-responsive" style="max-height: 525px; max-width: 1800px;">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> <!---Tạo bảng-->
-                <thead> <!--Danh sách bảng-->
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <!---Tạo bảng-->
+                <thead>
+                    <!--Danh sách bảng-->
                     <tr>
                         <th>
                             ID
@@ -28,7 +30,7 @@
                             Customer Checkout Full Name
                         </th>
                         <th>
-                            Customer Checkout Phone 
+                            Customer Checkout Phone
                         </th>
                         <th>
                             Customer Checkout Address
@@ -51,33 +53,35 @@
                     </tr>
                 </thead>
 
-                <tbody> 
-                    @if (Model != null) 
+                <tbody>
+                    @if (Model != null)
                     {
                         // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
-                        @foreach (var item in Model.customercheckout_ViewModels.customercheckout){
-                            if(item != null){
+                        @foreach (var item in Model.customercheckout_ViewModels.customercheckout)
+                        {
+                            if (item != null)
+                            {
                                 <tr>
                                     <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Id)</td>
                                     <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_FullName)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Phone)</td> 
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Phone)</td>
                                     <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Address)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_TotalPrice)</td> 
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_TotalPrice)</td>
                                     <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Mess)</td>
                                     <td>
-                                        @foreach(var item2 in Model.paymnet_ViewModels.payment)
+                                        @foreach (var item2 in Model.paymnet_ViewModels.payment)
                                         {
-                                            if(item.Payment_Id == item2.Payment_Id) // item là cái xác định cho item2 
+                                            if (item.Payment_Id == item2.Payment_Id) // item là cái xác định cho item2
                                             {
                                                 @Html.DisplayFor(modelItem => item2.Payment_Name)
                                             }
                                         }
                                     </td>
                                     <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Status)</td>
-                                    <td>@Html.ActionLink("Process Order", "#", new { Product_Id = item.CustomerCheckout_Id })</td>
+                                    <td>@Html.ActionLink("Deliver", "# Chức năng ở đây", new { Product_Id = item.CustomerCheckout_Id })</td>
                                 </tr>
                             }
-                            
+
                         }
                     }
                 </tbody>
@@ -97,3 +101,4 @@
         </div>
     </div>
 </div>
+
