@@ -50,6 +50,9 @@
                         <th>
                             Action
                         </th>
+                        <th>
+                            Details
+                        </th>
                     </tr>
                 </thead>
 
@@ -79,6 +82,7 @@
                                     </td>
                                     <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Status)</td>
                                     <td>@Html.ActionLink("Back", "processreversedfunction", new { id = item.CustomerCheckout_Id, status = (int)item.CustomerCheckout_Status })</td>
+                                    <td>@Html.ActionLink("Xem chi tiết", "#", new { id = item.CustomerCheckout_Id })</td>
                                 </tr>
                             }
                         }

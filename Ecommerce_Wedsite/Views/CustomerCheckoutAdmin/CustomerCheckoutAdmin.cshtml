@@ -48,6 +48,9 @@
                         <th>
                             Action
                         </th>
+                        <th>
+                            Details
+                        </th>
                     </tr>
                 </thead>
 
@@ -75,6 +78,17 @@
                                     </td>
                                     <td>@Html.DisplayFor(modelItem => item.CustomerCheckout_Status)</td>
                                     <td>@Html.ActionLink("Process", "processfunction", new { id = item.CustomerCheckout_Id, status = (int)item.CustomerCheckout_Status })</td> <!--Ép kiểu nó về int-->
+                                    <td>@Html.ActionLink("Xem chi tiết", "#", new { id = item.CustomerCheckout_Id})</td>
+                                    <td>
+                                        <!-- Nút chi tiết, khi nhấn sẽ gọi AJAX -->
+                                        <button class="btn btn-info" onclick="loadProductDetails(@item.CustomerCheckout_Id)">Chi tiết</button>
+                                    </td>
+                                </tr>
+                                <tr id="details-@item.CustomerCheckout_Id" class="details-row" style="display:none;">
+                                    <td colspan="4">
+                                        <!-- Đây là nơi partial view sẽ được load vào -->
+                                        <div id="product-details-@item.CustomerCheckout_Id"></div>
+                                    </td>
                                 </tr>
                             } 
                         }
@@ -84,4 +98,25 @@
         </div>
     </div>
 </div>
+<script>
+    function loadProductDetails(CustomerCheckout_Id) {
+        var detailsRow = $('#details-' + CustomerCheckout_Id);
+        var detailsDiv = $('#product-details-' + CustomerCheckout_Id);
+
+        // Kiểm tra nếu hàng chi tiết đã hiển thị, nếu có thì ẩn đi
+        if (detailsRow.is(':visible')) {
+            detailsRow.hide();
+        } else {
+            // Nếu chưa hiển thị, gọi AJAX để lấy dữ liệu
+            $.ajax({
+                url: '@Url.Action("Details", "CustomerCheckoutAdmin")', // tạo một controller. Từ nút chi tiết -> ajax -> controller -> trả về partial view -> hiện lên
+                data: { CustomerCheckout_Id: CustomerCheckout_Id},
+                success: function (result) {
+                    detailsDiv.html(result); // Chèn partial view vào div
+                    detailsRow.show(); // Hiển thị hàng chi tiết
+                }
+            });
+        }
+    }
+</script>
 

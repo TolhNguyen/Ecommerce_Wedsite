@@ -10,108 +10,102 @@
     Tìm cách sửa table bị tràn màn hình overwheeling:
     - Tham khảo các dạng bảng khác. vd: https://bootdey.com/snippets/tagged/cart shopping cart table
 -->
-<div>
+<div style="Overflow-x:hidden">
     <div class="card-body">
-        
-        <div class="table-responsive" style="max-height: 550px;">
-            <div class="table-wrapper" style="width: 2000px;">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <h2>Home Page <b>Table</b></h2>
-                        </div>
-                        <div class="col-sm-7">
-                            <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
-                        </div>
-                    </div>
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Home Page <b>Table</b></h2>
                 </div>
-                <div>
-                    <table class="table table-bordered" id="dataTable">
-                        <!---Tạo bảng-->
-                        <thead>
-                            <!--Danh sách bảng-->
-                            <tr>
-                                <th style="">
-                                    Home Page ID
-                                </th >
-                                <th style="">
-                                    Home Page Title
-                                </th>
-                                <th>
-                                    Home Page Condition
-                                </th>
-                                <th>
-                                    Home Page Parent Id
-                                </th>
-                                <th>
-                                    Home Page Level
-                                </th>
-                                <th>
-                                    Picture Group Id
-                                </th>
-                                <th>
-                                    HTML ID
-                                </th>
-                                <th>
-                                    Home Page Image
-                                </th>
-                                <th>
-                                    Home Page Summary
-                                </th>
-                                <th>
-                                    Home Page Order
-                                </th>
-                                <th>
-                                    Home Page Video
-                                </th>
-                                <th>
-                                    Home Page Product Display Id
-                                </th>
-                                <th>
-                                    Edit
-                                </th>
-                                <th>
-                                    Delete
-                                </th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @if (Model != null)
-                            {
-                                // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
-                                @foreach (var item in Model.homepage_ViewModels.homepage)
-                                {
-                                    if (item != null)
-                                    {
-                                        <tr>
-                                            <td>@Html.DisplayFor(modelItem => item.HomePage_Id)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.HomePage_Title)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.HomePage_Condition)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.HomePageParent_Id)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.HomePage_Levels)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.PictureGrp_Id)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.HTML_Id)</td>
-                                            <td>
-                                                <img style="width:120px; height:120px" data-img="@item.HomePage_Img" src="@item.HomePage_Img" data-lazyload="@item.HomePage_Img" alt="">
-                                            </td>
-                                            <td>@Html.DisplayFor(modelItem => item.HomePage_Summary)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.HomePage_Order)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.HomePage_Video)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.HomePage_ProductDisplayId)</td>
-                                            <td>@Html.ActionLink("Edit", "homepageadminedit", new { HomePage_Id = item.HomePage_Id })</td>
-                                            <!--Chỉ cần gửi id thôi-->
-                                            <td>@Html.ActionLink("Delete", "#", item)</td>
-                                            <!--Tao controller hay service cho edit va delete-->
-                                        </tr>
-                                    }
-                                }
-                            }
-                        </tbody>
-                    </table>
+                <div class="col-sm-7">
+                    <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
                 </div>
-                
             </div>
+        </div>
+        <div class="table-responsive" style="max-height: 650px;">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <!---Tạo bảng-->
+                <thead>
+                    <!--Danh sách bảng-->
+                    <tr>
+                        <th style="">
+                            Home Page ID
+                        </th >
+                        <th style="">
+                            Home Page Title
+                        </th>
+                        <th>
+                            Home Page Condition
+                        </th>
+                        <th>
+                            Home Page Parent Id
+                        </th>
+                        <th>
+                            Home Page Level
+                        </th>
+                        <th>
+                            Picture Group Id
+                        </th>
+                        <th>
+                            HTML ID
+                        </th>
+                        <th>
+                            Home Page Image
+                        </th>
+                        <th>
+                            Home Page Summary
+                        </th>
+                        <th>
+                            Home Page Order
+                        </th>
+                        <th>
+                            Home Page Video
+                        </th>
+                        <th>
+                            Home Page Product Display Id
+                        </th>
+                        <th>
+                            Edit
+                        </th>
+                        <th>
+                            Delete
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model != null)
+                    {
+                        // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
+                        @foreach (var item in Model.homepage_ViewModels.homepage)
+                        {
+                            if (item != null)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Title)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Condition)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePageParent_Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Levels)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PictureGrp_Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HTML_Id)</td>
+                                    <td>
+                                        <img style="width:120px; height:120px" data-img="@item.HomePage_Img" src="@item.HomePage_Img" data-lazyload="@item.HomePage_Img" alt="">
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Summary)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Order)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_Video)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HomePage_ProductDisplayId)</td>
+                                    <td>@Html.ActionLink("Edit", "homepageadminedit", new { HomePage_Id = item.HomePage_Id })</td>
+                                    <!--Chỉ cần gửi id thôi-->
+                                    <td>@Html.ActionLink("Delete", "#", item)</td>
+                                    <!--Tao controller hay service cho edit va delete-->
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table> 
         </div>
     </div>
 </div>

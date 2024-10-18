@@ -19,6 +19,7 @@ namespace Ecommerce_Wedsite.Service.WebApp
         Task<ResponseMessageObject<CustomerCheckout_ViewModel>> Finish(); //Model lớn chứa Model nhỏ. Tạo Phương Thức
         Task<int> ProcessFunction(int id, int status); //Model lớn chứa Model nhỏ. Tạo Phương Thức
         Task<int> ProcessReversedFunction(int id, int status);
+        Task<ResponseMessageObject<ProductCheckout_ViewModel>> Details(int CustomerCheckout_Id);
     }
     public class CustomerCheckoutAdminService : ICustomerCheckoutAdminService // Thừa kế các thuộc tính từ Interface 
     {
@@ -169,6 +170,30 @@ namespace Ecommerce_Wedsite.Service.WebApp
                 return 0;
             }
             return status;
+        }
+        public async Task<ResponseMessageObject<ProductCheckout_ViewModel>> Details(int CustomerCheckout_Id)
+        {
+            var data = new ResponseMessageObject<ProductCheckout_ViewModel>();
+            data.Data = new ProductCheckout_ViewModel();
+            try
+            {
+                using (var dbConn = new SqlConnection(_configuration.GetConnectionString("ConnectionString")))
+                {
+                    await dbConn.OpenAsync(); // mở sync
+
+                    var query = dbConn.QueryBuilder($"select * from ProductCheckout WHERE CustomerCheckout_Id = {CustomerCheckout_Id}");
+
+                    data.Data.productcheckout = await query.QueryAsync<ProductCheckout>();
+
+                    await dbConn.CloseAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                data.message = e.Message;
+                data.success = false;
+            }
+            return data;
         }
     }
 }

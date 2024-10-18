@@ -147,6 +147,15 @@ namespace Ecommerce_Wedsite.Controllers
             return RedirectToAction("CustomerCheckoutFinishAdmin"); // là finish
         }
 
+        [Route("~/details")]
+        public async Task<IActionResult> Details(int CustomerCheckout_Id) //
+        {
+            var All = new AllLayout();
+            var productcheckout_ViewModels = await _customercheckoutadminService.Details(CustomerCheckout_Id);
+            All.productcheckout_ViewModels = productcheckout_ViewModels.Data;
+            return PartialView("_ProductDetails", All); // Trả về partial view. Chưa làm view (chưa truyền dữ liệu vào)
+        }
+
         [Route("~/customercheckoutfinishadmin")]
         public async Task<IActionResult> CustomerCheckoutFinishAdmin() // nên tách ra làm 3 trang unpro -> pro -> deli
         {
