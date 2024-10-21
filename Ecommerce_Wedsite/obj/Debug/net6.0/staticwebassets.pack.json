@@ -125,6 +125,10 @@
       "PackagePath": "staticwebassets\\css\\checkout.css"
     },
     {
+      "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\core.min.css",
+      "PackagePath": "staticwebassets\\css\\core.min.css"
+    },
+    {
       "Id": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\css\\crud2.css",
       "PackagePath": "staticwebassets\\css\\crud2.css"
     },

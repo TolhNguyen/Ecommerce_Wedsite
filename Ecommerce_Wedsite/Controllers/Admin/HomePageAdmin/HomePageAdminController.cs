@@ -102,12 +102,25 @@ namespace Ecommerce_Wedsite.Controllers
         {
             var All = new AllLayout();
 
+            int id = 0;
+            string? idstr = HttpContext.Request.Cookies["adminid"];
+            var check = int.TryParse(idstr, out id);
+            var admin_ViewModels = await _adminService.AdminInfo(id);
+            var noticookie = HttpContext.Request.Cookies["noticookie"];
+            if (noticookie != null) // nếu có tb rồi, chỉ hiện thôi
+            {
+                var notiVM = new NoticeAdmin_ViewModel();
+                notiVM = JsonSerializer.Deserialize<NoticeAdmin_ViewModel>(noticookie);
+                All.noticeadmin_ViewModels = notiVM;
+            }
+
             var homepage_ViewModels = await _homepageadmineditService.HomePageAdminEdit(HomePage_Id);    
             var adminmenu_ViewModels = await _adminmenuService.AdminMenu_ServiceTest();
             var idtable_ViewModels = await _homepageadminidtableService.IdTable();
             All.product_ViewModels = idtable_ViewModels.Data;
             All.adminmenu_ViewModels = adminmenu_ViewModels.Data;
-            All.homepage_ViewModels = homepage_ViewModels.Data; 
+            All.homepage_ViewModels = homepage_ViewModels.Data;
+            All.admin_ViewModels = admin_ViewModels.Data;
 
             return View("HomePageAdminEdit", All);
         }

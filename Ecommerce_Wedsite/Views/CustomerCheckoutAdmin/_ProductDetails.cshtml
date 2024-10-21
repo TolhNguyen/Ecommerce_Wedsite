@@ -1,75 +1,74 @@
 ﻿@model AllLayout
-<link href="/css/core.min.css" rel="stylesheet" type="text/css">
-<section class="vh-100" style="background-color: #fdccbc;">
-    <div class="container h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col">
-                <p><span class="h2">Shopping Cart </span><span class="h4">(1 item in your cart)</span></p>
+<!--Cách vận hành mở customer checkout -> xem chỉ tiết -> load sản phẩm hiện ở đây lên (Partial View)->
+<link href="~/css/idtable.css" rel="stylesheet" type="text/css" media="all" /> <!--Chạy được rồi mà chỉnh lại cho đẹp-->
 
-                <div class="card mb-4">
-                    <div class="card-body p-4">
-
-                        <div class="row align-items-center">
-                            <div class="col-md-2">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/1.webp"
-                                     class="img-fluid" alt="Generic placeholder image">
-                            </div>
-                            <div class="col-md-2 d-flex justify-content-center">
-                                <div>
-                                    <p class="small text-muted mb-4 pb-2">Name</p>
-                                    <p class="lead fw-normal mb-0">iPad Air</p>
-                                </div>
-                            </div>
-                            <div class="col-md-2 d-flex justify-content-center">
-                                <div>
-                                    <p class="small text-muted mb-4 pb-2">Color</p>
-                                    <p class="lead fw-normal mb-0">
-                                        <i class="fas fa-circle me-2" style="color: #fdd8d2;"></i>
-                                        pink rose
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-2 d-flex justify-content-center">
-                                <div>
-                                    <p class="small text-muted mb-4 pb-2">Quantity</p>
-                                    <p class="lead fw-normal mb-0">1</p>
-                                </div>
-                            </div>
-                            <div class="col-md-2 d-flex justify-content-center">
-                                <div>
-                                    <p class="small text-muted mb-4 pb-2">Price</p>
-                                    <p class="lead fw-normal mb-0">$799</p>
-                                </div>
-                            </div>
-                            <div class="col-md-2 d-flex justify-content-center">
-                                <div>
-                                    <p class="small text-muted mb-4 pb-2">Total</p>
-                                    <p class="lead fw-normal mb-0">$799</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="card mb-5">
-                    <div class="card-body p-4">
-
-                        <div class="float-end">
-                            <p class="mb-0 me-5 d-flex align-items-center">
-                                <span class="small text-muted me-2">Order total:</span> <span class="lead fw-normal">$799</span>
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-end">
-                    <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-light btn-lg me-2">Continue shopping</button>
-                    <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg">Add to cart</button>
-                </div>
-
+<div class="container px-3 my-5 clearfix" id="idtable" style="margin-left: inherit;">
+    <!-- Shopping cart table -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Details display</h2>
+            <button type="button" class="close" onclick="CloseTable()" style="position: absolute; top: 10px; right: 20px; font-size: 24px;">&times;</button>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive" style="max-height: 350px;">
+                <table class="table table-bordered m-0">
+                    <thead>
+                        <tr>
+                            <!-- Set columns width -->
+                            <th class="text-center py-3 px-4" style="min-width: 400px;">Product Name &amp; Details</th>
+                            <th class="text-right py-3 px-4" style="width: 100px;">Price</th>
+                            <th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
+                            <th class="text-right py-3 px-4" style="width: 100px;">Product Type Id</th>
+                            <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
+                        </tr>
+                    </thead>
+                    <tbody style="">
+                        @if (Model != null)
+                        {
+                            // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
+                            @foreach (var item in Model.productcheckout_ViewModels.productcheckout)
+                            {
+                                <tr>
+                                    <td class="p-4">
+                                        <div class="media align-items-center">
+                                            <!--Nên có hình ảnh sản phẩm-->
+                                            <img src="#" class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                                            <div class="media-body">
+                                                <a href="#" class="d-block text-dark">@item.ProductCheckout_Name</a>
+                                                <small>
+                                                    <span class="text-muted">Color:</span>
+                                                    <span class="ui-product-color ui-product-color-sm align-text-bottom" style="background:#e81e2c;"></span> &nbsp;
+                                                    @* <span class="text-muted">Size: </span> EU 37 &nbsp; *@
+                                                    <span class="text-muted">Size: </span> # Size
+                                                    <span class="text-muted">Ships from: </span> # Manufacture
+                                                    <span class="text-muted">Id: </span> @item.ProductCheckout_Id
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right font-weight-semibold align-middle p-4">@item.ProductCheckout_Price.000đ</td>
+                                    <td class="align-middle p-4"><input type="text" class="form-control text-center" value="@item.ProductCheckout_Quantity" readonly></td>
+                                    <td class="text-right font-weight-semibold align-middle p-4">#Type</td>
+                                        
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
             </div>
+            <!-- / Shopping cart table -->
+
+            <div class="float-right">
+                <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" onclick="CloseTable()">Back to table</button>
+                <button type="button" class="btn btn-lg btn-primary mt-2" id="sendBtn">Confirm</button>
+            </div>
+
         </div>
     </div>
-</section>
+</div>
+
+<script>
+    function CloseTable() {
+        document.querySelector('.idtable').style.display = 'none';
+    }
+</script>

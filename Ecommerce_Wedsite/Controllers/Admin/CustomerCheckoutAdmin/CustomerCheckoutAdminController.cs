@@ -147,7 +147,7 @@ namespace Ecommerce_Wedsite.Controllers
             return RedirectToAction("CustomerCheckoutFinishAdmin"); // là finish
         }
 
-        [Route("~/details")]
+        [HttpGet]
         public async Task<IActionResult> Details(int CustomerCheckout_Id) //
         {
             var All = new AllLayout();
