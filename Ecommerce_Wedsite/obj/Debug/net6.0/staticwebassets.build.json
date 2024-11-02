@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2YXBXxM7CVvk2dW01Ir/VkXbKYY46RyVJ6mQQl9AKjY=",
+  "Hash": "tDOjIMbWWB3VxlPd56ElJnD8gDb+QUejTJZ4DA7RJzs=",
   "Source": "Ecommerce_Wedsite",
   "BasePath": "_content/Ecommerce_Wedsite",
   "Mode": "Default",
@@ -2561,6 +2561,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\Picture\\mastercard3.png"
+    },
+    {
+      "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\mic.png",
+      "SourceId": "Ecommerce_Wedsite",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\",
+      "BasePath": "_content/Ecommerce_Wedsite",
+      "RelativePath": "img/Picture/mic.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\Picture\\mic.png"
     },
     {
       "Identity": "C:\\Users\\Dong Quan\\Documents\\Clone-HVNetWebsite\\Ecommerce_Wedsite\\Ecommerce_Wedsite\\wwwroot\\img\\Picture\\momo.png",

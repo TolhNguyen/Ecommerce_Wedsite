@@ -60,10 +60,12 @@
                         <!--value=Model: để hiện giá trị lưu từ model vào-->
                         <input class="change_pl" style="border-radius:20px; width:350px; height:34px;" placeholder="Tìm kiếm..." value="@Model.sort_ViewModels.proname" maxlength="170" id="sortname" >
                         <a href="#" onclick="SortName()">Tìm kiếm</a>
+                        <a href="#" class="fa fa-microphone" style="font-size:24px; padding-left: 8px;" onclick="VoiceSearch()"></a>
                     </form>
                     <div class="fix-cart">
                         <div class="l_o hidden-xs hidden-sm">
                                 <img loading="lazy" alt="Mew Nature" src="//bizweb.dktcdn.net/100/364/767/themes/737174/assets/user.png?1676649124511">
+                                
                             <div class="box_log" id="login">
                                 <div class="login">
                                     <a href="/userloginpage">Đăng nhập</a>
@@ -286,6 +288,26 @@
 }
 </header>
     <script>
+        // Chạy được Voice Search:
+        function VoiceSearch() {
+            var proname = document.getElementById("sortname");
+            var speech = true;
+            const SpeechRecognition = window.speechRecognition || window.webkitSpeechRecognition;
+            const recog = new SpeechRecognition();
+            recog.interimResults = true;
+            recog.addEventListener('result', e => {
+                const transcript = Array.from(e.results)
+                .map(result => result[0])
+                .map(result => result.transcript)
+                proname.value = transcript;
+            })
+            if(speech == true)
+            {
+                recog.start();
+            }
+        }
+
+
 	    // Vấn để: là chưa search loại 1 mình đc và Chưa search ở bên ngoài trang Home đc:
         //Func Chạy chỉ chạy cho thanh tìm kiếm thôi :
         function SortName() {    

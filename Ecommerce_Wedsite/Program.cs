@@ -1,4 +1,4 @@
-using Autofac.Core;
+﻿using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
 using Ecommerce_Wedsite.Service.Helpers;

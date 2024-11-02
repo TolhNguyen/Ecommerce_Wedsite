@@ -47,6 +47,8 @@ namespace Ecommerce_Wedsite.Service.WebApp
                     
                     productcheckout.ProductCheckout_Name = item.name;
                     productcheckout.ProductCheckout_Price = item.price;
+                    productcheckout.ProductCheckout_Img = item.img;
+                    
                     
                     dbConn.Insert(productcheckout); // gắn id cus vào và lưu model mới db
                 }

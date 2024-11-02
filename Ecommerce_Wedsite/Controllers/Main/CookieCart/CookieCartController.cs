@@ -35,7 +35,8 @@ namespace Ecommerce_Wedsite.Controllers
             _checkingquantityService = checkingquantityService;
         }
 
-
+        // GD1 CookieCartController: Từ ProductDetail -> mua sp -> ajax tạo thuộc tính (id, qty, img, ...) -> gửi controller -> Add lên cookie trên web
+        // GD2 CustomerCheckoutController: Sau khi mua hàng  -> gửi tt customer (bằng form) và lấy giỏ hàng từ cookie web ra -> cookie đó chuyển thành tt sản phẩm -> Lưu tt customer và sản phẩm xuống db. 
         public async Task<IActionResult> CreateCookie(int id, int qty) // truyền biến id (id sp), qty (số lượng sp)
         {
             //  lay thong san pham tu id

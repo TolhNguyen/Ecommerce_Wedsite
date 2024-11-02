@@ -12,6 +12,7 @@ namespace Ecommerce_Wedsite.Models.Entities
         public string ProductCheckout_Name { get; set; } // tên sp: Kilaz - Sen da
         public int ProductCheckout_Quantity { get; set; } // sl: 4 - 6
         public decimal ProductCheckout_Price { get; set; } // tiền sp đó: 1500 - 2000
+        public string ProductCheckout_Img { get; set; } // link anh
 
     }
 }

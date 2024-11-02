@@ -144,7 +144,7 @@ namespace Ecommerce_Wedsite.Controllers.Main
             }
 
             await _customercheckoutService.CustomerCheckoutFunction(customercheckout, idwebname); // lưu vào db
-            int cscheckoutid = customercheckout.CustomerCheckout_Id; // lấy cus id ra so sánh
+            int cscheckoutid = customercheckout.CustomerCheckout_Id; // lấy custom id ra so sánh
             int promoid = customercheckout.Promotion_Id; // lấy id để - số lượng
             var cookieCard = HttpContext.Request.Cookies["cart"]; //lấy giỏ hàng từ cookie
             var card = new ShopCard_ViewModel();

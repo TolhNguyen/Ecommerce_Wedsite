@@ -25,6 +25,8 @@
                     <tbody style="">
                         @if (Model != null)
                         {
+                            decimal n = 0;
+                            var qty = 0;
                             // có thể dùng chung viewmodel, nhưng view sẽ hiện khác nhau tùy service trong controller.
                             @foreach (var item in Model.productcheckout_ViewModels.productcheckout)
                             {
@@ -32,7 +34,7 @@
                                     <td class="p-4">
                                         <div class="media align-items-center">
                                             <!--Nên có hình ảnh sản phẩm-->
-                                            <img src="#" class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                                            <img src="@item.ProductCheckout_Img" class="d-block ui-w-40 ui-bordered mr-4" alt="">
                                             <div class="media-body">
                                                 <a href="#" class="d-block text-dark">@item.ProductCheckout_Name</a>
                                                 <small>
@@ -51,7 +53,20 @@
                                     <td class="text-right font-weight-semibold align-middle p-4">#Type</td>
                                         
                                 </tr>
+                                n += item.ProductCheckout_Price;
+                                qty += item.ProductCheckout_Quantity;
                             }
+                            var amountInVND = n * 1000;
+                            // Định dạng số tiền theo kiểu tiền tệ Việt Nam (VND)
+                            var formattedAmount = amountInVND.ToString("N0", new System.Globalization.CultureInfo("vi-VN")) + "đ";
+                            <tr>
+                                <td class="p-4">
+                                    Tổng kết
+                                </td>
+
+                                <td class="text-right font-weight-semibold align-middle p-4">@formattedAmount</td>
+                                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="@qty" readonly></td>
+                            </tr>
                         }
                     </tbody>
                 </table>
