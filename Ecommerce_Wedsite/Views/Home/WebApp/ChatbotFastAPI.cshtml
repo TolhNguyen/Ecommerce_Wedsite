@@ -34,56 +34,81 @@
         </div>
     </body>
 </html>
+
 <script>
-    const chatbox = document.getElementById("chatbox");
+    // Chạy được Chat bot RAG rồi
+    const chatbotToggler = document.querySelector(".chatbot-toggler");
+    const closeBtn = document.querySelector(".close-btn");
+    const chatbox = document.querySelector(".chatbox");
     const chatInput = document.getElementById("user-input");
-    const messageElement = chatElement.querySelector("p");
+    const sendChatBtn = document.getElementById("send-btn");
+
     const inputInitHeight = chatInput.scrollHeight;
+    let userMessage = null;
+
     const createChatLi = (message, className) => {
-        // Create a chat <li> element with passed message and className
         const chatLi = document.createElement("li");
-        chatLi.classList.add("chat", `${className}`);
+        chatLi.classList.add("chat", className);
         let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
         chatLi.innerHTML = chatContent;
         chatLi.querySelector("p").textContent = message;
-        return chatLi; // return chat <li> element
-    }
-
+        return chatLi;
+    };
+    
     async function sendQuestion() {
-        const userMessage = chatInput.value.trim();
+        userMessage = chatInput.value.trim();
         if (!userMessage) return;
 
-        chatInput.value = ""; // Xóa input
+        chatInput.value = "";
+        chatInput.style.height = `${inputInitHeight}px`;
+        chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+        chatbox.scrollTo(0, chatbox.scrollHeight);
 
-        // Tạo và thêm tin nhắn của người dùng
-        const userChatLi = createChatLi(userMessage, "outgoing");
-        chatbox.appendChild(userChatLi);
+        // Tạo thẻ "Thinking..." trong khi chờ phản hồi từ API
+        const thinkingMessage = createChatLi("Thinking...", "incoming");
+        chatbox.appendChild(thinkingMessage);
+        chatbox.scrollTo(0, chatbox.scrollHeight);
 
-        // Gửi câu hỏi đến FastAPI
-        const response = await fetch('http://http://127.0.0.1:5050/generative_ai', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ question: userMessage })
-        });
+        // Gửi câu hỏi đến API
+        try {
+            const response = await fetch('http://127.0.0.1:5050/generative_ai', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ question: userMessage })
+            });
 
-        if (response.ok) {
-            const data = await response.json();
-            const answer = data.answer;
+            if (response.ok) { // .ok: kiểm tra xem thành công hay không? (true / false)
+                const data = await response.json();
+                const answer = data.answer;
 
-            // Tạo và thêm câu trả lời từ bot
-            const botChatLi = createChatLi(answer, "incoming");
-            chatbox.appendChild(botChatLi);
-        } else {
-            // Tạo và thêm tin nhắn lỗi
-            const errorChatLi = createChatLi("Oops! Something went wrong. Please try again.", "incoming");
-            chatbox.appendChild(errorChatLi);
+                // Thay thế nội dung "Thinking..." bằng câu trả lời
+                thinkingMessage.querySelector("p").textContent = answer;
+                chatbox.scrollTo(0, chatbox.scrollHeight);
+            } else {
+                console.error('Failed to fetch the answer from the API');
+                thinkingMessage.querySelector("p").textContent = "Error fetching response.";
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            thinkingMessage.querySelector("p").textContent = "Error occurred.";
         }
-        
-        // Cuộn đến tin nhắn mới nhất
-        chatbox.scrollTop = chatbox.scrollHeight; 
     }
+    
+    // Điều chỉnh chiều cao của textarea dựa trên nội dung
+    chatInput.addEventListener("input", () => {
+        chatInput.style.height = `${inputInitHeight}px`;
+        chatInput.style.height = `${chatInput.scrollHeight}px`;
+    });
+
+    // Xử lý sự kiện Enter để gửi tin nhắn
+    chatInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+            e.preventDefault();
+            sendQuestion();
+        }
+    });
+
+    sendChatBtn.addEventListener("click", sendQuestion);
 
     // Tương tác tắt/mở chatbot
     document.querySelector(".chatbot-toggler").addEventListener("click", () => {
@@ -93,14 +118,8 @@
     document.querySelector(".close-btn").addEventListener("click", () => {
         document.body.classList.remove("show-chatbot");
     });
-
-    chatInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
-            sendQuestion();
-        }
-    });
 </script>
+
 
 
 

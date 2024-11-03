@@ -105,7 +105,6 @@
             messageElement.classList.add("error");
             messageElement.textContent = "Oops! Something went wrong. Please try again.";
         }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
-        console.log("error here 2");
     }
     @*
     const generateResponse = (chatElement) => { // Function create answer chat of bot
@@ -156,7 +155,7 @@
         }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
     }
     *@
-    const handleChat = () => { // Hàm chat User:
+    const handleChat = () => { // Hàm tạo chat User:
         userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace
         if (!userMessage) return;
         chatInput.value = "";
