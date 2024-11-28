@@ -37,31 +37,41 @@
 </div>
 </div>
 <form action="/adminloginpagefunction" class="login-form">
-<div class="form-group">
-<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-user"></span></div>
-<input type="text" id="userName" name="userName" class="form-control rounded-left" placeholder="Username" required>
-</div>
-<div class="form-group">
-<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-lock"></span></div>
-<input type="password" id="passWord" name="passWord" class="form-control rounded-left" placeholder="Password" required>
-</div>
-<div class="form-group d-flex align-items-center">
-<div class="w-100">
-<label class="checkbox-wrap checkbox-primary mb-0">Save Password
-<input type="checkbox" checked>
-<span class="checkmark"></span>
-</label>
-</div>
-<div class="w-100 d-flex justify-content-end">
-<button onclick="log()" type="submit" class="btn btn-primary rounded submit">Login</button>
-</div>
-</div>
-<div class="form-group mt-4">
-<div class="w-100 text-center">
-<p class="mb-1">Don't have an account? <a href="#">Sign Up</a></p>
-<p><a href="#">Forgot Password</a></p>
-</div>
-</div>
+    <div class="form-group">
+        <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-user"></span></div>
+        <input type="text" id="userName" name="userName" class="form-control rounded-left" placeholder="Username">
+    </div>
+        <div class="form-group">
+            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-lock"></span></div>
+            <input type="password" id="passWord" name="passWord" class="form-control rounded-left" placeholder="Password">
+        </div>
+    <div class="form-group d-flex align-items-center">
+        <div class="w-100">
+            <label class="checkbox-wrap checkbox-primary mb-0">Save Password
+                <input type="checkbox" checked>
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div class="w-100 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary rounded submit">Login</button>
+        </div>
+    </div>
+    <div class="form-group mt-4">
+        <div class="w-100 text-center">
+            <p class="mb-1">Don't have an account? <a href="#">Sign Up</a></p>
+            <p><a href="#">Forgot Password</a></p>
+        </div>
+    </div>
+    <div class="form-group mt-4">
+    <!--
+    <button type="button" id="faceIdLogin" class="btn btn-face-id btn-lg">
+            Đăng nhập bằng Face ID
+        </button>
+    -->
+        <div class="w-100 text-center">
+            <button type="button" class="btn btn-primary rounded submit" id="faceIdLogin">Face ID</button>
+        </div>
+    </div>
 </form>
 </div>
 </div>
@@ -73,35 +83,48 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854" integrity="sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==" data-cf-beacon='{"rayId":"7f0fc3a7cf07e68e","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.7.0","si":100}' crossorigin="anonymous"></script>
-<script> 
-        //C1: Dùng ajax js login action controller
-        // function log() {
-        //    $.ajax({
-        //        url: "/adminloginpagefunction", // chạy chức năng function login
-        //        dataType: "text",
-        //        type: "POST",
-        //        data: {
-        //            userName: $('#userName').val(),
-        //            passWord: $('#passWord').val(),
-        //        },
-        //        cache: !1,
-        //        success:  
-        //        function(result) {
-        //            console.log(result);
-        //            var obj = JSON.parse(result);
-        //            if (obj.success == true) { 
-        //                alert(obj.message);
-        //                window.location = 'https://localhost:7037/adminpage'; // Nếu đúng thì chạy tiếp sang trang Admin
-        //            }
-        //            else { 
-        //                alert(obj.message);
-        //                window.location = 'https://localhost:7037/adminloginpage'; // nếu false thì về lại trang login
-        //            }
-        //        }
-        //    });
-        //};
-
-        // C2: dùng controller login thôi
-</script>
 </body>
 </html>
+<script>
+    document.getElementById('faceIdLogin').addEventListener('click', function (event) {
+        event.preventDefault(); // Ngăn gửi form mặc định
+        detectFace();
+    });
+    async function detectFace() { // Sửa lại vì ajax này không có kết quả trả về. Nếu fetch thành công thì gửi về controller này fail thì thông báo lỗi
+        try {
+            // Gọi API FastAPI để lấy username và password
+            const response = await fetch('http://127.0.0.1:5000/detect_face');
+            const data = await response.json(); // Kết quả từ API FastAPI Face Detection và mã hóa
+
+            if (data.status === "success") // chuỗi thuộc tính string đã set bên code python
+            {
+
+                // Gửi username và password đến controller
+                const queryString = new URLSearchParams({
+                    userName: data.username,
+                    passWord: data.password
+                }).toString();
+
+                // Gửi yêu cầu GET mà không xử lý kết quả
+                const result = await fetch(`/adminloginpagefunction?${queryString}`, {
+                    method: 'POST', // Sử dụng phương thức GET để gửi query string
+                });
+                if (result.ok) //chạy chức năng Ok 
+                {
+                    const successData = await result.json();
+                    alert(`Login successful: ${successData.message}`);
+                    window.location.href = '/adminpage'; // chuyển tiếp chạy controller đến page khác
+
+                } else {
+                    const errorData = await result.json(); // lấy message báo lỗi
+                    alert(`Login failed: ${errorData.message}`);
+                }
+            } else { // nếu lỗi
+                alert(data.message);
+            }
+        } catch (error) { // lỗi đường truyền đến code python
+            console.error('Error:', error);
+            alert('Something with Face Id Function went wrong.');
+        }
+    }
+</script>

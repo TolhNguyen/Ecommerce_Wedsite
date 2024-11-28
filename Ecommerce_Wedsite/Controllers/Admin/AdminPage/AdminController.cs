@@ -113,19 +113,49 @@ namespace Ecommerce_Wedsite.Controllers
         }
 
 
-    //C1: Dùng ajax để login với js:
-    //public async Task<ResponseMessageObject<Admin_ViewModel>> AdminLoginPageFunction(string? userName, string? passWord) // function login ajax. Nên để dưới 
-    //{
-    //    var All = new AllLayout();
+        //C1: Dùng ajax để login với js:
+        /*
+        [HttpPost]
+        public async Task<IActionResult> AdminLoginPageFunction(string? userName, string? passWord) // function login ajax. Nên để dưới 
+        {
+            {
+                var admin_ViewModels = await _adminService.Service_Test(userName, passWord); // lấy kết quả kiểm tra ra
 
-    //    var admin_ViewModels = await _adminService.Service_Test(userName, passWord);
+                if (admin_ViewModels.success == true) // nếu kq đúng:
+                {
+                    int id = 0;
+                    int idcookie = await _userwebnameService.WebNameAdminId(userName, id);
 
-    //    All.admin_ViewModels = admin_ViewModels.Data;
+                    // nên đổi sang lưu cookie
+                    //var noticefake = await _noticeadminService.NoticeAdminFunctionFake();
 
-    //    return admin_ViewModels;
-    //}
+                    CookieOptions option = new CookieOptions();
+                    option.Secure = true;
+                    option.HttpOnly = false;
+                    option.SameSite = SameSiteMode.None;
+                    option.Path = "/";
+                    option.Expires = DateTime.Now.AddDays(1);
+                    HttpContext.Response.Cookies.Append("adminid", idcookie.ToString(), option);
 
-    //C2:
+                    int dem = 1;
+                    if (HttpContext.Request.Cookies["dem"] != null) // nếu có giá trị
+                    {
+                        int.TryParse(HttpContext.Request.Cookies["dem"], out dem); // ép kiểu sang số dếm
+                        dem++;
+                        HttpContext.Response.Cookies.Append("dem", dem.ToString(), option);
+                    }
+                    else // nếu k có giá trị thì là 1
+                    {
+                        HttpContext.Response.Cookies.Append("dem", dem.ToString(), option);
+                    }
+                    return RedirectToAction("AdminPage"); // cài id admin và name lên cookie
+                }
+                else return RedirectToAction("AdminLoginPage"); // kq sai
+            }
+        }
+        */
+        //C2:
+        
         [Route("~/adminloginpagefunction")]
         public async Task<IActionResult> AdminLoginPageFunction(string? userName, string? passWord) // function login ajax. Nên để dưới 
         {
@@ -158,10 +188,11 @@ namespace Ecommerce_Wedsite.Controllers
                 {
                     HttpContext.Response.Cookies.Append("dem", dem.ToString(), option);
                 }
-                return RedirectToAction("AdminPage"); // cài id admin và name lên cookie
+                return Ok(new { message = "Login successful!"}); // ajax ok neu61 thanh cong
             }
-            else return RedirectToAction("AdminLoginPage"); // kq sai
+            else return BadRequest(new { message = "Invalid username or password." }); // ajax bad request
         }
+        
 
         [Route("~/noticeadminfunction")]
         public async Task<IActionResult> NoticeAdminFunction(string pagename) // nội dung và id hành động đó.
