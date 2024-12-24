@@ -1,0 +1,140 @@
+﻿
+<script>
+    // Hàm chính: Tạo hoặc lấy userId
+    function getUserId() {
+        // Kiểm tra cookie để xem user_id đã tồn tại hay chưa
+        let userId = getCookie("userAB_id");
+
+        if (!userId) { // Kiểm tra có id AB chưa
+            // Nếu chưa có, tạo một ID ngẫu nhiên
+            userId = generateRandomId();
+            // Lưu vào cookie với thời hạn 30 ngày
+            setCookie("userAB_id", userId, 30);
+        }
+
+        return userId;
+    }
+
+    // Hàm tạo ID ngẫu nhiên (8 ký tự)
+    function generateRandomId() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let id = '';
+        for (let i = 0; i < 8; i++) {
+            id += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return id;
+    }
+
+    // Hàm lấy giá trị từ cookie
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+    }
+
+    // Hàm lưu giá trị vào cookie
+    function setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = `expires=${date.toUTCString()}`;
+        document.cookie = `${name}=${value}; ${expires}; path=/`;
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const userId = getUserId(); // ID người dùng thực tế
+        const currentProduct = '@Model.ProductName'; // Tên sản phẩm hiện tại
+        const sessionKey = "product_view_session";
+        const timerKey = "ten_minute_timer";
+
+        let viewData = JSON.parse(localStorage.getItem(sessionKey)) || [];
+        let timerStart = parseInt(localStorage.getItem(timerKey)) || Date.now();
+        let currentStartTime = Date.now();
+        let isViewing = true;
+
+        // Cập nhật thời gian xem sản phẩm hiện tại
+        function updateViewData() {
+            const timeSpent = Math.round((Date.now() - currentStartTime) / 1000); // Tính thời gian bằng giây
+            const productIndex = viewData.findIndex(item => item.product_view === currentProduct);
+
+            if (timeSpent > 0) {
+                if (productIndex > -1) {
+                    viewData[productIndex].time_view += timeSpent;
+                } else {
+                    viewData.push({
+                        id_user: userId,
+                        product_view: currentProduct,
+                        time_view: timeSpent
+                    });
+                }
+
+                localStorage.setItem(sessionKey, JSON.stringify(viewData));
+                // Log dữ liệu đã ghi nhận
+                console.log("Dữ liệu cập nhật:", viewData);
+
+            }
+        }
+
+        // Kiểm tra thời gian 10 phút và xử lý khi hết
+        function checkTenMinuteTimer() {
+            const elapsed = (Date.now() - timerStart) / 1000; // Tính thời gian đã qua
+            console.log(`Thời gian đã qua: ${elapsed} giây`);
+            if (elapsed >= 600) { // 600 giây = 10 phút
+                console.log("Kết quả sau 10 phút:", viewData);
+
+                // Gửi dữ liệu đến server nếu cần
+                // fetch('/api/saveUserViewData', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify(viewData)
+                // });
+
+                // Xóa dữ liệu sau 10 phút
+                localStorage.removeItem(sessionKey);
+                localStorage.removeItem(timerKey);
+            }
+        }
+
+        // Khi rời trang, lưu thông tin xem
+        window.addEventListener('beforeunload', function () {
+            if (isViewing) {
+                updateViewData();
+            }
+            checkTenMinuteTimer();
+        });
+
+        // Khi quay lại trang
+        window.addEventListener('focus', function () {
+            if (!isViewing) {
+                currentStartTime = Date.now();
+                isViewing = true;
+            }
+        });
+
+        // Khi chuyển sang tab khác
+        window.addEventListener('blur', function () {
+            if (isViewing) {
+                updateViewData();
+                isViewing = false;
+            }
+        });
+
+        window.addEventListener('load', function () {
+            console.log("Dữ liệu hiện tại từ localStorage:", JSON.parse(localStorage.getItem(sessionKey)) || []);
+            console.log("Bắt đầu 10 phút từ:", new Date(timerStart).toLocaleTimeString());
+        });
+
+        // Khởi tạo bộ đếm 10 phút nếu chưa bắt đầu
+        if (!localStorage.getItem(timerKey)) {
+            localStorage.setItem(timerKey, Date.now());
+        } else {
+            // Kiểm tra nếu hết thời gian khi quay lại
+            checkTenMinuteTimer();
+        }
+    });
+
+    // Gọi hàm khi trang được tải
+    document.addEventListener("DOMContentLoaded", function () {
+        const userId = getUserId();
+    });
+</script>

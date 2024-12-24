@@ -54,7 +54,7 @@
                 <div itemscope itemtype="http://schema.org/Product">
                     <meta itemprop="category" content="#Category_Name">
                     <meta itemprop="url" content="//mew-nature.mysapo.net/duoi-lim-la-bau">
-                    <meta itemprop="name" content="#Product_Name">
+                    <meta itemprop="name" content="@item1.Product_Name">
                     <meta itemprop="image" content="http://bizweb.dktcdn.net/thumb/grande/100/364/767/products/70589264-400878850631068-192375588097359872-n.jpg?v=1571390161147">
                     <meta itemprop="description" content="#Product_Info">
                     <div class="d-none" itemprop="brand" itemtype="https://schema.org/Brand" itemscope>
@@ -95,7 +95,7 @@
                                                     <div class="col_large_full large-image">
                                                         <!--Sửa tiếp cho các ảnh khác-->
                                                         <a href="@item1.Product_Img" class="large_image_url checkurl" data-rel="prettyPhoto[product-gallery]">
-                                                            <img loading="lazy" id="img_01" value="@item1.Picture_Id" class="img-responsive" alt="#Product_Name" src="@item1.Product_Img" data-zoom-image="@item1.Product_Img" />
+                                                            <img loading="lazy" id="img_01" value="@item1.Picture_Id" class="img-responsive" alt="@item1.Product_Name" src="@item1.Product_Img" data-zoom-image="@item1.Product_Img" />
                                                         </a>
 
                                                         <div class="offset_nop hidden">
@@ -424,6 +424,161 @@
                 
             </script>
             <script>
+                //// Chức năng lấy gợi ý sản phẩm AI:
+
+                // Hàm chính: Tạo hoặc lấy userId
+                function getUserId() {
+                    // Kiểm tra cookie để xem user_id đã tồn tại hay chưa
+                    let userId = getCookie("userAB_id");
+
+                    if (!userId) { // Kiểm tra có id AB chưa
+                        // Nếu chưa có, tạo một ID ngẫu nhiên
+                        userId = generateRandomId();
+                        // Lưu vào cookie với thời hạn 30 ngày
+                        setCookie("userAB_id", userId, 30);
+                    }
+
+                    return userId;
+                }
+
+                // Hàm tạo ID ngẫu nhiên (8 ký tự)
+                function generateRandomId() {
+                    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                    let id = '';
+                    for (let i = 0; i < 8; i++) {
+                        id += chars.charAt(Math.floor(Math.random() * chars.length));
+                    }
+                    return id;
+                }
+
+                // Hàm lấy giá trị từ cookie
+                function getCookie(name) {
+                    const value = `; ${document.cookie}`;
+                    const parts = value.split(`; ${name}=`);
+                    if (parts.length === 2) return parts.pop().split(';').shift();
+                    return null;
+                }
+
+                // Hàm lưu giá trị vào cookie
+                function setCookie(name, value, days) {
+                    const date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    const expires = `expires=${date.toUTCString()}`;
+                    document.cookie = `${name}=${value}; ${expires}; path=/`;
+                }
+
+                document.addEventListener('DOMContentLoaded', function () {
+                    const userId = getUserId(); // ID người dùng thực tế
+                    const currentProduct = document.getElementById("itemname").textContent; // Tên sản phẩm hiện tại
+                    const sessionKey = "product_view_session";
+                    const timerKey = "five_minute_timer";
+                        const timerCompletedKey = "five_minute_timer_completed";
+
+                    let viewData = JSON.parse(localStorage.getItem(sessionKey)) || [];
+                    let timerStart = parseInt(localStorage.getItem(timerKey)) || Date.now();
+                    let currentStartTime = Date.now();
+                    let isViewing = true;
+
+                    // Cập nhật thời gian xem sản phẩm hiện tại
+                    function updateViewData() {
+                        const timeSpent = Math.round((Date.now() - currentStartTime) / 1000); // Tính thời gian bằng giây
+                        const productIndex = viewData.findIndex(item => item.product_view === currentProduct); // kiểm tra sản phẩm đã nằm trong danh sách chưa
+
+                        if (timeSpent > 0) {
+                            if (productIndex > -1) {
+                                viewData[productIndex].time_view += timeSpent;
+                            } else {
+                                viewData.push({
+                                    id_user: userId,
+                                    product_view: currentProduct,
+                                    time_view: timeSpent
+                                });
+                            }
+
+                            localStorage.setItem(sessionKey, JSON.stringify(viewData));
+                            // Log dữ liệu đã ghi nhận
+                            console.log("Dữ liệu cập nhật:", viewData);
+
+                        }
+                    }
+
+                    // Kiểm tra thời gian 5 phút và xử lý khi hết
+                    function checkFiveMinuteTimer() {
+                        const elapsed = (Date.now() - timerStart) / 1000; // Tính thời gian đã qua
+                        console.log(`Thời gian đã qua: ${elapsed} giây`);
+                        if (elapsed >= 300) { // 600 giây = 10 phút. 300 = 5
+                            console.log("Kết quả sau 5 phút:", viewData);
+
+                            // Gửi dữ liệu đến server nếu cần
+                            // fetch('/api/saveUserViewData', {
+                            //     method: 'POST',
+                            //     headers: { 'Content-Type': 'application/json' },
+                            //     body: JSON.stringify(viewData)
+                            // });
+
+                            // Xóa dữ liệu sau 5 phút và đặt trạng thái hoàn tất:
+                            localStorage.removeItem(sessionKey);
+                            localStorage.removeItem(timerKey);
+
+                            // Dừng bộ đếm:
+                            clearInterval(timerInterval); // Khi TimeInter đã đạt 5 phút thì tắt. Đã khai báo bên dưới.
+                            console.log("Bộ đếm đã dừng sau 5 phút.");
+
+                            // Khởi động lại bộ đếm sau 5 phút:
+                            timerStart = Date.now(); // Đặt lại thời gian bắt đầu mới
+                            localStorage.setItem(timerKey, timerStart); // Lưu lại thời gian mới vào localStorage
+
+                            // Tạo một bộ đếm mới
+                            timerInterval = setInterval(checkFiveMinuteTimer, 1000); // Khởi động lại bộ đếm sau 5 phút
+                        }
+                    }
+
+                    // Khi rời trang, lưu thông tin xem
+                    window.addEventListener('beforeunload', function () {
+                        if (isViewing) {
+                            updateViewData();
+                        }
+                        checkFiveMinuteTimer();
+                    });
+
+                    // Khi quay lại trang
+                    window.addEventListener('focus', function () {
+                        if (!isViewing) {
+                            currentStartTime = Date.now();
+                            isViewing = true;
+                        }
+                    });
+
+                    // Khi chuyển sang tab khác
+                    window.addEventListener('blur', function () {
+                        if (isViewing) {
+                            updateViewData();
+                            isViewing = false;
+                        }
+                    });
+
+                    window.addEventListener('load', function () {
+                        console.log("Dữ liệu hiện tại từ localStorage:", JSON.parse(localStorage.getItem(sessionKey)) || []);
+                        console.log("Bắt đầu 5 phút từ:", new Date(timerStart).toLocaleTimeString());
+                    });
+
+                    // Khởi tạo bộ đếm 5 phút nếu chưa bắt đầu
+                    if (!localStorage.getItem(timerKey)) {
+                        localStorage.setItem(timerKey, Date.now());
+                    } else {
+                        // Kiểm tra nếu hết thời gian khi quay lại
+                        checkFiveMinuteTimer();
+                    }
+                    // Thêm đoạn này: Khởi động bộ đếm kiểm tra 5 phút
+                    const timerInterval = setInterval(checkFiveMinuteTimer, 1000); // Kiểm tra mỗi giây. Nếu đạt 5 phút thì tắt
+                });
+
+                // Gọi hàm khi trang được tải
+                document.addEventListener("DOMContentLoaded", function () {
+                    const userId = getUserId();
+                });
+            </script>
+            <script>
                 // chức năng tăng giảm của trang product detail:
                 function Counting(calc) {
                     var num = parseInt(document.getElementById("num").value);
@@ -451,7 +606,6 @@
                     }
                     document.getElementById("num").value = num; // lưu giá trị num mới
                 }
-
 
             </script>
             <!--JS tăng giảm số lượng sửa tiếp-->
