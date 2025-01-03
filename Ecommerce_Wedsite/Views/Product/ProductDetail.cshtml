@@ -420,11 +420,9 @@
                         numnoti.textContent = "Warning: Lỗi số lượng sản phẩm";
                     } 
                 }
-
-                
             </script>
             <script>
-                //// Chức năng lấy gợi ý sản phẩm AI:
+                //// Chức năng lấy gợi ý sản phẩm AI: Vấn đề nằm ở hàm Update khi không thể thực hiện chạy hàm trc > 0 -> Chưa sửa.
 
                 // Hàm chính: Tạo hoặc lấy userId
                 function getUserId() {
@@ -467,110 +465,137 @@
                     document.cookie = `${name}=${value}; ${expires}; path=/`;
                 }
 
+                
                 document.addEventListener('DOMContentLoaded', function () {
-                    const userId = getUserId(); // ID người dùng thực tế
                     const currentProduct = document.getElementById("itemname").textContent; // Tên sản phẩm hiện tại
+                    let userId = getUserId(); // ID người dùng thực tế
                     const sessionKey = "product_view_session";
                     const timerKey = "five_minute_timer";
-                        const timerCompletedKey = "five_minute_timer_completed";
+                    let intervalId; // Lưu ID của setInterval
+                    let lastUpdateTime = 0; // Thời gian của lần gọi `updateViewData` gần nhất
 
                     let viewData = JSON.parse(localStorage.getItem(sessionKey)) || [];
-                    let timerStart = parseInt(localStorage.getItem(timerKey)) || Date.now();
-                    let currentStartTime = Date.now();
+                    let currentStartTime = Date.now(); // Thời gian bắt đầu xem sản phẩm
                     let isViewing = true;
+                    let isDataCleared = false; // Cờ trạng thái xóa dữ liệu
+
+                        // Khởi tạo giá trị timerKey nếu chưa có
+                    if (!localStorage.getItem(timerKey)) {
+                        localStorage.setItem(timerKey, Date.now());
+                    }
 
                     // Cập nhật thời gian xem sản phẩm hiện tại
                     function updateViewData() {
-                        const timeSpent = Math.round((Date.now() - currentStartTime) / 1000); // Tính thời gian bằng giây
-                        const productIndex = viewData.findIndex(item => item.product_view === currentProduct); // kiểm tra sản phẩm đã nằm trong danh sách chưa
-
-                        if (timeSpent > 0) {
-                            if (productIndex > -1) {
-                                viewData[productIndex].time_view += timeSpent;
-                            } else {
-                                viewData.push({
-                                    id_user: userId,
-                                    product_view: currentProduct,
-                                    time_view: timeSpent
-                                });
-                            }
-
-                            localStorage.setItem(sessionKey, JSON.stringify(viewData));
-                            // Log dữ liệu đã ghi nhận
-                            console.log("Dữ liệu cập nhật:", viewData);
-
+                        if (isDataCleared) return; // Không làm gì nếu dữ liệu đã bị xóa
+                        const timeSpent = Math.floor((Date.now() - currentStartTime) / 1000); // Tính thời gian bằng giây
+                        const productIndex = viewData.findIndex(item => item.product_view === currentProduct);
+                        if (productIndex > -1) {
+                            viewData[productIndex].time_view += timeSpent;
+                        } else {
+                            viewData.push({
+                                id_user: userId,
+                                product_view: currentProduct,
+                                time_view: timeSpent
+                            });
                         }
+                        localStorage.setItem(sessionKey, JSON.stringify(viewData));
+                        console.log("Dữ liệu cập nhật:", viewData);
+                        currentStartTime = Date.now(); // Đặt lại thời gian bắt đầu
                     }
 
                     // Kiểm tra thời gian 5 phút và xử lý khi hết
-                    function checkFiveMinuteTimer() {
+                    async function checkFiveMinuteTimer() {
+                        const timerStart = parseInt(localStorage.getItem(timerKey)) || Date.now();
                         const elapsed = (Date.now() - timerStart) / 1000; // Tính thời gian đã qua
                         console.log(`Thời gian đã qua: ${elapsed} giây`);
-                        if (elapsed >= 300) { // 600 giây = 10 phút. 300 = 5
-                            console.log("Kết quả sau 5 phút:", viewData);
+                        // Kiểm tra nếu đã đủ 5 giây kể từ lần cập nhật trước
+                        if (Math.floor(elapsed / 5) > lastUpdateTime / 5) { // Kiểm tra bội số của 5
+                            updateViewData();
+                            lastUpdateTime = elapsed; // Cập nhật thời gian của lần gọi gần nhất
+                        }
+                        if (elapsed >= 20) { // 600 giây = 10 phút. 300 = 5
+                            console.log("Kết quả sau 20s tren:", viewData);
+                            /**/
+                            try {
+                                const response = await fetch("http://localhost:5000/recommend/", { // Thay "url" bằng URL API thực tế
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    },
+                                    body: JSON.stringify(viewData) // Gửi dữ liệu dưới dạng JSON
+                                });
 
-                            // Gửi dữ liệu đến server nếu cần
-                            // fetch('/api/saveUserViewData', {
-                            //     method: 'POST',
-                            //     headers: { 'Content-Type': 'application/json' },
-                            //     body: JSON.stringify(viewData)
-                            // });
+                                // Kiểm tra xem yêu cầu có thành công không
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
 
-                            // Xóa dữ liệu sau 5 phút và đặt trạng thái hoàn tất:
+                                // Đọc kết quả trả về
+                                const data = await response.json();
+                                console.log("Gợi ý sản phẩm:", data.suggestion); // Đã chạy được kết hợp với VSC (cần sửa VSC)
+                            } catch (error) {
+                                console.error("Lỗi khi gửi yêu cầu:", error);
+                            }
+                            /**/
+
+                            // Xóa dữ liệu cũ
                             localStorage.removeItem(sessionKey);
                             localStorage.removeItem(timerKey);
+                            viewData = []; // Đặt lại dữ liệu cục bộ
+                            isDataCleared = true; // Đánh dấu trạng thái dữ liệu đã xóa
 
-                            // Dừng bộ đếm:
-                            clearInterval(timerInterval); // Khi TimeInter đã đạt 5 phút thì tắt. Đã khai báo bên dưới.
-                            console.log("Bộ đếm đã dừng sau 5 phút.");
+                            console.log("Dữ liệu sau khi xóa:", viewData);
 
-                            // Khởi động lại bộ đếm sau 5 phút:
-                            timerStart = Date.now(); // Đặt lại thời gian bắt đầu mới
-                            localStorage.setItem(timerKey, timerStart); // Lưu lại thời gian mới vào localStorage
-
-                            // Tạo một bộ đếm mới
-                            timerInterval = setInterval(checkFiveMinuteTimer, 1000); // Khởi động lại bộ đếm sau 5 phút
+                            // Dừng bộ đếm
+                            clearInterval(intervalId);
+                        }
+                        else {
+                            console.log(`Chưa đủ 10 phút: ${elapsed} giây đã qua`);
                         }
                     }
 
-                    // Khi rời trang, lưu thông tin xem
+                    // Xử lý khi rời trang
                     window.addEventListener('beforeunload', function () {
                         if (isViewing) {
                             updateViewData();
+                            console.log(`Do sự kiện rời trang`);
                         }
                         checkFiveMinuteTimer();
                     });
 
-                    // Khi quay lại trang
+                    // Xử lý khi quay lại trang
                     window.addEventListener('focus', function () {
-                        if (!isViewing) {
+                        viewData = JSON.parse(localStorage.getItem(sessionKey)) || [];
+                        if (!isViewing && !isDataCleared) {
+                            updateViewData();
                             currentStartTime = Date.now();
                             isViewing = true;
                         }
                     });
 
-                    // Khi chuyển sang tab khác
+                    // Xử lý khi chuyển sang tab khác
                     window.addEventListener('blur', function () {
-                        if (isViewing) {
+                        if (isViewing && !isDataCleared) {
                             updateViewData();
+                            console.log(`Do sự kiện blur trang`);
                             isViewing = false;
                         }
                     });
 
-                    window.addEventListener('load', function () {
-                        console.log("Dữ liệu hiện tại từ localStorage:", JSON.parse(localStorage.getItem(sessionKey)) || []);
-                        console.log("Bắt đầu 5 phút từ:", new Date(timerStart).toLocaleTimeString());
+                    // Sử dụng sự kiện pageshow để xử lý khi quay lại trang
+                    window.addEventListener('pageshow', function () {
+                        viewData = JSON.parse(localStorage.getItem(sessionKey)) || [];
+                        if (!isViewing && !isDataCleared) {
+                            updateViewData();
+                            console.log(`Do sự kiện blur trang`);
+                            currentStartTime = Date.now();
+                            isViewing = true;
+                        }
                     });
 
-                    // Khởi tạo bộ đếm 5 phút nếu chưa bắt đầu
-                    if (!localStorage.getItem(timerKey)) {
-                        localStorage.setItem(timerKey, Date.now());
-                    } else {
-                        // Kiểm tra nếu hết thời gian khi quay lại
-                        checkFiveMinuteTimer();
-                    }
-                    // Thêm đoạn này: Khởi động bộ đếm kiểm tra 5 phút
-                    const timerInterval = setInterval(checkFiveMinuteTimer, 1000); // Kiểm tra mỗi giây. Nếu đạt 5 phút thì tắt
+                    // Khởi động bộ đếm kiểm tra 5 phút
+                    intervalId = setInterval(checkFiveMinuteTimer, 1000);
+
                 });
 
                 // Gọi hàm khi trang được tải
