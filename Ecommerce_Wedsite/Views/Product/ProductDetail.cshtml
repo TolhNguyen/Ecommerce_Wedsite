@@ -468,6 +468,7 @@
                 
                 document.addEventListener('DOMContentLoaded', function () {
                     const currentProduct = document.getElementById("itemname").textContent; // Tên sản phẩm hiện tại
+                    const currentProductId = document.getElementById('itemid').getAttribute('value');
                     let userId = getUserId(); // ID người dùng thực tế
                     const sessionKey = "product_view_session";
                     const timerKey = "five_minute_timer";
@@ -494,6 +495,7 @@
                         } else {
                             viewData.push({
                                 id_user: userId,
+                                product_id: currentProductId,
                                 product_view: currentProduct,
                                 time_view: timeSpent
                             });
@@ -529,10 +531,26 @@
                                 if (!response.ok) {
                                     throw new Error(`HTTP error! status: ${response.status}`);
                                 }
-
-                                // Đọc kết quả trả về
-                                const data = await response.json();
-                                console.log("Gợi ý sản phẩm:", data.suggestion); // Đã chạy được kết hợp với VSC (cần sửa VSC)
+                                /// Đọc kết quả trả về. Kiểm tra id user trc khi gửi suggestion:
+                                let data;
+                                try {
+                                    data = await response.json(); // Đảm bảo phản hồi là JSON
+                                } catch (parseError) {
+                                    throw new Error("Phản hồi từ server không phải JSON hợp lệ.");
+                                }
+                                // Kiểm tra nếu `userId` không tồn tại
+                                if (!userId) {
+                                    console.error("Không tìm thấy userId trong cookie.");
+                                    return;
+                                }
+                                // So sánh `id_user` từ server với `userId` trong cookie
+                                if (data.id_user !== userId) {
+                                    console.warn(`ID user không khớp. Cookie: ${userId} với Server: ${data.id_user}`);
+                                    return;
+                                }
+                                // Nếu khớp, hiển thị suggestion
+                                console.log(`Gợi ý cho người dùng (ID: ${data.id_user}):`, data.suggestion || "Không có gợi ý nào.");
+                            
                             } catch (error) {
                                 console.error("Lỗi khi gửi yêu cầu:", error);
                             }
